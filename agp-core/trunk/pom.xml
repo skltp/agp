@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.soitoolkit.commons.poms</groupId>
+        <artifactId>soitoolkit-default-parent</artifactId>
+        <version>0.6.1-M1</version>
+    </parent>
+    
+    <groupId>se.skltp</groupId>
+    <artifactId>agp</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>agp</name>
+
+    <properties>
+        <!-- TODO: FIX FOR INCORRECT PROPERTY IN ST 0.6.1-M1 -->
+        <soitoolkit.version>0.6.1-M1</soitoolkit.version>
+
+        <!-- Properties for generating code from XML Schemas (JAXB) -->
+        <schema.path>${basedir}/src/main/resources/schemas/interoperability/headers/core_components</schema.path>
+    </properties>
+    
+    <scm>
+        <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->		
+        <connection>scm:svn:https://my-subversion-server/svn/agp/trunk</connection>
+        <developerConnection>scm:svn:https://my-subversion-server/svn/agp/trunk</developerConnection>
+        <url>https://my-subversion-server/svn/agp/trunk</url>
+    </scm>
+    
+    <distributionManagement>
+        <!-- TODO: Sample <distributionManagement>-tag, update to reflect you own environment! -->
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Snapshot Repository</name>
+            <url>http://my-maven-repo-server/repositories/snapshots</url>
+        </snapshotRepository>  
+        <repository>
+            <id>releases</id>
+            <name>Release Repository</name>
+            <url>http://my-maven-repo-server/repositories/releases</url>
+        </repository>
+    </distributionManagement>
+
+	<dependencies>
+		<dependency>
+		  <groupId>org.soitoolkit.commons.components</groupId>
+			<artifactId>soitoolkit-commons-mule</artifactId>
+			<version>${soitoolkit.version}</version>
+		</dependency>
+
+<!-- 
+		<dependency>
+		  <groupId>org.soitoolkit.commons.components</groupId>
+			<artifactId>soitoolkit-studio-components</artifactId>
+			<version>${soitoolkit.version}</version>
+		</dependency>
+ -->
+
+		<dependency>
+			<groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
+			<artifactId>soitoolkit-mule-ee-3.3.1-dependencies</artifactId>
+			<version>${soitoolkit.version}</version>
+			<type>pom</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>se.rivta.tools</groupId>
+			<artifactId>itintegration-engagementindex-schemas</artifactId>
+			<version>1</version>
+		</dependency>
+
+		<!-- TEST DEPENDENCIES -->
+		
+		<dependency>
+			<groupId>org.soitoolkit.commons.poms</groupId>
+			<artifactId>soitoolkit-test-dependencies</artifactId>
+			<version>${soitoolkit.version}</version>
+			<type>pom</type>
+			<scope>test</scope>
+		</dependency>
+
+        <dependency>
+            <groupId>se.skltp</groupId>
+            <artifactId>agp-test-common</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+			<groupId>se.rivta.tools</groupId>
+			<artifactId>ehr-scheduling-schemas</artifactId>
+			<version>1</version>
+            <scope>test</scope>
+		</dependency>
+
+		<!-- Mockito -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<scope>test</scope>
+			<version>1.8.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<scope>test</scope>
+			<version>1.8.5</version>
+		</dependency>
+
+  </dependencies> 
+
+    <build>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+            </resource>
+            <resource>
+                <!-- To get mule-config files from the Mule Studio defined resource-folder in the classpath... -->
+                <directory>${basedir}/src/main/app</directory>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-xjc-plugin</artifactId>
+                <version>2.3.0</version>
+                <configuration>
+                    <extensions>
+                        <extension>org.apache.cxf.xjcplugins:cxf-xjc-dv:2.3.0</extension>
+                    </extensions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>xsdtojava</goal>
+                        </goals>
+                        <configuration>
+                            <sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
+                            <xsdOptions>
+                                <xsdOption>
+                                    <xsd>${schema.path}/interoperability_headers_1.0.xsd</xsd>
+                                    <packagename>se.riv.interoperability.headers.v1</packagename>
+                                </xsdOption>
+                            </xsdOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

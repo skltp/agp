@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mule 
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:spring="http://www.springframework.org/schema/beans"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
+	xmlns:jdbc="http://www.mulesoft.org/schema/mule/jdbc"
+	xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
+	xmlns:jms="http://www.mulesoft.org/schema/mule/jms"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:https="http://www.mulesoft.org/schema/mule/https"
+	xmlns:mule-xml="http://www.mulesoft.org/schema/mule/xml"
+	xmlns:smooks="http://www.muleforge.org/smooks/schema/mule-module-smooks"
+	xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
+	xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.mulesoft.org/schema/mule/core      http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/vm        http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+		http://www.mulesoft.org/schema/mule/jdbc      http://www.mulesoft.org/schema/mule/jdbc/current/mule-jdbc.xsd
+		http://www.mulesoft.org/schema/mule/cxf       http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+		http://www.mulesoft.org/schema/mule/jms       http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+		http://www.mulesoft.org/schema/mule/http      http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+		http://www.mulesoft.org/schema/mule/https     http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd
+		http://www.mulesoft.org/schema/mule/xml       http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
+		http://www.muleforge.org/smooks/schema/mule-module-smooks http://dist.muleforge.org/smooks/schema/mule-module-smooks/1.3/mule-module-smooks.xsd
+		http://www.mulesoft.org/schema/mule/json      http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+		http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+		http://www.mulesoft.org/schema/mule/xml       http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
+	">
+
+    <spring:bean name="queryObjectFactory" class="${QUERY_OBJECT_FACTORY_IMPL}" />
+    <spring:bean name="requestListFactory" class="${REQUEST_LIST_FACTORY_IMPL}" />
+    <spring:bean name="responseListFactory" class="${RESPONSE_LIST_FACTORY_IMPL}" />
+
+<!-- 
+TODO: Mule EE dependency
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" 
+		http://www.mulesoft.org/schema/mule/ee/core   http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd 
+ -->
+
+	<queued-asynchronous-processing-strategy name="worker-flow-processing-strategy" maxThreads="50"/>    
+
+<!-- TODO: Mule EE dependency
+    <ee:object-store-caching-strategy name="caching_strategy" keyGenerationExpression="#[payload]" doc:name="Caching Strategy">
+        <custom-object-store class="se.skltp.agp.cache.CacheMemoryStoreImpl">
+        	<spring:property name="maxEntries" value="${CACHE_MAX_ENTRIES}"/>
+        	<spring:property name="entryTTL" value="${CACHE_TTL_MS}"/>
+        	<spring:property name="expirationInterval" value="${CACHE_EXPIRATION_INTERVAL_MS}"/>
+        </custom-object-store>
+    </ee:object-store-caching-strategy>
+-->    
+	<flow name="cache-flow">
+
+		<https:inbound-endpoint
+			doc:name="Inbound"
+            connector-ref="soitoolkit-https-connector"
+			address="${SERVICE_INBOUND_URL}"
+			exchange-pattern="request-response"
+			transformer-refs="objToStr logReqIn"
+			responseTransformer-refs="createSoapFaultIfException logRespOut">
+		</https:inbound-endpoint>
+
+		<cxf:proxy-service 
+            wsdlLocation="${SERVICE_INBOUND_WSDL}"
+			service="${SERVICE_INBOUND_NAME}"
+			namespace="${SERVICE_INBOUND_NAMESPACE}"
+			payload="envelope">
+		</cxf:proxy-service>
+
+	    <custom-transformer doc:name="Create Query Object" class="se.skltp.agp.service.transformers.CreateQueryObjectTransformer">
+	        <spring:property name="queryObjectFactory" ref="queryObjectFactory"/>
+	    </custom-transformer>
+	    
+        <set-variable value="#[payload]" variableName="queryObject" doc:name="Invocation queryObject" />
+
+		<flow-ref name="main-flow" doc:name="main-flow"/>
+
+<!-- TODO: Mule EE dependency
+        <ee:cache doc:name="Cache" cachingStrategy-ref="caching_strategy">
+		</ee:cache>
+-->
+	</flow>
+	
+	<flow name="main-flow" processingStrategy="synchronous">
+
+        <response>
+            <custom-transformer doc:name="Response List Transformer" class="se.skltp.agp.service.transformers.CreateResponseListTransformer">
+	            <spring:property name="responseListFactory" ref="responseListFactory"/>
+	        </custom-transformer>
+        </response>
+
+	    <custom-transformer doc:name="Find Content Transformer" class="se.skltp.agp.ei.findcontent.FindContentRequestTransformer"/>
+
+        <enricher target="#[payload]">
+			<https:outbound-endpoint 
+				doc:name="Engagement Index"
+	            connector-ref="soitoolkit-https-connector"
+				address="${ENGAGEMANGSINDEX_OUTBOUND_URL}" 
+				exchange-pattern="request-response"
+				responseTimeout="${SERVICE_TIMEOUT_MS}"
+				transformer-refs="logReqOut"
+				responseTransformer-refs="logRespIn">
+		        <cxf:jaxws-client 
+		        	port="FindContentResponderPort" 
+		        	operation="FindContent" 
+		        	clientClass="se.riv.itintegration.engagementindex.findcontent.v1.rivtabp21.FindContentResponderService"
+		        	wsdlLocation="classpath:/interactions/FindContentInteraction/FindContentInteraction_1.0_RIVTABP21.wsdl"
+		       	/>
+			</https:outbound-endpoint>
+        </enricher>
+
+	    <custom-transformer doc:name="Request List Transformer" class="se.skltp.agp.service.transformers.CreateRequestListTransformer">
+            <spring:property name="requestListFactory" ref="requestListFactory"/>
+        </custom-transformer>
+
+        <choice doc:name="Choice">
+            <when expression="payload.size() == 0">
+                <processor-chain>
+                    <scripting:component doc:name="Set empty result">
+                        <scripting:script engine="Groovy">
+                            <scripting:text><![CDATA[return []]]></scripting:text>
+                        </scripting:script>
+                    </scripting:component>
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain>
+					<flow-ref name="request-reply-flow" doc:name="request-reply-flow"/>
+                </processor-chain>
+            </otherwise>
+        </choice>
+
+	</flow>
+	
+	<flow name="request-reply-flow" processingStrategy="synchronous">
+
+        <request-reply  doc:name="Request/Reply" timeout="${AGGREGATED_SERVICE_TIMEOUT_MS}">  
+            <vm:outbound-endpoint path="splitter"> 
+	            <message-properties-transformer scope="outbound"> 
+	                <delete-message-property key="MULE_REPLYTO"/> 
+	            </message-properties-transformer> 
+            </vm:outbound-endpoint>
+            <vm:inbound-endpoint path="reply"></vm:inbound-endpoint> 
+        </request-reply>
+
+	</flow>
+	
+	
+    <flow name="splitter-flow" doc:name="splitter-flow">
+        <vm:inbound-endpoint exchange-pattern="one-way" path="splitter" doc:name="vm://splitter"/>
+		
+		<collection-splitter enableCorrelation="IF_NOT_SET"/>
+		
+        <message-properties-transformer scope="outbound" doc:name="Set ReplyTo = vm://agregate"> 
+            <add-message-property key="MULE_REPLYTO" value="vm://aggregate"/> 
+        </message-properties-transformer> 
+        
+        <vm:outbound-endpoint path="worker" doc:name="vm://worker"/>
+    </flow>
+    
+	<custom-transformer name="toObjArr" class="se.skltp.agp.service.transformers.ObjectArrayTransformer"/>
+
+    
+    <flow name="worker-flow" processingStrategy="worker-flow-processing-strategy" doc:name="worker-flow">
+        <vm:inbound-endpoint exchange-pattern="one-way" path="worker" doc:name="vm://worker"/>
+
+		<!-- Save the incoming logical-address in a variable so that is can be added to the response in the <response> - element -->
+        <set-variable variableName="logical-address" value="#[groovy:payload[0]]" doc:name="Set Logical Address"/>
+
+		<https:outbound-endpoint 
+			doc:name="Outbound"
+            connector-ref="soitoolkit-https-connector"
+			address="${SERVICE_OUTBOUND_URL}" 
+			exchange-pattern="request-response"
+			responseTimeout="${SERVICE_TIMEOUT_MS}"
+			transformer-refs="logReqOut"
+			responseTransformer-refs="logRespIn toObjArr">
+	        <cxf:jaxws-client 
+	        	port="${SERVICE_OUTBOUND_PORT}" 
+	        	operation="${SERVICE_OUTBOUND_OPERATION}" 
+	        	clientClass="${SERVICE_OUTBOUND_CLIENT_CLASS}"
+	        	wsdlLocation="${SERVICE_OUTBOUND_WSDL}"
+	        />
+		</https:outbound-endpoint>
+ 
+        <catch-exception-strategy doc:name="Catch Exception Strategy">
+            <custom-transformer doc:name="Error Handler" class="se.skltp.agp.service.transformers.HandleWorkerErrorTransformer"/>
+	        <vm:outbound-endpoint path="aggregate" doc:name="vm://aggregate"/>
+        </catch-exception-strategy>
+    </flow>
+
+
+    <flow name="aggregation-flow" doc:name="aggregation-flow">
+        <vm:inbound-endpoint exchange-pattern="one-way" path="aggregate" doc:name="vm://aggregate"/>
+
+        <collection-aggregator timeout="${AGGREGATE_TIMEOUT_MS}" failOnTimeout="false" doc:name="Collection Aggregator"/>
+
+        <vm:outbound-endpoint path="reply" doc:name="vm://reply"/>
+    </flow>
+	
+</mule>
