@@ -4,46 +4,21 @@
 	<modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.soitoolkit.commons.poms</groupId>
-        <artifactId>soitoolkit-default-parent</artifactId>
-        <version>0.6.1-M1</version>
+	    <groupId>se.skltp.agp</groupId>
+	    <artifactId>agp-parent</artifactId>
+	    <version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
     </parent>
     
-    <groupId>se.skltp</groupId>
-    <artifactId>agp</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <artifactId>agp-core</artifactId>
     <packaging>jar</packaging>
-    <name>agp</name>
+    <name>agp-core</name>
 
     <properties>
-        <!-- TODO: FIX FOR INCORRECT PROPERTY IN ST 0.6.1-M1 -->
-        <soitoolkit.version>0.6.1-M1</soitoolkit.version>
-
         <!-- Properties for generating code from XML Schemas (JAXB) -->
         <schema.path>${basedir}/src/main/resources/schemas/interoperability/headers/core_components</schema.path>
     </properties>
     
-    <scm>
-        <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->		
-        <connection>scm:svn:https://my-subversion-server/svn/agp/trunk</connection>
-        <developerConnection>scm:svn:https://my-subversion-server/svn/agp/trunk</developerConnection>
-        <url>https://my-subversion-server/svn/agp/trunk</url>
-    </scm>
-    
-    <distributionManagement>
-        <!-- TODO: Sample <distributionManagement>-tag, update to reflect you own environment! -->
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>Snapshot Repository</name>
-            <url>http://my-maven-repo-server/repositories/snapshots</url>
-        </snapshotRepository>  
-        <repository>
-            <id>releases</id>
-            <name>Release Repository</name>
-            <url>http://my-maven-repo-server/repositories/releases</url>
-        </repository>
-    </distributionManagement>
-
 	<dependencies>
 		<dependency>
 		  <groupId>org.soitoolkit.commons.components</groupId>
@@ -83,7 +58,7 @@
 		</dependency>
 
         <dependency>
-            <groupId>se.skltp</groupId>
+            <groupId>se.skltp.agp</groupId>
             <artifactId>agp-test-common</artifactId>
             <version>1.0.0-SNAPSHOT</version>
             <scope>test</scope>
