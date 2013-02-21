@@ -110,7 +110,7 @@ TODO: Mule EE dependency
     <!-- The common single jaxb-context for this mule-app -->
     <!-- Don't create additional jaxb-contexts to avoid problems with implicit jaxb transformations that can't resolve what jaxb-context to use! -->
     <!-- Use ":" as a separator if jaxb-objects from more than one java package will be used by the jaxb-transformers  -->
-    <mulexml:jaxb-context name="jaxbContext" packageNames="org.soitoolkit.commons.logentry.schema.v1:se.riv.itintegration.engagementindex.findcontentresponder.v1:se.riv.crm.scheduling.getsubjectofcarescheduleresponder.v1"/>
+    <mulexml:jaxb-context name="jaxbContext" packageNames="${JAXB_CONTEXT}"/>
 	
 	<custom-transformer class="org.soitoolkit.commons.mule.core.ObjectToStringTransformer" name="objToStr"/>
 

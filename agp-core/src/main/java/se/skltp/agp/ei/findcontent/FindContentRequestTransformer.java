@@ -1,6 +1,6 @@
 package se.skltp.agp.ei.findcontent;
 
-import static se.skltp.agp.cache.Contants.ENGAGEMANGSINDEX_HSA_ID;
+import static se.skltp.agp.cache.Constants.ENGAGEMANGSINDEX_HSA_ID;
 
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
