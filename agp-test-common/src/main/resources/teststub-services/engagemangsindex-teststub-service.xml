@@ -16,7 +16,7 @@
 	<simple-service 
 		name="engagemangsindex-teststub-service"
         address="${ENGAGEMANGSINDEX_TESTSTUB_INBOUND_URL}?connector=soitoolkit-https-connector" 
-        component-class="se.skltp.agp.ei.findcontent.EngagemangsindexTestProducer"
+        component-class="${ENGAGEMANGSINDEX_PRODUCER_TESTSTUB_IMPL}"
         type="jax-ws" />
  
 </mule>
