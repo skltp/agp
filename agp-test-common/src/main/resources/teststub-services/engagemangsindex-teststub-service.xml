@@ -13,10 +13,22 @@
 		http://www.mulesoft.org/schema/mule/jms     http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
 	">
 
+    <!-- 
+        component-class="${ENGAGEMANGSINDEX_PRODUCER_TESTSTUB_IMPL}"
+     -->
+
+    <spring:bean name="engagemangsindex-teststub-bean" class="${ENGAGEMANGSINDEX_PRODUCER_TESTSTUB_IMPL}">
+        <spring:property name="eiServiceDomain" value="${EI_SERVICE_DOMAIN}" />
+        <spring:property name="eiCategorization" value="${EI_CATEGORIZATION}" />
+    </spring:bean>
+
 	<simple-service 
 		name="engagemangsindex-teststub-service"
         address="${ENGAGEMANGSINDEX_TESTSTUB_INBOUND_URL}?connector=soitoolkit-https-connector" 
-        component-class="${ENGAGEMANGSINDEX_PRODUCER_TESTSTUB_IMPL}"
-        type="jax-ws" />
+        type="jax-ws">
+        <component>
+            <spring-object bean="engagemangsindex-teststub-bean"/>
+        </component>
+    </simple-service>
  
 </mule>

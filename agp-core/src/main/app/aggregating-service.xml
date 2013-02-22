@@ -32,7 +32,9 @@
 		http://www.mulesoft.org/schema/mule/xml       http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
 	">
 
-    <spring:bean name="queryObjectFactory" class="${QUERY_OBJECT_FACTORY_IMPL}" />
+    <spring:bean name="queryObjectFactory" class="${QUERY_OBJECT_FACTORY_IMPL}">
+        <spring:property name="eiServiceDomain" value="${EI_SERVICE_DOMAIN}" />
+    </spring:bean>
     <spring:bean name="requestListFactory" class="${REQUEST_LIST_FACTORY_IMPL}" />
     <spring:bean name="responseListFactory" class="${RESPONSE_LIST_FACTORY_IMPL}" />
 
@@ -93,7 +95,9 @@ TODO: Mule EE dependency
 	        </custom-transformer>
         </response>
 
-	    <custom-transformer doc:name="Find Content Transformer" class="se.skltp.agp.ei.findcontent.FindContentRequestTransformer"/>
+	    <custom-transformer doc:name="Find Content Transformer" class="se.skltp.agp.ei.findcontent.FindContentRequestTransformer">
+	       <spring:property name="engagemangsIndexHsaId" value="${ENGAGEMANGSINDEX_HSA_ID}"/>
+	    </custom-transformer>
 
         <enricher target="#[payload]">
 			<https:outbound-endpoint 

@@ -1,7 +1,5 @@
 package se.skltp.agp.ei.findcontent;
 
-import static se.skltp.agp.cache.Constants.ENGAGEMANGSINDEX_HSA_ID;
-
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.transformer.AbstractMessageTransformer;
@@ -10,11 +8,17 @@ import org.slf4j.LoggerFactory;
 
 import se.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentType;
 import se.skltp.agp.service.api.QueryObject;
+import se.skltp.agp.service.api.ResponseListFactory;
 
 public class FindContentRequestTransformer extends AbstractMessageTransformer {
 
 	private static final Logger log = LoggerFactory.getLogger(FindContentRequestTransformer.class);
 	
+	private String engagemangsIndexHsaId;
+	public void setEngagemangsIndexHsaId(String engagemangsIndexHsaId) {
+		this.engagemangsIndexHsaId = engagemangsIndexHsaId;
+	}
+
     /**
      * Message aware transformer that ...
      */
@@ -38,9 +42,9 @@ public class FindContentRequestTransformer extends AbstractMessageTransformer {
 		reqOut.setRegisteredResidentIdentification(qo.getRegisteredResidentIdentification());
 		reqOut.setServiceDomain(qo.getServiceDomain());
 		
-		Object[] reqOutList = new Object[] {ENGAGEMANGSINDEX_HSA_ID, reqOut};
+		Object[] reqOutList = new Object[] {engagemangsIndexHsaId, reqOut};
 
-		log.info("Calling EI using logical address {} for subject of care id {}", ENGAGEMANGSINDEX_HSA_ID, reqOut.getRegisteredResidentIdentification());
+		log.info("Calling EI using logical address {} for subject of care id {}", engagemangsIndexHsaId, reqOut.getRegisteredResidentIdentification());
 		
 		log.debug("Transformed payload: {}, pid: {}", reqOutList, reqOut.getRegisteredResidentIdentification());
 		
