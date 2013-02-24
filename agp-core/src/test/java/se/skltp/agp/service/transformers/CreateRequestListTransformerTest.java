@@ -7,6 +7,7 @@ import org.soitoolkit.commons.mule.util.MiscUtil;
 
 public class CreateRequestListTransformerTest {
 
+	@SuppressWarnings("unused")
 	@Test
 	public void testTransformer_ok() throws Exception {
 

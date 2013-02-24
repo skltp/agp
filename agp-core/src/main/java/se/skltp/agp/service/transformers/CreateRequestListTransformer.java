@@ -30,7 +30,7 @@ public class CreateRequestListTransformer extends AbstractMessageTransformer {
     	QueryObject qo = (QueryObject)message.getInvocationProperty("queryObject");
 		FindContentResponseType eiResp = (FindContentResponseType)message.getPayload();
     	
-    	log.info("qo_id: {}, qo_s: {}, ei.size: {}", new Object[] {qo.getRegisteredResidentIdentification(), qo.getServiceDomain(), eiResp.getEngagement().size()});
+    	log.info("qo_id: {}, qo_s: {}, ei.size: {}", new Object[] {qo.getFindContent().getRegisteredResidentIdentification(), qo.getFindContent().getServiceDomain(), eiResp.getEngagement().size()});
     	
         // Perform any message aware processing here, otherwise delegate as much as possible to pojoTransform() for easier unit testing
     	List<Object[]> transformedPayload = requestListFactory.createRequestList(qo, eiResp);

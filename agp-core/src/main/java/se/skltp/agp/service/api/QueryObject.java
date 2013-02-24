@@ -1,31 +1,22 @@
 package se.skltp.agp.service.api;
 
+import se.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentType;
+
 public class QueryObject {
-	private String registeredResidentIdentification = "";
-	private String serviceDomain = "";
 
-	public QueryObject() {
+	private FindContentType findContent = null;
+	private Object extraArg = null;
+
+	public QueryObject(FindContentType findContent, Object extraArg) {
+		this.findContent = findContent;
+		this.extraArg = extraArg;
 	}
 
-	public QueryObject(String registeredResidentIdentification, String serviceDomain) {
-		this.registeredResidentIdentification = registeredResidentIdentification;
-		this.serviceDomain = serviceDomain;
+	public FindContentType getFindContent() {
+		return findContent;
 	}
 
-	public String getRegisteredResidentIdentification() {
-		return registeredResidentIdentification;
-	}
-
-	public void setRegisteredResidentIdentification(String registeredResidentIdentification) {
-		this.registeredResidentIdentification = registeredResidentIdentification;
-	}
-
-	public String getServiceDomain() {
-		return serviceDomain;
-	}
-
-	public void setServiceDomain(String serviceDomain) {
-		this.serviceDomain = serviceDomain;
-	}
-
+	public Object getExtraArg() {
+		return extraArg;
+	}	
 }

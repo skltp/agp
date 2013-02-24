@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 
 import se.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentType;
 import se.skltp.agp.service.api.QueryObject;
-import se.skltp.agp.service.api.ResponseListFactory;
 
 public class FindContentRequestTransformer extends AbstractMessageTransformer {
 
@@ -36,11 +35,9 @@ public class FindContentRequestTransformer extends AbstractMessageTransformer {
 
 		log.debug("Transforming payload: {}", src);
 
-		QueryObject qo =(QueryObject)src;
+		QueryObject qo = (QueryObject)src;
 
-		FindContentType reqOut = new FindContentType();
-		reqOut.setRegisteredResidentIdentification(qo.getRegisteredResidentIdentification());
-		reqOut.setServiceDomain(qo.getServiceDomain());
+		FindContentType reqOut = qo.getFindContent();
 		
 		Object[] reqOutList = new Object[] {engagemangsIndexHsaId, reqOut};
 

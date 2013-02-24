@@ -16,7 +16,8 @@
 
     <properties>
         <!-- Properties for generating code from XML Schemas (JAXB) -->
-        <schema.path>${basedir}/src/main/resources/schemas/interoperability/headers/core_components</schema.path>
+        <schema.path>${basedir}/src/main/resources/schemas</schema.path>
+        <cxf.version>2.5.1</cxf.version>
     </properties>
     
 	<dependencies>
@@ -41,12 +42,6 @@
 			<type>pom</type>
 		</dependency>
 		
-		<dependency>
-			<groupId>se.rivta.tools</groupId>
-			<artifactId>itintegration-engagementindex-schemas</artifactId>
-			<version>1</version>
-		</dependency>
-
 		<!-- TEST DEPENDENCIES -->
 		
 		<dependency>
@@ -119,7 +114,7 @@
                             <sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
                             <xsdOptions>
                                 <xsdOption>
-                                    <xsd>${schema.path}/interoperability_headers_1.0.xsd</xsd>
+                                    <xsd>${schema.path}/interoperability/headers/core_components/interoperability_headers_1.0.xsd</xsd>
                                     <packagename>se.riv.interoperability.headers.v1</packagename>
                                 </xsdOption>
                             </xsdOptions>
@@ -127,6 +122,60 @@
                     </execution>
                 </executions>
             </plugin>
+
+      <plugin>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-codegen-plugin</artifactId>
+        <version>${cxf.version}</version>
+        <executions>
+          <execution>
+            <id>generate-sources</id>
+            <phase>generate-sources</phase>
+            <configuration>
+              <sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
+              <wsdlOptions>
+
+                <wsdloption>
+                  <wsdl>${schema.path}/TD_ENGAGEMENTINDEX_1_0_RC7/interactions/FindContentInteraction/FindContentInteraction_1.0_RIVTABP21.wsdl</wsdl>
+                  <extraargs>
+                    <extraarg>-p</extraarg>
+                    <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:itintegration:engagementindex:FindContentResponder:1=se.riv.itintegration.engagementindex.findcontentresponder.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:itintegration:engagementindex:FindContentInitiator:1=se.riv.itintegration.engagementindex.findcontentinitiator.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:itintegration:engagementindex:FindContent:1:rivtabp21=se.riv.itintegration.engagementindex.findcontent.v1.rivtabp21</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:itintegration:registry:1=se.riv.itintegration.registry.v1</extraarg>
+                  </extraargs>
+                </wsdloption>
+
+                <wsdloption>
+                  <wsdl>${schema.path}/TD_ENGAGEMENTINDEX_1_0_RC7/interactions/ProcessNotificationInteraction/ProcessNotificationInteraction_1.0_RIVTABP21.wsdl</wsdl>
+                  <extraargs>
+                    <extraarg>-p</extraarg>
+                    <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:itintegration:engagementindex:ProcessNotificationResponder:1=se.riv.itintegration.engagementindex.processnotificationresponder.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:itintegration:engagementindex:ProcessNotificationInitiator:1=se.riv.itintegration.engagementindex.processnotificationinitiator.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:itintegration:engagementindex:ProcessNotification:1:rivtabp21=se.riv.itintegration.engagementindex.processnotification.v1.rivtabp21</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:itintegration:registry:1=se.riv.itintegration.registry.v1</extraarg>
+                  </extraargs>
+                </wsdloption>
+              </wsdlOptions>
+
+            </configuration>
+            <goals>
+              <goal>wsdl2java</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
         </plugins>
     </build>
 
