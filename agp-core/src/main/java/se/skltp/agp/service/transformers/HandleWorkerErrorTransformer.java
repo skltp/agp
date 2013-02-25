@@ -7,8 +7,8 @@ import org.mule.transformer.AbstractMessageTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import se.riv.interoperability.headers.v1.CausingAgentEnum;
-import se.riv.interoperability.headers.v1.LastUnsuccessfulSynchErrorType;
+import se.skltp.agp.riv.interoperability.headers.v1.CausingAgentEnum;
+import se.skltp.agp.riv.interoperability.headers.v1.LastUnsuccessfulSynchErrorType;
 
 public class HandleWorkerErrorTransformer extends AbstractMessageTransformer {
 

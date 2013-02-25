@@ -1,18 +1,18 @@
 package se.skltp.agp.cache;
 
-import static se.riv.interoperability.headers.v1.StatusCodeEnum.DATA_FROM_CACHE;
-import static se.riv.interoperability.headers.v1.StatusCodeEnum.DATA_FROM_CACHE_SYNCH_FAILED;
-import static se.riv.interoperability.headers.v1.StatusCodeEnum.DATA_FROM_SOURCE;
+import static se.skltp.agp.riv.interoperability.headers.v1.StatusCodeEnum.DATA_FROM_CACHE;
+import static se.skltp.agp.riv.interoperability.headers.v1.StatusCodeEnum.DATA_FROM_CACHE_SYNCH_FAILED;
+import static se.skltp.agp.riv.interoperability.headers.v1.StatusCodeEnum.DATA_FROM_SOURCE;
 
 import java.util.Date;
 import java.util.List;
 
 import org.soitoolkit.commons.mule.util.ThreadSafeSimpleDateFormat;
 
-import se.riv.interoperability.headers.v1.LastUnsuccessfulSynchErrorType;
-import se.riv.interoperability.headers.v1.ProcessingStatusRecordType;
-import se.riv.interoperability.headers.v1.ProcessingStatusType;
-import se.riv.interoperability.headers.v1.StatusCodeEnum;
+import se.skltp.agp.riv.interoperability.headers.v1.LastUnsuccessfulSynchErrorType;
+import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusRecordType;
+import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
+import se.skltp.agp.riv.interoperability.headers.v1.StatusCodeEnum;
 
 public class ProcessingStatusUtil {
 

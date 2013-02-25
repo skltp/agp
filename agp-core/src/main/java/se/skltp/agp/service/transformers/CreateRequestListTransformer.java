@@ -8,7 +8,7 @@ import org.mule.transformer.AbstractMessageTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import se.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentResponseType;
+import se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentResponseType;
 import se.skltp.agp.service.api.QueryObject;
 import se.skltp.agp.service.api.RequestListFactory;
 

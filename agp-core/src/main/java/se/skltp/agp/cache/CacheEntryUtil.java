@@ -20,8 +20,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-import se.riv.interoperability.headers.v1.ObjectFactory;
-import se.riv.interoperability.headers.v1.ProcessingStatusType;
+import se.skltp.agp.riv.interoperability.headers.v1.ObjectFactory;
+import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
 
 public class CacheEntryUtil {
 	

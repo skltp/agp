@@ -6,7 +6,7 @@ import org.mule.transformer.AbstractMessageTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import se.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentType;
+import se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentType;
 import se.skltp.agp.service.api.QueryObject;
 
 public class FindContentRequestTransformer extends AbstractMessageTransformer {

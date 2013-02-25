@@ -2,8 +2,8 @@ package se.skltp.agp.service.transformers;
 
 import static org.soitoolkit.commons.xml.XPathUtil.appendXmlFragment;
 import static org.soitoolkit.commons.xml.XPathUtil.getXml;
-import static se.riv.interoperability.headers.v1.StatusCodeEnum.DATA_FROM_SOURCE;
-import static se.riv.interoperability.headers.v1.StatusCodeEnum.NO_DATA_SYNCH_FAILED;
+import static se.skltp.agp.riv.interoperability.headers.v1.StatusCodeEnum.DATA_FROM_SOURCE;
+import static se.skltp.agp.riv.interoperability.headers.v1.StatusCodeEnum.NO_DATA_SYNCH_FAILED;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -34,10 +34,10 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import se.riv.interoperability.headers.v1.LastUnsuccessfulSynchErrorType;
-import se.riv.interoperability.headers.v1.ProcessingStatusType;
-import se.riv.interoperability.headers.v1.ObjectFactory;
 import se.skltp.agp.cache.ProcessingStatusUtil;
+import se.skltp.agp.riv.interoperability.headers.v1.LastUnsuccessfulSynchErrorType;
+import se.skltp.agp.riv.interoperability.headers.v1.ObjectFactory;
+import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
 import se.skltp.agp.service.api.ResponseListFactory;
 
 public class CreateResponseListTransformer extends AbstractMessageTransformer {

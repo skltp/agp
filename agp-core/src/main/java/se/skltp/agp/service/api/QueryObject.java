@@ -1,6 +1,6 @@
 package se.skltp.agp.service.api;
 
-import se.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentType;
+import se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentType;
 
 public class QueryObject {
 

@@ -59,13 +59,6 @@
             <scope>test</scope>
         </dependency>
         
-        <dependency>
-			<groupId>se.rivta.tools</groupId>
-			<artifactId>ehr-scheduling-schemas</artifactId>
-			<version>1</version>
-            <scope>test</scope>
-		</dependency>
-
 		<!-- Mockito -->
 		<dependency>
 			<groupId>org.mockito</groupId>
@@ -115,7 +108,7 @@
                             <xsdOptions>
                                 <xsdOption>
                                     <xsd>${schema.path}/interoperability/headers/core_components/interoperability_headers_1.0.xsd</xsd>
-                                    <packagename>se.riv.interoperability.headers.v1</packagename>
+                                    <packagename>se.skltp.agp.riv.interoperability.headers.v1</packagename>
                                 </xsdOption>
                             </xsdOptions>
                         </configuration>
@@ -139,15 +132,15 @@
                   <wsdl>${schema.path}/TD_ENGAGEMENTINDEX_1_0_RC7/interactions/FindContentInteraction/FindContentInteraction_1.0_RIVTABP21.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
-                    <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
+                    <extraarg>urn:riv:itintegration:engagementindex:1=se.skltp.agp.riv.itintegration.engagementindex.v1</extraarg>
                     <extraarg>-p</extraarg>
-                    <extraarg>urn:riv:itintegration:engagementindex:FindContentResponder:1=se.riv.itintegration.engagementindex.findcontentresponder.v1</extraarg>
+                    <extraarg>urn:riv:itintegration:engagementindex:FindContentResponder:1=se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1</extraarg>
                     <extraarg>-p</extraarg>
-                    <extraarg>urn:riv:itintegration:engagementindex:FindContentInitiator:1=se.riv.itintegration.engagementindex.findcontentinitiator.v1</extraarg>
+                    <extraarg>urn:riv:itintegration:engagementindex:FindContentInitiator:1=se.skltp.agp.riv.itintegration.engagementindex.findcontentinitiator.v1</extraarg>
                     <extraarg>-p</extraarg>
-                    <extraarg>urn:riv:itintegration:engagementindex:FindContent:1:rivtabp21=se.riv.itintegration.engagementindex.findcontent.v1.rivtabp21</extraarg>
+                    <extraarg>urn:riv:itintegration:engagementindex:FindContent:1:rivtabp21=se.skltp.agp.riv.itintegration.engagementindex.findcontent.v1.rivtabp21</extraarg>
                     <extraarg>-p</extraarg>
-                    <extraarg>urn:riv:itintegration:registry:1=se.riv.itintegration.registry.v1</extraarg>
+                    <extraarg>urn:riv:itintegration:registry:1=se.skltp.agp.riv.itintegration.registry.v1</extraarg>
                   </extraargs>
                 </wsdloption>
 
@@ -155,15 +148,15 @@
                   <wsdl>${schema.path}/TD_ENGAGEMENTINDEX_1_0_RC7/interactions/ProcessNotificationInteraction/ProcessNotificationInteraction_1.0_RIVTABP21.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
-                    <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
+                    <extraarg>urn:riv:itintegration:engagementindex:1=se.skltp.agp.riv.itintegration.engagementindex.v1</extraarg>
                     <extraarg>-p</extraarg>
-                    <extraarg>urn:riv:itintegration:engagementindex:ProcessNotificationResponder:1=se.riv.itintegration.engagementindex.processnotificationresponder.v1</extraarg>
+                    <extraarg>urn:riv:itintegration:engagementindex:ProcessNotificationResponder:1=se.skltp.agp.riv.itintegration.engagementindex.processnotificationresponder.v1</extraarg>
                     <extraarg>-p</extraarg>
-                    <extraarg>urn:riv:itintegration:engagementindex:ProcessNotificationInitiator:1=se.riv.itintegration.engagementindex.processnotificationinitiator.v1</extraarg>
+                    <extraarg>urn:riv:itintegration:engagementindex:ProcessNotificationInitiator:1=se.skltp.agp.riv.itintegration.engagementindex.processnotificationinitiator.v1</extraarg>
                     <extraarg>-p</extraarg>
-                    <extraarg>urn:riv:itintegration:engagementindex:ProcessNotification:1:rivtabp21=se.riv.itintegration.engagementindex.processnotification.v1.rivtabp21</extraarg>
+                    <extraarg>urn:riv:itintegration:engagementindex:ProcessNotification:1:rivtabp21=se.skltp.agp.riv.itintegration.engagementindex.processnotification.v1.rivtabp21</extraarg>
                     <extraarg>-p</extraarg>
-                    <extraarg>urn:riv:itintegration:registry:1=se.riv.itintegration.registry.v1</extraarg>
+                    <extraarg>urn:riv:itintegration:registry:1=se.skltp.agp.riv.itintegration.registry.v1</extraarg>
                   </extraargs>
                 </wsdloption>
               </wsdlOptions>
