@@ -38,6 +38,7 @@ import se.skltp.agp.cache.ProcessingStatusUtil;
 import se.skltp.agp.riv.interoperability.headers.v1.LastUnsuccessfulSynchErrorType;
 import se.skltp.agp.riv.interoperability.headers.v1.ObjectFactory;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
+import se.skltp.agp.service.api.QueryObject;
 import se.skltp.agp.service.api.ResponseListFactory;
 
 public class CreateResponseListTransformer extends AbstractMessageTransformer {
@@ -77,14 +78,15 @@ public class CreateResponseListTransformer extends AbstractMessageTransformer {
     public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
 
         // Perform any message aware processing here, otherwise delegate as much as possible to pojoTransform() for easier unit testing
+    	QueryObject queryObject = (QueryObject)message.getInvocationProperty("queryObject");
 
-        return pojoTransform(message.getPayload(), outputEncoding);
+        return pojoTransform(queryObject, message.getPayload(), outputEncoding);
     }
     
     /**
      * Simple pojo transformer method that can be tested with plain unit testing...
      */
-    public Object pojoTransform(Object src, String outputEncoding) throws TransformerException {
+    public Object pojoTransform(QueryObject queryObject, Object src, String outputEncoding) throws TransformerException {
         log.debug("Transforming payload: {}", src);
 
         @SuppressWarnings("unchecked")
@@ -124,7 +126,7 @@ public class CreateResponseListTransformer extends AbstractMessageTransformer {
         
     	log.info("Returning aggregated response from {} source systems", psu.getStatus().getProcessingStatusList().size());
 
-        String xml = responseListFactory.getXmlFromAggregatedResponse(aggregatedResponse);
+        String xml = responseListFactory.getXmlFromAggregatedResponse(queryObject, aggregatedResponse);
         
         String xmlStatus = jaxbUtil.marshal(OF_HEADERS.createProcessingStatus(psu.getStatus()));
         log.debug("processingStatus:\n{}", xmlStatus);

@@ -21,14 +21,10 @@ public class CreateResponseListTransformerTest {
 		String expectedResult = MiscUtil.readFileAsString("src/test/resources/testfiles/tidbokning/response-expected-result.xml");
 		
 		// Create the transformer under test and let it perform the transformation
-
 		CreateResponseListTransformer transformer = new CreateResponseListTransformer();
-		String result = (String)transformer.pojoTransform(input, "UTF-8");
-
+		String result = (String)transformer.pojoTransform(null, input, "UTF-8");
 
 		// Compare the result to the expected value
 		assertEquals(expectedResult, result);
 	}
-
-
 }
