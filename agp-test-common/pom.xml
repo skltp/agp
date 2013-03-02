@@ -16,6 +16,12 @@
 
 	<dependencies>
 		<dependency>
+		    <groupId>se.skltp.agp</groupId>
+			<artifactId>agp-schemas</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
 		  <groupId>org.soitoolkit.commons.components</groupId>
 			<artifactId>soitoolkit-commons-mule</artifactId>
 			<version>${soitoolkit.version}</version>

@@ -43,6 +43,7 @@
 
 	<modules>
 		<module>agp-core</module>
+		<module>agp-schemas</module>
 		<module>agp-test-common</module>
 	</modules>
 		

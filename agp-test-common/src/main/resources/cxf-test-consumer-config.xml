@@ -41,7 +41,7 @@
 		</http:tlsClientParameters>
 	</http:conduit>
 
-    <bean id="soapHeaderInterceptor" class="se.skltp.agp.cache.SoapHeaderCxfInterceptor"/>
+    <bean id="soapHeaderInterceptor" class="se.skltp.agp.test.consumer.SoapHeaderCxfInterceptor"/>
 
     <!-- We are adding the interceptors to the bus as we will have only one endpoint/service/bus. -->
 
