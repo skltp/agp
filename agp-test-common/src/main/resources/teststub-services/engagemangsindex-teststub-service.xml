@@ -20,6 +20,7 @@
     <spring:bean name="engagemangsindex-teststub-bean" class="${ENGAGEMANGSINDEX_PRODUCER_TESTSTUB_IMPL}">
         <spring:property name="eiServiceDomain" value="${EI_SERVICE_DOMAIN}" />
         <spring:property name="eiCategorization" value="${EI_CATEGORIZATION}" />
+        <spring:property name="serviceTimeoutMs" value="${SERVICE_TIMEOUT_MS}" />
     </spring:bean>
 
 	<simple-service 
