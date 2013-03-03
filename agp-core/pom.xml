@@ -85,6 +85,21 @@
                 <directory>${basedir}/src/main/app</directory>
             </resource>
         </resources>
+        
+        <plugins>   
+            <plugin>
+                <!-- Add mule-nature to the eclipse-.project-file -->
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <configuration>
+                    <additionalBuildcommands>
+                        <buildcommand>org.mule.tooling.core.muleBuilder</buildcommand>
+                    </additionalBuildcommands>
+                    <additionalProjectnatures>
+                        <projectnature>org.mule.tooling.core.muleNature</projectnature>
+                    </additionalProjectnatures>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
 </project>
