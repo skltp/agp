@@ -167,9 +167,6 @@ public class CreateResponseListTransformer extends AbstractMessageTransformer {
 
 		xml = getXml(respDoc);
 
-//		System.err.println("RESPONSE: " + xml);
-		log.debug("Transforming result: {}", xml);
-
         return xml;
 	}
 
