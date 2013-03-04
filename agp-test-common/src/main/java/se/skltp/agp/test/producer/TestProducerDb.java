@@ -14,11 +14,11 @@ public abstract class TestProducerDb {
 	public static final String TEST_LOGICAL_ADDRESS_2 = "HSA-ID-2";
 	public static final String TEST_LOGICAL_ADDRESS_3 = "HSA-ID-3";
 
-	public static final String TEST_RR_ID_ZERO_HITS = "000000000000";
-	public static final String TEST_RR_ID_ONE_HIT   = "111111111111";
-	public static final String TEST_RR_ID_MANY_HITS = "222222222222";
-	public static final String TEST_RR_ID_FAULT_INVALID_ID = "-1";
-	public static final String TEST_RR_ID_FAULT_TIMEOUT    = "0";
+	public static final String TEST_RR_ID_ZERO_HITS        = "188803099368"; // Agda Andersson
+	public static final String TEST_RR_ID_ONE_HIT          = "194911172296"; // Sven Sturesson
+	public static final String TEST_RR_ID_MANY_HITS        = "198611062384"; // Ulla Alm
+	public static final String TEST_RR_ID_FAULT_INVALID_ID = "192011189228"; // Gunbritt Boden
+	public static final String TEST_RR_ID_FAULT_TIMEOUT    = "194804032094"; // Laban Meijer
 
 	public static final String TEST_BO_ID_ONE_HIT      = "1001";
 	public static final String TEST_BO_ID_MANY_HITS_1  = "1002";
