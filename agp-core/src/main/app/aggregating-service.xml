@@ -34,6 +34,7 @@
 
     <spring:bean name="queryObjectFactory" class="${QUERY_OBJECT_FACTORY_IMPL}">
         <spring:property name="eiServiceDomain" value="${EI_SERVICE_DOMAIN}" />
+        <spring:property name="eiCategorization" value="${EI_CATEGORIZATION}" />
     </spring:bean>
     <spring:bean name="requestListFactory" class="${REQUEST_LIST_FACTORY_IMPL}" />
     <spring:bean name="responseListFactory" class="${RESPONSE_LIST_FACTORY_IMPL}" />
