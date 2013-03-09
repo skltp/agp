@@ -11,7 +11,7 @@
     
     <groupId>se.skltp.agp</groupId>
     <artifactId>agp-parent</artifactId>
-    <version>1.0.0-RC1</version>
+    <version>1.0.0-RC2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>agp-parent</name>
 
@@ -21,9 +21,9 @@
     </properties>
     
     <scm>
-        <connection>scm:svn:https://skltp.googlecode.com/svn/tp/agp/tags/agp-parent-1.0.0-RC1</connection>
-        <developerConnection>scm:svn:https://skltp.googlecode.com/svn/tp/agp/tags/agp-parent-1.0.0-RC1</developerConnection>
-        <url>https://skltp.googlecode.com/svn/tp/agp/tags/agp-parent-1.0.0-RC1</url>
+        <connection>scm:svn:https://skltp.googlecode.com/svn/tp/agp/trunk</connection>
+        <developerConnection>scm:svn:https://skltp.googlecode.com/svn/tp/agp/trunk</developerConnection>
+        <url>https://skltp.googlecode.com/svn/tp/agp/trunk</url>
     </scm>
     
 	<modules>
