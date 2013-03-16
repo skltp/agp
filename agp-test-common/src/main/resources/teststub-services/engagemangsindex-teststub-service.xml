@@ -25,7 +25,7 @@
 
 	<simple-service 
 		name="engagemangsindex-teststub-service"
-        address="${ENGAGEMANGSINDEX_TESTSTUB_INBOUND_URL}?connector=soitoolkit-https-connector" 
+        address="${ENGAGEMANGSINDEX_TESTSTUB_INBOUND_URL}?connector=soitoolkit-http-connector" 
         type="jax-ws">
         <component>
             <spring-object bean="engagemangsindex-teststub-bean"/>

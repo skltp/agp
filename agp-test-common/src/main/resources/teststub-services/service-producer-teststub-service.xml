@@ -28,7 +28,7 @@
 	<!-- Teststub service for a source system (källsystem) behind a virtual service in TP VP -->
 	<simple-service 
 		name="service-producer-teststub-service"
-        address="${TESTSTUB_SERVICE_INBOUND_URL}?connector=soitoolkit-https-connector" 
+        address="${TESTSTUB_SERVICE_INBOUND_URL}?connector=soitoolkit-http-connector" 
         transformer-refs="testProducerLogger"
         type="jax-ws">
         <component>

@@ -10,7 +10,6 @@
 	xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
 	xmlns:jms="http://www.mulesoft.org/schema/mule/jms"
 	xmlns:http="http://www.mulesoft.org/schema/mule/http"
-	xmlns:https="http://www.mulesoft.org/schema/mule/https"
 	xmlns:mule-xml="http://www.mulesoft.org/schema/mule/xml"
 	xmlns:smooks="http://www.muleforge.org/smooks/schema/mule-module-smooks"
 	xmlns:json="http://www.mulesoft.org/schema/mule/json"
@@ -24,7 +23,6 @@
 		http://www.mulesoft.org/schema/mule/cxf       http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
 		http://www.mulesoft.org/schema/mule/jms       http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
 		http://www.mulesoft.org/schema/mule/http      http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
-		http://www.mulesoft.org/schema/mule/https     http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd
 		http://www.mulesoft.org/schema/mule/xml       http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
 		http://www.muleforge.org/smooks/schema/mule-module-smooks http://dist.muleforge.org/smooks/schema/mule-module-smooks/1.3/mule-module-smooks.xsd
 		http://www.mulesoft.org/schema/mule/json      http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
@@ -58,14 +56,14 @@ TODO: Mule EE dependency
 -->    
 	<flow name="cache-flow">
 
-		<https:inbound-endpoint
+		<http:inbound-endpoint
 			doc:name="Inbound"
-            connector-ref="soitoolkit-https-connector"
+            connector-ref="soitoolkit-http-connector"
 			address="${SERVICE_INBOUND_URL}"
 			exchange-pattern="request-response"
 			transformer-refs="objToStr logReqIn"
 			responseTransformer-refs="createSoapFaultIfException logRespOut">
-		</https:inbound-endpoint>
+		</http:inbound-endpoint>
 
 		<cxf:proxy-service 
             wsdlLocation="${SERVICE_INBOUND_WSDL}"
@@ -104,9 +102,9 @@ TODO: Mule EE dependency
 	    </custom-transformer>
 
         <enricher target="#[payload]">
-			<https:outbound-endpoint 
+			<http:outbound-endpoint 
 				doc:name="Engagement Index"
-	            connector-ref="soitoolkit-https-connector"
+	            connector-ref="soitoolkit-http-connector"
 				address="${ENGAGEMANGSINDEX_OUTBOUND_URL}" 
 				exchange-pattern="request-response"
 				responseTimeout="${SERVICE_TIMEOUT_MS}"
@@ -118,7 +116,7 @@ TODO: Mule EE dependency
 		        	clientClass="se.skltp.agp.riv.itintegration.engagementindex.findcontent.v1.rivtabp21.FindContentResponderService"
 		        	wsdlLocation="classpath:/schemas/TD_ENGAGEMENTINDEX_1_0_RC7/interactions/FindContentInteraction/FindContentInteraction_1.0_RIVTABP21.wsdl"
 		       	/>
-			</https:outbound-endpoint>
+			</http:outbound-endpoint>
         </enricher>
 
 	    <custom-transformer doc:name="Request List Transformer" class="se.skltp.agp.service.transformers.CreateRequestListTransformer">
@@ -182,9 +180,9 @@ TODO: Mule EE dependency
         <!-- Set the outbpund property x-rivta-original-serviceconsumer-hsaid so it will be sent as a http-header -->
         <set-property propertyName="x-rivta-original-serviceconsumer-hsaid" value="#[sessionVars.originalServiceconsumerHsaid]" doc:name="x-rivta-original-serviceconsumer-hsaid" />
 
-		<https:outbound-endpoint 
+		<http:outbound-endpoint 
 			doc:name="Outbound"
-            connector-ref="soitoolkit-https-connector"
+            connector-ref="soitoolkit-http-connector"
 			address="${SERVICE_OUTBOUND_URL}" 
 			exchange-pattern="request-response"
 			responseTimeout="${SERVICE_TIMEOUT_MS}"
@@ -196,7 +194,7 @@ TODO: Mule EE dependency
 	        	clientClass="${SERVICE_OUTBOUND_CLIENT_CLASS}"
 	        	wsdlLocation="${SERVICE_OUTBOUND_WSDL}"
 	        />
-		</https:outbound-endpoint>
+		</http:outbound-endpoint>
  
         <catch-exception-strategy doc:name="Catch Exception Strategy">
             <custom-transformer doc:name="Error Handler" class="se.skltp.agp.service.transformers.HandleWorkerErrorTransformer"/>
