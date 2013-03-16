@@ -74,11 +74,14 @@ TODO: Mule EE dependency
 			payload="envelope">
 		</cxf:proxy-service>
 
+        <!-- Save the x-rivta-original-serviceconsumer-hsaid in a session-property for later usage when calling the service producers -->
+        <set-session-variable variableName="originalServiceconsumerHsaid" value="#[message.inboundProperties.get('x-rivta-original-serviceconsumer-hsaid')]" doc:name="x-rivta-original-serviceconsumer-hsaid" />
+
 	    <custom-transformer doc:name="Create Query Object" class="se.skltp.agp.service.transformers.CreateQueryObjectTransformer">
 	        <spring:property name="queryObjectFactory" ref="queryObjectFactory"/>
 	    </custom-transformer>
 	    
-        <set-variable value="#[payload]" variableName="queryObject" doc:name="Invocation queryObject" />
+        <set-variable variableName="queryObject" value="#[payload]" doc:name="queryObject" />
 
 		<flow-ref name="main-flow" doc:name="main-flow"/>
 
@@ -175,6 +178,9 @@ TODO: Mule EE dependency
 
 		<!-- Save the incoming logical-address in a variable so that is can be added to the response in the <response> - element -->
         <set-variable variableName="logical-address" value="#[groovy:payload[0]]" doc:name="Set Logical Address"/>
+
+        <!-- Set the outbpund property x-rivta-original-serviceconsumer-hsaid so it will be sent as a http-header -->
+        <set-property propertyName="x-rivta-original-serviceconsumer-hsaid" value="#[sessionVars.originalServiceconsumerHsaid]" doc:name="x-rivta-original-serviceconsumer-hsaid" />
 
 		<https:outbound-endpoint 
 			doc:name="Outbound"

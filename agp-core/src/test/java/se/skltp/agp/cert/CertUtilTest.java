@@ -27,7 +27,6 @@ public class CertUtilTest {
 //		Enumeration<String> a = ks.aliases();
 //		while (a.hasMoreElements()) {
 //			String string = (String) a.nextElement();
-//			System.err.println(string);
 //		}
 //
 //		int i = 0;

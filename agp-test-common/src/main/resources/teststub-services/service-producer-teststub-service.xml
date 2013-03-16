@@ -23,15 +23,17 @@
         <spring:property name="testDb" ref="service-producer-testdb-bean" />
     </spring:bean>
 
+    <custom-transformer name="testProducerLogger" class="se.skltp.agp.test.producer.TestProducerLogger"/>
+
 	<!-- Teststub service for a source system (källsystem) behind a virtual service in TP VP -->
 	<simple-service 
 		name="service-producer-teststub-service"
         address="${TESTSTUB_SERVICE_INBOUND_URL}?connector=soitoolkit-https-connector" 
+        transformer-refs="testProducerLogger"
         type="jax-ws">
         <component>
             <spring-object bean="service-producer-teststub-bean"/>
         </component>
     </simple-service>
-        
 
 </mule>
