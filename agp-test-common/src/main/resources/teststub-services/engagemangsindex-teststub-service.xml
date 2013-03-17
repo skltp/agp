@@ -23,9 +23,12 @@
         <spring:property name="serviceTimeoutMs" value="${SERVICE_TIMEOUT_MS}" />
     </spring:bean>
 
+    <custom-transformer name="engagemangsindexTestProducerLogger" class="se.skltp.agp.test.producer.EngagemangsindexTestProducerLogger"/>
+
 	<simple-service 
 		name="engagemangsindex-teststub-service"
         address="${ENGAGEMANGSINDEX_TESTSTUB_INBOUND_URL}?connector=soitoolkit-http-connector" 
+        transformer-refs="engagemangsindexTestProducerLogger"
         type="jax-ws">
         <component>
             <spring-object bean="engagemangsindex-teststub-bean"/>

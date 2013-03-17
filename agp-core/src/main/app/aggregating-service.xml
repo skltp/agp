@@ -101,6 +101,9 @@ TODO: Mule EE dependency
 	       <spring:property name="engagemangsIndexHsaId" value="${ENGAGEMANGSINDEX_HSA_ID}"/>
 	    </custom-transformer>
 
+        <!-- Set the outbpund property x-rivta-original-serviceconsumer-hsaid as the HSA-ID of SKLTP itself. i.e. it is SKLTP that is authorized to call EI not the original consumer -->
+        <set-property propertyName="x-rivta-original-serviceconsumer-hsaid" value="${SKLTP_HSA_ID}" doc:name="set x-rivta-original-serviceconsumer-hsaid = SKLTP_HSA_ID" />
+
         <enricher target="#[payload]">
 			<http:outbound-endpoint 
 				doc:name="Engagement Index"
