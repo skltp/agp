@@ -96,7 +96,7 @@ TODO: Mule EE dependency
 -->
 
     <spring:beans>
-      <spring:import resource="classpath:soitoolkit-mule-http-connector.xml"/>
+      <spring:import resource="classpath:agp-mule-http-connector.xml"/>
     </spring:beans>
 
     <message-properties-transformer name="setJsonContentType" scope="outbound">
