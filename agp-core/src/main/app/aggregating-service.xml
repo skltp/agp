@@ -117,7 +117,7 @@ TODO: Mule EE dependency
 		        	port="FindContentResponderPort" 
 		        	operation="FindContent" 
 		        	clientClass="se.skltp.agp.riv.itintegration.engagementindex.findcontent.v1.rivtabp21.FindContentResponderService"
-		        	wsdlLocation="classpath:/schemas/TD_ENGAGEMENTINDEX_1_0_RC7/interactions/FindContentInteraction/FindContentInteraction_1.0_RIVTABP21.wsdl"
+		        	wsdlLocation="classpath:/schemas/TD_ENGAGEMENTINDEX_1_0_RC10/interactions/FindContentInteraction/FindContentInteraction_1.0_RIVTABP21.wsdl"
 		       	/>
 			</http:outbound-endpoint>
         </enricher>
