@@ -48,6 +48,17 @@
 			<artifactId>soitoolkit-mule-3.3.1-dependencies</artifactId>
 			<version>${soitoolkit.version}</version>
 			<type>pom</type>
+			<!-- Exclude mule-module-spring-security since we don't use it and it contains dependencies to old versions of spring causing strange problems to occur -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.mule.modules</groupId>
+					<artifactId>mule-module-spring-security</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-web</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<!-- TEST DEPENDENCIES -->
