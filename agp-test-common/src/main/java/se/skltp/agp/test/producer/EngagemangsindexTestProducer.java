@@ -1,17 +1,6 @@
 package se.skltp.agp.test.producer;
 
-import static se.skltp.agp.test.producer.TestProducerDb.TEST_BO_ID_FAULT_INVALID_ID;
-import static se.skltp.agp.test.producer.TestProducerDb.TEST_BO_ID_MANY_HITS_1;
-import static se.skltp.agp.test.producer.TestProducerDb.TEST_BO_ID_MANY_HITS_2;
-import static se.skltp.agp.test.producer.TestProducerDb.TEST_BO_ID_MANY_HITS_3;
-import static se.skltp.agp.test.producer.TestProducerDb.TEST_BO_ID_MANY_HITS_4;
-import static se.skltp.agp.test.producer.TestProducerDb.TEST_BO_ID_ONE_HIT;
-import static se.skltp.agp.test.producer.TestProducerDb.TEST_LOGICAL_ADDRESS_1;
-import static se.skltp.agp.test.producer.TestProducerDb.TEST_LOGICAL_ADDRESS_2;
-import static se.skltp.agp.test.producer.TestProducerDb.TEST_LOGICAL_ADDRESS_3;
-import static se.skltp.agp.test.producer.TestProducerDb.TEST_RR_ID_FAULT_INVALID_ID;
-import static se.skltp.agp.test.producer.TestProducerDb.TEST_RR_ID_MANY_HITS;
-import static se.skltp.agp.test.producer.TestProducerDb.TEST_RR_ID_ONE_HIT;
+import static se.skltp.agp.test.producer.TestProducerDb.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -93,24 +82,24 @@ public class EngagemangsindexTestProducer implements FindContentResponderInterfa
 
 		// Patient with one booking
 		FindContentResponseType response = new FindContentResponseType();
-		response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_ONE_HIT, TEST_BO_ID_ONE_HIT));
+		response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_ONE_HIT, TEST_BO_ID_ONE_HIT, TEST_DATE_ONE_HIT));
 		INDEX.put(TEST_RR_ID_ONE_HIT, response);
 
 		// Patient with three bookings spread over two logical-addresses
 		response = new FindContentResponseType();
-		response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_1));
-		response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_2, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_2));
-		response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_2, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_3));
-		response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_3, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_4));
+		response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_1, TEST_DATE_MANY_HITS_1));
+		response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_2, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_2, TEST_DATE_MANY_HITS_2));
+		response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_2, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_3, TEST_DATE_MANY_HITS_3));
+		response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_3, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_4, TEST_DATE_MANY_HITS_4));
 		INDEX.put(TEST_RR_ID_MANY_HITS, response);
 				
 		// Patient that cause an exception in the source system
 		response = new FindContentResponseType();
-		response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_FAULT_INVALID_ID, TEST_BO_ID_FAULT_INVALID_ID));
+		response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_FAULT_INVALID_ID, TEST_BO_ID_FAULT_INVALID_ID, TEST_DATE_FAULT_INVALID_ID));
 		INDEX.put(TEST_RR_ID_FAULT_INVALID_ID, response);
 	}
 
-	private EngagementType createResponse(String receiverLogicalAddress, String registeredResidentIdentification, String businessObjectId) {
+	private EngagementType createResponse(String receiverLogicalAddress, String registeredResidentIdentification, String businessObjectId, String date) {
 		
 		EngagementType e = new EngagementType();
 		e.setServiceDomain(eiServiceDomain);
@@ -118,9 +107,9 @@ public class EngagemangsindexTestProducer implements FindContentResponderInterfa
 		e.setLogicalAddress(receiverLogicalAddress);
 		e.setRegisteredResidentIdentification(registeredResidentIdentification);
 		e.setBusinessObjectInstanceIdentifier(businessObjectId);
-		e.setCreationTime("2011101000000");
-		e.setUpdateTime("2011101000000");
-		e.setMostRecentContent("2011101000000");
+		e.setCreationTime(date);
+		e.setUpdateTime(date);
+		e.setMostRecentContent(date);
 		e.setSourceSystem(receiverLogicalAddress);
 		return e;
 	}

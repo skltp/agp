@@ -27,6 +27,13 @@ public abstract class TestProducerDb {
 	public static final String TEST_BO_ID_MANY_HITS_4  = "1004";
 	public static final String TEST_BO_ID_MANY_HITS_NEW_1  = "2001";
 	public static final String TEST_BO_ID_FAULT_INVALID_ID = "1005";
+	
+	public static final String TEST_DATE_ONE_HIT = "20130101000000";
+	public static final String TEST_DATE_MANY_HITS_1 = "20130301000000";
+	public static final String TEST_DATE_MANY_HITS_2 = "20130401000000";
+	public static final String TEST_DATE_MANY_HITS_3 = "20130401000000";
+	public static final String TEST_DATE_MANY_HITS_4 = "20130415000000";
+	public static final String TEST_DATE_FAULT_INVALID_ID = "20130101000000";
 
 	private long serviceTimeoutMs;
 	public void setServiceTimeoutMs(long serviceTimeoutMs) {
@@ -75,8 +82,8 @@ public abstract class TestProducerDb {
 	
 	public abstract Object createResponse(Object... responseItems);
 
-	public abstract Object createResponseItem(String logicalAddress, String registeredResidentId, String businessObjectId);
-
+	public abstract Object createResponseItem(String logicalAddress, String registeredResidentId, String businessObjectId, String time);	
+	
 	//
 	// Simplest possible memory db for business object instances from test-stubs for a number of source systems
 	//
@@ -89,19 +96,19 @@ public abstract class TestProducerDb {
 		resetDb();
 
 		// Patient with one booking, id = TEST_RR_ID_ONE_HIT
-		Object response = createResponse(createResponseItem(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_ONE_HIT, TEST_BO_ID_ONE_HIT));
+		Object response = createResponse(createResponseItem(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_ONE_HIT, TEST_BO_ID_ONE_HIT, TEST_DATE_ONE_HIT));
 		storeInDb(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_ONE_HIT, response);
 
 		// Patient with four bookings spread over three logical-addresses, where one is on a slow system, i.e. that cause timeouts
-		response = createResponse(createResponseItem(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_1));
+		response = createResponse(createResponseItem(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_1, TEST_DATE_MANY_HITS_1));
 		storeInDb(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_MANY_HITS, response);
 
 		response = createResponse(
-			createResponseItem(TEST_LOGICAL_ADDRESS_2, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_2),
-			createResponseItem(TEST_LOGICAL_ADDRESS_2, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_3));
+			createResponseItem(TEST_LOGICAL_ADDRESS_2, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_2, TEST_DATE_MANY_HITS_2),
+			createResponseItem(TEST_LOGICAL_ADDRESS_2, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_3, TEST_DATE_MANY_HITS_3));
 		storeInDb(TEST_LOGICAL_ADDRESS_2, TEST_RR_ID_MANY_HITS, response);
 
-		response = createResponse(createResponseItem(TEST_LOGICAL_ADDRESS_3, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_4));
+		response = createResponse(createResponseItem(TEST_LOGICAL_ADDRESS_3, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_4, TEST_DATE_MANY_HITS_4));
 		storeInDb(TEST_LOGICAL_ADDRESS_3, TEST_RR_ID_MANY_HITS, response);
 	}
 
