@@ -95,7 +95,13 @@ TODO: Mule EE dependency
     <rest-router:config/>
 -->
 
+
     <spring:beans>
+       <spring:bean name="soitoolkit.eventLogger" class="se.skltp.agp.log.CustomEventLogger" primary="true">
+        <spring:property name="infoEventQueue" value="${SOITOOLKIT_LOG_INFO_QUEUE}"/>
+        <spring:property name="errorEventQueue" value="${SOITOOLKIT_LOG_ERROR_QUEUE}"/>
+      </spring:bean>
+
       <spring:import resource="classpath:agp-mule-http-connector.xml"/>
     </spring:beans>
 
