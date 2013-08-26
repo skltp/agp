@@ -11,14 +11,14 @@
     
     <groupId>se.skltp.agp</groupId>
     <artifactId>agp-parent</artifactId>
-    <version>1.0.0-RC6-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
     <name>agp-parent</name>
 
     <scm>
-        <connection>scm:svn:https://skltp.googlecode.com/svn/tp/agp/trunk</connection>
-        <developerConnection>scm:svn:https://skltp.googlecode.com/svn/tp/agp/trunk</developerConnection>
-        <url>https://skltp.googlecode.com/svn/tp/agp/trunk</url>
+        <connection>scm:svn:https://skltp.googlecode.com/svn/tp/agp/tags/agp-parent-1.0.0</connection>
+        <developerConnection>scm:svn:https://skltp.googlecode.com/svn/tp/agp/tags/agp-parent-1.0.0</developerConnection>
+        <url>https://skltp.googlecode.com/svn/tp/agp/tags/agp-parent-1.0.0</url>
     </scm>
     
 	<modules>
