@@ -105,9 +105,15 @@ TODO: Mule EE dependency
 	    <custom-transformer doc:name="Find Content Transformer" class="se.skltp.agp.ei.findcontent.FindContentRequestTransformer">
 	       <spring:property name="engagemangsIndexHsaId" value="${ENGAGEMANGSINDEX_HSA_ID}"/>
 	    </custom-transformer>
-
-        <!-- Set the outbpund property x-vp-sender-id as the HSA-ID of SKLTP itself. i.e. it is SKLTP that is authorized to call EI not the sender -->
-        <set-property propertyName="x-vp-sender-id" value="${SKLTP_HSA_ID}" doc:name="set x-vp-sender-id = SKLTP_HSA_ID" />
+	    
+	    <!-- 
+ 			Set the outbpund property x-vp-sender-id as the HSA-ID of SKLTP itself. i.e. it is SKLTP that is authorized to call EI not the sender.
+ 			Propagate x-vp-instance-id as an outbound property, value is set as an id of the invoked VP.
+ 			
+ 			These two headers are dependent on each other in a way that when using x-vp-sender-id against VP, VP will check for a valid x-vp-instance-id.
+ 		-->
+ 		<set-property propertyName="x-vp-sender-id" value="${SKLTP_HSA_ID}" doc:name="propagate x-vp-sender-id = SKLTP_HSA_ID when invoking FindContent" />
+ 		<set-property propertyName="x-vp-instance-id" value="${VP_INSTANCE_ID}" doc:name="propagate x-vp-instance-id = VP_INSTANCE_ID when invoking FindContent" />
 
         <!-- Propagate x-rivta-original-serviceconsumer-hsaid as an outbound property -->
         <set-property propertyName="x-rivta-original-serviceconsumer-hsaid" value="#[sessionVars.originalServiceconsumerHsaid]" doc:name="propagate x-rivta-original-serviceconsumer-hsaid" />
@@ -187,9 +193,15 @@ TODO: Mule EE dependency
 
 		<!-- Save the incoming logical-address in a variable so that is can be added to the response in the <response> - element -->
         <set-variable variableName="logical-address" value="#[groovy:payload[0]]" doc:name="Set Logical Address"/>
-
-        <!-- Propagate x-vp-sender-id as an outbound property, i.e. it is the sender that is authorized to call the service producers -->
-        <set-property propertyName="x-vp-sender-id" value="#[sessionVars.senderId]" doc:name="propagate x-vp-sender-id" />
+        
+        <!-- 
+ 			Propagate x-vp-sender-id as an outbound property, i.e. it is the sender that is authorized to call the service producers.
+ 			Propagate x-vp-instance-id as an outbound property, value is set as an id of the invoked VP.
+ 			
+ 			These two headers are dependent on each other in a way that when using x-vp-sender-id against VP, VP will check for a valid x-vp-instance-id.
+ 		-->
+ 		<set-property propertyName="x-vp-sender-id" value="#[sessionVars.senderId]" doc:name="propagate x-vp-sender-id" />
+ 		<set-property propertyName="x-vp-instance-id" value="${VP_INSTANCE_ID}" doc:name="propagate x-vp-instance-id" />
 
         <!-- Propagate x-rivta-original-serviceconsumer-hsaid as an outbound property -->
         <set-property propertyName="x-rivta-original-serviceconsumer-hsaid" value="#[sessionVars.originalServiceconsumerHsaid]" doc:name="propagate x-rivta-original-serviceconsumer-hsaid" />

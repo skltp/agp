@@ -16,6 +16,7 @@ public class TestProducerLogger extends AbstractMessageTransformer {
 
 	private static String lastSenderId = null;
 	private static String lastOriginalConsumer = null;
+	private static String lastVpInstance = null;
 	
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
@@ -23,15 +24,23 @@ public class TestProducerLogger extends AbstractMessageTransformer {
 		@SuppressWarnings("unchecked")
 		Map<String, Object> httpHeaders = (Map<String, Object>)message.getInboundProperty("http.headers");
 		
-		String senderId    = (String)httpHeaders.get(AgpConstants.X_VP_SENDER_ID);
-		String orgConsumer = (String)httpHeaders.get(AgpConstants.X_RIVTA_ORIGINAL_SERVICE_CONSUMER_HSA_ID);
-		log.info("Test producer called with {}: {} and {}: {}", new Object[] {
-			AgpConstants.X_VP_SENDER_ID, senderId, 
-			AgpConstants.X_RIVTA_ORIGINAL_SERVICE_CONSUMER_HSA_ID, orgConsumer});
+		String senderId = (String)httpHeaders.get(AgpConstants.X_VP_SENDER_ID);
+		log.info("Test producer called with {}: {}", AgpConstants.X_VP_SENDER_ID, senderId);
 		lastSenderId = senderId;
+		
+		String vpInstance = (String)httpHeaders.get(AgpConstants.X_VP_INSTANCE_ID);
+		log.info("Test producer called with {}: {}", AgpConstants.X_VP_INSTANCE_ID, vpInstance);
+		lastVpInstance = vpInstance;
+		
+		String orgConsumer = (String)httpHeaders.get(AgpConstants.X_RIVTA_ORIGINAL_SERVICE_CONSUMER_HSA_ID);
+		log.info("Test producer called with {}: {}", AgpConstants.X_RIVTA_ORIGINAL_SERVICE_CONSUMER_HSA_ID, orgConsumer);
 		lastOriginalConsumer = orgConsumer;
 
 		return message;
+	}
+
+	public static String getLastVpInstance() {
+		return lastVpInstance;
 	}
 
 	public static String getLastSenderId() {
