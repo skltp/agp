@@ -80,23 +80,42 @@ public class EngagemangsindexTestProducer implements FindContentResponderInterfa
 	private void initIndex() {
 		// Build a booking-index based subjectOfCare as key containing a number of bookings with unique booking-id's spread over one or more logical-addresses. 
 
+		//
 		// Patient with one booking
+		//
 		FindContentResponseType response = new FindContentResponseType();
 		response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_ONE_HIT, TEST_BO_ID_ONE_HIT, TEST_DATE_ONE_HIT));
 		INDEX.put(TEST_RR_ID_ONE_HIT, response);
+		log.info("### Engagemengsindex add {} items to the index for resident {}", response.getEngagement().size(), TEST_RR_ID_ONE_HIT);
 
+		//
 		// Patient with three bookings spread over two logical-addresses
+		//
 		response = new FindContentResponseType();
 		response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_1, TEST_DATE_MANY_HITS_1));
 		response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_2, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_2, TEST_DATE_MANY_HITS_2));
 		response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_2, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_3, TEST_DATE_MANY_HITS_3));
 		response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_3, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_4, TEST_DATE_MANY_HITS_4));
 		INDEX.put(TEST_RR_ID_MANY_HITS, response);
-				
+		log.info("### Engagemengsindex add {} items to the index for resident {}", response.getEngagement().size(), TEST_RR_ID_MANY_HITS);
+			
+		//
 		// Patient that cause an exception in the source system
+		//
 		response = new FindContentResponseType();
 		response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_FAULT_INVALID_ID, TEST_BO_ID_FAULT_INVALID_ID, TEST_DATE_FAULT_INVALID_ID));
 		INDEX.put(TEST_RR_ID_FAULT_INVALID_ID, response);
+		log.info("### Engagemengsindex add {} items to the index for resident {}", response.getEngagement().size(), TEST_RR_ID_FAULT_INVALID_ID);
+
+		//
+		// Patient with three bookings spread over three logical-addresses, all with fast response times
+		//
+		response = new FindContentResponseType();
+		response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_4, TEST_RR_ID_MANY_HITS_NO_ERRORS, TEST_BO_ID_MANY_HITS_1, TEST_DATE_MANY_HITS_1));
+		response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_5, TEST_RR_ID_MANY_HITS_NO_ERRORS, TEST_BO_ID_MANY_HITS_2, TEST_DATE_MANY_HITS_2));
+		response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_6, TEST_RR_ID_MANY_HITS_NO_ERRORS, TEST_BO_ID_MANY_HITS_3, TEST_DATE_MANY_HITS_3));
+		INDEX.put(TEST_RR_ID_MANY_HITS_NO_ERRORS, response);
+		log.info("### Engagemengsindex add {} items to the index for resident {}", response.getEngagement().size(), TEST_RR_ID_MANY_HITS_NO_ERRORS);
 	}
 
 	private EngagementType createResponse(String receiverLogicalAddress, String registeredResidentIdentification, String businessObjectId, String date) {
