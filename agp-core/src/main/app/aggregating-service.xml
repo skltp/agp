@@ -43,7 +43,7 @@ TODO: Mule EE dependency
 		http://www.mulesoft.org/schema/mule/ee/core   http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd 
  -->
 
-	<queued-asynchronous-processing-strategy name="worker-flow-processing-strategy" maxThreads="50"/>    
+	<queued-asynchronous-processing-strategy name="worker-flow-processing-strategy"/>    
 
 <!-- TODO: Mule EE dependency
     <ee:object-store-caching-strategy name="caching_strategy" keyGenerationExpression="#[payload]" doc:name="Caching Strategy">

@@ -104,6 +104,10 @@ TODO: Mule EE dependency
 
       <spring:import resource="classpath:agp-mule-http-connector.xml"/>
     </spring:beans>
+    
+    <configuration>
+		<default-threading-profile poolExhaustedAction="ABORT" maxThreadsActive="${AGP_DEFAULT_MAX_THREADS_ACTIVE}" maxThreadsIdle="${AGP_DEFAULT_MAX_THREADS_IDLE}" threadTTL="${AGP_DEFAULT_MAX_THREADS_TTL}"/>
+	</configuration>
 
     <message-properties-transformer name="setJsonContentType" scope="outbound">
         <add-message-property key="Content-Type" value="application/json;charset=UTF-8"/>
