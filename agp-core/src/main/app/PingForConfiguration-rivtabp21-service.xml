@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mule 
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:spring="http://www.springframework.org/schema/beans"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.mulesoft.org/schema/mule/core      http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/cxf       http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+		http://www.mulesoft.org/schema/mule/http      http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+	">
+    
+    <flow name="PingForConfiguration-1-rivtabp21-flow" >
+        <inbound-endpoint
+	            name="PingForConfiguration-1-rivtabp21-service"
+	            address="${PINGFORCONFIGURATION_INBOUND_ENDPOINT}"
+	            exchange-pattern="request-response">
+	    </inbound-endpoint>
+ 
+        <cxf:jaxws-service serviceClass="se.skltp.agp.monitoring.PingForconfigurationService"/>
+        
+        <logger message="PingForConfiguration requested in aggregated service ${APPLICATION_NAME}" category="se.skltp.agp.monitoring" level="DEBUG"/>
+        
+        <custom-transformer doc:name="PingForConfiguration request transformer" class="se.skltp.agp.monitoring.PingForconfigurationRequestTransformer">
+	       <spring:property name="engagemangsIndexHsaId" value="${ENGAGEMANGSINDEX_HSA_ID}"/>
+	    </custom-transformer>
+	    
+	    <!-- 
+ 			Set the outbpund property x-vp-sender-id as the HSA-ID of SKLTP itself. i.e. it is SKLTP that is authorized to call EI not the sender.
+ 			Propagate x-vp-instance-id as an outbound property, value is set as an id of the invoked VP.
+ 			
+ 			These two headers are dependent on each other in a way that when using x-vp-sender-id against VP, VP will check for a valid x-vp-instance-id.
+ 		-->
+ 		<set-property propertyName="x-vp-sender-id" value="${SKLTP_HSA_ID}" doc:name="propagate x-vp-sender-id = SKLTP_HSA_ID when invoking PingForConfiguration through VP" />
+ 		<set-property propertyName="x-vp-instance-id" value="${VP_INSTANCE_ID}" doc:name="propagate x-vp-instance-id = VP_INSTANCE_ID when invoking PingForConfiguration through VP" />
+	    
+        <logger message="Perform a PingForconfiguration request aginst EI for ${APPLICATION_NAME}" category="se.skltp.agp.monitoring" level="INFO"/>
+        
+		<http:outbound-endpoint 
+			doc:name="Engagement Index PingForConfiguration"
+            connector-ref="soitoolkit-http-connector"
+			address="${ENGAGEMANGSINDEX_PINGFORCONFIGURATION_ENDPOINT}" 
+			exchange-pattern="request-response"
+			responseTimeout="${ENGAGEMANGSINDEX_PINGFORCONFIGURATION_SERVICE_TIMEOUT_MS}">
+	        <cxf:jaxws-client 
+	        	port="PingForConfigurationResponderPort" 
+	        	operation="PingForConfiguration" 
+	        	clientClass="se.riv.itintegration.monitoring.rivtabp21.v1.PingForConfigurationResponderService"
+	        	wsdlLocation="classpath:/ServiceContracts_itintegration_monitoring/interactions/PingForConfigurationInteraction/PingForConfigurationInteraction_1.0_RIVTABP21.wsdl"
+	       	/>
+		</http:outbound-endpoint>
+		
+		<logger message="Successfull PingForConfiguration request against EI, create a PingForconfiguration response for ${APPLICATION_NAME}" category="se.skltp.agp.monitoring" level="INFO"/>
+		
+		 <custom-transformer doc:name="PingForConfiguration response transformer" class="se.skltp.agp.monitoring.PingForconfigurationResponseTransformer">
+	       <spring:property name="appName" value="${APPLICATION_NAME}" />
+	    </custom-transformer>
+        
+        <custom-exception-strategy class="org.soitoolkit.commons.mule.error.ServiceExceptionStrategy"/>
+    </flow>
+</mule>
