@@ -24,6 +24,12 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>se.skltp.commons</groupId>
+			<artifactId>tp-commons-mule</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		
+		<dependency>
 		    <groupId>se.skltp.agp</groupId>
 			<artifactId>agp-schemas</artifactId>
 			<version>${project.version}</version>

@@ -102,11 +102,8 @@ TODO: Mule EE dependency
 
 
     <spring:beans>
-       <spring:bean name="soitoolkit.eventLogger" class="se.skltp.agp.log.CustomEventLogger" primary="true">
-        <spring:property name="infoEventQueue" value="${SOITOOLKIT_LOG_INFO_QUEUE}"/>
-        <spring:property name="errorEventQueue" value="${SOITOOLKIT_LOG_ERROR_QUEUE}"/>
-      </spring:bean>
-
+      <!-- import the common logger config -->
+      <spring:import resource="classpath:tp-commons-mule-logging.xml" />
       <spring:import resource="classpath:agp-mule-http-connector.xml"/>
     </spring:beans>
     
