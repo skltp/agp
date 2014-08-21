@@ -26,6 +26,7 @@ public class PingForconfigurationServiceIntegrationTest extends AbstractTestCase
 		return 	"soitoolkit-mule-jms-connector-activemq-embedded.xml," +
 				"PingForConfiguration-test-common.xml," +
 				"teststub-services/PingForConfiguration-teststub-service.xml," +
+				"PingForConfiguration-rivtabp21-service.xml, " +
 				"aggregating-services-common.xml";
 	}
 
