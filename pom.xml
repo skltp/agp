@@ -6,29 +6,48 @@
     <parent>
         <groupId>org.soitoolkit.commons.poms</groupId>
         <artifactId>soitoolkit-default-parent</artifactId>
-        <version>0.6.1-M2</version>
+        <version>0.6.1</version>
     </parent>
-    
+
     <groupId>se.skltp.agp</groupId>
     <artifactId>agp-parent</artifactId>
     <version>1.2.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>agp-parent</name>
 
-    <scm>
-        <connection>scm:svn:https://skltp.googlecode.com/svn/tp/agp/trunk</connection>
-        <developerConnection>scm:svn:https://skltp.googlecode.com/svn/tp/agp/trunk</developerConnection>
-        <url>https://skltp.googlecode.com/svn/tp/agp/trunk</url>
-    </scm>
-    
+		<scm>
+			<url>http://github.com/skltp/agp</url>
+			<connection>scm:git:git://github.com/skltp/agp.git</connection>
+			<developerConnection>scm:git:git://github.com/skltp/agp.git</developerConnection>
+			<tag>HEAD</tag>
+		</scm>
+
 	<modules>
 		<module>agp-core</module>
 		<module>agp-schemas</module>
 		<module>agp-test-common</module>
-<!-- 
+<!--
 		<module>agp-gen</module>
 		<module>agp-gen-maven-plugin</module>
  -->
 	</modules>
-		
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-release-plugin</artifactId>
+						<version>2.5.1</version>
+						<configuration>
+								<autoVersionSubmodules>true</autoVersionSubmodules>
+								<tagNameFormat>v@{project.version}</tagNameFormat>
+								<pushChanges>false</pushChanges>
+								<localCheckout>true</localCheckout>
+						</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
 </project>
