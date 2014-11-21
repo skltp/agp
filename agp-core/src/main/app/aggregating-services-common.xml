@@ -61,6 +61,7 @@ TODO: Mule EE dependency
  		<spring:property name="takEndpoint" value="${TAK_OUTBOUND_URL}" />
  		<spring:property name="targetNamespace" value="${SERVICE_INBOUND_NAMESPACE}" />
  		<spring:property name="serviceTimeout" value="${SERVICE_TIMEOUT_MS}" />
+ 		<spring:property name="takLocalCacheFile" value="${TAK_CACHE_FILE_NAME}" />
  	</spring:bean>
 
   
