@@ -20,9 +20,17 @@ endpointInterface = "se.skltp.agp.riv.vagvalsinfo.v2.SokVagvalsInfoInterface",
 public class TakTestProducer implements SokVagvalsInfoInterface {
 	
 	private static final String TEST_ADDRESS = "TEST_ADDRESS";
-	private static final String TEST_RECIVER_ID = "TEST_RECIVER_ID";
 	private static final String TEST_RIV_PROFIL = "TEST_RIV_PROFIL";
 	private static final String TEST_VIRTUALISERING_INFO = "TEST_VIRTUALISERING_INFO";
+	
+	private static final String[] recivers = {
+		TestProducerDb.TEST_LOGICAL_ADDRESS_1,
+		TestProducerDb.TEST_LOGICAL_ADDRESS_2,
+		TestProducerDb.TEST_LOGICAL_ADDRESS_3,
+		TestProducerDb.TEST_LOGICAL_ADDRESS_4,
+		TestProducerDb.TEST_LOGICAL_ADDRESS_5,
+		TestProducerDb.TEST_LOGICAL_ADDRESS_6
+	};
 	
 	private long serviceTimeout;
 	private String targetNamespace;
@@ -58,22 +66,23 @@ public class TakTestProducer implements SokVagvalsInfoInterface {
 	
 	protected HamtaAllaVirtualiseringarResponseType createStubData() {
 		final HamtaAllaVirtualiseringarResponseType type = new HamtaAllaVirtualiseringarResponseType();
-		//Add entry with correct namespace
-		type.getVirtualiseringsInfo().add(infoType(targetNamespace));
-		//Add some faulty ones
-		for(int i = 0; i < 5; i++) {
-			type.getVirtualiseringsInfo().add(infoType(UUID.randomUUID().toString()));
+		//Add entrys with correct namespace
+		for(int i = 0; i < 6; i++) {
+			type.getVirtualiseringsInfo().add(infoType(targetNamespace, recivers[i]));
 		}
+		//Add some faulty ones
+		type.getVirtualiseringsInfo().add(infoType(UUID.randomUUID().toString(), "HSA-ID-FEL"));
+		type.getVirtualiseringsInfo().add(infoType(UUID.randomUUID().toString(), "HSA-ID-FEL"));
 		return type;
 	}
 	
-	protected VirtualiseringsInfoType infoType(final String targetNamespace) {
+	protected VirtualiseringsInfoType infoType(final String ns, final String ls) {
 		final VirtualiseringsInfoType type = new VirtualiseringsInfoType();
 		type.setAdress(TEST_ADDRESS);
 		type.setFromTidpunkt(xmlDate());
-		type.setReceiverId(TEST_RECIVER_ID);
+		type.setReceiverId(ls);
 		type.setRivProfil(TEST_RIV_PROFIL);
-		type.setTjansteKontrakt(targetNamespace);
+		type.setTjansteKontrakt(ns);
 		type.setTomTidpunkt(type.getFromTidpunkt());
 		type.setVirtualiseringsInfoId(TEST_VIRTUALISERING_INFO);
 		return type;
