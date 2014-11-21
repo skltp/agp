@@ -32,6 +32,7 @@
 	    <spring:property name="locations">
 	      <spring:list>
 	        <spring:value>classpath:pingforconfiguration-test-config.properties</spring:value>
+	        <spring:value>classpath:takcache-test-config.properties</spring:value>
 	      </spring:list>
 	    </spring:property>
 	  </spring:bean>

@@ -30,11 +30,15 @@
 		http://www.mulesoft.org/schema/mule/xml       http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
 	">
 
+	
+
     <spring:bean name="queryObjectFactory" class="${QUERY_OBJECT_FACTORY_IMPL}">
         <spring:property name="eiServiceDomain" value="${EI_SERVICE_DOMAIN}" />
         <spring:property name="eiCategorization" value="${EI_CATEGORIZATION}" />
     </spring:bean>
-    <spring:bean name="requestListFactory" class="${REQUEST_LIST_FACTORY_IMPL}" />
+    <spring:bean name="requestListFactory" class="${REQUEST_LIST_FACTORY_IMPL}">
+   		<spring:property name="takCache" ref="takCacheBean"/>
+    </spring:bean>
     <spring:bean name="responseListFactory" class="${RESPONSE_LIST_FACTORY_IMPL}" />
 
 <!-- 
@@ -235,5 +239,21 @@ TODO: Mule EE dependency
         <collection-aggregator timeout="${AGGREGATE_TIMEOUT_MS}" failOnTimeout="false" doc:name="Collection Aggregator"/>
 
         <vm:outbound-endpoint path="reply" doc:name="vm://reply"/>
+    </flow>
+    
+    <flow name="reset-tak-cache-http-flow">
+    	<http:inbound-endpoint address="${TAK_INBOUND_RESET_CACHE_TAK_URL}" 
+    					  connector-ref="soitoolkit-http-connector"
+    					  exchange-pattern="request-response"
+    					  responseTimeout="${SERVICE_TIMEOUT_MS}"
+    					  transformer-refs="logReqOut"
+    					  responseTransformer-refs="logRespIn" />
+    	
+    	<invoke object-ref="takCacheBean" method="updateCache" />
+    	
+    	<expression-transformer>
+            <return-argument evaluator="string"
+                             expression="TAK cache for ${APPLICATION_NAME} has been reset" />
+        </expression-transformer>
     </flow>
 </mule>

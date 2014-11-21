@@ -54,6 +54,14 @@ TODO: Mule EE dependency
         </management:credentials>
     </management:jmx-default-config> 
  -->
+ 
+ 	<spring:bean scope="singleton" 
+ 				 id="takCacheBean" 
+ 				 class="se.skltp.agp.cache.TakCacheBean">
+ 		<spring:property name="takEndpoint" value="${TAK_OUTBOUND_URL}" />
+ 		<spring:property name="targetNamespace" value="${SERVICE_INBOUND_NAMESPACE}" />
+ 		<spring:property name="serviceTimeout" value="${SERVICE_TIMEOUT_MS}" />
+ 	</spring:bean>
 
   
 
