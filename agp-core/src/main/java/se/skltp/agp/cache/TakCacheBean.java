@@ -42,7 +42,6 @@ import se.skltp.agp.riv.vagvalsinfo.v2.VirtualiseringsInfoType;
  * 
  * Cache for TAK service hamtaAllaVirtualliseringar for current namespace.
  * 
- * @author torbjorncla
  */
 public class TakCacheBean implements MuleContextAware { 
 	private final static Logger log = LoggerFactory.getLogger(TakCacheBean.class);
@@ -93,6 +92,7 @@ public class TakCacheBean implements MuleContextAware {
 
 	/**
 	 * Update cache.
+	 * Main entry point. Called from Mule-flow and scheduler.
 	 * 
 	 */
 	public synchronized void updateCache() {
@@ -114,6 +114,12 @@ public class TakCacheBean implements MuleContextAware {
 		}
 	}
 	
+	/**
+	 * Populates cache with values after applying filter on targetNamespace.
+	 * Removes elements from cache that have been removed from TAK.
+	 * @param virtualiseringar
+	 * @throws IOException
+	 */
 	protected synchronized void populateCache(final List<VirtualiseringsInfoType> virtualiseringar) throws IOException {
 		final Set<String> current = new HashSet<String>();
 		for(final VirtualiseringsInfoType vi : virtualiseringar) {
@@ -139,11 +145,20 @@ public class TakCacheBean implements MuleContextAware {
 		log.info("Updated local cache file: " + takLocalCacheFile);
 	}
 	
+	/**
+	 * Writes received elements to locale cache file.
+	 * @param reciverIds, set of values to write to cache file.
+	 * @throws IOException
+	 */
 	protected synchronized void writeTakLocalCache(final Set<String> reciverIds) throws IOException {
 		final Path path = FileSystems.getDefault().getPath(takLocalCacheFile);
 		Files.write(path, reciverIds, Charset.forName("UTF-8"));
 	}
 	
+	/**
+	 * Populates current cache with elements from local cache file.
+	 * @throws IOException
+	 */
 	protected synchronized void loadTakLocalCache() throws IOException {
 		final List<String> localCache = 
 				Files.readAllLines(FileSystems.getDefault().getPath(takLocalCacheFile), Charset.forName("UTF-8"));
@@ -160,6 +175,10 @@ public class TakCacheBean implements MuleContextAware {
 		log.info("Local cache loaded");
 	}
 	
+	/**
+	 * Convenience method to log elements in cache.
+	 * @param cache
+	 */
 	private void prettyPrintCache(final Set<String> cache) {
 		for(final String v : cache) {
 			log.debug("## Cached value: " + v);
@@ -175,7 +194,7 @@ public class TakCacheBean implements MuleContextAware {
 	}
 	
 	/**
-	 * Helper method to verify if reciverIds exists in cache.
+	 * Returns boolean representation for the existences of reciverId in cache.
 	 * @param reciverId to lookup.
 	 * @return true if reciverId exists in cache, else false.
 	 */
@@ -207,6 +226,9 @@ public class TakCacheBean implements MuleContextAware {
         return (SokVagvalsInfoInterface) service;
 	}
 
+	/**
+	 * Needed since updateCache can't be executed before mule context has been loaded.
+	 */
 	@Override
 	public void setMuleContext(MuleContext context) {
 		log.info("MuleContext is ready, populate TAK-cache");
