@@ -53,6 +53,7 @@ public class TakCacheBean implements MuleContextAware {
 	private String targetNamespace;
 	private long serviceTimeout;
 	private String takLocalCacheFile;
+	private boolean enabled;
 
 	public TakCacheBean() {
 		cache = new ConcurrentHashMap<String, Boolean>();
@@ -89,6 +90,7 @@ public class TakCacheBean implements MuleContextAware {
 	public void setTakEndpoint(String takEnpoint) {
 		this.takEndpoint = takEnpoint;
 	}
+
 
 	/**
 	 * Update cache.
@@ -233,9 +235,9 @@ public class TakCacheBean implements MuleContextAware {
 	public void setMuleContext(MuleContext context) {
 		log.info("MuleContext is ready, populate TAK-cache");
 		worker.schedule(new Runnable() {
-			public void run() {
-				updateCache();
-			}
-		}, 10, TimeUnit.SECONDS);
+				public void run() {
+					updateCache();
+				}
+			}, 10, TimeUnit.SECONDS);
 	}
 }

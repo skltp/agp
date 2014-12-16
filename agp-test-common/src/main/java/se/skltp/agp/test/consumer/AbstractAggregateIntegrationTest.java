@@ -45,6 +45,8 @@ public abstract class AbstractAggregateIntegrationTest extends AbstractTestCase 
 		
  		// Clear queues used for error handling
 		jmsUtil.clearQueues(ERROR_LOG_QUEUE);
+		
+		
     }
 
     protected TestProducerDb getTestDb() {
