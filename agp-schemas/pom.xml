@@ -9,7 +9,7 @@
 	    <version>1.2.2-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
     </parent>
-    
+
     <artifactId>agp-schemas</artifactId>
     <packaging>jar</packaging>
     <name>agp-schemas</name>
@@ -18,7 +18,7 @@
         <!-- Properties for generating code from XML Schemas (JAXB) -->
         <schema.path>${basedir}/src/main/resources/schemas</schema.path>
         <cxf.version>2.5.1</cxf.version>
-    </properties>    
+    </properties>
 
     <build>
         <plugins>
@@ -94,6 +94,15 @@
                     <extraarg>urn:riv:itintegration:registry:1=se.skltp.agp.riv.itintegration.registry.v1</extraarg>
                   </extraargs>
                 </wsdloption>
+
+								<wsdloption>
+									<wsdl>${schema.path}/TD_SOKVAGVAL_2/sokvagval-info-v2.wsdl</wsdl>
+									<extraargs>
+										<extraarg>-p</extraarg>
+										<extraarg>urn:skl:tp:vagvalsinfo:v2=se.skltp.agp.riv.vagvalsinfo.v2</extraarg>
+									</extraargs>
+								</wsdloption>
+
               </wsdlOptions>
 
             </configuration>
