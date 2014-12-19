@@ -14,7 +14,7 @@
 	">
 
     <spring:bean name="tak-teststub-bean" class="se.skltp.agp.test.producer.TakTestProducer">
-        <spring:property name="targetNamespace" value="${SERVICE_INBOUND_NAMESPACE}" />
+        <spring:property name="targetNamespace" value="${TAK_TJANSTEKONTRAKT}" />
         <spring:property name="serviceTimeout" value="${SERVICE_TIMEOUT_MS}" />
     </spring:bean>
 
