@@ -11,7 +11,7 @@
 
     <groupId>se.skltp.agp</groupId>
     <artifactId>agp-parent</artifactId>
-    <version>1.2.3-SNAPSHOT</version>
+    <version>1.2.3</version>
     <packaging>pom</packaging>
     <name>agp-parent</name>
 
