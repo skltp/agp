@@ -6,29 +6,29 @@
     <parent>
 	    <groupId>se.skltp.agp</groupId>
 	    <artifactId>agp-parent</artifactId>
-	    <version>1.2.2-SNAPSHOT</version>
+	    <version>1.2.3</version>
 		<relativePath>../pom.xml</relativePath>
     </parent>
-    
+
     <artifactId>agp-core</artifactId>
     <packaging>jar</packaging>
     <name>agp-core</name>
 
 	<dependencies>
-		
+
 		<!-- itintegration monitoring schemas för PingForConfiguration -->
 		<dependency>
 		  	<groupId>se.skltp.itintegration.monitoring</groupId>
   			<artifactId>ServiceContracts_itintegration_monitoring</artifactId>
 			<version>1.0</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>se.skltp.commons</groupId>
 			<artifactId>tp-commons-mule</artifactId>
 			<version>1.0.1</version>
 		</dependency>
-		
+
 		<dependency>
 		    <groupId>se.skltp.agp</groupId>
 			<artifactId>agp-schemas</artifactId>
@@ -41,7 +41,7 @@
 			<version>${soitoolkit.version}</version>
 		</dependency>
 
-<!-- 
+<!--
 		<dependency>
 		  <groupId>org.soitoolkit.commons.components</groupId>
 			<artifactId>soitoolkit-studio-components</artifactId>
@@ -74,9 +74,9 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<!-- TEST DEPENDENCIES -->
-		
+
 		<dependency>
 			<groupId>org.soitoolkit.commons.poms</groupId>
 			<artifactId>soitoolkit-test-dependencies</artifactId>
@@ -91,7 +91,7 @@
 			<version>${project.version}</version>
             <scope>test</scope>
         </dependency>
-        
+
 		<!-- Mockito -->
 		<dependency>
 			<groupId>org.mockito</groupId>
@@ -106,7 +106,7 @@
 			<version>1.8.5</version>
 		</dependency>
 
-  </dependencies> 
+  </dependencies>
 
     <build>
         <resources>
@@ -118,8 +118,8 @@
                 <directory>${basedir}/src/main/app</directory>
             </resource>
         </resources>
-        
-        <plugins>   
+
+        <plugins>
             <plugin>
                 <!-- Add mule-nature to the eclipse-.project-file -->
                 <artifactId>maven-eclipse-plugin</artifactId>

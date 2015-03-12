@@ -9,6 +9,10 @@ import org.slf4j.LoggerFactory;
 public abstract class TestProducerDb {
 
 	private static final Logger log = LoggerFactory.getLogger(TestProducerDb.class);
+	
+	// Test cases are documented at
+	// https://skl-tp.atlassian.net/wiki/pages/viewpage.action?pageId=30015599
+	// "Aggregerande tjänst - Funktionella tester"
 
 	public static final String TEST_LOGICAL_ADDRESS_1 = "HSA-ID-1";
 	public static final String TEST_LOGICAL_ADDRESS_2 = "HSA-ID-2";
@@ -16,28 +20,31 @@ public abstract class TestProducerDb {
 	public static final String TEST_LOGICAL_ADDRESS_4 = "HSA-ID-4";
 	public static final String TEST_LOGICAL_ADDRESS_5 = "HSA-ID-5";
 	public static final String TEST_LOGICAL_ADDRESS_6 = "HSA-ID-6";
+    public static final String TEST_LOGICAL_ADDRESS_7 = "HSA-ID-7";
 
-	public static final String TEST_RR_ID_ZERO_HITS           = "188803099368"; // Agda Andersson
-	public static final String TEST_RR_ID_ONE_HIT             = "194911172296"; // Sven Sturesson
-	public static final String TEST_RR_ID_MANY_HITS           = "198611062384"; // Ulla Alm
-	public static final String TEST_RR_ID_FAULT_INVALID_ID    = "192011189228"; // Gunbritt Boden
-	public static final String TEST_RR_ID_FAULT_TIMEOUT       = "194804032094"; // Laban Meijer
-	public static final String TEST_RR_ID_MANY_HITS_NO_ERRORS = "121212121212"; // Tolvan...
+    public static final String TEST_RR_ID_MANY_HITS_NO_ERRORS = "121212121212"; // TC1 - Tolvan Tolvansson
+    public static final String TEST_RR_ID_ZERO_HITS           = "188803099368"; // TC2 - Agda Andersson
+    public static final String TEST_RR_ID_ONE_HIT             = "194911172296"; // TC3 - Sven Sturesson
+    public static final String TEST_RR_ID_MANY_HITS           = "198611062384"; // TC4 - Ulla Alm
+    public static final String TEST_RR_ID_FAULT_INVALID_ID    = "192011189228"; // TC5 - Gunbritt Boden
+    public static final String TEST_RR_ID_EJ_SAMVERKAN_I_TAK  = "194804032094"; // TC6 - Laban Meijer
 
-	public static final String TEST_BO_ID_ONE_HIT      = "1001";
-	public static final String TEST_BO_ID_MANY_HITS_1  = "1002";
-	public static final String TEST_BO_ID_MANY_HITS_2  = "1003";
-	public static final String TEST_BO_ID_MANY_HITS_3  = "1004";
-	public static final String TEST_BO_ID_MANY_HITS_4  = "1004";
-	public static final String TEST_BO_ID_MANY_HITS_NEW_1  = "2001";
-	public static final String TEST_BO_ID_FAULT_INVALID_ID = "1005";
+	public static final String TEST_BO_ID_ONE_HIT             = "1001";
+	public static final String TEST_BO_ID_MANY_HITS_1         = "1002";
+	public static final String TEST_BO_ID_MANY_HITS_2         = "1003";
+	public static final String TEST_BO_ID_MANY_HITS_3         = "1004";
+	public static final String TEST_BO_ID_MANY_HITS_4         = "1004";
+	public static final String TEST_BO_ID_MANY_HITS_NEW_1     = "2001";
+	public static final String TEST_BO_ID_FAULT_INVALID_ID    = "5001";
+	public static final String TEST_BO_ID_EJ_SAMVERKAN_I_TAK  = "6001";
 	
-	public static final String TEST_DATE_ONE_HIT = "20130101000000";
-	public static final String TEST_DATE_MANY_HITS_1 = "20130301000000";
-	public static final String TEST_DATE_MANY_HITS_2 = "20130401000000";
-	public static final String TEST_DATE_MANY_HITS_3 = "20130401000000";
-	public static final String TEST_DATE_MANY_HITS_4 = "20130415000000";
-	public static final String TEST_DATE_FAULT_INVALID_ID = "20130101000000";
+	public static final String TEST_DATE_ONE_HIT              = "20130101000000";
+	public static final String TEST_DATE_MANY_HITS_1          = "20130301000000";
+	public static final String TEST_DATE_MANY_HITS_2          = "20130401000000";
+	public static final String TEST_DATE_MANY_HITS_3          = "20130401000000";
+	public static final String TEST_DATE_MANY_HITS_4          = "20130415000000";
+	public static final String TEST_DATE_FAULT_INVALID_ID     = "20130101000000";
+    public static final String TEST_DATE_EJ_SAMVERKAN_I_TAK   = "20130106000000";
 
 	private long serviceTimeoutMs;
 	public void setServiceTimeoutMs(long serviceTimeoutMs) {
@@ -46,17 +53,14 @@ public abstract class TestProducerDb {
 
 	public Object processRequest(String logicalAddress, String registeredResidentId) {
 
-		// Return an error-message if invalid id
+		// TC5 - Invalid id - return error-message
 		if (TEST_RR_ID_FAULT_INVALID_ID.equals(registeredResidentId)) {
 			throw new RuntimeException("Invalid Id: " + registeredResidentId);
 		}
 
-		// Force a timeout if zero Id
-		// TODO: Do we need this one, we already have a timeout case below???
-        if (TEST_RR_ID_FAULT_TIMEOUT.equals(registeredResidentId)) {
-	    	try {
-				Thread.sleep(serviceTimeoutMs + 1000);
-			} catch (InterruptedException e) {}
+		// TC6 - in EI, but not in TAK
+        if (TEST_RR_ID_EJ_SAMVERKAN_I_TAK.equals(registeredResidentId)) {
+            throw new RuntimeException("VP004");
         }
 
         // Simulate some processing
@@ -100,14 +104,27 @@ public abstract class TestProducerDb {
 		// Start with resetting the db from old values.
 		resetDb();
 
+        //
+        // TC1 - Patient with three bookings spread over three logical-addresses, all with fast response times
+        //
+		Object response = createResponse(createResponseItem(TEST_LOGICAL_ADDRESS_4, TEST_RR_ID_MANY_HITS_NO_ERRORS, TEST_BO_ID_MANY_HITS_1, TEST_DATE_MANY_HITS_1));
+        storeInDb(TEST_LOGICAL_ADDRESS_4, TEST_RR_ID_MANY_HITS_NO_ERRORS, response);
+
+        response = createResponse(createResponseItem(TEST_LOGICAL_ADDRESS_5, TEST_RR_ID_MANY_HITS_NO_ERRORS, TEST_BO_ID_MANY_HITS_2, TEST_DATE_MANY_HITS_2));
+        storeInDb(TEST_LOGICAL_ADDRESS_5, TEST_RR_ID_MANY_HITS_NO_ERRORS, response);
+
+        response = createResponse(createResponseItem(TEST_LOGICAL_ADDRESS_6, TEST_RR_ID_MANY_HITS_NO_ERRORS, TEST_BO_ID_MANY_HITS_3, TEST_DATE_MANY_HITS_3));
+        storeInDb(TEST_LOGICAL_ADDRESS_6, TEST_RR_ID_MANY_HITS_NO_ERRORS, response);
+        
 		// 
-		// Patient with one booking, id = TEST_RR_ID_ONE_HIT
+		// TC3 - Patient with one booking, id = TEST_RR_ID_ONE_HIT
+		//       Second booking in engagement index does not exist in the producer
 		//
-		Object response = createResponse(createResponseItem(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_ONE_HIT, TEST_BO_ID_ONE_HIT, TEST_DATE_ONE_HIT));
+		response = createResponse(createResponseItem(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_ONE_HIT, TEST_BO_ID_ONE_HIT, TEST_DATE_ONE_HIT));
 		storeInDb(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_ONE_HIT, response);
 
 		//
-		// Patient with four bookings spread over three logical-addresses, where one is on a slow system, i.e. that cause timeouts
+		// TC4 - Patient with four bookings spread over three logical-addresses, where one is on a slow system, i.e. that cause timeouts
 		//
 		response = createResponse(createResponseItem(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_1, TEST_DATE_MANY_HITS_1));
 		storeInDb(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_MANY_HITS, response);
@@ -119,18 +136,6 @@ public abstract class TestProducerDb {
 
 		response = createResponse(createResponseItem(TEST_LOGICAL_ADDRESS_3, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_4, TEST_DATE_MANY_HITS_4));
 		storeInDb(TEST_LOGICAL_ADDRESS_3, TEST_RR_ID_MANY_HITS, response);
-
-		//
-		// Patient with three bookings spread over three logical-addresses, all with fast response times
-		//
-		response = createResponse(createResponseItem(TEST_LOGICAL_ADDRESS_4, TEST_RR_ID_MANY_HITS_NO_ERRORS, TEST_BO_ID_MANY_HITS_1, TEST_DATE_MANY_HITS_1));
-		storeInDb(TEST_LOGICAL_ADDRESS_4, TEST_RR_ID_MANY_HITS_NO_ERRORS, response);
-
-		response = createResponse(createResponseItem(TEST_LOGICAL_ADDRESS_5, TEST_RR_ID_MANY_HITS_NO_ERRORS, TEST_BO_ID_MANY_HITS_2, TEST_DATE_MANY_HITS_2));
-		storeInDb(TEST_LOGICAL_ADDRESS_5, TEST_RR_ID_MANY_HITS_NO_ERRORS, response);
-
-		response = createResponse(createResponseItem(TEST_LOGICAL_ADDRESS_6, TEST_RR_ID_MANY_HITS_NO_ERRORS, TEST_BO_ID_MANY_HITS_3, TEST_DATE_MANY_HITS_3));
-		storeInDb(TEST_LOGICAL_ADDRESS_6, TEST_RR_ID_MANY_HITS_NO_ERRORS, response);
 	}
 
 	public void resetDb() {
