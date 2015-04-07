@@ -60,7 +60,7 @@ public abstract class TestProducerDb {
 
 		// TC6 - in EI, but not in TAK
         if (TEST_RR_ID_EJ_SAMVERKAN_I_TAK.equals(registeredResidentId)) {
-            throw new RuntimeException("VP004");
+            throw new RuntimeException("VP007 Authorization missing");
         }
 
         // Simulate some processing
