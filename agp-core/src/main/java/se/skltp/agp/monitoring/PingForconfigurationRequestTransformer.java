@@ -39,7 +39,7 @@ public class PingForconfigurationRequestTransformer extends AbstractMessageTrans
 
 		log.debug("Transforming payload: {}", src);
 		
-		//Forward the original reguest, but with logicalAddress=engagemangsIndexHsaId
+		//Forward the original request, but with logicalAddress=engagemangsIndexHsaId
 		Object[] reqList = (Object[])src;
 		PingForConfigurationType forwardRequestIn = (PingForConfigurationType)reqList[1];
 		Object[] reqOutList = new Object[] {engagemangsIndexHsaId, forwardRequestIn};

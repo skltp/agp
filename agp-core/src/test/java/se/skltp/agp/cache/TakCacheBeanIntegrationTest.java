@@ -1,5 +1,8 @@
 package se.skltp.agp.cache;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -35,7 +38,7 @@ public class TakCacheBeanIntegrationTest extends AbstractTestCase {
 	protected String getConfigResources() {
 		return 	"soitoolkit-mule-jms-connector-activemq-embedded.xml," +
 				"PingForConfiguration-test-common.xml," +
-				"teststub-services/tak-teststub-service.xml," +
+				"teststub-non-default-services/tak-teststub-service.xml," +
 				"PingForConfiguration-rivtabp21-service.xml, " +
 				"aggregating-services-common.xml";
 	}
@@ -44,6 +47,22 @@ public class TakCacheBeanIntegrationTest extends AbstractTestCase {
 	public void testUpdateCacheSuccess() {
 		testObject.updateCache();
 	}
+	
+	@Test
+	public void testContainsExpectedLogicalAddress() {
+	    testObject.updateCache();
+        assertTrue(testObject.contains("HSA-ID-1"));
+        assertTrue(testObject.contains("HSA-ID-2"));
+        assertTrue(testObject.contains("HSA-ID-3"));
+        assertTrue(testObject.contains("HSA-ID-4"));
+        assertTrue(testObject.contains("HSA-ID-5"));
+        assertTrue(testObject.contains("HSA-ID-6"));
+	}
+	
+    @Test
+    public void testDoesNotContainLogicalAddress() {
+        assertFalse(testObject.contains("HSA-ID-99"));
+    }
 	
 	@After
 	public void cleanup() throws Exception {

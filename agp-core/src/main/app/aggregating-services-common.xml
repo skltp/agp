@@ -81,7 +81,6 @@ TODO: Mule EE dependency
         </mule>
     </spring:beans>
 
-
 	<!-- Used by st-muleServer-helper-class only -->
     <spring:beans profile="soitoolkit-teststubs">
         <!-- Load all teststub services -->

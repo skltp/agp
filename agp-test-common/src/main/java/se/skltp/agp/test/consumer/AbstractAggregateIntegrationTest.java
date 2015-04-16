@@ -40,13 +40,11 @@ public abstract class AbstractAggregateIntegrationTest extends AbstractTestCase 
 		// Setup jms
 		
 		// TODO: Fix lazy init of JMS connection et al so that we can create jmsutil in the declaration
-		// (The embedded ActiveMQ queue manager is not yet started by Mule when jmsutil is delcared...)
+		// (The embedded ActiveMQ queue manager is not yet started by Mule when jmsutil is declared...)
 		if (jmsUtil == null) jmsUtil = new ActiveMqJmsTestUtil();
 		
  		// Clear queues used for error handling
 		jmsUtil.clearQueues(ERROR_LOG_QUEUE);
-		
-		
     }
 
     protected TestProducerDb getTestDb() {

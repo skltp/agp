@@ -15,7 +15,10 @@ import se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1.Fi
 import se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentType;
 import se.skltp.agp.riv.itintegration.engagementindex.v1.EngagementType;
 
-@WebService(serviceName = "FindContentResponderService", portName = "FindContentResponderPort", targetNamespace = "urn:riv:itintegration:engagementindex:FindContent:1:rivtabp21", name = "FindContentInteraction")
+@WebService(serviceName     = "FindContentResponderService", 
+            portName        = "FindContentResponderPort", 
+            targetNamespace = "urn:riv:itintegration:engagementindex:FindContent:1:rivtabp21", 
+            name            = "FindContentInteraction")
 public class EngagemangsindexTestProducer implements FindContentResponderInterface {
 
 	public static final String TEST_ID_FAULT_INVALID_ID_IN_EI = "EI:INV_ID";
