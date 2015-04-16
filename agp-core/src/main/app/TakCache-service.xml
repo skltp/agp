@@ -32,6 +32,8 @@
         <spring:property name="takCache" ref="takCacheBean"/>
     </spring:bean>
 
+    <!-- post to http://33.33.33.33:8084/tak/reset -->
+    <!-- returns 'TAK cache for GetAggregatedVaccinationHistory-v2 has been reset' -->
     <flow name="reset-tak-cache-http-flow">
         <http:inbound-endpoint address="${TAK_INBOUND_RESET_CACHE_TAK_URL}"
                                connector-ref="soitoolkit-http-connector"

@@ -1,138 +1,122 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-	    <groupId>se.skltp.agp</groupId>
-	    <artifactId>agp-parent</artifactId>
-	    <version>1.2.3</version>
-		<relativePath>../pom.xml</relativePath>
-    </parent>
+  <parent>
+    <groupId>se.skltp.agp</groupId>
+    <artifactId>agp-parent</artifactId>
+    <version>1.3.0-RC1</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
 
-    <artifactId>agp-core</artifactId>
-    <packaging>jar</packaging>
-    <name>agp-core</name>
+  <artifactId>agp-core</artifactId>
+  <packaging>jar</packaging>
+  <name>agp-core</name>
 
-	<dependencies>
+  <dependencies>
 
-		<!-- itintegration monitoring schemas för PingForConfiguration -->
-		<dependency>
-		  	<groupId>se.skltp.itintegration.monitoring</groupId>
-  			<artifactId>ServiceContracts_itintegration_monitoring</artifactId>
-			<version>1.0</version>
-		</dependency>
+    <!-- itintegration monitoring schemas för PingForConfiguration -->
+    <dependency>
+      <groupId>se.skltp.itintegration.monitoring</groupId>
+      <artifactId>ServiceContracts_itintegration_monitoring</artifactId>
+      <version>1.0</version>
+    </dependency>
 
-		<dependency>
-			<groupId>se.skltp.commons</groupId>
-			<artifactId>tp-commons-mule</artifactId>
-			<version>1.0.1</version>
-		</dependency>
+    <dependency>
+      <groupId>se.skltp.commons</groupId>
+      <artifactId>tp-commons-mule</artifactId>
+      <version>1.0.1</version>
+    </dependency>
 
-		<dependency>
-		    <groupId>se.skltp.agp</groupId>
-			<artifactId>agp-schemas</artifactId>
-			<version>${project.version}</version>
-		</dependency>
+    <dependency>
+      <groupId>se.skltp.agp</groupId>
+      <artifactId>agp-schemas</artifactId>
+      <version>${project.version}</version>
+    </dependency>
 
-		<dependency>
-		  <groupId>org.soitoolkit.commons.components</groupId>
-			<artifactId>soitoolkit-commons-mule</artifactId>
-			<version>${soitoolkit.version}</version>
-		</dependency>
+    <dependency>
+      <groupId>org.soitoolkit.commons.components</groupId>
+      <artifactId>soitoolkit-commons-mule</artifactId>
+      <version>${soitoolkit.version}</version>
+    </dependency>
 
-<!--
-		<dependency>
-		  <groupId>org.soitoolkit.commons.components</groupId>
-			<artifactId>soitoolkit-studio-components</artifactId>
-			<version>${soitoolkit.version}</version>
-		</dependency>
+    <dependency>
+      <groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
+      <artifactId>soitoolkit-mule-3.3.1-dependencies</artifactId>
+      <version>${soitoolkit.version}</version>
+      <type>pom</type>
+      <exclusions>
+        <!-- Exclude mule-module-spring-security since we don't use it and it contains dependencies to old versions of spring causing strange problems to occur -->
+        <exclusion>
+          <groupId>org.mule.modules</groupId>
+          <artifactId>mule-module-spring-security</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-web</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
 
-        TODO: Mule EE dependency
-        <dependency>
-            <groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
-            <artifactId>soitoolkit-mule-ee-3.3.1-dependencies</artifactId>
-            <version>${soitoolkit.version}</version>
-            <type>pom</type>
-        </dependency>
- -->
+    <!-- test dependencies -->
 
-		<dependency>
-			<groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
-			<artifactId>soitoolkit-mule-3.3.1-dependencies</artifactId>
-			<version>${soitoolkit.version}</version>
-			<type>pom</type>
-			<!-- Exclude mule-module-spring-security since we don't use it and it contains dependencies to old versions of spring causing strange problems to occur -->
-			<exclusions>
-				<exclusion>
-					<groupId>org.mule.modules</groupId>
-					<artifactId>mule-module-spring-security</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-web</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+    <dependency>
+      <groupId>org.soitoolkit.commons.poms</groupId>
+      <artifactId>soitoolkit-test-dependencies</artifactId>
+      <version>${soitoolkit.version}</version>
+      <type>pom</type>
+      <scope>test</scope>
+    </dependency>
 
-		<!-- TEST DEPENDENCIES -->
+    <dependency>
+      <groupId>se.skltp.agp</groupId>
+      <artifactId>agp-test-common</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
+    </dependency>
 
-		<dependency>
-			<groupId>org.soitoolkit.commons.poms</groupId>
-			<artifactId>soitoolkit-test-dependencies</artifactId>
-			<version>${soitoolkit.version}</version>
-			<type>pom</type>
-			<scope>test</scope>
-		</dependency>
-
-        <dependency>
-            <groupId>se.skltp.agp</groupId>
-            <artifactId>agp-test-common</artifactId>
-			<version>${project.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-		<!-- Mockito -->
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<scope>test</scope>
-			<version>1.8.5</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<scope>test</scope>
-			<version>1.8.5</version>
-		</dependency>
+    <!-- Mockito -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <scope>test</scope>
+      <version>1.8.5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <scope>test</scope>
+      <version>1.8.5</version>
+    </dependency>
 
   </dependencies>
 
-    <build>
-        <resources>
-            <resource>
-                <directory>${basedir}/src/main/resources</directory>
-            </resource>
-            <resource>
-                <!-- To get mule-config files from the Mule Studio defined resource-folder in the classpath... -->
-                <directory>${basedir}/src/main/app</directory>
-            </resource>
-        </resources>
+  <build>
+    <resources>
+      <resource>
+        <directory>${basedir}/src/main/resources</directory>
+      </resource>
+      <resource>
+        <!-- To get mule-config files from the Mule Studio defined resource-folder in the classpath... -->
+        <directory>${basedir}/src/main/app</directory>
+      </resource>
+    </resources>
 
-        <plugins>
-            <plugin>
-                <!-- Add mule-nature to the eclipse-.project-file -->
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <configuration>
-                    <additionalBuildcommands>
-                        <buildcommand>org.mule.tooling.core.muleBuilder</buildcommand>
-                    </additionalBuildcommands>
-                    <additionalProjectnatures>
-                        <projectnature>org.mule.tooling.core.muleNature</projectnature>
-                    </additionalProjectnatures>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <plugins>
+      <plugin>
+        <!-- Add mule-nature to the eclipse-.project-file -->
+        <artifactId>maven-eclipse-plugin</artifactId>
+        <configuration>
+          <additionalBuildcommands>
+            <buildcommand>org.mule.tooling.core.muleBuilder</buildcommand>
+          </additionalBuildcommands>
+          <additionalProjectnatures>
+            <projectnature>org.mule.tooling.core.muleNature</projectnature>
+          </additionalProjectnatures>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>

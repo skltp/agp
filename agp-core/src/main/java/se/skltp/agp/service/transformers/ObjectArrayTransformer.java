@@ -11,7 +11,7 @@ public class ObjectArrayTransformer extends AbstractMessageTransformer {
 	private static final Logger log = LoggerFactory.getLogger(ObjectArrayTransformer.class);
 
     /**
-     * Message aware transformer that ...
+     * Message aware transformer that retrieves logical address from message.
      */
     @Override
     public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
