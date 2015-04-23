@@ -13,9 +13,9 @@
 		http://www.mulesoft.org/schema/mule/jms     http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
 	">
 
-    <spring:bean name="tak-teststub-bean" class="se.skltp.agp.test.producer.TakTestProducer">
+    <spring:bean name="tak-teststub-bean" class="se.skltp.agp.test.producer.TakTestProducer" init-method="log">
+        <spring:property name="serviceTimeout"   value="${SERVICE_TIMEOUT_MS}" />
         <spring:property name="targetNamespace" value="${TAK_TJANSTEKONTRAKT}" />
-        <spring:property name="serviceTimeout" value="${SERVICE_TIMEOUT_MS}" />
     </spring:bean>
 
 	<simple-service 
