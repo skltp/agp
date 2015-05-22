@@ -1,14 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <!-- # PingForConfiguration - default:33.33.33.33:8084 (http) 
-    mvn gatling:execute -PPingForConfiguration 
-    mvn gatling:execute -PPingForConfiguration \
-    -DbaseUrl=http://ine-dit-app02.sth.basefarm.net:9007/agp/getaggregatedlaboratoryorderoutcome/itintegration/monitoring/PingForConfiguration/1/rivtabp21 \
-    -DaggregatedService=GetAggregatedLaboratoryOrderOutcome 
-    mvn gatling:execute 
-    -PPingForConfiguration -DbaseUrl=http://ine-sit-app03.sth.basefarm.net:9007/agp/getaggregatedlaboratoryorderoutcome/itintegration/monitoring/PingForConfiguration/1/rivtabp21 -->
-
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -26,17 +18,25 @@
     <dependency>
         <groupId>org.scala-lang</groupId>
         <artifactId>scala-library</artifactId>
-        <version>2.11.5</version>
-    </dependency>  
+        <version>2.11.6</version>
+    </dependency>
     <dependency>
       <groupId>io.gatling.highcharts</groupId>
       <artifactId>gatling-charts-highcharts</artifactId>
-      <version>2.1.4</version>
+      <version>2.1.6</version>
     </dependency>
   </dependencies>
-  
+
   <build>
     <sourceDirectory>src/test/scala</sourceDirectory>
+    <resources>
+      <resource>
+        <directory>src/test/resources/bodies</directory>
+      </resource>
+      <resource>
+        <directory>src/test/resources/data</directory>
+      </resource>
+    </resources>
     <testSourceDirectory>src/test/scala</testSourceDirectory>
     <testResources>
       <testResource>
