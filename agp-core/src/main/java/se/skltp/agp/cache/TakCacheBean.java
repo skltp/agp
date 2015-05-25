@@ -155,8 +155,7 @@ public class TakCacheBean implements MuleContextAware {
     /**
      * Writes received elements to locale cache file.
      * 
-     * @param receiverIds
-     *            , set of values to write to cache file.
+     * @param receiverIds set of values to write to cache file.
      * @throws IOException
      */
     protected synchronized void writeTakLocalCache(final Set<String> receiverIds) throws IOException {
@@ -212,9 +211,7 @@ public class TakCacheBean implements MuleContextAware {
     }
 
     /**
-     * Returns boolean representation for the existences of receiverId in cache.
-     * 
-     * @param reciverId to lookup.
+     * @param receiverId to look up.
      * @return true if receiverId exists in cache, else false.
      */
     public boolean contains(final String receiverId) {

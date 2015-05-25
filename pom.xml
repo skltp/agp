@@ -26,6 +26,7 @@
 		<module>agp-core</module>
 		<module>agp-schemas</module>
 		<module>agp-test-common</module>
+		<module>agp-test-non-functional</module>
 <!--
 		<module>agp-gen</module>
 		<module>agp-gen-maven-plugin</module>
