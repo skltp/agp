@@ -9,7 +9,7 @@ import se.skltp.agp.testnonfunctional.scenarios.GetAggregatedSomeScenario
 /**
  * Simple requests to warm up service.
  */
-abstract class TP00WarmUpAbstract extends Simulation {
+abstract class TP01WarmUpAbstract extends Simulation {
 
   val testDuration     = 1 minute
   val minWaitDuration  = 2 seconds

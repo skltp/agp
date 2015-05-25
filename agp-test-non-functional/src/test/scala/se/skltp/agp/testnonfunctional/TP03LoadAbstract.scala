@@ -9,6 +9,7 @@ import io.gatling.core.structure.PopulatedScenarioBuilder
 
 /**
  * Load test aggregated service.
+ * Just run against Tolvan Tolvansson - Happy path (no exceptions).
  */
 abstract class TP03LoadAbstract extends Simulation {
 

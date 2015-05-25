@@ -9,7 +9,7 @@ import se.skltp.agp.testnonfunctional.scenarios.PingForConfigurationScenario
 /**
  * Ping for configuration run against remote service - returns ok.
  */
-class TP01PingForConfiguration extends Simulation {
+class TP00PingForConfiguration extends Simulation {
 
   val baseUrl = if (System.getProperty("baseUrl") != null && !System.getProperty("baseUrl").isEmpty()) { 
                   System.getProperty("baseUrl") 

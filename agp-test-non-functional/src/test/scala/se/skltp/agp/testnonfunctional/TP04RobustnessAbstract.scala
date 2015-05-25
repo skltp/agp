@@ -8,7 +8,8 @@ import se.skltp.agp.testnonfunctional.scenarios.GetAggregatedSomeScenario
 import io.gatling.core.structure.PopulatedScenarioBuilder
 
 /**
- * Load test aggregated service.
+ * Robustness test aggregated service.
+ * Runs against all patients (happy path, exceptions, delays)
  */
 abstract class TP04RobustnessAbstract extends Simulation {
 
