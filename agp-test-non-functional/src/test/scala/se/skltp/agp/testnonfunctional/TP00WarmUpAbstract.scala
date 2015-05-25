@@ -11,18 +11,12 @@ import se.skltp.agp.testnonfunctional.scenarios.GetAggregatedSomeScenario
  */
 abstract class TP00WarmUpAbstract extends Simulation {
 
-  val baseUrl:String         = "http://33.33.33.33:8081/GetAggregatedObservations/service/v1"
-  val serviceName:String     = "Observations"
-  val urn:String             = "urn:riv:clinicalprocess:healthcond:basic:GetObservationsResponder:1"
-  val responseElement:String = "GetObservationsResponse"     
-  val responseItem:String    = "observationGroup"
-  
   val testDuration     = 1 minute
   val minWaitDuration  = 2 seconds
   val maxWaitDuration  = 5 seconds
   val times:Int        = 1 // 6
 
-  val warmUp = scenario("warm up")
+  def warmUp(serviceName:String, urn:String, responseElement:String, responseItem:String) = scenario("warm up")
                  .repeat(times) {
                 // ---
                 // either run all the patients
@@ -36,6 +30,8 @@ abstract class TP00WarmUpAbstract extends Simulation {
                    .exec(GetAggregatedSomeScenario.request(serviceName, urn, responseElement, responseItem))
                    .pause(1 second)
                   }
-
-  setUp (warmUp.inject(atOnceUsers(1)).protocols(http.baseURL(baseUrl).disableResponseChunksDiscarding))
+  
+   def setUpAbstract(serviceName:String, urn:String, responseElement:String, responseItem:String, baseUrl:String) : io.gatling.core.structure.PopulatedScenarioBuilder = {
+     warmUp(serviceName, urn, responseElement, responseItem).inject(atOnceUsers(1)).protocols(http.baseURL(baseUrl).disableResponseChunksDiscarding) 
+   }
 }

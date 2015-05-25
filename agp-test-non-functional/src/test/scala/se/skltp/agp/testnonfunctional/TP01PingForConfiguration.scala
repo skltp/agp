@@ -14,10 +14,7 @@ class TP01PingForConfiguration extends Simulation {
   val baseUrl = if (System.getProperty("baseUrl") != null && !System.getProperty("baseUrl").isEmpty()) { 
                   System.getProperty("baseUrl") 
                 } else {
-                  throw new IllegalArgumentException(
-                      "missing system property baseUrl " + 
-                      "(for example, -DbaseUrl=http://ine-dit-app02.sth.basefarm.net:9018/agp/" + 
-                      "getaggregatedfunctionalstatus/itintegration/monitoring/PingForConfiguration/1/rivtabp21)")
+                  "http://33.33.33.33:8081/agp/getaggregatedobservations/itintegration/monitoring/PingForConfiguration/1/rivtabp21"
                 }
   val httpProtocol = http.baseURL(baseUrl).disableResponseChunksDiscarding  
   
