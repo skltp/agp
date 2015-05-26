@@ -11,10 +11,20 @@ import se.skltp.agp.testnonfunctional.scenarios.PingForConfigurationScenario
  */
 class TP00PingForConfiguration extends Simulation {
 
+  val serviceLowercase = if (System.getProperty("serviceLowercase") != null && !System.getProperty("serviceLowercase").isEmpty()) { 
+                           System.getProperty("serviceLowercase") 
+                         } else {
+                           ""
+                         }
+  
   val baseUrl = if (System.getProperty("baseUrl") != null && !System.getProperty("baseUrl").isEmpty()) { 
                   System.getProperty("baseUrl") 
                 } else {
-                  "http://33.33.33.33:8081/agp/getaggregatedobservations/itintegration/monitoring/PingForConfiguration/1/rivtabp21"
+                  if (serviceLowercase != null && !serviceLowercase.isEmpty()) {
+                  "http://33.33.33.33:8081/agp/" + serviceLowercase + "/itintegration/monitoring/PingForConfiguration/1/rivtabp21"
+                  } else {
+                    throw new IllegalArgumentException("system variable serviceLowercase is missing - should be defined as '-DserviceLowercase=getaggregatedobservations'")
+                  }
                 }
   val httpProtocol = http.baseURL(baseUrl).disableResponseChunksDiscarding  
   
