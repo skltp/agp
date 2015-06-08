@@ -11,9 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.cxf.endpoint.Client;
@@ -35,11 +32,10 @@ import se.skltp.agp.riv.vagvalsinfo.v2.VirtualiseringsInfoType;
 /**
  * Scope: Singleton
  * 
- * Cache for TAK service hamtaAllaVirtualliseringar for current namespace.
+ * Cache for tak service hamtaAllaVirtualliseringar for current namespace.
  */
 public class TakCacheBean implements MuleContextAware {
     private final static Logger log = LoggerFactory.getLogger(TakCacheBean.class);
-    private static final ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();
 
     private final ConcurrentHashMap<String, Boolean> cache;
 
@@ -111,6 +107,18 @@ public class TakCacheBean implements MuleContextAware {
     }
 
     /**
+     * updateCache can't be executed before mule context has been loaded.
+     */
+    @Override
+    public void setMuleContext(MuleContext context) {
+        log.info ("MuleContext is ready - populating cache from tak.");
+        log.debug("Note - if using the tak teststub (skltp-box, dev), then mule needs to have started the teststub before starting the aggregating service.");
+        log.debug("This is managed in skltp-box by listing the stub before the service in the script file");
+        log.debug("In dev environment, it is managed by script file hostenv");
+        updateCache();
+    }
+    
+    /**
      * Populates cache with values after applying filter on targetNamespace.
      * Adds new elements to the cache. 
      * Removes elements from cache that have been removed from TAK. 
@@ -136,7 +144,7 @@ public class TakCacheBean implements MuleContextAware {
                 cache.remove(key);
             }
         }
-        log.info("TAK cache updated");
+        log.info("tak cache updated with {} values", current.size());
         if (log.isDebugEnabled()) {
             prettyPrintCache(cache.keySet());
         }
@@ -147,8 +155,7 @@ public class TakCacheBean implements MuleContextAware {
     /**
      * Writes received elements to locale cache file.
      * 
-     * @param receiverIds
-     *            , set of values to write to cache file.
+     * @param receiverIds set of values to write to cache file.
      * @throws IOException
      */
     protected synchronized void writeTakLocalCache(final Set<String> receiverIds) throws IOException {
@@ -204,9 +211,7 @@ public class TakCacheBean implements MuleContextAware {
     }
 
     /**
-     * Returns boolean representation for the existences of receiverId in cache.
-     * 
-     * @param reciverId to lookup.
+     * @param receiverId to look up.
      * @return true if receiverId exists in cache, else false.
      */
     public boolean contains(final String receiverId) {
@@ -248,19 +253,5 @@ public class TakCacheBean implements MuleContextAware {
         }
         SokVagvalsInfoInterface takClient = (SokVagvalsInfoInterface) service;
         return takClient;
-    }
-
-    /**
-     * updateCache can't be executed before mule context has been loaded.
-     */
-    @Override
-    public void setMuleContext(MuleContext context) {
-        log.info("MuleContext is ready - will populate cache from tak after delay");
-        worker.schedule(new Runnable() {
-            public void run() {
-                log.info("Delay expired - updating cache now from tak");
-                updateCache();
-            }
-        }, 20, TimeUnit.SECONDS);
     }
 }

@@ -4,14 +4,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.soitoolkit.commons.poms</groupId>
-        <artifactId>soitoolkit-default-parent</artifactId>
-        <version>0.6.1</version>
+        <groupId>se.skltp.commons</groupId>
+        <artifactId>skltp-commons-mule-parent</artifactId>
+        <version>1.0.0</version>
     </parent>
 
     <groupId>se.skltp.agp</groupId>
     <artifactId>agp-parent</artifactId>
-    <version>1.3.0-RC1</version>
+    <version>1.3.0-RC2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>agp-parent</name>
 
@@ -19,13 +19,14 @@
 			<url>http://github.com/skltp/agp</url>
 			<connection>scm:git:git://github.com/skltp/agp.git</connection>
 			<developerConnection>scm:git:git://github.com/skltp/agp.git</developerConnection>
-			<tag>v1.3.0-RC1</tag>
+			<tag>HEAD</tag>
 		</scm>
 
 	<modules>
 		<module>agp-core</module>
 		<module>agp-schemas</module>
 		<module>agp-test-common</module>
+		<module>agp-test-non-functional</module>
 <!--
 		<module>agp-gen</module>
 		<module>agp-gen-maven-plugin</module>
