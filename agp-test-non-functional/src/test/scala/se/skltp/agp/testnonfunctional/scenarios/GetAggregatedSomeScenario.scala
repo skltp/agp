@@ -10,9 +10,9 @@ object GetAggregatedSomeScenario {
   def headers(urn:String) = Map(
     "Accept-Encoding"                        -> "gzip,deflate",
     "Content-Type"                           -> "text/xml;charset=UTF-8",
-    "SOAPAction"                             -> urn,
-    "x-vp-sender-id"                         -> "test",
-    "x-rivta-original-serviceconsumer-hsaid" -> "test",
+    "SOAPAction"                             ->  urn,
+    "x-vp-sender-id"                         -> "SE5565594230-B9P",
+    "x-rivta-original-serviceconsumer-hsaid" -> "NonFunctionalTest - Gatling",
     "Keep-Alive"                             -> "115")
 
   def request(serviceName:String, urn:String, responseElement:String, responseItem:String) = exec(
