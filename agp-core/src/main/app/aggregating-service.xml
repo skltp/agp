@@ -30,7 +30,6 @@
 		http://www.mulesoft.org/schema/mule/xml       http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
 	">
 
-
     <spring:bean name="queryObjectFactory" class="${QUERY_OBJECT_FACTORY_IMPL}">
         <spring:property name="eiServiceDomain" value="${EI_SERVICE_DOMAIN}" />
         <spring:property name="eiCategorization" value="${EI_CATEGORIZATION}" />
@@ -81,6 +80,9 @@ TODO: Mule EE dependency
         <!-- Save the x-rivta-original-serviceconsumer-hsaid in a session-property for later usage when calling the service producers -->
         <set-session-variable variableName="originalServiceconsumerHsaid" value="#[message.inboundProperties.get('x-rivta-original-serviceconsumer-hsaid')]" doc:name="Save x-rivta-original-serviceconsumer-hsaid" />
 
+        <!-- Save the x-skltp-correlation-id in a session-property for later usage when calling the service producers -->
+        <set-session-variable variableName="correlationId" value="#[message.inboundProperties.get('x-skltp-correlation-id')]" doc:name="Save x-skltp-correlation-id" />
+
 	    <custom-transformer doc:name="Create Query Object" class="se.skltp.agp.service.transformers.CreateQueryObjectTransformer">
 	        <spring:property name="queryObjectFactory" ref="queryObjectFactory"/>
 	    </custom-transformer>
@@ -119,6 +121,9 @@ TODO: Mule EE dependency
         <!-- Propagate x-rivta-original-serviceconsumer-hsaid as an outbound property -->
         <set-property propertyName="x-rivta-original-serviceconsumer-hsaid" value="#[sessionVars.originalServiceconsumerHsaid]" doc:name="propagate x-rivta-original-serviceconsumer-hsaid" />
 
+        <!-- Propagate x-skltp-correlation-id as an outbound property -->
+        <set-property propertyName="x-skltp-correlation-id" value="#[sessionVars.correlationId]" doc:name="propagate x-skltp-correlation-id" />
+        
         <enricher target="#[payload]">
 			<http:outbound-endpoint 
 				doc:name="Engagement Index"
@@ -207,6 +212,9 @@ TODO: Mule EE dependency
         <!-- Propagate x-rivta-original-serviceconsumer-hsaid as an outbound property -->
         <set-property propertyName="x-rivta-original-serviceconsumer-hsaid" value="#[sessionVars.originalServiceconsumerHsaid]" doc:name="propagate x-rivta-original-serviceconsumer-hsaid" />
 
+        <!-- Propagate x-skltp-correlation-id as an outbound property -->
+        <set-property propertyName="x-skltp-correlation-id" value="#[sessionVars.correlationId]" doc:name="propagate x-skltp-correlation-id" />
+
 		<http:outbound-endpoint 
 			doc:name="Outbound"
             connector-ref="soitoolkit-http-connector"
@@ -237,6 +245,4 @@ TODO: Mule EE dependency
 
         <vm:outbound-endpoint path="reply" doc:name="vm://reply"/>
     </flow>
-
-
 </mule>
