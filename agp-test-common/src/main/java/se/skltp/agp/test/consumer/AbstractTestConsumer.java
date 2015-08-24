@@ -16,8 +16,9 @@ import se.skltp.agp.AgpConstants;
 
 public abstract class AbstractTestConsumer<ServiceInterface> {
 
-	public static final String SAMPLE_SENDER_ID = "sample-sender-id";
+	public static final String SAMPLE_SENDER_ID               = "sample-sender-id";
 	public static final String SAMPLE_ORIGINAL_CONSUMER_HSAID = "sample-original-consumer-hsaid";
+    public static final String SAMPLE_CORRELATION_ID          = "sample-correlation-id";
 	
 	protected ServiceInterface _service = null;	
 
@@ -30,8 +31,9 @@ public abstract class AbstractTestConsumer<ServiceInterface> {
      * @param serviceAddress
      * @param senderId mandatory http header x-vp-sender-id
      * @param originalConsumerHsaId mandatory http header x-rivta-original-serviceconsumer-hsaid
+     * @param correlationId mandatory http header x-skltp-correlation-id
      */
-	public AbstractTestConsumer(Class<ServiceInterface> serviceType, String serviceAddress, String senderId, String originalConsumerHsaId) {
+	public AbstractTestConsumer(Class<ServiceInterface> serviceType, String serviceAddress, String senderId, String originalConsumerHsaId, String correlationId) {
 
 		_serviceType = serviceType;
 		
@@ -48,14 +50,14 @@ public abstract class AbstractTestConsumer<ServiceInterface> {
 
 		_service = proxyFactory.create(getServiceType()); 
 		
-		setSenderIdAndOriginalConsumerHsaId(_service, senderId, originalConsumerHsaId);
+		setSenderOriginalConsumerCorrelation(_service, senderId, originalConsumerHsaId, correlationId);
 	}
 
     Class<ServiceInterface> getServiceType() {
     	return _serviceType;
     }
     
-    private void setSenderIdAndOriginalConsumerHsaId (ServiceInterface service, String senderId, String originalConsumerHsaId) {
+    private void setSenderOriginalConsumerCorrelation (ServiceInterface service, String senderId, String originalConsumerHsaId, String correlationId) {
 
     	// Get the underlying Client object from the proxy object of service interface
     	Client proxy = ClientProxy.getClient(service);
@@ -70,6 +72,9 @@ public abstract class AbstractTestConsumer<ServiceInterface> {
     	if (originalConsumerHsaId != null) {
     		headers.put(AgpConstants.X_RIVTA_ORIGINAL_SERVICE_CONSUMER_HSA_ID, Arrays.asList(originalConsumerHsaId));
     	}
+        if (correlationId != null) {
+            headers.put(AgpConstants.X_SKLTP_CORRELATION_ID, Arrays.asList(correlationId));
+        }
     	 
     	// Add HTTP headers to the web service request
     	proxy.getRequestContext().put(Message.PROTOCOL_HEADERS, headers);

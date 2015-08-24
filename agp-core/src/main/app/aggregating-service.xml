@@ -72,7 +72,7 @@ TODO: Mule EE dependency
 			payload="envelope">
 		</cxf:proxy-service>
 
-	    <custom-transformer doc:name="Check SenderId and OriginalConsumer" class="se.skltp.agp.service.transformers.CheckSenderIdAndOriginalConsumerTransformer"/>
+	    <custom-transformer doc:name="Check Sender, OriginalConsumer, Correlation" class="se.skltp.agp.service.transformers.CheckInboundPropertiesTransformer"/>
 
         <!-- Save the x-vp-sender-id in a session-property for later usage when calling the service producers -->
         <set-session-variable variableName="senderId" value="#[message.inboundProperties.get('x-vp-sender-id')]" doc:name="Save x-vp-sender-id" />
