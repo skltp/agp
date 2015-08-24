@@ -16,6 +16,7 @@ public class EngagemangsindexTestProducerLogger extends AbstractMessageTransform
 
 	private static String lastSenderId = null;
 	private static String lastOriginalConsumer = null;
+    private static String lastCorrelationId = null;
 	private static String lastVpInstance = null;
 	
 	@Override
@@ -24,18 +25,22 @@ public class EngagemangsindexTestProducerLogger extends AbstractMessageTransform
 		@SuppressWarnings("unchecked")
 		Map<String, Object> httpHeaders = (Map<String, Object>)message.getInboundProperty("http.headers");
 		
+        String vpInstance = (String)httpHeaders.get(AgpConstants.X_VP_INSTANCE_ID);
+        log.info("Engagemangsindex Test producer called with {}: {}", AgpConstants.X_VP_INSTANCE_ID, vpInstance);
+        lastVpInstance = vpInstance;
+        
 		String senderId = (String)httpHeaders.get(AgpConstants.X_VP_SENDER_ID);
 		log.info("Engagemangsindex Test producer called with {}: {}", AgpConstants.X_VP_SENDER_ID, senderId);
 		lastSenderId = senderId;
-		
-		String vpInstance = (String)httpHeaders.get(AgpConstants.X_VP_INSTANCE_ID);
-		log.info("Engagemangsindex Test producer called with {}: {}", AgpConstants.X_VP_INSTANCE_ID, vpInstance);
-		lastVpInstance = vpInstance;
 		
 		String orgConsumer = (String)httpHeaders.get(AgpConstants.X_RIVTA_ORIGINAL_SERVICE_CONSUMER_HSA_ID);
 		log.info("Engagemangsindex Test producer called with {}: {}", AgpConstants.X_RIVTA_ORIGINAL_SERVICE_CONSUMER_HSA_ID, orgConsumer);
 		lastOriginalConsumer = orgConsumer;
 
+        String correlationId = (String)httpHeaders.get(AgpConstants.X_SKLTP_CORRELATION_ID);
+        log.info("Engagemangsindex Test producer called with {}: {}", AgpConstants.X_SKLTP_CORRELATION_ID, correlationId);
+        lastCorrelationId = correlationId;
+        
 		return message;
 	}
 
@@ -51,5 +56,8 @@ public class EngagemangsindexTestProducerLogger extends AbstractMessageTransform
 		return lastOriginalConsumer;
 	}
 	
+    public static String getLastCorrelationId() {
+        return lastCorrelationId;
+    }
 	
 }
