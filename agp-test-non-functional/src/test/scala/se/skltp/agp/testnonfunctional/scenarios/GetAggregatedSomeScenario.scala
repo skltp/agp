@@ -13,6 +13,7 @@ object GetAggregatedSomeScenario {
     "SOAPAction"                             ->  urn,
     "x-vp-sender-id"                         -> "SE5565594230-B9P",
     "x-rivta-original-serviceconsumer-hsaid" -> "NonFunctionalTest - Gatling",
+    "x-skltp-correlation-id"                 -> "Correlation id - NonFunctionalTest - Gatling",
     "Keep-Alive"                             -> "115")
 
   def request(serviceName:String, urn:String, responseElement:String, responseItem:String) = exec(
