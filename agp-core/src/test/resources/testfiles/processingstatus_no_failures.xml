@@ -1,0 +1,32 @@
+<!--
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:urn="urn:riv:interoperability:headers:1" xmlns:urn1="urn:riv:itintegration:registry:1">
+    <soapenv:Header>
+-->
+        <ProcessingStatus xmlns="urn:riv:interoperability:headers:1">
+            <ProcessingStatusList>
+                <logicalAddress>SE2321000164-101B</logicalAddress>
+                <statusCode>DataFromSource</statusCode>
+                <isResponseFromCache>false</isResponseFromCache>
+                <isResponseInSynch>true</isResponseInSynch>
+                <lastSuccessfulSynch>20150828103515</lastSuccessfulSynch>
+            </ProcessingStatusList>
+            <ProcessingStatusList>
+                <logicalAddress>SE2321000164-1004</logicalAddress>
+                <statusCode>DataFromSource</statusCode>
+                <isResponseFromCache>false</isResponseFromCache>
+                <isResponseInSynch>true</isResponseInSynch>
+                <lastSuccessfulSynch>20150828103515</lastSuccessfulSynch>
+            </ProcessingStatusList>
+        </ProcessingStatus>
+<!--        
+    </soapenv:Header>
+    <soapenv:Body>
+        <ns2:GetCareDocumentationResponse
+            xmlns:ns2="urn:riv:clinicalprocess:healthcond:description:GetCareDocumentationResponder:2"
+            xmlns="urn:riv:clinicalprocess:healthcond:description:2"
+            xmlns:ns3="urn:riv:interoperability:headers:1">
+        </ns2:GetCareDocumentationResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
+-->

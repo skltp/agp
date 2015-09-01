@@ -35,6 +35,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import se.skltp.agp.cache.ProcessingStatusUtil;
+import se.skltp.agp.log.AgpLoggingProperties;
+import se.skltp.agp.log.ProcessingStatusLogFormat;
 import se.skltp.agp.riv.interoperability.headers.v1.LastUnsuccessfulSynchErrorType;
 import se.skltp.agp.riv.interoperability.headers.v1.ObjectFactory;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
@@ -80,13 +82,23 @@ public class CreateResponseListTransformer extends AbstractMessageTransformer {
         // Perform any message aware processing here, otherwise delegate as much as possible to pojoTransform() for easier unit testing
     	QueryObject queryObject = (QueryObject)message.getInvocationProperty("queryObject");
 
-        return pojoTransform(queryObject, message.getPayload(), outputEncoding);
+        //return pojoTransform(queryObject, message.getPayload(), outputEncoding);
+    	PojoTransformResult ptr = pojoTransform(queryObject, message.getPayload(), outputEncoding);
+    	
+    	// set ProcessingStatus result as properties for log tracking
+    	message.setInvocationProperty(AgpLoggingProperties.PROCESSINGSTATUS_COUNT_TOTAL, String.valueOf(ptr.procStatusLogFormat.getProcStatusCountTot()));
+    	message.setInvocationProperty(AgpLoggingProperties.PROCESSINGSTATUS_COUNT_FAIL, String.valueOf(ptr.procStatusLogFormat.getProcStatusCountFail()));
+    	message.setInvocationProperty(AgpLoggingProperties.PROCESSINGSTATUS, ptr.procStatusLogFormat.getProcStatus());
+    	
+    	message.setPayload(ptr.xml);
+    	
+    	return message;
     }
     
     /**
      * Simple pojo transformer method that can be tested with plain unit testing...
      */
-    public Object pojoTransform(QueryObject queryObject, Object src, String outputEncoding) throws TransformerException {
+    public PojoTransformResult pojoTransform(QueryObject queryObject, Object src, String outputEncoding) throws TransformerException {
         log.debug("Transforming payload: {}", src);
 
         @SuppressWarnings("unchecked")
@@ -167,7 +179,11 @@ public class CreateResponseListTransformer extends AbstractMessageTransformer {
 
 		xml = getXml(respDoc);
 
-        return xml;
+		PojoTransformResult ptr = new PojoTransformResult();
+		ptr.xml = xml;
+		ptr.procStatusLogFormat = new ProcessingStatusLogFormat(psu.getStatus());
+		
+        return ptr;
 	}
 
 	@SuppressWarnings("unused")
@@ -195,5 +211,11 @@ public class CreateResponseListTransformer extends AbstractMessageTransformer {
 		domFactory.setNamespaceAware(true);
 		DocumentBuilder builder = domFactory.newDocumentBuilder();
 		return builder;
+	}
+	
+	// private class to propagate multiple values
+	class PojoTransformResult {
+		String xml;
+		ProcessingStatusLogFormat procStatusLogFormat;
 	}
 }

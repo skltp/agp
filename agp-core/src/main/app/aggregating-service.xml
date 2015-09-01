@@ -61,7 +61,7 @@ TODO: Mule EE dependency
             connector-ref="soitoolkit-http-connector"
 			address="${SERVICE_INBOUND_URL}"
 			exchange-pattern="request-response"
-			transformer-refs="objToStr logReqIn"
+			transformer-refs="objToStr"
 			responseTransformer-refs="createSoapFaultIfException logRespOut">
 		</http:inbound-endpoint>
 
@@ -72,17 +72,19 @@ TODO: Mule EE dependency
 			payload="envelope">
 		</cxf:proxy-service>
 
-	    <custom-transformer doc:name="Check Sender, OriginalConsumer, Correlation" class="se.skltp.agp.service.transformers.CheckInboundPropertiesTransformer"/>
-
         <!-- Save the x-vp-sender-id in a session-property for later usage when calling the service producers -->
-        <set-session-variable variableName="senderId" value="#[message.inboundProperties.get('x-vp-sender-id')]" doc:name="Save x-vp-sender-id" />
+        <set-session-variable variableName="senderId" value="#[message.inboundProperties['x-vp-sender-id']]" doc:name="Save x-vp-sender-id" />
 
         <!-- Save the x-rivta-original-serviceconsumer-hsaid in a session-property for later usage when calling the service producers -->
-        <set-session-variable variableName="originalServiceconsumerHsaid" value="#[message.inboundProperties.get('x-rivta-original-serviceconsumer-hsaid')]" doc:name="Save x-rivta-original-serviceconsumer-hsaid" />
+        <set-session-variable variableName="originalServiceconsumerHsaid" value="#[message.inboundProperties['x-rivta-original-serviceconsumer-hsaid']]" doc:name="Save x-rivta-original-serviceconsumer-hsaid" />
 
         <!-- Save the x-skltp-correlation-id in a session-property for later usage when calling the service producers -->
-        <set-session-variable variableName="correlationId" value="#[message.inboundProperties.get('x-skltp-correlation-id')]" doc:name="Save x-skltp-correlation-id" />
-
+        <set-session-variable variableName="soitoolkit_correlationId" value="#[message.inboundProperties['x-skltp-correlation-id']]" doc:name="Save x-skltp-correlation-id" />
+        
+        <transformer ref="logReqIn"/>
+        
+        <custom-transformer doc:name="Check Sender, OriginalConsumer, Correlation" class="se.skltp.agp.service.transformers.CheckInboundPropertiesTransformer"/>
+        
 	    <custom-transformer doc:name="Create Query Object" class="se.skltp.agp.service.transformers.CreateQueryObjectTransformer">
 	        <spring:property name="queryObjectFactory" ref="queryObjectFactory"/>
 	    </custom-transformer>
@@ -122,7 +124,7 @@ TODO: Mule EE dependency
         <set-property propertyName="x-rivta-original-serviceconsumer-hsaid" value="#[sessionVars.originalServiceconsumerHsaid]" doc:name="propagate x-rivta-original-serviceconsumer-hsaid" />
 
         <!-- Propagate x-skltp-correlation-id as an outbound property -->
-        <set-property propertyName="x-skltp-correlation-id" value="#[sessionVars.correlationId]" doc:name="propagate x-skltp-correlation-id" />
+        <set-property propertyName="x-skltp-correlation-id" value="#[sessionVars.soitoolkit_correlationId]" doc:name="propagate x-skltp-correlation-id" />
         
         <enricher target="#[payload]">
 			<http:outbound-endpoint 
@@ -213,7 +215,7 @@ TODO: Mule EE dependency
         <set-property propertyName="x-rivta-original-serviceconsumer-hsaid" value="#[sessionVars.originalServiceconsumerHsaid]" doc:name="propagate x-rivta-original-serviceconsumer-hsaid" />
 
         <!-- Propagate x-skltp-correlation-id as an outbound property -->
-        <set-property propertyName="x-skltp-correlation-id" value="#[sessionVars.correlationId]" doc:name="propagate x-skltp-correlation-id" />
+        <set-property propertyName="x-skltp-correlation-id" value="#[sessionVars.soitoolkit_correlationId]" doc:name="propagate x-skltp-correlation-id" />
 
 		<http:outbound-endpoint 
 			doc:name="Outbound"

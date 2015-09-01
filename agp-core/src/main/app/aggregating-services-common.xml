@@ -139,6 +139,11 @@ TODO: Mule EE dependency
     <custom-transformer class="org.soitoolkit.commons.mule.log.LogTransformer" name="logReqIn">
 		<spring:property name="logType" value="req-in"/>
         <spring:property name="jaxbContext" ref="jaxbContext"/>
+		<spring:property name="extraInfo">
+			<spring:map>
+				<spring:entry key="originalServiceconsumerHsaid" value="#[sessionVars['originalServiceconsumerHsaid']]"/>
+			</spring:map>
+		</spring:property>
     </custom-transformer>
 
     <custom-transformer class="org.soitoolkit.commons.mule.log.LogTransformer" name="logReqOut">
@@ -154,8 +159,14 @@ TODO: Mule EE dependency
     <custom-transformer class="org.soitoolkit.commons.mule.log.LogTransformer" name="logRespOut">
 		<spring:property name="logType" value="resp-out"/>
         <spring:property name="jaxbContext" ref="jaxbContext"/>
-    </custom-transformer>  
-
-    <!-- TODO: Add global definitions here -->
+		<spring:property name="extraInfo">
+			<spring:map>
+				<spring:entry key="originalServiceconsumerHsaid" value="#[sessionVars['originalServiceconsumerHsaid']]"/>
+				<spring:entry key="processingStatusCountTot" value="#[flowVars[se.skltp.agp.log.AgpLoggingProperties.PROCESSINGSTATUS_COUNT_TOTAL]]"/>
+				<spring:entry key="processingStatusCountFail" value="#[flowVars[se.skltp.agp.log.AgpLoggingProperties.PROCESSINGSTATUS_COUNT_FAIL]]"/>
+				<spring:entry key="processingStatus" value="#[flowVars[se.skltp.agp.log.AgpLoggingProperties.PROCESSINGSTATUS]]"/>
+			</spring:map>
+		</spring:property>
+    </custom-transformer>
 
 </mule>
