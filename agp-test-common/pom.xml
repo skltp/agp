@@ -37,7 +37,7 @@
 
     <dependency>
       <groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
-      <artifactId>soitoolkit-mule-3.3.1-dependencies</artifactId>
+      <artifactId>soitoolkit-mule-3.7.0-dependencies</artifactId>
       <version>${soitoolkit.version}</version>
       <type>pom</type>
       <exclusions>
@@ -62,13 +62,6 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- Mockito -->
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-all</artifactId>
-      <scope>test</scope>
-      <version>1.8.5</version>
-    </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
