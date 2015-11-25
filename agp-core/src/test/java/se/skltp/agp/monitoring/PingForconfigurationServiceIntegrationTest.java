@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.soitoolkit.commons.mule.test.junit4.AbstractTestCase;
 import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
@@ -41,10 +42,13 @@ public class PingForconfigurationServiceIntegrationTest extends AbstractTestCase
 		assertEquals(rb.getString("APPLICATION_NAME"), response.getConfiguration().get(0).getValue());
 		
 		//Test correct http headers are passed to producer
-		assertEquals(rb.getString("SKLTP_HSA_ID"), PingForConfigurationTestProducerLogger.getLastConsumer());
-		assertEquals(rb.getString("VP_INSTANCE_ID"), PingForConfigurationTestProducerLogger.getLastVpInstance());
+		// SERVICE-187 No calls to EI PFC service done, therefore no check against the EI PFC service
+		// assertEquals(rb.getString("SKLTP_HSA_ID"), PingForConfigurationTestProducerLogger.getLastConsumer());
+		// assertEquals(rb.getString("VP_INSTANCE_ID"), PingForConfigurationTestProducerLogger.getLastVpInstance());
 	}
 	
+	// SERVICE-187 No calls to EI PFC service done, therefore no check against the EI PFC service
+	@Ignore
 	@Test
 	public void pingForConfiguration_error_in_ei() throws Exception {
 
@@ -58,6 +62,8 @@ public class PingForconfigurationServiceIntegrationTest extends AbstractTestCase
 		}
 	}
 	
+	// SERVICE-187 No calls to EI PFC service done, therefore no check against the EI PFC service
+	@Ignore
 	@Test
 	public void pingForConfiguration_timeout_in_ei() throws Exception {
 
