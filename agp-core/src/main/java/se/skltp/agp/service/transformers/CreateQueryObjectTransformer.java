@@ -2,8 +2,6 @@ package se.skltp.agp.service.transformers;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -134,61 +132,6 @@ public class CreateQueryObjectTransformer extends AbstractMessageTransformer {
         return true;
 	}
 	
-
-    /**
-     * @return false if the incoming request contains a non-blank sourceSystemHSAId/sourceSystemHSAid. (SERVICE-218)
-     */
-	protected boolean validSourceSystemHSAId(Object request) {
-        try {
-            Method getSourceSystemHSAId = request.getClass().getMethod("getSourceSystemHSAId");
-            try {
-                Object sourceSystemHSAId = getSourceSystemHSAId.invoke(request, new Object[]{});
-                if (sourceSystemHSAId != null) {
-                    if (sourceSystemHSAId instanceof String) {
-                        String s = (String)sourceSystemHSAId;
-                        if (StringUtils.isNotBlank(s)) {
-                            return false;
-                        }
-                    }
-                }
-            } catch (IllegalArgumentException e) {
-                log.error("Unexpected Exception for " + request.getClass().getName(), e);
-            } catch (IllegalAccessException e) {
-                log.error("Unexpected Exception for " + request.getClass().getName(), e);
-            } catch (InvocationTargetException e) {
-                log.error("Unexpected Exception for " + request.getClass().getName(), e);
-            }
-        } catch (SecurityException e) {
-            log.error("Unexpected SecurityException for " + request.getClass().getName(), e);
-        } catch (NoSuchMethodException n) {
-            // no method getSourceSystemHSAId, now need to check getSourceSystemHSAid
-            try {
-                Method getSourceSystemHSAid = request.getClass().getMethod("getSourceSystemHSAid");
-                try {
-                    Object sourceSystemHSAid = getSourceSystemHSAid.invoke(request, new Object[]{});
-                    if (sourceSystemHSAid != null) {
-                        if (sourceSystemHSAid instanceof String) {
-                            String s = (String)sourceSystemHSAid;
-                            if (StringUtils.isNotBlank(s)) {
-                                return false;
-                            }
-                        }
-                    }
-                } catch (IllegalArgumentException e) {
-                    log.error("Unexpected Exception for " + request.getClass().getName(), e);
-                } catch (IllegalAccessException e) {
-                    log.error("Unexpected Exception for " + request.getClass().getName(), e);
-                } catch (InvocationTargetException e) {
-                    log.error("Unexpected Exception for " + request.getClass().getName(), e);
-                }
-            } catch (SecurityException e) {
-                log.error("Unexpected SecurityException for " + request.getClass().getName(), e);
-            } catch (NoSuchMethodException e) {
-                // this is not an error - ignore
-            }
-        }
-        return true;
-    }
 
     private Document createDocument(String content, String charset) {
 		try {
