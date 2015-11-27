@@ -24,16 +24,18 @@
         
         <logger message="PingForConfiguration requested in aggregated service ${APPLICATION_NAME}" category="se.skltp.agp.monitoring" level="DEBUG"/>
         
+        <!--
+        
         <custom-transformer doc:name="PingForConfiguration request transformer" class="se.skltp.agp.monitoring.PingForconfigurationRequestTransformer">
 	       <spring:property name="engagemangsIndexHsaId" value="${ENGAGEMANGSINDEX_HSA_ID}"/>
 	    </custom-transformer>
 	    
-	    <!-- 
+	     
  			Set the outbpund property x-vp-sender-id as the HSA-ID of SKLTP itself. i.e. it is SKLTP that is authorized to call EI not the sender.
  			Propagate x-vp-instance-id as an outbound property, value is set as an id of the invoked VP.
  			
  			These two headers are dependent on each other in a way that when using x-vp-sender-id against VP, VP will check for a valid x-vp-instance-id.
- 		-->
+ 		
  		<set-property propertyName="x-vp-sender-id" value="${SKLTP_HSA_ID}" doc:name="propagate x-vp-sender-id = SKLTP_HSA_ID when invoking PingForConfiguration through VP" />
  		<set-property propertyName="x-vp-instance-id" value="${VP_INSTANCE_ID}" doc:name="propagate x-vp-instance-id = VP_INSTANCE_ID when invoking PingForConfiguration through VP" />
 	    
@@ -54,6 +56,8 @@
 		</http:outbound-endpoint>
 		
 		<logger message="Successfull PingForConfiguration request against EI, create a PingForconfiguration response for ${APPLICATION_NAME}" category="se.skltp.agp.monitoring" level="INFO"/>
+		
+		-->
 		
 		 <custom-transformer doc:name="PingForConfiguration response transformer" class="se.skltp.agp.monitoring.PingForconfigurationResponseTransformer">
 	       <spring:property name="appName" value="${APPLICATION_NAME}" />

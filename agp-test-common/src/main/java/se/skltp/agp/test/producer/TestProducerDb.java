@@ -51,6 +51,12 @@ public abstract class TestProducerDb {
 		this.serviceTimeoutMs = serviceTimeoutMs;
 	}
 
+	
+	public TestProducerDb() {
+        initDb();
+	}
+	
+	
 	public Object processRequest(String logicalAddress, String registeredResidentId) {
 
 		// TC5 - Invalid id - return error-message
@@ -67,7 +73,7 @@ public abstract class TestProducerDb {
 		doSomeProcessingForSomeTime(logicalAddress);
         
         // Lookup the response
-        Object object = retreiveFromDb(logicalAddress, registeredResidentId);
+        Object object = retrieveFromDb(logicalAddress, registeredResidentId);
 		return object;
 	}
 
@@ -139,23 +145,14 @@ public abstract class TestProducerDb {
 	}
 
 	public void resetDb() {
-		log.debug("### RESET-DB CALLED, DB == NULL? " + (DB == null));
 		DB = new HashMap<String, Object>();
 	}
 
 	public void storeInDb(String logicalAddress, String registeredResidentId, Object value) {
-		log.debug("### STORE-DB CALLED, DB == NULL? " + (DB == null));
-		if (DB == null) {
-			initDb();
-		}
 		DB.put(logicalAddress + "|" + registeredResidentId, value);
 	}
 	
-	public Object retreiveFromDb(String logicalAddress, String registeredResidentId) {
-		log.debug("### RETREIVE-DB CALLED, DB == NULL? " + (DB == null));
-		if (DB == null) {
-			initDb();
-		}
+	public Object retrieveFromDb(String logicalAddress, String registeredResidentId) {
         return DB.get(logicalAddress + "|" + registeredResidentId);
 	}
 }

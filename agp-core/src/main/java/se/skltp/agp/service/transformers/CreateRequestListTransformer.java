@@ -22,7 +22,9 @@ public class CreateRequestListTransformer extends AbstractMessageTransformer {
 	}
 	
     /**
-     * Message aware transformer that ...
+     * A findContent request has been sent to engagement index, and a findContent response has been returned.
+     * This transformer now creates a list of requests - one for each producer that engagement index has returned.
+     * Processing is handled by the implementation of the RequestListFactory interface.
      */
     @Override
     public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
@@ -30,7 +32,7 @@ public class CreateRequestListTransformer extends AbstractMessageTransformer {
     	QueryObject qo = (QueryObject)message.getInvocationProperty("queryObject");
 		FindContentResponseType eiResp = (FindContentResponseType)message.getPayload();
     	
-    	log.info("qo_id: {}, qo_s: {}, ei.size: {}", new Object[] {qo.getFindContent().getRegisteredResidentIdentification(), qo.getFindContent().getServiceDomain(), eiResp.getEngagement().size()});
+    	log.info("findContent.patientId: {}, findContent.serviceDomain: {}, findContentResponse.size: {}", new Object[] {qo.getFindContent().getRegisteredResidentIdentification(), qo.getFindContent().getServiceDomain(), eiResp.getEngagement().size()});
     	
         // Perform any message aware processing here, otherwise delegate as much as possible to pojoTransform() for easier unit testing
     	List<Object[]> transformedPayload = requestListFactory.createRequestList(qo, eiResp);
