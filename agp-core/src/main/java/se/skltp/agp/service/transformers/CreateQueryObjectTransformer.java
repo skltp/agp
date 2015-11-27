@@ -2,6 +2,8 @@ package se.skltp.agp.service.transformers;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +16,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.apache.commons.lang.StringUtils;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.module.xml.stax.MapNamespaceContext;
@@ -26,6 +29,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import se.skltp.agp.service.api.QueryObject;
 import se.skltp.agp.service.api.QueryObjectFactory;
 
 public class CreateQueryObjectTransformer extends AbstractMessageTransformer {
@@ -45,7 +49,9 @@ public class CreateQueryObjectTransformer extends AbstractMessageTransformer {
 	}
 
 	/**
-     * Message aware transformer that ...
+     * Incoming mule message contains a request from the consumer. This will contain patientId, domain, and a number of parameters.
+     * The message is passed to the implementation of the QueryObjectFactory which will return a findContent request which
+     * will be sent later on to the engagement index.
      */
     @Override
     public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
@@ -55,6 +61,8 @@ public class CreateQueryObjectTransformer extends AbstractMessageTransformer {
     }
 
 	/**
+	 * Retrieve the node in the incoming xml message and pass it on to the query object factory for creating a findContent request.
+	 * 
      * Simple pojo transformer method that can be tested with plain unit testing...
 	 */
 	protected Object pojoTransform(Object src, String encoding) throws TransformerException {
@@ -63,7 +71,7 @@ public class CreateQueryObjectTransformer extends AbstractMessageTransformer {
 		String xml = XmlUtil.convertReversibleXMLStreamReaderToString((ReversibleXMLStreamReader)src, "UTF-8");
 		log.debug("Transforming payload: {}", xml);
 
-		Object result;
+		Object soapBody;
 		try {
 			XPath xpath = XPathFactory.newInstance().newXPath();
 		    xpath.setNamespaceContext(new MapNamespaceContext(namespaceMap));
@@ -73,21 +81,116 @@ public class CreateQueryObjectTransformer extends AbstractMessageTransformer {
 			XPathExpression xpathRequest = xpath.compile("/soap:Envelope/soap:Body/*[1]");
 
 			Document reqDoc = createDocument(xml, "UTF-8");
-			result = xpathRequest.evaluate(reqDoc, XPathConstants.NODESET);
-		} catch (XPathExpressionException e) {
+			soapBody = xpathRequest.evaluate(reqDoc, XPathConstants.NODESET);
+	        if (soapBody == null) {
+	            throw new RuntimeException("Unable to find soap body in incoming message");
+	        } else {
+	            NodeList list = (NodeList)soapBody; 
+	            if (list.getLength() < 1) {
+	                throw new RuntimeException("Unable to find soap body in incoming message (length 0)");
+	            } else {
+	                Node node = list.item(0);
+	                log.debug("Request root-element: " + node.getLocalName() + " - " + node.getNamespaceURI());
+	                
+	                if (!validSourceSystemHSAIdUsingXPath(reqDoc)) {
+                        throw new RuntimeException("Ifyllt sourceSystemHSAId får inte skickas till en aggregerande tjänst");
+	                } else {
+    	                QueryObject findContentQueryObject = queryObjectFactory.createQueryObject(node);
+                        return findContentQueryObject;
+	                }
+	            }
+	        }
+ 		} catch (XPathExpressionException e) {
 			throw new RuntimeException(e);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-		NodeList list = (NodeList)result; 
-		Node node = list.item(0);
-
-		log.debug("Request root-element: " + node.getLocalName() + " - " + node.getNamespaceURI());
-
-		return queryObjectFactory.createQueryObject(node);
 	}
+	
+	
+    /**
+     * @return false if the incoming request contains a non-blank sourceSystemHSAId/sourceSystemHSAid. (SERVICE-218)
+     */
+	protected boolean validSourceSystemHSAIdUsingXPath(Document doc) {
+	    
+	    // use local-name() in order to avoid complexity surrounding namespaces
+	    
+	    XPath xpath = XPathFactory.newInstance().newXPath();
+        try {
+            XPathExpression xpathExpression = xpath.compile("//*[local-name()='sourceSystemHSAId']");
+            String sourceSystemHSAId = (String) xpathExpression.evaluate(doc, XPathConstants.STRING);
+            if (StringUtils.isNotBlank(sourceSystemHSAId)) {
+                return false;
+            } else {
+                xpathExpression = xpath.compile("//*[local-name()='sourceSystemHSAid']");
+                String sourceSystemHSAid = (String) xpathExpression.evaluate(doc, XPathConstants.STRING);
+                if (StringUtils.isNotBlank(sourceSystemHSAid)) {
+                    return false;
+                }
+            }
+        } catch (XPathExpressionException e) {
+            log.error("Unexpected XPath error",e);
+        }	
+        return true;
+	}
+	
 
-	private Document createDocument(String content, String charset) {
+    /**
+     * @return false if the incoming request contains a non-blank sourceSystemHSAId/sourceSystemHSAid. (SERVICE-218)
+     */
+	protected boolean validSourceSystemHSAId(Object request) {
+        try {
+            Method getSourceSystemHSAId = request.getClass().getMethod("getSourceSystemHSAId");
+            try {
+                Object sourceSystemHSAId = getSourceSystemHSAId.invoke(request, new Object[]{});
+                if (sourceSystemHSAId != null) {
+                    if (sourceSystemHSAId instanceof String) {
+                        String s = (String)sourceSystemHSAId;
+                        if (StringUtils.isNotBlank(s)) {
+                            return false;
+                        }
+                    }
+                }
+            } catch (IllegalArgumentException e) {
+                log.error("Unexpected Exception for " + request.getClass().getName(), e);
+            } catch (IllegalAccessException e) {
+                log.error("Unexpected Exception for " + request.getClass().getName(), e);
+            } catch (InvocationTargetException e) {
+                log.error("Unexpected Exception for " + request.getClass().getName(), e);
+            }
+        } catch (SecurityException e) {
+            log.error("Unexpected SecurityException for " + request.getClass().getName(), e);
+        } catch (NoSuchMethodException n) {
+            // no method getSourceSystemHSAId, now need to check getSourceSystemHSAid
+            try {
+                Method getSourceSystemHSAid = request.getClass().getMethod("getSourceSystemHSAid");
+                try {
+                    Object sourceSystemHSAid = getSourceSystemHSAid.invoke(request, new Object[]{});
+                    if (sourceSystemHSAid != null) {
+                        if (sourceSystemHSAid instanceof String) {
+                            String s = (String)sourceSystemHSAid;
+                            if (StringUtils.isNotBlank(s)) {
+                                return false;
+                            }
+                        }
+                    }
+                } catch (IllegalArgumentException e) {
+                    log.error("Unexpected Exception for " + request.getClass().getName(), e);
+                } catch (IllegalAccessException e) {
+                    log.error("Unexpected Exception for " + request.getClass().getName(), e);
+                } catch (InvocationTargetException e) {
+                    log.error("Unexpected Exception for " + request.getClass().getName(), e);
+                }
+            } catch (SecurityException e) {
+                log.error("Unexpected SecurityException for " + request.getClass().getName(), e);
+            } catch (NoSuchMethodException e) {
+                // this is not an error - ignore
+            }
+        }
+        return true;
+    }
+
+    private Document createDocument(String content, String charset) {
 		try {
 			InputStream is = new ByteArrayInputStream(content.getBytes(charset));
 			return getBuilder().parse(is);
