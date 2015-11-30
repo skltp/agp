@@ -9,7 +9,7 @@ import se.skltp.agp.testnonfunctional.scenarios.PingForConfigurationScenario
 /**
  * Ping for configuration run against remote service - returns ok.
  */
-class TP00PingForConfiguration extends Simulation {
+class TPPingForConfiguration extends Simulation {
 
   val serviceLowercase = if (System.getProperty("serviceLowercase") != null && !System.getProperty("serviceLowercase").isEmpty()) { 
                            System.getProperty("serviceLowercase") 
