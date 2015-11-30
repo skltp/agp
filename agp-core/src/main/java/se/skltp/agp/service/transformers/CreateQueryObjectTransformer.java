@@ -14,7 +14,6 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.apache.commons.lang.StringUtils;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.module.xml.stax.MapNamespaceContext;
@@ -89,13 +88,8 @@ public class CreateQueryObjectTransformer extends AbstractMessageTransformer {
 	            } else {
 	                Node node = list.item(0);
 	                log.debug("Request root-element: " + node.getLocalName() + " - " + node.getNamespaceURI());
-	                
-	                if (!validSourceSystemHSAIdUsingXPath(reqDoc)) {
-                        throw new RuntimeException("Ifyllt sourceSystemHSAId får inte skickas till en aggregerande tjänst");
-	                } else {
-    	                QueryObject findContentQueryObject = queryObjectFactory.createQueryObject(node);
-                        return findContentQueryObject;
-	                }
+	                QueryObject findContentQueryObject = queryObjectFactory.createQueryObject(node);
+                    return findContentQueryObject;
 	            }
 	        }
  		} catch (XPathExpressionException e) {
@@ -105,34 +99,6 @@ public class CreateQueryObjectTransformer extends AbstractMessageTransformer {
 		}
 	}
 	
-	
-    /**
-     * @return false if the incoming request contains a non-blank sourceSystemHSAId/sourceSystemHSAid. (SERVICE-218)
-     */
-	protected boolean validSourceSystemHSAIdUsingXPath(Document doc) {
-	    
-	    // use local-name() in order to avoid complexity surrounding namespaces
-	    
-	    XPath xpath = XPathFactory.newInstance().newXPath();
-        try {
-            XPathExpression xpathExpression = xpath.compile("//*[local-name()='sourceSystemHSAId']");
-            String sourceSystemHSAId = (String) xpathExpression.evaluate(doc, XPathConstants.STRING);
-            if (StringUtils.isNotBlank(sourceSystemHSAId)) {
-                return false;
-            } else {
-                xpathExpression = xpath.compile("//*[local-name()='sourceSystemHSAid']");
-                String sourceSystemHSAid = (String) xpathExpression.evaluate(doc, XPathConstants.STRING);
-                if (StringUtils.isNotBlank(sourceSystemHSAid)) {
-                    return false;
-                }
-            }
-        } catch (XPathExpressionException e) {
-            log.error("Unexpected XPath error",e);
-        }	
-        return true;
-	}
-	
-
     private Document createDocument(String content, String charset) {
 		try {
 			InputStream is = new ByteArrayInputStream(content.getBytes(charset));
