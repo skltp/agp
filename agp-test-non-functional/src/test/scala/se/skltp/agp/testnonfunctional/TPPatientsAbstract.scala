@@ -13,12 +13,6 @@ import io.gatling.core.structure.PopulatedScenarioBuilder
  */
 abstract class TPPatientsAbstract extends Simulation {
 
-//  val testDuration            =  12 hours
-//  val numberOfConcurrentUsers =   5
-//  val rampDuration            =   1 minute
-//  val minWaitDuration         =   2 seconds
-//  val maxWaitDuration         =   4 seconds
-  
   val numberOfConcurrentUsers:Int = if (System.getProperty("numberOfConcurrentUsers") != null && !System.getProperty("numberOfConcurrentUsers").isEmpty()) {
                                         new Integer(System.getProperty("numberOfConcurrentUsers"))
                                     } else {
