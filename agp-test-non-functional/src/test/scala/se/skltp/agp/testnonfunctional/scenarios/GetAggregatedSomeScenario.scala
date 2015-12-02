@@ -16,7 +16,11 @@ object GetAggregatedSomeScenario {
     "x-skltp-correlation-id"                 -> "Correlation id - NonFunctionalTest - Gatling",
     "Keep-Alive"                             -> "115")
 
-  def request(serviceName:String, urn:String, responseElement:String, responseItem:String) = exec(
+  def assertionUrn(urn:String, responseItemUrn:Option[String]):String = {
+    responseItemUrn getOrElse urn
+  }
+    
+  def request(serviceName:String, urn:String, responseElement:String, responseItem:String, responseItemUrn:Option[String] = None) = exec(
         http("GetAggregated" + serviceName + " ${patientid} - ${name}")
           .post("")
           .headers(headers(urn + ":Get" + serviceName))
@@ -24,6 +28,6 @@ object GetAggregatedSomeScenario {
           .check(status.is(session => session("status").as[String].toInt))
           .check(xpath("soap:Envelope", List("soap" -> "http://schemas.xmlsoap.org/soap/envelope/")).exists)
           .check(substring(responseElement))
-          .check(xpath("//ns2:" + responseItem, List("ns2" -> urn)).count.is(session => session("count").as[String].toInt))
+          .check(xpath("//ns2:" + responseItem, List("ns2" -> assertionUrn(urn, responseItemUrn))).count.is(session => session("count").as[String].toInt))
       )
 }

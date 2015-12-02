@@ -49,15 +49,15 @@ abstract class TPPatientsAbstract extends Simulation {
                                         "patients.csv"
                                     }
   
-  def patients(serviceName:String, urn:String, responseElement:String, responseItem:String) 
+  def patients(serviceName:String, urn:String, responseElement:String, responseItem:String, responseItemUrn:Option[String] = None) 
                  = scenario("patients")
                  .during(testDuration) {
                     feed(csv(patientsFileName).circular)
-                   .exec(GetAggregatedSomeScenario.request(serviceName, urn, responseElement, responseItem))
+                   .exec(GetAggregatedSomeScenario.request(serviceName, urn, responseElement, responseItem, responseItemUrn))
                    .pause(minWaitDuration, maxWaitDuration)
                   }
   
-   def setUpAbstract(serviceName:String, urn:String, responseElement:String, responseItem:String, baseUrl:String) : PopulatedScenarioBuilder = {
-     patients(serviceName, urn, responseElement, responseItem).inject(rampUsers(numberOfConcurrentUsers) over (rampDuration)).protocols(http.baseURL(baseUrl).disableResponseChunksDiscarding) 
+   def setUpAbstract(serviceName:String, urn:String, responseElement:String, responseItem:String, baseUrl:String, responseItemUrn:Option[String] = None) : PopulatedScenarioBuilder = {
+     patients(serviceName, urn, responseElement, responseItem, responseItemUrn).inject(rampUsers(numberOfConcurrentUsers) over (rampDuration)).protocols(http.baseURL(baseUrl).disableResponseChunksDiscarding) 
    }
 }
