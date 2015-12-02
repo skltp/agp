@@ -42,16 +42,17 @@ abstract class TPHappyPathAbstract extends Simulation {
                                      }
   
   
-  def happyPath(serviceName:String, urn:String, responseElement:String, responseItem:String) = scenario("happy path")
+  def happyPath(serviceName:String, urn:String, responseElement:String, responseItem:String, responseItemUrn:Option[String] = None) 
+                = scenario("happy path")
                  .during(testDuration) {
                    exec(session => {
                      session.set("status","200").set("patientid","121212121212").set("name","Tolvan Tolvansson").set("count","3")
                    })
-                   .exec(GetAggregatedSomeScenario.request(serviceName, urn, responseElement, responseItem))
+                   .exec(GetAggregatedSomeScenario.request(serviceName, urn, responseElement, responseItem, responseItemUrn))
                    .pause(minWaitDuration, maxWaitDuration)
                   }
   
-   def setUpAbstract(serviceName:String, urn:String, responseElement:String, responseItem:String, baseUrl:String) : io.gatling.core.structure.PopulatedScenarioBuilder = {
-     happyPath(serviceName, urn, responseElement, responseItem).inject(rampUsers(numberOfConcurrentUsers) over (rampDuration)).protocols(http.baseURL(baseUrl).disableResponseChunksDiscarding) 
+   def setUpAbstract(serviceName:String, urn:String, responseElement:String, responseItem:String, baseUrl:String, responseItemUrn:Option[String] = None) : io.gatling.core.structure.PopulatedScenarioBuilder = {
+     happyPath(serviceName, urn, responseElement, responseItem, responseItemUrn).inject(rampUsers(numberOfConcurrentUsers) over (rampDuration)).protocols(http.baseURL(baseUrl).disableResponseChunksDiscarding) 
    }
 }
