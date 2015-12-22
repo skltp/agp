@@ -6,11 +6,13 @@
 	xmlns:spring="http://www.springframework.org/schema/beans"
 	xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
 	xmlns:jms="http://www.mulesoft.org/schema/mule/jms"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 		http://www.mulesoft.org/schema/mule/core    http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 		http://www.mulesoft.org/schema/mule/cxf     http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
 		http://www.mulesoft.org/schema/mule/jms     http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+		http://www.mulesoft.org/schema/mule/http    http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 	">
 
     <!-- 
@@ -25,14 +27,20 @@
 
     <custom-transformer name="engagemangsindexTestProducerLogger" class="se.skltp.agp.test.producer.EngagemangsindexTestProducerLogger"/>
 
-	<simple-service 
-		name="engagemangsindex-teststub-service"
-        address="${ENGAGEMANGSINDEX_TESTSTUB_INBOUND_URL}?connector=soitoolkit-http-connector" 
-        transformer-refs="engagemangsindexTestProducerLogger"
-        type="jax-ws">
+    <flow name="engagemangsindex-teststub-service">
+		<http:inbound-endpoint
+        	connector-ref="soitoolkit-http-connector"
+            address="${ENGAGEMANGSINDEX_TESTSTUB_INBOUND_URL}" 
+            exchange-pattern="request-response">
+        </http:inbound-endpoint>
+        
+        <transformer ref="engagemangsindexTestProducerLogger"/>
+        
+        <cxf:jaxws-service serviceClass="${ENGAGEMANGSINDEX_PRODUCER_TESTSTUB_IMPL}"/>
+        
         <component>
-            <spring-object bean="engagemangsindex-teststub-bean"/>
+        	<spring-object bean="engagemangsindex-teststub-bean"/>
         </component>
-    </simple-service>
+    </flow>
  
 </mule>
