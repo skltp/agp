@@ -86,23 +86,6 @@
     </resources>
 
     <plugins>
-      <!-- setup/debug of dependencies: dump all dependencies for inspection into dir target/dependency -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>copy-dependencies</id>
-            <!--
-            <phase>package</phase>
-            -->
-            <phase>process-resources</phase>
-            <goals>
-              <goal>copy-dependencies</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
       <plugin>
         <!-- Add mule-nature to the eclipse-.project-file -->
         <artifactId>maven-eclipse-plugin</artifactId>
