@@ -5,7 +5,13 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.soitoolkit.commons.mule.util.MiscUtil;
 
-public class CreateRequestListTransformerTest {
+import se.skltp.agp.cache.TakCacheBean;
+import se.skltp.agp.cache.TakCacheBeanIntegrationTest;
+import se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentResponseType;
+import se.skltp.agp.riv.itintegration.engagementindex.v1.EngagementType;
+import se.skltp.agp.test.consumer.AbstractTestConsumer;
+
+public class CreateRequestListTransformerTest extends TakCacheBeanIntegrationTest {
 
 	@SuppressWarnings("unused")
 	@Test
@@ -29,5 +35,39 @@ public class CreateRequestListTransformerTest {
 
 		// Compare the result to the expected value
 		assertEquals(expectedResult, result);
+	}
+	
+	@Test
+	public void testFilterFindContentResponseBasedOnAuthority_ok() {
+		CreateRequestListTransformer transformer = new CreateRequestListTransformer();
+		TakCacheBean testObject = getTakCacheBean();
+		testObject.updateCache();
+		transformer.setTakCache(testObject);
+		
+		FindContentResponseType eiResp = new FindContentResponseType();
+		EngagementType engType = new EngagementType();
+		engType.setLogicalAddress("HSA-ID-1");
+		
+		eiResp.getEngagement().add(engType);
+		
+		transformer.filterFindContentResponseBasedOnAuthority(eiResp, AbstractTestConsumer.SAMPLE_SENDER_ID, null);
+		assertEquals(1, eiResp.getEngagement().size());
+	}
+	
+	@Test
+	public void testFilterFindContentResponseBasedOnAuthority_Filter_Engagement() {
+		CreateRequestListTransformer transformer = new CreateRequestListTransformer();
+		TakCacheBean testObject = getTakCacheBean();
+		testObject.updateCache();
+		transformer.setTakCache(testObject);
+		
+		FindContentResponseType eiResp = new FindContentResponseType();
+		EngagementType engType = new EngagementType();
+		engType.setLogicalAddress("HSA-ID-1");
+		
+		eiResp.getEngagement().add(engType);
+		
+		transformer.filterFindContentResponseBasedOnAuthority(eiResp, "SRC_HSA-ID-1", null);
+		assertEquals(0, eiResp.getEngagement().size());
 	}
 }
