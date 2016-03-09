@@ -16,7 +16,7 @@ public class PingForconfigurationResponseTransformer extends AbstractMessageTran
 
 	private static final Logger log = LoggerFactory.getLogger(PingForconfigurationResponseTransformer.class);
 	
-	private ThreadSafeSimpleDateFormat dateFormat = new ThreadSafeSimpleDateFormat("yyyyMMddhhmmss");
+	private ThreadSafeSimpleDateFormat dateFormat = new ThreadSafeSimpleDateFormat("yyyyMMddHHmmss");
 	
 	private String appName;
 	
