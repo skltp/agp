@@ -41,12 +41,16 @@ abstract class TPHappyPathAbstract extends Simulation {
                                          1 seconds
                                      }
   
-  
+  val senderId:String              = if (System.getProperty("senderid") != null && !System.getProperty("senderid").isEmpty()) {
+										new String(System.getProperty("senderid"))										
+									 } else {
+										throw new IllegalArgumentException("Note: This tests requires senderid. Usage -Dsenderid=xxx")
+									 }
   def happyPath(serviceName:String, urn:String, responseElement:String, responseItem:String, responseItemUrn:Option[String] = None) 
                 = scenario("happy path")
                  .during(testDuration) {
                    exec(session => {
-                     session.set("status","200").set("patientid","121212121212").set("name","Tolvan Tolvansson").set("count","3")
+                     session.set("status","200").set("patientid","121212121212").set("name","Tolvan Tolvansson").set("count","3").set("senderid", senderId)
                    })
                    .exec(GetAggregatedSomeScenario.request(serviceName, urn, responseElement, responseItem, responseItemUrn))
                    .pause(minWaitDuration, maxWaitDuration)

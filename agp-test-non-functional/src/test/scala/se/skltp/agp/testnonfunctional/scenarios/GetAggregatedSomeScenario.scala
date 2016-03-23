@@ -11,7 +11,7 @@ object GetAggregatedSomeScenario {
     "Accept-Encoding"                        -> "gzip,deflate",
     "Content-Type"                           -> "text/xml;charset=UTF-8",
     "SOAPAction"                             ->  soapAction,
-    "x-vp-sender-id"                         -> "SE5565594230-B9P",
+    "x-vp-sender-id"                         ->  "${senderid}",
     "x-rivta-original-serviceconsumer-hsaid" -> "NonFunctionalTest - Gatling",
     "x-skltp-correlation-id"                 -> "Correlation id - NonFunctionalTest - Gatling",
     "Keep-Alive"                             -> "115")
