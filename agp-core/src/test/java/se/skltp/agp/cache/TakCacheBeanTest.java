@@ -4,15 +4,17 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Enumeration;
 import java.util.List;
-import java.util.Set;
+import java.util.Properties;
 import java.util.UUID;
 
 import org.junit.After;
@@ -37,27 +39,32 @@ public class TakCacheBeanTest {
     }
 
     @Test
-    public void testWriteAndLoadLocalCacheSuccess() throws IOException {
+    public void testWriteAndLoadLocalCacheSuccess() throws IOException, ClassNotFoundException {
         final TakCacheBean testObject = new TakCacheBean();
         testObject.setTakLocalCacheFile(TEST_LOCAL_TEST_FILE);
-
-        final Set<String> testRecivers = new HashSet<String>();
-        testRecivers.add("TEST1");
-        testRecivers.add("TEST2");
-        testRecivers.add("TEST3");
-
-        testObject.writeTakLocalCache(testRecivers);
+        
+        Properties prop = new Properties();
+        prop.put("TEST1", "TEST1,TEST2");
+        prop.put("TEST2", "TEST2,TEST3");
+        prop.put("TEST3", "TEST3,TEST5");
+        
+        testObject.writeTakLocalCache(prop);
+        
         assertTrue(Files.exists(testPath));
-        List<String> cacheFileContent = Files.readAllLines(testPath, Charset.forName("UTF-8"));
-        assertEquals(testRecivers.size(), cacheFileContent.size());
-        for (String s : cacheFileContent) {
-            assertTrue(testRecivers.contains(s));
-        }
-
         testObject.loadTakLocalCache();
-        assertEquals(cacheFileContent.size(), testObject.receiverIds().size());
-        for (String s : cacheFileContent) {
-            assertTrue(testObject.contains(s));
+        assertTrue(testObject.getAuthorizedConsumers("TEST3").contains("TEST5"));
+        
+        Properties cacheFileContent = new Properties();
+        try (FileInputStream fin = new FileInputStream(testPath.toString())) {
+		    try (InputStreamReader ois = new InputStreamReader(fin, Charset.forName("UTF-8"))) {
+		    	cacheFileContent.load(ois);
+		    }
+		}   
+        assertFalse(cacheFileContent.isEmpty());
+        Enumeration enumeration = cacheFileContent.keys();
+        
+        while (enumeration.hasMoreElements()) {
+            assertTrue(testObject.contains(enumeration.nextElement().toString()));
         }
     }
 
@@ -89,8 +96,9 @@ public class TakCacheBeanTest {
         list.add(secondWrong);
         list.add(firstWrong);
         list.add(secondCorrect);
-
-        testObject.populateCache(list);
+        
+        Properties prop = new Properties();
+        testObject.populateVirtualiseringsInfoCache(prop, list);
 
         assertEquals(2, testObject.receiverIds().size());
         assertTrue(testObject.receiverIds().contains(firstCorrect.getReceiverId()));
@@ -98,7 +106,8 @@ public class TakCacheBeanTest {
         assertFalse(testObject.receiverIds().contains(firstWrong.getReceiverId()));
 
         list.remove(0);
-        testObject.populateCache(list);
+        prop.clear();
+        testObject.populateVirtualiseringsInfoCache(prop, list);
         assertEquals(1, testObject.receiverIds().size());
         assertTrue(testObject.receiverIds().contains(secondCorrect.getReceiverId()));
         assertFalse(testObject.receiverIds().contains(firstWrong.getReceiverId()));
@@ -112,18 +121,21 @@ public class TakCacheBeanTest {
         testObject.setTargetNamespace(TEST_NAMESPACE);
 
         // First populate localcache so that we have something to fallback on.
-        Set<String> fallback = new HashSet<String>();
-        fallback.add("one");
-        fallback.add("two");
-        fallback.add("three");
-        testObject.writeTakLocalCache(fallback);
+        Properties prop = new Properties();
+        prop.put("one", "TEST1,TEST2");
+        prop.put("two", "TEST2,TEST3");
+        prop.put("three", "TEST3,TEST5");
+        
+        testObject.writeTakLocalCache(prop);
 
         assertTrue(testObject.receiverIds().isEmpty());
 
         testObject.updateCache();
         assertEquals(3, testObject.receiverIds().size());
-        for (String s : fallback) {
-            assertTrue(testObject.contains(s));
+        
+        Enumeration items = prop.keys(); 
+        while (items.hasMoreElements()) {
+        	assertTrue(testObject.contains(items.nextElement().toString()));
         }
     }
 

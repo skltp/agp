@@ -28,10 +28,6 @@
         <spring:property name="takLocalCacheFile" value="${TAK_CACHE_FILE_NAME}" />
     </spring:bean>
 
-    <spring:bean name="requestListFactory" class="${REQUEST_LIST_FACTORY_IMPL}">
-        <spring:property name="takCache" ref="takCacheBean"/>
-    </spring:bean>
-
     <!-- post to http://33.33.33.33:8084/tak/reset -->
     <!-- returns 'TAK cache for GetAggregatedVaccinationHistory-v2 has been reset' -->
     <flow name="reset-tak-cache-http-flow">

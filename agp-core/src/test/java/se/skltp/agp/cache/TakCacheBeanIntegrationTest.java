@@ -68,5 +68,9 @@ public class TakCacheBeanIntegrationTest extends AbstractTestCase {
 	public void cleanup() throws Exception {
 		Files.deleteIfExists(testLocalCacheFile);
 	}
+	
+	public TakCacheBean getTakCacheBean() {
+		return testObject;
+	}
 
 }

@@ -132,7 +132,7 @@ public class CreateResponseListTransformer extends AbstractMessageTransformer {
         		
         	} else {
         		// FIXME. Fix error handling... 
-        		log.warn("HERE COMES UNHADLED ERROR INFORMATION: {}", singleResponse);
+        		log.warn("HERE COMES UNHANDLED ERROR INFORMATION: {}", singleResponse);
         	}
 		}
         

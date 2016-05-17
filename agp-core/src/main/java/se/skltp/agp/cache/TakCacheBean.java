@@ -1,14 +1,19 @@
 package se.skltp.agp.cache;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -25,6 +30,8 @@ import org.mule.module.cxf.transport.MuleUniversalConduit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import se.skltp.agp.riv.vagvalsinfo.v2.AnropsBehorighetsInfoType;
+import se.skltp.agp.riv.vagvalsinfo.v2.HamtaAllaAnropsBehorigheterResponseType;
 import se.skltp.agp.riv.vagvalsinfo.v2.HamtaAllaVirtualiseringarResponseType;
 import se.skltp.agp.riv.vagvalsinfo.v2.SokVagvalsInfoInterface;
 import se.skltp.agp.riv.vagvalsinfo.v2.VirtualiseringsInfoType;
@@ -37,7 +44,7 @@ import se.skltp.agp.riv.vagvalsinfo.v2.VirtualiseringsInfoType;
 public class TakCacheBean implements MuleContextAware {
     private final static Logger log = LoggerFactory.getLogger(TakCacheBean.class);
 
-    private final ConcurrentHashMap<String, Boolean> cache;
+    private final ConcurrentHashMap<String, AuthorizedConsumers> cache;
 
     private String takEndpoint;
     private String targetNamespace;
@@ -45,7 +52,7 @@ public class TakCacheBean implements MuleContextAware {
     private String takLocalCacheFileName;
 
     public TakCacheBean() {
-        cache = new ConcurrentHashMap<String, Boolean>();
+        cache = new ConcurrentHashMap<String, AuthorizedConsumers>();
     }
 
     public String getTakLocalCacheFile() {
@@ -91,15 +98,24 @@ public class TakCacheBean implements MuleContextAware {
             final SokVagvalsInfoInterface client = createClient();
             log.info("about to call hamtaAllaVirtualiseringar");
             final HamtaAllaVirtualiseringarResponseType vr = client.hamtaAllaVirtualiseringar(null);
-            populateCache(vr.getVirtualiseringsInfo());
+            log.info("about to call hamtaAllaVirtualiseringar");
+            final HamtaAllaAnropsBehorigheterResponseType ab = client.hamtaAllaAnropsBehorigheter(null);
+            
+            Properties prop = new Properties();
+            populateVirtualiseringsInfoCache(prop, vr.getVirtualiseringsInfo());
+            populateAnropsbehorighetsInfoCache(prop, ab.getAnropsBehorighetsInfo());
+            
+            writeTakLocalCache(prop);
+            log.info("Updated local cache file: " + takLocalCacheFileName);
+            
         } catch (Exception err) {
-            if (err instanceof IOException) {
+            if (err instanceof IOException || err instanceof ClassNotFoundException) {
                 log.error("Could not write to local tak cache: " + takLocalCacheFileName, err);
             } else {
                 try {
                     log.error("Could not get data from TAK at endpoint: " + takEndpoint, err);
                     loadTakLocalCache();
-                } catch (IOException io) {
+                } catch (IOException | ClassNotFoundException io) {
                     log.error("Could not load local tak cache file: " + takLocalCacheFileName, io);
                 }
             }
@@ -127,67 +143,111 @@ public class TakCacheBean implements MuleContextAware {
      * @param virtualiseringar
      * @throws IOException
      */
-    protected synchronized void populateCache(final List<VirtualiseringsInfoType> virtualiseringar) throws IOException {
-        final Set<String> current = new HashSet<String>();
+    protected synchronized void populateVirtualiseringsInfoCache(final Properties prop, final List<VirtualiseringsInfoType> virtualiseringar) throws IOException {
         for (final VirtualiseringsInfoType vi : virtualiseringar) {
             if (StringUtils.equalsIgnoreCase(vi.getTjansteKontrakt(), targetNamespace)) {
                 if (vi.getReceiverId() != null) {
-                    current.add(vi.getReceiverId());
-                    cache.putIfAbsent(vi.getReceiverId(), false);
+                    prop.put(vi.getReceiverId(), "");
+                    cache.putIfAbsent(vi.getReceiverId(), new AuthorizedConsumers());
                 }
             }
         }
         final Iterator<String> it = cache.keySet().iterator();
         while (it.hasNext()) {
             final String key = it.next();
-            if (!current.contains(key)) {
+            if (!prop.containsKey(key)) {
                 cache.remove(key);
             }
         }
-        log.info("tak cache updated with {} values", current.size());
+        
         if (log.isDebugEnabled()) {
             prettyPrintCache(cache.keySet());
         }
-        writeTakLocalCache(current);
-        log.info("Updated local cache file: " + takLocalCacheFileName);
+        log.info("tak cache updated with {} values", prop.size());
     }
-
+    
+    /**
+     * Populates cache with values after applying filter on targetNamespace.
+     * Adds new elements to the cache. 
+     * Removes elements from cache that have been removed from TAK. 
+     * Persists to file.
+     * 
+     * @param virtualiseringar
+     * @throws IOException
+     */
+    protected synchronized void populateAnropsbehorighetsInfoCache(final Properties prop, final List<AnropsBehorighetsInfoType> anropsBehorighetsInfoTypeList) throws IOException {
+        for (final AnropsBehorighetsInfoType ab : anropsBehorighetsInfoTypeList) {
+            if (StringUtils.equalsIgnoreCase(ab.getTjansteKontrakt(), targetNamespace)) {
+                if (ab.getReceiverId() != null && ab.getSenderId() != null) {
+                    AuthorizedConsumers authConsumers = cache.get(ab.getReceiverId());
+                    authConsumers.addIfAbsent(ab.getSenderId());
+                    prop.put(ab.getReceiverId(), StringUtils.join(authConsumers, ','));
+                }
+            }
+        }
+        log.info("tak cache updated with {} anropbehoriget", prop.size());
+    }
+    
     /**
      * Writes received elements to locale cache file.
      * 
      * @param receiverIds set of values to write to cache file.
      * @throws IOException
      */
-    protected synchronized void writeTakLocalCache(final Set<String> receiverIds) throws IOException {
+    protected synchronized void writeTakLocalCache(final Properties prop) throws IOException {
         final Path path = FileSystems.getDefault().getPath(takLocalCacheFileName);
-        // create, truncate_existing, write
-        Files.write(path, receiverIds, Charset.forName("UTF-8"));
+        try (OutputStreamWriter writer = new OutputStreamWriter(
+        	    new FileOutputStream(path.toString()), Charset.forName("UTF-8"))) {
+        	prop.store(writer, String.valueOf(System.currentTimeMillis()));
+        }
     }
 
     /**
      * Populates current cache with elements from local cache file.
      * 
      * @throws IOException
+     * @throws ClassNotFoundException 
      */
-    protected synchronized void loadTakLocalCache() throws IOException {
-
+    protected synchronized void loadTakLocalCache() throws IOException, ClassNotFoundException {
+    	Properties localCache = new Properties();
         Path cacheFile = FileSystems.getDefault().getPath(takLocalCacheFileName);
         if (Files.notExists(cacheFile)) {
             Files.createFile(cacheFile);
         }
-
-        final List<String> localCache = Files.readAllLines(FileSystems.getDefault().getPath(takLocalCacheFileName), Charset.forName("UTF-8"));
-        for (String cached : localCache) {
-            cache.putIfAbsent(cached, false);
+        
+        try (FileInputStream fin = new FileInputStream(cacheFile.toString())) {
+		    try (InputStreamReader ois = new InputStreamReader(fin, Charset.forName("UTF-8"))) {
+		    	localCache.load(ois);
+			    
+		    	Enumeration<Object> enumeration = localCache.keys();
+			    while (enumeration.hasMoreElements()) {
+			    	
+			    	String receiverId = (String) enumeration.nextElement();
+			    	AuthorizedConsumers consumers = cache.get(receiverId);
+		            if (consumers != null) {
+		            	consumers.update(localCache.get(receiverId));
+		            } else {
+		            	consumers = new AuthorizedConsumers(localCache.get(receiverId));
+		            	cache.put(receiverId, consumers);
+		            }
+		        }
+			    
+			    final Iterator<String> it = cache.keySet().iterator();
+		        while (it.hasNext()) {
+		            final String key = it.next();
+		            if (!localCache.containsKey(key)) {
+		                cache.remove(key);
+		            }
+		        }
+				ois.close();
+		    }
         }
-        final Iterator<String> it = cache.keySet().iterator();
-        while (it.hasNext()) {
-            final String key = it.next();
-            if (!localCache.contains(key)) {
-                cache.remove(key);
-            }
-        }
+        
         log.info("Local cache loaded");
+    }
+    
+    public AuthorizedConsumers getAuthorizedConsumers(String receiverId) {
+    	return cache.get(receiverId);
     }
 
     /**

@@ -96,6 +96,7 @@ TODO: Mule EE dependency
 
 
     <spring:beans>
+      <spring:import resource="classpath:TakCache-service.xml" />
       <!-- import the common logger config -->
       <spring:import resource="classpath:tp-commons-mule-logging.xml" />
       <spring:import resource="classpath:agp-mule-http-connector.xml"/>
