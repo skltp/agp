@@ -36,7 +36,9 @@
     </spring:bean>
     <spring:bean name="requestListFactory" class="${REQUEST_LIST_FACTORY_IMPL}" />
     <spring:bean name="responseListFactory" class="${RESPONSE_LIST_FACTORY_IMPL}" />
-
+    <spring:beans>
+    	<spring:import resource="classpath:TakCache-service.xml" />
+	</spring:beans>
 <!-- 
 TODO: Mule EE dependency
 	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" 
