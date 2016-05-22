@@ -111,6 +111,10 @@ public class TakTestProducer implements SokVagvalsInfoInterface {
         for (int i = 0; i < 6; i++) {
             type.getVirtualiseringsInfo().add(virtualiseringsInfoType(targetNamespace, receivers[i]));
         }
+
+        // We should not have permissions to this one
+        type.getVirtualiseringsInfo().add(virtualiseringsInfoType(targetNamespace, "HSA-ID-77"));
+
         // Add some alternative major versions
         type.getVirtualiseringsInfo().add(virtualiseringsInfoType(targetNamespaceAnotherMajorVersion, "HSA-ID-11"));
         type.getVirtualiseringsInfo().add(virtualiseringsInfoType(targetNamespaceAnotherMajorVersion, "HSA-ID-12"));
@@ -125,14 +129,24 @@ public class TakTestProducer implements SokVagvalsInfoInterface {
     protected HamtaAllaAnropsBehorigheterResponseType createBehorighetStubData() {
     	final HamtaAllaAnropsBehorigheterResponseType type = new HamtaAllaAnropsBehorigheterResponseType();
     	
+    	// Permissions for AbstractTestConsumer.SAMPLE_SENDER_ID
+    	
     	for (int i = 0; i < 6; i++) {
             type.getAnropsBehorighetsInfo().add(anropsBehorighetsInfoType(targetNamespace, receivers[i], AbstractTestConsumer.SAMPLE_SENDER_ID));
         }
+
+    	// Permissions for AbstractTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID
     	
+    	type.getAnropsBehorighetsInfo().add(anropsBehorighetsInfoType(targetNamespace, "HSA-ID-1", AbstractTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID));
+    	type.getAnropsBehorighetsInfo().add(anropsBehorighetsInfoType(targetNamespace, "HSA-ID-77", AbstractTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID));
+
     	type.getAnropsBehorighetsInfo().add(anropsBehorighetsInfoType(targetNamespaceAnotherMajorVersion, "HSA-ID-11", AbstractTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID));
     	type.getAnropsBehorighetsInfo().add(anropsBehorighetsInfoType(targetNamespaceAnotherMajorVersion, "HSA-ID-12", AbstractTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID));
     	type.getAnropsBehorighetsInfo().add(anropsBehorighetsInfoType(targetNamespaceAnotherMajorVersion, "HSA-ID-31", AbstractTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID));
     	type.getAnropsBehorighetsInfo().add(anropsBehorighetsInfoType(targetNamespaceAnotherMajorVersion, "HSA-ID-32", AbstractTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID));
+    	type.getAnropsBehorighetsInfo().add(anropsBehorighetsInfoType(targetNamespaceAnotherMajorVersion, "HSA-ID-1", AbstractTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID));
+    	
+    	// Some faulty random permissions
     	
     	type.getAnropsBehorighetsInfo().add(anropsBehorighetsInfoType(UUID.randomUUID().toString(), "HSA-ID-FEL", "TK_" + "HSA-ID-FEL"));
         type.getAnropsBehorighetsInfo().add(anropsBehorighetsInfoType(UUID.randomUUID().toString(), "HSA-ID-FEL", "TK_" + "HSA-ID-FEL"));
