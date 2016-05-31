@@ -98,9 +98,10 @@ public class TakCacheBean implements MuleContextAware {
             final SokVagvalsInfoInterface client = createClient();
             log.info("about to call hamtaAllaVirtualiseringar");
             final HamtaAllaVirtualiseringarResponseType vr = client.hamtaAllaVirtualiseringar(null);
-            log.info("about to call hamtaAllaVirtualiseringar");
+            log.info("about to call hamtaAllaAnropsBehorigheter");
             final HamtaAllaAnropsBehorigheterResponseType ab = client.hamtaAllaAnropsBehorigheter(null);
-            
+            log.info("Number of hamtaAllaAnropsBehorigheter =" + ab.getAnropsBehorighetsInfo().size());
+                   
             Properties prop = new Properties();
             populateVirtualiseringsInfoCache(prop, vr.getVirtualiseringsInfo());
             populateAnropsbehorighetsInfoCache(prop, ab.getAnropsBehorighetsInfo());
@@ -180,8 +181,10 @@ public class TakCacheBean implements MuleContextAware {
             if (StringUtils.equalsIgnoreCase(ab.getTjansteKontrakt(), targetNamespace)) {
                 if (ab.getReceiverId() != null && ab.getSenderId() != null) {
                     AuthorizedConsumers authConsumers = cache.get(ab.getReceiverId());
-                    authConsumers.addIfAbsent(ab.getSenderId());
-                    prop.put(ab.getReceiverId(), StringUtils.join(authConsumers, ','));
+                    if(authConsumers != null) {
+	                    authConsumers.addIfAbsent(ab.getSenderId());
+	                    prop.put(ab.getReceiverId(), StringUtils.join(authConsumers, ','));
+                    }
                 }
             }
         }
