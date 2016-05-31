@@ -48,6 +48,11 @@ abstract class TPPatientsAbstract extends Simulation {
                                     } else {
                                         "patients.csv"
                                     }
+  val senderId:String              = if (System.getProperty("senderid") != null && !System.getProperty("senderid").isEmpty()) {
+										new String(System.getProperty("senderid"))										
+									 } else {
+										throw new IllegalArgumentException("Note: This tests requires senderid. Usage -Dsenderid=xxx")
+									 }
   
   def patients(serviceName:String, urn:String, responseElement:String, responseItem:String, responseItemUrn:Option[String] = None) 
                  = scenario("patients")
