@@ -44,7 +44,7 @@ import se.skltp.agp.riv.vagvalsinfo.v2.VirtualiseringsInfoType;
 public class TakCacheBean implements MuleContextAware {
     private final static Logger log = LoggerFactory.getLogger(TakCacheBean.class);
 
-    private final ConcurrentHashMap<String, AuthorizedConsumers> cache;
+    private ConcurrentHashMap<String, AuthorizedConsumers> cache;
 
     private String takEndpoint;
     private String targetNamespace;
@@ -101,12 +101,17 @@ public class TakCacheBean implements MuleContextAware {
             log.info("about to call hamtaAllaAnropsBehorigheter");
             final HamtaAllaAnropsBehorigheterResponseType ab = client.hamtaAllaAnropsBehorigheter(null);
             log.info("Number of hamtaAllaAnropsBehorigheter =" + ab.getAnropsBehorighetsInfo().size());
-                   
-            Properties prop = new Properties();
-            populateVirtualiseringsInfoCache(prop, vr.getVirtualiseringsInfo());
-            populateAnropsbehorighetsInfoCache(prop, ab.getAnropsBehorighetsInfo());
             
+            /*
+             * Treat cache as immutable
+             */
+            Properties prop = new Properties();
+            ConcurrentHashMap<String, AuthorizedConsumers> _cache = new ConcurrentHashMap<String, AuthorizedConsumers>();
+            populateVirtualiseringsInfoCache(_cache, prop, vr.getVirtualiseringsInfo());
+            populateAnropsbehorighetsInfoCache(_cache, prop, ab.getAnropsBehorighetsInfo());
+            setTakCache(_cache);
             writeTakLocalCache(prop);
+            
             log.info("Updated local cache file: " + takLocalCacheFileName);
             
         } catch (Exception err) {
@@ -124,6 +129,14 @@ public class TakCacheBean implements MuleContextAware {
     }
 
     /**
+     * Required for test case
+     * @param c
+     */
+    protected void setTakCache(ConcurrentHashMap<String, AuthorizedConsumers> c) {
+    	cache = c;
+    }
+    
+    /**
      * updateCache can't be executed before mule context has been loaded.
      */
     @Override
@@ -140,11 +153,12 @@ public class TakCacheBean implements MuleContextAware {
      * Adds new elements to the cache. 
      * Removes elements from cache that have been removed from TAK. 
      * Persists to file.
+     * @param cache 
      * 
      * @param virtualiseringar
      * @throws IOException
      */
-    protected synchronized void populateVirtualiseringsInfoCache(final Properties prop, final List<VirtualiseringsInfoType> virtualiseringar) throws IOException {
+    protected synchronized void populateVirtualiseringsInfoCache(ConcurrentHashMap<String, AuthorizedConsumers> cache, final Properties prop, final List<VirtualiseringsInfoType> virtualiseringar) throws IOException {
         for (final VirtualiseringsInfoType vi : virtualiseringar) {
             if (StringUtils.equalsIgnoreCase(vi.getTjansteKontrakt(), targetNamespace)) {
                 if (vi.getReceiverId() != null) {
@@ -172,11 +186,12 @@ public class TakCacheBean implements MuleContextAware {
      * Adds new elements to the cache. 
      * Removes elements from cache that have been removed from TAK. 
      * Persists to file.
+     * @param cache 
      * 
      * @param virtualiseringar
      * @throws IOException
      */
-    protected synchronized void populateAnropsbehorighetsInfoCache(final Properties prop, final List<AnropsBehorighetsInfoType> anropsBehorighetsInfoTypeList) throws IOException {
+    protected synchronized void populateAnropsbehorighetsInfoCache(ConcurrentHashMap<String, AuthorizedConsumers> cache, final Properties prop, final List<AnropsBehorighetsInfoType> anropsBehorighetsInfoTypeList) throws IOException {
         for (final AnropsBehorighetsInfoType ab : anropsBehorighetsInfoTypeList) {
             if (StringUtils.equalsIgnoreCase(ab.getTjansteKontrakt(), targetNamespace)) {
                 if (ab.getReceiverId() != null && ab.getSenderId() != null) {

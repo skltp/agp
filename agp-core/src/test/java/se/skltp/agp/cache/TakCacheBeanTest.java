@@ -16,6 +16,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.junit.After;
 import org.junit.Before;
@@ -98,7 +99,9 @@ public class TakCacheBeanTest {
         list.add(secondCorrect);
         
         Properties prop = new Properties();
-        testObject.populateVirtualiseringsInfoCache(prop, list);
+        ConcurrentHashMap<String, AuthorizedConsumers> _cache = new ConcurrentHashMap<String, AuthorizedConsumers>();
+        testObject.populateVirtualiseringsInfoCache(_cache, prop, list);
+        testObject.setTakCache(_cache);
 
         assertEquals(2, testObject.receiverIds().size());
         assertTrue(testObject.receiverIds().contains(firstCorrect.getReceiverId()));
@@ -107,7 +110,9 @@ public class TakCacheBeanTest {
 
         list.remove(0);
         prop.clear();
-        testObject.populateVirtualiseringsInfoCache(prop, list);
+        testObject.populateVirtualiseringsInfoCache(_cache, prop, list);
+        testObject.setTakCache(_cache);
+        
         assertEquals(1, testObject.receiverIds().size());
         assertTrue(testObject.receiverIds().contains(secondCorrect.getReceiverId()));
         assertFalse(testObject.receiverIds().contains(firstWrong.getReceiverId()));
