@@ -7,11 +7,17 @@ import scala.util.Random
 
 object GetAggregatedSomeScenario {
 
+  val senderId:String = if (System.getProperty("senderid") != null && !System.getProperty("senderid").isEmpty()) {
+                               new String(System.getProperty("senderid"))
+                        } else {
+                               throw new IllegalArgumentException("Note: This tests requires senderid. Usage -Dsenderid=xxx")
+                        }
+
   def headers(soapAction:String) = Map(
     "Accept-Encoding"                        -> "gzip,deflate",
     "Content-Type"                           -> "text/xml;charset=UTF-8",
     "SOAPAction"                             ->  soapAction,
-    "x-vp-sender-id"                         ->  "${senderid}",
+    "x-vp-sender-id"                         ->  senderId,
     "x-rivta-original-serviceconsumer-hsaid" -> "NonFunctionalTest - Gatling",
     "x-skltp-correlation-id"                 -> "Correlation id - NonFunctionalTest - Gatling",
     "Keep-Alive"                             -> "115")
