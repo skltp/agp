@@ -6,4 +6,5 @@ import se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1.Fi
 
 public interface RequestListFactory {
 	public List<Object[]> createRequestList(QueryObject qo, FindContentResponseType src);
+	public List<Object[]> createRequestList(QueryObject qo, List<String> src);
 }

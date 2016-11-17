@@ -9,6 +9,7 @@ import java.nio.charset.Charset;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -268,6 +269,18 @@ public class TakCacheBean implements MuleContextAware {
     	return cache.get(receiverId);
     }
 
+    public List<String> getReceivers(String senderId, String originalConsumerId) {
+    	
+    	List<String> receivers = new ArrayList<String>();
+    	
+    	for(String key : cache.keySet()) {
+    		if(getAuthorizedConsumers(key).contains(senderId, originalConsumerId))
+    			receivers.add(key);
+    	}
+    	return receivers;
+    }
+
+    
     /**
      * Convenience method to log elements in cache.
      * 
