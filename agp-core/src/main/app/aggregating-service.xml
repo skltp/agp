@@ -100,7 +100,7 @@ TODO: Mule EE dependency
 		</ee:cache>
 -->
 	</flow>
-	
+
 	<flow name="main-flow" processingStrategy="synchronous">
 
         <response>
@@ -127,24 +127,31 @@ TODO: Mule EE dependency
 
         <!-- Propagate x-skltp-correlation-id as an outbound property -->
         <set-property propertyName="x-skltp-correlation-id" value="#[sessionVars.soitoolkit_correlationId]" doc:name="propagate x-skltp-correlation-id" />
-        
-        <enricher target="#[payload]">
-			<http:outbound-endpoint 
-				doc:name="Engagement Index"
-	            connector-ref="soitoolkit-http-connector"
-				address="${ENGAGEMANGSINDEX_OUTBOUND_URL}" 
-				exchange-pattern="request-response"
-				responseTimeout="${SERVICE_TIMEOUT_MS}"
-				transformer-refs="logReqOut"
-				responseTransformer-refs="logRespIn">
-		        <cxf:jaxws-client 
-		        	port="FindContentResponderPort" 
-		        	operation="FindContent" 
-		        	clientClass="se.skltp.agp.riv.itintegration.engagementindex.findcontent.v1.rivtabp21.FindContentResponderService"
-		        	wsdlLocation="classpath:/schemas/TD_ENGAGEMENTINDEX_1_0_R/interactions/FindContentInteraction/FindContentInteraction_1.0_RIVTABP21.wsdl"
-		       	/>
-			</http:outbound-endpoint>
-        </enricher>
+
+		<choice doc:name="Execute only when findContent parameter exist">
+			<when expression="#[payload[1] != null]">
+				<enricher target="#[payload]">
+					<http:outbound-endpoint
+						doc:name="Engagement Index"
+									connector-ref="soitoolkit-http-connector"
+						address="${ENGAGEMANGSINDEX_OUTBOUND_URL}"
+						exchange-pattern="request-response"
+						responseTimeout="${SERVICE_TIMEOUT_MS}"
+						transformer-refs="logReqOut"
+						responseTransformer-refs="logRespIn">
+								<cxf:jaxws-client
+									port="FindContentResponderPort"
+									operation="FindContent"
+									clientClass="se.skltp.agp.riv.itintegration.engagementindex.findcontent.v1.rivtabp21.FindContentResponderService"
+									wsdlLocation="classpath:/schemas/TD_ENGAGEMENTINDEX_1_0_R/interactions/FindContentInteraction/FindContentInteraction_1.0_RIVTABP21.wsdl"
+								 />
+					</http:outbound-endpoint>
+				</enricher>
+			</when>
+			<otherwise>
+				<logger level="DEBUG" message="findContent parameter is null" />
+			</otherwise>
+		</choice>
 
 	    <custom-transformer doc:name="Request List Transformer" class="se.skltp.agp.service.transformers.CreateRequestListTransformer">
             <spring:property name="requestListFactory" ref="requestListFactory"/>
