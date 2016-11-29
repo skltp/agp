@@ -45,7 +45,7 @@ public class CreateRequestListTransformer extends AbstractMessageTransformer {
 		String originalServiceConsumerId = getOriginalServiceConsumerId(message);
 		String senderId = getSenderId(message);
 
-    	if(qo.getFindContent() == null) {
+    	if(qo.getFindContent().getRegisteredResidentIdentification() == null) {
     		List<String> src = takCache.getReceivers(senderId, originalServiceConsumerId);
     		
 			// Perform any message aware processing here, otherwise delegate as much as possible to pojoTransform() for easier unit testing
