@@ -88,6 +88,11 @@ public class TakCacheBean implements MuleContextAware {
         this.takEndpoint = takEnpoint;
     }
 
+	private String agpHsaId;
+	public void setEngagemangsIndexHsaId(String agpHsaId) {
+		this.agpHsaId = agpHsaId;
+	}
+	
     /**
      * Update cache. Main entry point.
      * Synchronises cache with tak (master).
@@ -110,6 +115,10 @@ public class TakCacheBean implements MuleContextAware {
             ConcurrentHashMap<String, AuthorizedConsumers> _cache = new ConcurrentHashMap<String, AuthorizedConsumers>();
             populateVirtualiseringsInfoCache(_cache, prop, vr.getVirtualiseringsInfo());
             populateAnropsbehorighetsInfoCache(_cache, prop, ab.getAnropsBehorighetsInfo());
+            
+            // Prevent agp service to call itself
+            removeAgpFromCache(_cache);
+            
             setTakCache(_cache);
             writeTakLocalCache(prop);
             
@@ -129,6 +138,14 @@ public class TakCacheBean implements MuleContextAware {
         }
     }
 
+    private void removeAgpFromCache(ConcurrentHashMap<String, AuthorizedConsumers> _cache) {
+        try {
+        	_cache.remove(agpHsaId);
+        } catch(NullPointerException ne) {
+        	// do nothing
+        }            	
+    }
+    
     /**
      * Required for test case
      * @param c
