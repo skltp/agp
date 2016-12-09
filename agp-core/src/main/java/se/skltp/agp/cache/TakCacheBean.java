@@ -89,7 +89,7 @@ public class TakCacheBean implements MuleContextAware {
     }
 
 	private String agpHsaId;
-	public void setEngagemangsIndexHsaId(String agpHsaId) {
+	public void setAgpHsaId(String agpHsaId) {
 		this.agpHsaId = agpHsaId;
 	}
 	
