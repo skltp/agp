@@ -148,6 +148,10 @@ public abstract class TestProducerDb {
 		DB = new HashMap<String, Object>();
 	}
 
+	public void refreshDb() {
+		initDb();
+	}
+	
 	public void storeInDb(String logicalAddress, String registeredResidentId, Object value) {
 		DB.put(logicalAddress + "|" + registeredResidentId, value);
 	}
