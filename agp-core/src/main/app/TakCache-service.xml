@@ -26,6 +26,7 @@
         <spring:property name="targetNamespace" value="${TAK_TJANSTEKONTRAKT}" />
         <spring:property name="serviceTimeout" value="${SERVICE_TIMEOUT_MS}" />
         <spring:property name="takLocalCacheFile" value="${TAK_CACHE_FILE_NAME}" />
+    	<spring:property name="agpHsaId" value="${AGP_HSA_ID}"/>
     </spring:bean>
 
     <!-- post to http://33.33.33.33:8084/tak/reset -->

@@ -41,9 +41,9 @@ public class FindContentRequestTransformer extends AbstractMessageTransformer {
 		
 		Object[] reqOutList = new Object[] {engagemangsIndexHsaId, reqOut};
 
-		log.info("Calling EI using logical address {} for subject of care id {}", engagemangsIndexHsaId, reqOut.getRegisteredResidentIdentification());
+		log.info("Calling EI using logical address {} for subject of care id {}", engagemangsIndexHsaId, reqOut != null ? reqOut.getRegisteredResidentIdentification() : "#no findContent#");
 		
-		log.debug("Transformed payload: {}, pid: {}", reqOutList, reqOut.getRegisteredResidentIdentification());
+		log.debug("Transformed payload: {}, pid: {}", reqOutList, reqOut != null ? reqOut.getRegisteredResidentIdentification() : "#no findContent#");
 		
 		return reqOutList;
 	}

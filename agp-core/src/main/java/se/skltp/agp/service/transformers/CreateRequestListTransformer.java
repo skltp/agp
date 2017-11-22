@@ -39,17 +39,29 @@ public class CreateRequestListTransformer extends AbstractMessageTransformer {
     public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
 
     	QueryObject qo = (QueryObject)message.getInvocationProperty("queryObject");
-		FindContentResponseType eiResp = (FindContentResponseType)message.getPayload();
-		
+    	FindContentResponseType eiResp;
+    	List<Object[]> transformedPayload;
+
 		String originalServiceConsumerId = getOriginalServiceConsumerId(message);
 		String senderId = getSenderId(message);
-		filterFindContentResponseBasedOnAuthority(eiResp, senderId, originalServiceConsumerId);
-		
-    	log.info("findContent.patientId: {}, findContent.serviceDomain: {}, findContentResponse.size: {}", new Object[] {qo.getFindContent().getRegisteredResidentIdentification(), qo.getFindContent().getServiceDomain(), eiResp.getEngagement().size()});
-    	
-        // Perform any message aware processing here, otherwise delegate as much as possible to pojoTransform() for easier unit testing
-    	List<Object[]> transformedPayload = requestListFactory.createRequestList(qo, eiResp);
 
+    	if(qo.getFindContent() == null) {
+    		List<String> src = takCache.getReceivers(senderId, originalServiceConsumerId);
+    		
+			// Perform any message aware processing here, otherwise delegate as much as possible to pojoTransform() for easier unit testing
+	    	transformedPayload = requestListFactory.createRequestList(qo, src);
+    	} else {
+  	
+			eiResp = (FindContentResponseType)message.getPayload();
+			
+			filterFindContentResponseBasedOnAuthority(eiResp, senderId, originalServiceConsumerId);
+
+			// Perform any message aware processing here, otherwise delegate as much as possible to pojoTransform() for easier unit testing
+	    	transformedPayload = requestListFactory.createRequestList(qo, eiResp);
+
+	    	log.info("findContent.patientId: {}, findContent.serviceDomain: {}, findContentResponse.size: {}", new Object[] {qo.getFindContent().getRegisteredResidentIdentification(), qo.getFindContent().getServiceDomain(), eiResp.getEngagement().size()});
+    	}
+    	
     	// Set the expected number of responses so that the aggregator knows when to stop, update the message payload and return the message for further processing
     	message.setCorrelationGroupSize(transformedPayload.size());
     	message.setPayload(transformedPayload);
@@ -65,6 +77,26 @@ public class CreateRequestListTransformer extends AbstractMessageTransformer {
     }
    
     protected void filterFindContentResponseBasedOnAuthority(FindContentResponseType eiResp, String senderId, String originalServiceConsumerId) {
+    	Iterator<EngagementType> iterator = eiResp.getEngagement().iterator();
+    	
+    	while (iterator.hasNext()) {
+    		EngagementType engagementType = iterator.next();
+    		if (takCache.contains(engagementType.getLogicalAddress())) {
+    			log.debug("takCache contains logical adress:" + engagementType.getLogicalAddress());
+    			if (!takCache.getAuthorizedConsumers(engagementType.getLogicalAddress()).contains(senderId, originalServiceConsumerId)) {
+    				iterator.remove();
+    				log.info("Source system: senderId {} / originalServiceConsumerId {} is not authorized to access EngagementType:{} dispatched by FindContent", 
+    						new Object[] { senderId, originalServiceConsumerId, engagementType.getLogicalAddress() });
+    			}
+    		} else {
+    			iterator.remove();
+    			log.info("No virtualisering found for logical address {} ", new Object[] { engagementType.getLogicalAddress() });
+    		}
+    	}
+    }
+
+    protected void filterFindContentResponseBasedOnAuthority2(FindContentResponseType eiResp, String senderId, String originalServiceConsumerId) {
+
     	Iterator<EngagementType> iterator = eiResp.getEngagement().iterator();
     	
     	while (iterator.hasNext()) {

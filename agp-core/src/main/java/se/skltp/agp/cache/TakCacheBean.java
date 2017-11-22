@@ -9,6 +9,7 @@ import java.nio.charset.Charset;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -87,6 +88,11 @@ public class TakCacheBean implements MuleContextAware {
         this.takEndpoint = takEnpoint;
     }
 
+	private String agpHsaId;
+	public void setAgpHsaId(String agpHsaId) {
+		this.agpHsaId = agpHsaId;
+	}
+	
     /**
      * Update cache. Main entry point.
      * Synchronises cache with tak (master).
@@ -109,6 +115,10 @@ public class TakCacheBean implements MuleContextAware {
             ConcurrentHashMap<String, AuthorizedConsumers> _cache = new ConcurrentHashMap<String, AuthorizedConsumers>();
             populateVirtualiseringsInfoCache(_cache, prop, vr.getVirtualiseringsInfo());
             populateAnropsbehorighetsInfoCache(_cache, prop, ab.getAnropsBehorighetsInfo());
+            
+            // Prevent agp service to call itself
+            removeAgpFromCache(_cache);
+            
             setTakCache(_cache);
             writeTakLocalCache(prop);
             
@@ -128,6 +138,14 @@ public class TakCacheBean implements MuleContextAware {
         }
     }
 
+    private void removeAgpFromCache(ConcurrentHashMap<String, AuthorizedConsumers> _cache) {
+        try {
+        	_cache.remove(agpHsaId);
+        } catch(NullPointerException ne) {
+        	// do nothing
+        }            	
+    }
+    
     /**
      * Required for test case
      * @param c
@@ -268,6 +286,18 @@ public class TakCacheBean implements MuleContextAware {
     	return cache.get(receiverId);
     }
 
+    public List<String> getReceivers(String senderId, String originalConsumerId) {
+    	
+    	List<String> receivers = new ArrayList<String>();
+    	
+    	for(String key : cache.keySet()) {
+    		if(getAuthorizedConsumers(key).contains(senderId, originalConsumerId))
+    			receivers.add(key);
+    	}
+    	return receivers;
+    }
+
+    
     /**
      * Convenience method to log elements in cache.
      * 
