@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -14,14 +16,18 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import javax.xml.ws.BindingProvider;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
+import org.apache.cxf.message.Message;
 import org.apache.cxf.transport.Conduit;
 import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
@@ -35,6 +41,7 @@ import se.skltp.agp.riv.vagvalsinfo.v2.AnropsBehorighetsInfoType;
 import se.skltp.agp.riv.vagvalsinfo.v2.HamtaAllaAnropsBehorigheterResponseType;
 import se.skltp.agp.riv.vagvalsinfo.v2.HamtaAllaVirtualiseringarResponseType;
 import se.skltp.agp.riv.vagvalsinfo.v2.SokVagvalsInfoInterface;
+import se.skltp.agp.riv.vagvalsinfo.v2.SokVagvalsServiceSoap11LitDocService;
 import se.skltp.agp.riv.vagvalsinfo.v2.VirtualiseringsInfoType;
 
 /**
@@ -51,6 +58,7 @@ public class TakCacheBean implements MuleContextAware {
     private String targetNamespace;
     private long serviceTimeout;
     private String takLocalCacheFileName;
+	private SokVagvalsInfoInterface port = null;
 
     public TakCacheBean() {
         cache = new ConcurrentHashMap<String, AuthorizedConsumers>();
@@ -101,7 +109,7 @@ public class TakCacheBean implements MuleContextAware {
     public synchronized void updateCache() {
         log.info("updating tak cache");
         try {
-            final SokVagvalsInfoInterface client = createClient();
+            final SokVagvalsInfoInterface client = getPort();
             log.info("about to call hamtaAllaVirtualiseringar");
             final HamtaAllaVirtualiseringarResponseType vr = client.hamtaAllaVirtualiseringar(null);
             log.info("about to call hamtaAllaAnropsBehorigheter");
@@ -131,7 +139,7 @@ public class TakCacheBean implements MuleContextAware {
                 try {
                     log.error("Could not get data from TAK at endpoint: " + takEndpoint, err);
                     loadTakLocalCache();
-                } catch (IOException | ClassNotFoundException io) {
+                } catch (IOException io) {
                     log.error("Could not load local tak cache file: " + takLocalCacheFileName, io);
                 }
             }
@@ -163,6 +171,12 @@ public class TakCacheBean implements MuleContextAware {
         log.debug("Note - if using the tak teststub (skltp-box, dev), then mule needs to have started the teststub before starting the aggregating service.");
         log.debug("This is managed in skltp-box by listing the stub before the service in the script file");
         log.debug("In dev environment, it is managed by script file hostenv");
+        try {
+    		log.info("Loading local cache from file!");
+			loadTakLocalCache();
+		} catch (IOException e) {
+			log.warn("Can not load tak cache from file");
+		}        
         updateCache();
     }
     
@@ -244,7 +258,7 @@ public class TakCacheBean implements MuleContextAware {
      * @throws IOException
      * @throws ClassNotFoundException 
      */
-    protected synchronized void loadTakLocalCache() throws IOException, ClassNotFoundException {
+    protected synchronized void loadTakLocalCache() throws IOException {
     	Properties localCache = new Properties();
         Path cacheFile = FileSystems.getDefault().getPath(takLocalCacheFileName);
         if (Files.notExists(cacheFile)) {
@@ -331,12 +345,18 @@ public class TakCacheBean implements MuleContextAware {
 
     /**
      * @return soap client for calling tak SokVagvalsInfo
+     * 
+     * Deprecated. We encountered problems after server upgrade to 1.8-151.
+     * Will work if code is compiled with 1.8-151.
      */
+    @SuppressWarnings("unused")
+	@Deprecated
     private SokVagvalsInfoInterface createClient() {
         
         final JaxWsProxyFactoryBean jaxWs = new JaxWsProxyFactoryBean();
         jaxWs.setServiceClass(SokVagvalsInfoInterface.class);
         jaxWs.setAddress(takEndpoint);
+        jaxWs.setWsdlLocation(SokVagvalsServiceSoap11LitDocService.WSDL_LOCATION.toExternalForm());
 
         final Object service = jaxWs.create();
         final Client client = ClientProxy.getClient(service);
@@ -362,4 +382,23 @@ public class TakCacheBean implements MuleContextAware {
         SokVagvalsInfoInterface takClient = (SokVagvalsInfoInterface) service;
         return takClient;
     }
+    
+    /**
+     * SOAP client without cxf. Uses same methods as in  VP.
+     * @return
+     */
+	private SokVagvalsInfoInterface getPort() {
+	    if(port == null){
+	    	log.info("Use TAK endpoint adress: {}", takEndpoint);
+	        SokVagvalsServiceSoap11LitDocService service = new SokVagvalsServiceSoap11LitDocService(
+	        		SokVagvalsServiceSoap11LitDocService.WSDL_LOCATION);
+	        port = service.getSokVagvalsSoap11LitDocPort();
+	        
+	        Map<String, Object> req_ctx = ((BindingProvider)port).getRequestContext();
+	        req_ctx.put(Message.ENDPOINT_ADDRESS, takEndpoint);
+	    }
+		return port;
+	}
+	
+
 }
