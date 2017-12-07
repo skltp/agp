@@ -6,7 +6,7 @@
   <parent>
     <groupId>se.skltp.agp</groupId>
     <artifactId>agp-parent</artifactId>
-    <version>2.3.2</version>
+    <version>2.3.3</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -17,7 +17,8 @@
   <properties>
     <!-- Properties for generating code from XML Schemas (JAXB) -->
     <schema.path>${basedir}/src/main/resources/schemas</schema.path>
-    <cxf.version>2.5.1</cxf.version>
+    <cxf.version>${cxf-codegen-plugin.version}</cxf.version>
+    <cxf.xjc.version>3.1.0</cxf.xjc.version>
   </properties>
 
   <build>
@@ -26,10 +27,10 @@
       <plugin>
         <groupId>org.apache.cxf</groupId>
         <artifactId>cxf-xjc-plugin</artifactId>
-        <version>2.3.0</version>
+        <version>${cxf.xjc.version}</version>
         <configuration>
           <extensions>
-            <extension>org.apache.cxf.xjcplugins:cxf-xjc-dv:2.3.0</extension>
+            <extension>org.apache.cxf.xjcplugins:cxf-xjc-dv:${cxf.xjc.version}</extension>
           </extensions>
         </configuration>
         <executions>
@@ -45,7 +46,7 @@
                 <xsdOption>
                   <xsd>${schema.path}/interoperability/headers/core_components/interoperability_headers_1.0.xsd</xsd>
                   <packagename>se.skltp.agp.riv.interoperability.headers.v1</packagename>
-                </xsdOption>
+                 </xsdOption>
               </xsdOptions>
             </configuration>
           </execution>
@@ -98,6 +99,7 @@
 
                 <wsdloption>
                   <wsdl>${schema.path}/TD_SOKVAGVAL_2/sokvagval-info-v2.wsdl</wsdl>
+                  <wsdlLocation>classpath:schemas/TD_SOKVAGVAL_2/sokvagval-info-v2.wsdl</wsdlLocation>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>urn:skl:tp:vagvalsinfo:v2=se.skltp.agp.riv.vagvalsinfo.v2</extraarg>

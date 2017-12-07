@@ -86,10 +86,7 @@ public class CreateQueryObjectTransformer extends AbstractMessageTransformer {
 	            if (list.getLength() < 1) {
 	                throw new RuntimeException("Unable to find soap body in incoming message (length 0)");
 	            } else {
-	                Node node = list.item(0);
-	                log.debug("Request root-element: " + node.getLocalName() + " - " + node.getNamespaceURI());
-	                QueryObject findContentQueryObject = queryObjectFactory.createQueryObject(node);
-                    return findContentQueryObject;
+                    return createQueryObject(list.item(0));
 	            }
 	        }
  		} catch (XPathExpressionException e) {
@@ -97,6 +94,16 @@ public class CreateQueryObjectTransformer extends AbstractMessageTransformer {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	private QueryObject createQueryObject(Node node) {
+		try {
+            log.debug("Request root-element: " + node.getLocalName() + " - " + node.getNamespaceURI());
+			return queryObjectFactory.createQueryObject(node);
+		} catch(NullPointerException e) {
+        	throw new RuntimeException("Missing content in request");
+        }
+
 	}
 	
     private Document createDocument(String content, String charset) {

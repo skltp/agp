@@ -15,6 +15,7 @@ import se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1.Fi
 import se.skltp.agp.riv.itintegration.engagementindex.v1.EngagementType;
 import se.skltp.agp.service.api.QueryObject;
 import se.skltp.agp.service.api.RequestListFactory;
+import se.skltp.agp.service.api.RequestListFactoryExtended;
 
 public class CreateRequestListTransformer extends AbstractMessageTransformer {
 
@@ -49,7 +50,7 @@ public class CreateRequestListTransformer extends AbstractMessageTransformer {
     		List<String> src = takCache.getReceivers(senderId, originalServiceConsumerId);
     		
 			// Perform any message aware processing here, otherwise delegate as much as possible to pojoTransform() for easier unit testing
-	    	transformedPayload = requestListFactory.createRequestList(qo, src);
+	    	transformedPayload = ((RequestListFactoryExtended)requestListFactory).createRequestList(qo, src);
     	} else {
   	
 			eiResp = (FindContentResponseType)message.getPayload();
