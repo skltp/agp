@@ -72,6 +72,18 @@
       <version>1.8.5</version>
     </dependency>
 
+    <!--skltp-->
+    <dependency>
+      <groupId>se.skltp.takdatahandler</groupId>
+      <artifactId>behorighethandler</artifactId>
+      <version>${takdatahandler.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>se.skltp.takdatahandler</groupId>
+      <artifactId>vagvalhandler</artifactId>
+      <version>${takdatahandler.version}</version>
+    </dependency>
+
   </dependencies>
 
   <build>

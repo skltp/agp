@@ -18,6 +18,7 @@
 	  <properties>
     <!-- Turn off strict checking of javadoc tags for Java 8 -->
     <additionalparam>-Xdoclint:none</additionalparam>
+	<takdatahandler.version>1.0.0-RC2</takdatahandler.version>
   </properties>
   
 	<scm>

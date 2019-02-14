@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:spring="http://www.springframework.org/schema/beans" xmlns="http://www.mulesoft.org/schema/mule/core"
+      xsi:schemaLocation="
+		http://www.springframework.org/schema/beans	http://www.springframework.org/schema/beans/spring-beans-current.xsd
+		http://www.mulesoft.org/schema/mule/core	http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+	">
+
+    <spring:bean id="resetHsaCacheComponent" class="se.skltp.agp.cache.ResetHsaCache">
+        <spring:property name="hsaCache" ref="hsaCache" />
+        <spring:property name="hsaFiles" value="${HSA_FILES}"/>
+    </spring:bean>
+
+    <flow name="resetHsaCache-flow">
+
+        <inbound-endpoint address="${RESET_HSA_CACHE_INBOUND_URL}"
+                          responseTimeout="${RESET_HSA_CACHE_TIMEOUT_MS}"
+                          connector-ref="soitoolkit-http-connector" />
+
+        <component>
+            <spring-object bean="resetHsaCacheComponent" />
+        </component>
+    </flow>
+
+</mule>

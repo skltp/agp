@@ -29,6 +29,20 @@
     	<spring:property name="agpHsaId" value="${AGP_HSA_ID}"/>
     </spring:bean>
 
+    <spring:bean name="takCache" class="se.skltp.takcache.TakCacheImpl">
+        <spring:constructor-arg index="0" ref="takService"/>
+    </spring:bean>
+
+    <spring:bean name="hsaCache" class="se.skl.tp.hsa.cache.HsaCacheImpl"/>
+
+    <spring:bean name="muleStartupNotification"
+                 class="se.skltp.agp.cache.MuleStartupNotificationHandler">
+        <spring:property name="takCache" ref="takCache"/>
+        <spring:property name="hsaCache" ref="hsaCache"/>
+        <spring:property name="hsaFiles" value="${HSA_FILES}"/>
+        <spring:property name="tjanstekontrakt" value="${TAK_TJANSTEKONTRAKT}"/>
+    </spring:bean>
+
     <!-- post to http://33.33.33.33:8084/tak/reset -->
     <!-- returns 'TAK cache for GetAggregatedVaccinationHistory-v2 has been reset' -->
     <flow name="reset-tak-cache-http-flow">
@@ -45,6 +59,7 @@
             <return-argument evaluator="string"
                              expression="TAK cache for ${APPLICATION_NAME} has been reset" />
         </expression-transformer>
+
     </flow>
 
 </mule>

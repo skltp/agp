@@ -5,3 +5,6 @@
 target
 
 testFile.testCache
+target
+*.iml
+.idea
