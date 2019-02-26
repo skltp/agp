@@ -155,7 +155,7 @@ TODO: Mule EE dependency
 
 	    <custom-transformer doc:name="Request List Transformer" class="se.skltp.agp.service.transformers.CreateRequestListTransformer">
             <spring:property name="requestListFactory" ref="requestListFactory"/>
-            <spring:property name="takCache" ref="takCacheBean"/>
+            <spring:property name="anslutningCache" ref="anslutningCache"/>
         </custom-transformer>
 
         <choice doc:name="Choice">
