@@ -56,4 +56,5 @@ public class AnslutningCacheBean {
         return behorighetHandler.isAuthorized(senderId, servicecontractNamespace, consumerId) ||
                 behorighetHandler.isAuthorized(originalServiceConsumerId, servicecontractNamespace, consumerId);
     }
+
 }

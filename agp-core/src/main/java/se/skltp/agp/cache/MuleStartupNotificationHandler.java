@@ -19,18 +19,38 @@ public class MuleStartupNotificationHandler implements
     private HsaCache hsaCache;
     private String[] hsaFiles;
 
+    public void setTakCache(TakCache takCache) {
+        this.takCache = takCache;
+    }
+
+    public void setTjanstekontrakt(String tjanstekontrakt) {
+        this.tjanstekontrakt = tjanstekontrakt;
+    }
+
+    public void setHsaCache(HsaCache hsaCache) {
+        this.hsaCache = hsaCache;
+    }
+
+    public void setHsaFiles(String[] hsaFiles) {
+        this.hsaFiles = hsaFiles;
+    }
+
     @Override
     public void onNotification(MuleContextNotification notification) {
         if (notification.getType().equalsIgnoreCase(MuleContextNotification.TYPE_INFO)
                 && notification.getAction() == MuleContextNotification.CONTEXT_STARTED) {
 
-            logger.info("Initiates hsaCache with files: {}", Arrays.toString(hsaFiles));
-            hsaCache.init(hsaFiles);
-
-            logger.info("Initiates takCache");
-            takCache.refresh(tjanstekontrakt);
+            refreshCaches();
 
             logger.info("Mule started, vagvalAgent and hsaCache successfully initiated");
         }
+    }
+
+    public void refreshCaches() {
+        logger.info("Initiates hsaCache with files: {}", Arrays.toString(hsaFiles));
+        hsaCache.init(hsaFiles);
+
+        logger.info("Initiates takCache");
+        takCache.refresh(tjanstekontrakt);
     }
 }

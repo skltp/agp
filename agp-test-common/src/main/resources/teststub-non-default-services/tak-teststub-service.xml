@@ -15,23 +15,24 @@
 		http://www.mulesoft.org/schema/mule/http    http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 	">
 
-    <spring:bean name="tak-teststub-bean" class="se.skltp.agp.test.producer.TakTestProducer" init-method="log">
-        <spring:property name="serviceTimeout"   value="${SERVICE_TIMEOUT_MS}" />
-        <spring:property name="targetNamespace" value="${TAK_TJANSTEKONTRAKT}" />
-    </spring:bean>
+	<spring:bean name="vagvalInputs"
+				 class=" se.skltp.agp.test.producer.SokVagvalsInfoMockInput"/>
 
-    <flow name="tak-teststub-service">
-		<http:inbound-endpoint
-        	connector-ref="soitoolkit-http-connector"
-            address="${TAK_TESTSTUB_INBOUND_URL}" 
-            exchange-pattern="request-response">
-        </http:inbound-endpoint>
-        
-        <cxf:jaxws-service serviceClass="se.skltp.agp.riv.vagvalsinfo.v2.SokVagvalsInfoInterface"/>
-        
-        <component>
-        	<spring-object bean="tak-teststub-bean"/>
-        </component>
-    </flow>
 
+	<flow name="tk-teststub-flow">
+
+		<inbound-endpoint address="${TAK_TESTSTUB_INBOUND_URL}"/>
+
+		<cxf:jaxws-service
+				namespace="urn:skltp:tak:vagvalsinfo:v2"
+				serviceClass="se.skltp.agp.test.producer.TjansteKatalogenTestProducer"
+				wsdlLocation="classpath:/VAGVAL_2_0/interactions/vagvalsInfo/wrapped-vagvalsinfo-sokvagvalsinfo-2.0.wsdl"/>
+
+		<component>
+			<singleton-object class="se.skltp.agp.test.producer.TjansteKatalogenTestProducer">
+				<property key="vagvalInputs" value-ref="vagvalInputs"/>
+			</singleton-object>
+		</component>
+
+	</flow>
 </mule>

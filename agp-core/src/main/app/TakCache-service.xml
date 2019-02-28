@@ -19,15 +19,6 @@
 	">
 
 
-    <spring:bean scope="singleton"
-                 id="takCacheBean"
-                 class="se.skltp.agp.cache.TakCacheBean">
-        <spring:property name="takEndpoint" value="${TAK_OUTBOUND_URL}" />
-        <spring:property name="targetNamespace" value="${TAK_TJANSTEKONTRAKT}" />
-        <spring:property name="serviceTimeout" value="${SERVICE_TIMEOUT_MS}" />
-        <spring:property name="takLocalCacheFile" value="${TAK_CACHE_FILE_NAME}" />
-    	<spring:property name="agpHsaId" value="${AGP_HSA_ID}"/>
-    </spring:bean>
 
     <spring:bean name="takService" class="se.skltp.takcache.services.TakServiceImpl">
         <spring:constructor-arg index="0" value="${TAK_TESTSTUB_INBOUND_URL}"/>
@@ -48,7 +39,7 @@
         <spring:property name="tjanstekontrakt" value="${TAK_TJANSTEKONTRAKT}"/>
     </spring:bean>
 
-    <spring:bean name="DeprecatedDefaultRoutingConfiguration" class="se.skl.tp.DefaultRoutingConfigurationImpl">
+    <spring:bean name="defaultRoutingConfiguration" class="se.skl.tp.DefaultRoutingConfigurationImpl">
         <spring:property name="delimiter" value="${DEPRECATED_DEAFAULT_ROUTING_DELIMITER}"/>
         <spring:property name="allowedContractsAsString" value="${DEPRECATED_DEFAULT_ROUTING_CONTRACTS:''}"/>
         <spring:property name="allowedSenderIdsAsString" value="${DEPRECATED_DEFAULT_ROUTING_SENDERS:''}"/>
@@ -57,28 +48,10 @@
     <spring:bean name="anslutningCache" class="se.skltp.agp.cache.AnslutningCacheBean">
         <spring:constructor-arg index="0" ref="hsaCache"/>
         <spring:constructor-arg index="1" ref="takCache"/>
-        <spring:constructor-arg index="2" ref="DeprecatedDefaultRoutingConfiguration"/>
+        <spring:constructor-arg index="2" ref="defaultRoutingConfiguration"/>
 
-        <spring:property name="targetNamespace" value="${TAK_TJANSTEKONTRAKT}" />
+        <spring:property name="servicecontractNamespace" value="${TAK_TJANSTEKONTRAKT}" />
         <spring:property name="agpHsaId" value="${AGP_HSA_ID}"/>
         </spring:bean>
-    <!-- post to http://33.33.33.33:8084/tak/reset -->
-    <!-- returns 'TAK cache for GetAggregatedVaccinationHistory-v2 has been reset' -->
-    <flow name="reset-tak-cache-http-flow">
-        <http:inbound-endpoint address="${TAK_INBOUND_RESET_CACHE_TAK_URL}"
-                               connector-ref="soitoolkit-http-connector"
-                               exchange-pattern="request-response"
-                               responseTimeout="${SERVICE_TIMEOUT_MS}"
-                               transformer-refs="logReqOut"
-                               responseTransformer-refs="logRespIn" />
-
-        <invoke object-ref="takCacheBean" method="updateCache" />
-
-        <expression-transformer>
-            <return-argument evaluator="string"
-                             expression="TAK cache for ${APPLICATION_NAME} has been reset" />
-        </expression-transformer>
-
-    </flow>
 
 </mule>

@@ -30,6 +30,18 @@
     </dependency>
 
     <dependency>
+      <groupId>se.skltp.tak</groupId>
+      <artifactId>tak-schemas</artifactId>
+      <version>${tak.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>se.skltp.takcache</groupId>
+      <artifactId>takcache</artifactId>
+      <version>${tak.cache.version}</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.soitoolkit.commons.components</groupId>
       <artifactId>soitoolkit-commons-mule</artifactId>
       <version>${soitoolkit.version}</version>
