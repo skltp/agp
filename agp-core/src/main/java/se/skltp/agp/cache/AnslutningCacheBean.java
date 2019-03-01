@@ -52,9 +52,9 @@ public class AnslutningCacheBean {
                 map(AnropsBehorighetsInfoType::getReceiverId).collect(Collectors.toList());
     }
 
-    public boolean isAuthorizedConsumer(String senderId, String originalServiceConsumerId, String consumerId) {
-        return behorighetHandler.isAuthorized(senderId, servicecontractNamespace, consumerId) ||
-                behorighetHandler.isAuthorized(originalServiceConsumerId, servicecontractNamespace, consumerId);
+    public boolean isAuthorizedConsumer(String senderId, String originalServiceConsumerId, String receiverId) {
+        return behorighetHandler.isAuthorized(senderId, servicecontractNamespace, receiverId) ||
+                behorighetHandler.isAuthorized(originalServiceConsumerId, servicecontractNamespace, receiverId);
     }
 
 }

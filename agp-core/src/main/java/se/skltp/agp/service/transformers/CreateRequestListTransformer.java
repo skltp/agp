@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import se.skltp.agp.cache.AnslutningCacheBean;
-import se.skltp.agp.cache.TakCacheBean;
 import se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentResponseType;
 import se.skltp.agp.riv.itintegration.engagementindex.v1.EngagementType;
 import se.skltp.agp.service.api.QueryObject;
@@ -86,7 +85,7 @@ public class CreateRequestListTransformer extends AbstractMessageTransformer {
     	while (iterator.hasNext()) {
     		EngagementType engagementType = iterator.next();
 
-    		if(!anslutningCache.isAuthorizedConsumer(engagementType.getLogicalAddress(), senderId, originalServiceConsumerId)){
+    		if(!anslutningCache.isAuthorizedConsumer(originalServiceConsumerId, senderId, engagementType.getLogicalAddress())){
 				log.info("Source system: senderId {} / originalServiceConsumerId {} is not authorized to access EngagementType:{} dispatched by FindContent",
 						new Object[] { senderId, originalServiceConsumerId, engagementType.getLogicalAddress() });
 				iterator.remove();
