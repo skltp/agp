@@ -47,7 +47,7 @@ public class AnslutningCacheBean {
                 filter(anropsBehorighet -> !anropsBehorighet.getReceiverId().equals(HsaCache.DEFAUL_ROOTNODE)).
                 filter(anropsBehorighet -> !anropsBehorighet.getReceiverId().equals(agpHsaId)).
                 filter(anropsBehorighet -> !anropsBehorighet.getReceiverId().equals(BehorighetHandlerImpl.DEFAULT_RECEIVER_ADDRESS)).
-                filter(anropsBehorighet -> !XmlGregorianCalendarUtil.isTimeWithinInterval(XmlGregorianCalendarUtil.getNowAsXMLGregorianCalendar(),
+                filter(anropsBehorighet -> XmlGregorianCalendarUtil.isTimeWithinInterval(XmlGregorianCalendarUtil.getNowAsXMLGregorianCalendar(),
                         anropsBehorighet.getFromTidpunkt(), anropsBehorighet.getTomTidpunkt())).
                 map(AnropsBehorighetsInfoType::getReceiverId).collect(Collectors.toList());
     }

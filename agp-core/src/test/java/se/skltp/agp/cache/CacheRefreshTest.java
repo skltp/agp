@@ -21,7 +21,6 @@ import java.util.List;
 public class CacheRefreshTest extends AbstractTestCase {
     static SokVagvalsInfoMockInput svimi = new SokVagvalsInfoMockInput();
 
-    private MuleStartupNotificationHandler muleStartupNotification;
     private HsaCacheImpl hsaCache;
     private TakCacheImpl takCache;
 
@@ -34,7 +33,6 @@ public class CacheRefreshTest extends AbstractTestCase {
 
     @Override
     public void doSetUp() throws Exception {
-        muleStartupNotification = muleContext.getRegistry().lookupObject("muleStartupNotification");
         hsaCache = muleContext.getRegistry().lookupObject("hsaCache");
         takCache = muleContext.getRegistry().lookupObject("takCache");
     }
@@ -74,7 +72,7 @@ public class CacheRefreshTest extends AbstractTestCase {
     }
 
     @Test
-    public void testRefreshCache() throws HsaCacheNodeNotFoundException {
+    public void testRefreshCache()  {
         assertEquals("HSA cache has been updated incorrectly", 7, hsaCache.getHSACacheSize());
         assertEquals("TAK cache has been updated incorrectly", 3, takCache.getAnropsBehorighetsInfos().size());
     }
