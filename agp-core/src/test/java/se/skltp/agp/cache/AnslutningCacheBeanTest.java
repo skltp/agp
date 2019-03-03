@@ -126,7 +126,7 @@ public class AnslutningCacheBeanTest extends AbstractTestCase {
 
 
 
-        @Override
+    @Override
     protected void doSetUpBeforeMuleContextCreation() throws DatatypeConfigurationException {
         setupTjanstekatalogen();
     }

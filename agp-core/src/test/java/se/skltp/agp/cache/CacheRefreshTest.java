@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.soitoolkit.commons.mule.test.junit4.AbstractTestCase;
 import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 import se.skl.tp.hsa.cache.HsaCacheImpl;
-import se.skl.tp.hsa.cache.HsaCacheNodeNotFoundException;
 import se.skltp.agp.test.producer.SokVagvalsInfoMockInput;
 import se.skltp.agp.test.producer.VagvalMockInputRecord;
 import se.skltp.takcache.TakCacheImpl;
