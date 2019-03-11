@@ -25,16 +25,16 @@
         <spring:constructor-arg index="1" value="${takcache.header.user.agent}"/>
     </spring:bean>
 
-    <spring:bean name="takCache" class="se.skltp.takcache.TakCacheImpl">
+    <spring:bean name="takCacheBean" class="se.skltp.takcache.TakCacheImpl">
         <spring:constructor-arg index="0" ref="takService"/>
     </spring:bean>
 
-    <spring:bean name="hsaCache" class="se.skl.tp.hsa.cache.HsaCacheImpl"/>
+    <spring:bean name="hsaCacheBean" class="se.skl.tp.hsa.cache.HsaCacheImpl"/>
 
     <spring:bean name="muleStartupNotification"
                  class="se.skltp.agp.cache.MuleStartupNotificationHandler">
-        <spring:property name="takCache" ref="takCache"/>
-        <spring:property name="hsaCache" ref="hsaCache"/>
+        <spring:property name="takCache" ref="takCacheBean"/>
+        <spring:property name="hsaCache" ref="hsaCacheBean"/>
         <spring:property name="hsaFiles" value="${HSA_FILES}"/>
         <spring:property name="tjanstekontrakt" value="${TAK_TJANSTEKONTRAKT}"/>
     </spring:bean>
@@ -46,8 +46,8 @@
     </spring:bean>
 
     <spring:bean name="anslutningCache" class="se.skltp.agp.cache.AnslutningCacheBean">
-        <spring:constructor-arg index="0" ref="hsaCache"/>
-        <spring:constructor-arg index="1" ref="takCache"/>
+        <spring:constructor-arg index="0" ref="hsaCacheBean"/>
+        <spring:constructor-arg index="1" ref="takCacheBean"/>
         <spring:constructor-arg index="2" ref="defaultRoutingConfiguration"/>
 
         <spring:property name="servicecontractNamespace" value="${TAK_TJANSTEKONTRAKT}" />

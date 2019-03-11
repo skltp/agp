@@ -7,7 +7,7 @@
 	">
 
     <spring:bean id="resetHsaCacheComponent" class="se.skltp.agp.cache.ResetHsaCache">
-        <spring:property name="hsaCache" ref="hsaCache" />
+        <spring:property name="hsaCache" ref="hsaCacheBean" />
         <spring:property name="hsaFiles" value="${HSA_FILES}"/>
     </spring:bean>
 

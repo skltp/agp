@@ -32,8 +32,8 @@ public class CacheRefreshTest extends AbstractTestCase {
 
     @Override
     public void doSetUp() throws Exception {
-        hsaCache = muleContext.getRegistry().lookupObject("hsaCache");
-        takCache = muleContext.getRegistry().lookupObject("takCache");
+        hsaCache = muleContext.getRegistry().lookupObject("hsaCacheBean");
+        takCache = muleContext.getRegistry().lookupObject("takCacheBean");
     }
 
     @Override

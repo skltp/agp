@@ -8,7 +8,7 @@
 	">
 
     <spring:bean id="resetTakCacheComponent" class="se.skltp.agp.cache.ResetTakCache">
-        <spring:property name="takCache" ref="takCache" />
+        <spring:property name="takCache" ref="takCacheBean" />
         <spring:property name="tjanstekontrakt" value="${TAK_TJANSTEKONTRAKT}"/>
     </spring:bean>
 
