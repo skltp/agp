@@ -9,13 +9,13 @@ import se.skltp.agp.test.producer.SokVagvalsInfoMockInput;
 import se.skltp.agp.test.producer.VagvalMockInputRecord;
 import se.skltp.takcache.TakCacheImpl;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class CacheRefreshTest extends AbstractTestCase {
     static SokVagvalsInfoMockInput svimi = new SokVagvalsInfoMockInput();
@@ -23,9 +23,9 @@ public class CacheRefreshTest extends AbstractTestCase {
     private HsaCacheImpl hsaCache;
     private TakCacheImpl takCache;
 
-    private static final String vardgivareB = "SE0000000003-1234";
-    private static final String konsumentA = "konsumentA";
-    private static final String konsumentB = "konsumentB";
+    private static final String receiver = "SE0000000003-1234";
+    private static final String senderA = "senderA";
+    private static final String senderB = "senderB";
 
 
     private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("takcache-test-config");
@@ -43,15 +43,13 @@ public class CacheRefreshTest extends AbstractTestCase {
 
     private void setupTjanstekatalogen() {
         List<VagvalMockInputRecord> vagvalInputs = new ArrayList<>();
-        vagvalInputs.add(createVagvalRecord(vardgivareB, "rivtabp20", konsumentA, rb.getString("TAK_TJANSTEKONTRAKT")));
-        vagvalInputs.add(createVagvalRecord(vardgivareB, "rivtabp21", konsumentA, rb.getString("TAK_TJANSTEKONTRAKT")));
-        vagvalInputs.add(createVagvalRecord(vardgivareB, "rivtabp21", konsumentA, rb.getString("TAK_TJANSTEKONTRAKT")
-        ));
-        vagvalInputs.add(createVagvalRecord(vardgivareB, "rivtabp20", konsumentB, "urn:riv:ehr:accesscontrol:AssertCareEngagementResponder:1"));
+        vagvalInputs.add(createVagvalRecord(senderA, receiver, "rivtabp20", rb.getString("TAK_TJANSTEKONTRAKT")));
+        vagvalInputs.add(createVagvalRecord(senderA, receiver, "rivtabp21", rb.getString("TAK_TJANSTEKONTRAKT")));
+        vagvalInputs.add(createVagvalRecord(senderB, receiver, "rivtabp20", "urn:riv:ehr:accesscontrol:AssertCareEngagementResponder:1"));
         svimi.setVagvalInputs(vagvalInputs);
     }
 
-    private static VagvalMockInputRecord createVagvalRecord(String receiverId, String rivVersion, String senderId, String serviceNameSpace) {
+    private static VagvalMockInputRecord createVagvalRecord(String senderId, String receiverId, String rivVersion, String serviceNameSpace) {
         VagvalMockInputRecord vagvalInput = new VagvalMockInputRecord();
         vagvalInput.receiverId = receiverId;
         vagvalInput.rivVersion = rivVersion;
@@ -71,9 +69,16 @@ public class CacheRefreshTest extends AbstractTestCase {
     }
 
     @Test
-    public void testRefreshCache()  {
+    public void testRefreshTakCache() {
+        assertEquals("TAK cache has been updated incorrectly", 2, takCache.getAnropsBehorighetsInfos().size());
+        assertTrue(takCache.isAuthorized(senderA, rb.getString("TAK_TJANSTEKONTRAKT"), receiver));
+        assertFalse(takCache.isAuthorized(senderB, rb.getString("TAK_TJANSTEKONTRAKT"), receiver));
+    }
+
+
+    @Test
+    public void testRefreshHsaCache() {
         assertEquals("HSA cache has been updated incorrectly", 7, hsaCache.getHSACacheSize());
-        assertEquals("TAK cache has been updated incorrectly", 3, takCache.getAnropsBehorighetsInfos().size());
     }
 
     @After
