@@ -13,21 +13,128 @@ import org.soitoolkit.commons.mule.test.AbstractJmsTestUtil;
 import org.soitoolkit.commons.mule.test.ActiveMqJmsTestUtil;
 import org.soitoolkit.commons.mule.test.junit4.AbstractTestCase;
 
+import org.springframework.beans.factory.BeanInitializationException;
 import se.skltp.agp.riv.interoperability.headers.v1.CausingAgentEnum;
 import se.skltp.agp.riv.interoperability.headers.v1.LastUnsuccessfulSynchErrorType;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusRecordType;
+import se.skltp.agp.test.producer.SokVagvalsInfoMockInput;
 import se.skltp.agp.test.producer.TestProducerDb;
+import se.skltp.agp.test.producer.TjansteKatalogenTestProducer;
+import se.skltp.agp.test.producer.VagvalMockInputRecord;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public abstract class AbstractAggregateIntegrationTest extends AbstractTestCase {
 
 	private static final String ERROR_LOG_QUEUE = "SOITOOLKIT.LOG.ERROR";
 	private AbstractJmsTestUtil jmsUtil = null;
 
-    public AbstractAggregateIntegrationTest() {
+	static SokVagvalsInfoMockInput svimi = new SokVagvalsInfoMockInput();
+
+	private static final String[] receivers = { TestProducerDb.TEST_LOGICAL_ADDRESS_1, TestProducerDb.TEST_LOGICAL_ADDRESS_2,
+			TestProducerDb.TEST_LOGICAL_ADDRESS_3, TestProducerDb.TEST_LOGICAL_ADDRESS_4, TestProducerDb.TEST_LOGICAL_ADDRESS_5,
+			TestProducerDb.TEST_LOGICAL_ADDRESS_6 };
+
+
+	private String targetNamespace;
+	private String targetNamespaceAnotherMajorVersion;
+	private String targetNamespaceYetAnotherMajorVersion;
+
+
+	public AbstractAggregateIntegrationTest(String targetNamespace) {
+		setTargetNamespace(targetNamespace);
 	    // Only start up Mule once to make the tests run faster...
 	    // Set to false if tests interfere with each other when Mule is started only once.
 	    setDisposeContextPerClass(true);
     }
+
+	public void setTargetNamespace(String n) {
+		this.targetNamespace = n;
+		if (targetNamespace == null || targetNamespace.isEmpty()) {
+			throw new BeanInitializationException("targetNamespace is mandatory");
+		} else if (!targetNamespace.matches("^.+?\\d$")) {
+			throw new BeanInitializationException("targetNamespace must end with a numeric");
+		} else {
+			try {
+				int i = Integer.parseInt(targetNamespace.substring(targetNamespace.length() - 1));
+				if (i < 1) {
+					targetNamespaceAnotherMajorVersion = targetNamespace.substring(0, targetNamespace.length() - 1) + "1";
+					targetNamespaceYetAnotherMajorVersion = targetNamespace.substring(0, targetNamespace.length() - 1) + "2";
+				} else {
+					targetNamespaceAnotherMajorVersion = targetNamespace.substring(0, targetNamespace.length() - 1) + (i + 1);
+					targetNamespaceYetAnotherMajorVersion = targetNamespace.substring(0, targetNamespace.length() - 1) + (i + 2);
+				}
+			} catch (NumberFormatException nn) {
+				throw new BeanInitializationException("targetNamespace last character not numeric? " + nn.getLocalizedMessage());
+			}
+		}
+	}
+
+	@Override
+	protected void doSetUpBeforeMuleContextCreation() throws DatatypeConfigurationException {
+		setupTjanstekatalogen();
+	}
+
+	private void setupTjanstekatalogen() {
+		List<VagvalMockInputRecord> vagvalInputs = new ArrayList<>();
+
+		for (int i = 0; i < 6; i++) {
+			vagvalInputs.add(createVagvalRecord(null, receivers[i], "rivtabp20", targetNamespace, false, true));
+		}
+
+		// We should not have permissions to this one
+		vagvalInputs.add(createVagvalRecord(null, "HSA-ID-77", "rivtabp20", targetNamespace, false, true));
+
+		// Add some alternative major versions
+		vagvalInputs.add(createVagvalRecord(null, "HSA-ID-11", "rivtabp20", targetNamespaceAnotherMajorVersion, false, true));
+		vagvalInputs.add(createVagvalRecord(null, "HSA-ID-12", "rivtabp20", targetNamespaceAnotherMajorVersion, false, true));
+		vagvalInputs.add(createVagvalRecord(null, "HSA-ID-31", "rivtabp20", targetNamespaceYetAnotherMajorVersion, false, true));
+		vagvalInputs.add(createVagvalRecord(null, "HSA-ID-32", "rivtabp20", targetNamespaceYetAnotherMajorVersion, false, true));
+
+		// Add some faulty ones
+		vagvalInputs.add(createVagvalRecord(null, "HSA-ID-FEL", "rivtabp20", (UUID.randomUUID().toString()), false, true));
+		vagvalInputs.add(createVagvalRecord(null, "HSA-ID-FEL", "rivtabp20", (UUID.randomUUID().toString()), false, true));
+
+
+
+		for (int i = 0; i < 6; i++) {
+			vagvalInputs.add(createVagvalRecord(AbstractTestConsumer.SAMPLE_SENDER_ID, receivers[i], "rivtabp20", targetNamespace, true, false));
+		}
+
+		// Permissions for AbstractTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID
+		vagvalInputs.add(createVagvalRecord(AbstractTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID, "HSA-ID-1", "rivtabp20", targetNamespace, true, false));
+		vagvalInputs.add(createVagvalRecord(AbstractTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID, "HSA-ID-77", "rivtabp20", targetNamespace, true, false));
+
+
+		vagvalInputs.add(createVagvalRecord(AbstractTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID, "HSA-ID-11", "rivtabp20", targetNamespaceAnotherMajorVersion, true, false));
+		vagvalInputs.add(createVagvalRecord(AbstractTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID, "HSA-ID-12", "rivtabp20", targetNamespaceAnotherMajorVersion, true, false));
+		vagvalInputs.add(createVagvalRecord(AbstractTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID, "HSA-ID-31", "rivtabp20", targetNamespaceAnotherMajorVersion, true, false));
+		vagvalInputs.add(createVagvalRecord(AbstractTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID, "HSA-ID-32", "rivtabp20", targetNamespaceAnotherMajorVersion, true, false));
+		vagvalInputs.add(createVagvalRecord(AbstractTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID, "HSA-ID-1", "rivtabp20", targetNamespaceAnotherMajorVersion, true, false));
+
+		// Some faulty random permissions
+		vagvalInputs.add(createVagvalRecord("TK_" + "HSA-ID-FEL", "HSA-ID-FEL", "rivtabp20", UUID.randomUUID().toString(), true, false));
+		vagvalInputs.add(createVagvalRecord("TK_" + "HSA-ID-FEL", "HSA-ID-FEL", "rivtabp20", UUID.randomUUID().toString(), true, false));
+		svimi.setVagvalInputs(vagvalInputs);
+	}
+
+	private static VagvalMockInputRecord createVagvalRecord(String senderId, String receiverId, String rivVersion, String serviceNameSpace, boolean addBehorighet, boolean addVagval) {
+		VagvalMockInputRecord vagvalInput = new VagvalMockInputRecord();
+		vagvalInput.receiverId = receiverId;
+		vagvalInput.rivVersion = rivVersion;
+		vagvalInput.senderId = senderId;
+		vagvalInput.serviceContractNamespace = serviceNameSpace;
+		vagvalInput.addBehorighet=addBehorighet;
+		vagvalInput.addVagval=addVagval;
+
+		return vagvalInput;
+	}
+
 
     @Override
 	protected void doSetUp() throws Exception {
