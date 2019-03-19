@@ -129,6 +129,13 @@ public class EngagemangsindexTestProducer implements FindContentResponderInterfa
         response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_7, TEST_RR_ID_EJ_SAMVERKAN_I_TAK, TEST_BO_ID_EJ_SAMVERKAN_I_TAK, TEST_DATE_EJ_SAMVERKAN_I_TAK));
         INDEX.put(TEST_RR_ID_EJ_SAMVERKAN_I_TAK, response);
         log.info("### Engagemengsindex add {} items to the index for resident {}", response.getEngagement().size(), TEST_RR_ID_EJ_SAMVERKAN_I_TAK);
+        //
+        // TC7 - Patient with one booking
+        //
+        response = new FindContentResponseType();
+        response.getEngagement().add(createResponse(TEST_LOGICAL_ADDRESS_CHILD, TEST_RR_ID_TRADKLATTRING, TEST_BO_ID_TRADKLATTRING, TEST_DATE_TRADKLATTRING));
+        INDEX.put(TEST_RR_ID_TRADKLATTRING, response);
+        log.info("### Engagemengsindex add {} items to the index for resident {}", response.getEngagement().size(), TEST_RR_ID_TRADKLATTRING);
 	}
 
 	private EngagementType createResponse(String receiverLogicalAddress, String registeredResidentIdentification, String businessObjectId, String date) {

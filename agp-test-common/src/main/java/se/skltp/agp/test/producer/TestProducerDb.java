@@ -21,6 +21,8 @@ public abstract class TestProducerDb {
 	public static final String TEST_LOGICAL_ADDRESS_5 = "HSA-ID-5";
 	public static final String TEST_LOGICAL_ADDRESS_6 = "HSA-ID-6";
     public static final String TEST_LOGICAL_ADDRESS_7 = "HSA-ID-7";
+	public static final String TEST_LOGICAL_ADDRESS_CHILD = "SE0000000005-1234";
+	public static final String TEST_LOGICAL_ADDRESS_PARENT = "SE0000000003-1234";
 
     public static final String TEST_RR_ID_MANY_HITS_NO_ERRORS = "121212121212"; // TC1 - Tolvan Tolvansson
     public static final String TEST_RR_ID_ZERO_HITS           = "188803099368"; // TC2 - Agda Andersson
@@ -28,6 +30,7 @@ public abstract class TestProducerDb {
     public static final String TEST_RR_ID_MANY_HITS           = "198611062384"; // TC4 - Ulla Alm
     public static final String TEST_RR_ID_FAULT_INVALID_ID    = "192011189228"; // TC5 - Gunbritt Boden
     public static final String TEST_RR_ID_EJ_SAMVERKAN_I_TAK  = "194804032094"; // TC6 - Laban Meijer
+	public static final String TEST_RR_ID_TRADKLATTRING       = "194808069887"; // TC7
 
 	public static final String TEST_BO_ID_ONE_HIT             = "1001";
 	public static final String TEST_BO_ID_MANY_HITS_1         = "1002";
@@ -37,6 +40,7 @@ public abstract class TestProducerDb {
 	public static final String TEST_BO_ID_MANY_HITS_NEW_1     = "2001";
 	public static final String TEST_BO_ID_FAULT_INVALID_ID    = "5001";
 	public static final String TEST_BO_ID_EJ_SAMVERKAN_I_TAK  = "6001";
+	public static final String TEST_BO_ID_TRADKLATTRING       = "7001";
 	
 	public static final String TEST_DATE_ONE_HIT              = "20130101000000";
 	public static final String TEST_DATE_MANY_HITS_1          = "20130301000000";
@@ -45,6 +49,7 @@ public abstract class TestProducerDb {
 	public static final String TEST_DATE_MANY_HITS_4          = "20130415000000";
 	public static final String TEST_DATE_FAULT_INVALID_ID     = "20130101000000";
     public static final String TEST_DATE_EJ_SAMVERKAN_I_TAK   = "20130106000000";
+	public static final String TEST_DATE_TRADKLATTRING        = "20130406000000";
 
 	private long serviceTimeoutMs;
 	public void setServiceTimeoutMs(long serviceTimeoutMs) {
@@ -142,6 +147,13 @@ public abstract class TestProducerDb {
 
 		response = createResponse(createResponseItem(TEST_LOGICAL_ADDRESS_3, TEST_RR_ID_MANY_HITS, TEST_BO_ID_MANY_HITS_4, TEST_DATE_MANY_HITS_4));
 		storeInDb(TEST_LOGICAL_ADDRESS_3, TEST_RR_ID_MANY_HITS, response);
+
+		//
+		// TC7 - Patient with one booking, id = TEST_RR_ID_TRADKLATTRING for test trädklättring
+		//
+		response = createResponse(createResponseItem(TEST_LOGICAL_ADDRESS_CHILD, TEST_RR_ID_TRADKLATTRING, TEST_BO_ID_TRADKLATTRING, TEST_DATE_TRADKLATTRING));
+		storeInDb(TEST_LOGICAL_ADDRESS_CHILD, TEST_RR_ID_TRADKLATTRING, response);
+
 	}
 
 	public void resetDb() {

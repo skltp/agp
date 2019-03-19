@@ -17,6 +17,7 @@ import se.skltp.agp.AgpConstants;
 public abstract class AbstractTestConsumer<ServiceInterface> {
 
 	public static final String SAMPLE_SENDER_ID               = "sample-sender-id";
+	public static final String SENDER_MED_STANDARD_BEHORIGHET_ID = "standart-behorighet-sender-id";
 	public static final String SAMPLE_ORIGINAL_CONSUMER_HSAID = "sample-original-consumer-hsaid";
     public static final String SAMPLE_CORRELATION_ID          = "sample-correlation-id";
 	
