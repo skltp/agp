@@ -21,7 +21,7 @@
 
 
     <spring:bean name="takService" class="se.skltp.takcache.services.TakServiceImpl">
-        <spring:constructor-arg index="0" value="${TAK_TESTSTUB_INBOUND_URL}"/>
+        <spring:constructor-arg index="0" value="${TAK_OUTBOUND_URL}"/>
         <spring:constructor-arg index="1" value="${takcache.header.user.agent}"/>
     </spring:bean>
 
