@@ -12,7 +12,7 @@
         <spring:property name="tjanstekontrakt" value="${TAK_TJANSTEKONTRAKT}"/>
     </spring:bean>
 
-    <flow name="resetHsaCache-flow">
+    <flow name="resetTakCache-flow">
 
         <inbound-endpoint address="${RESET_TAK_CACHE_INBOUND_URL}"
                           responseTimeout="${RESET_TAK_CACHE_TIMEOUT_MS}"
