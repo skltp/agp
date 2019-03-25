@@ -25,8 +25,8 @@
   
 	<scm>
 		<url>http://github.com/skltp/agp</url>
-		<connection>scm:git:git://github.com/skltp/agp.git</connection>
-		<developerConnection>scm:git:git://github.com/skltp/agp.git</developerConnection>
+		<connection>scm:git:https://github.com:443/skltp/agp.git</connection>
+		<developerConnection>scm:git:https://github.com:443/skltp/agp.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
