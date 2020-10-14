@@ -1,0 +1,71 @@
+<Configuration status="WARN" monitorInterval="30">
+
+  <Properties>
+    <Property name="LOG_PATTERN">
+      %d %-5p [%t] %-30c - %X{corr.id} %m%n
+    </Property>
+    <Property name="PAYLOAD_LOG_PATTERN">
+      %d %-5p [%t] %-30c - %X{corr.id} skltp-payload - %m%n
+    </Property>
+  </Properties>
+
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+    </Console>
+
+    <TestLogAppender name="TestLogAppender">
+    </TestLogAppender>
+  </Appenders>
+
+  <Loggers>
+    <Logger name="se.skltp.aggregatingservices" level="WARN"/>
+
+    <!--Level INFO will log the init/reset och TAK cache-->
+    <Logger name="se.skltp.takcache" level="INFO"/>
+    <Logger name="se.skl.tp.vp.vagval.ResetTakCacheProcessor" level="INFO"/>
+
+
+    <!--Level INFO will log startup for spring boot application-->
+    <Logger name="se.skltp.aggregatingservices.AgpApplication" level="INFO"/>
+
+    <!--Apache camel-->
+    <Logger name="org.apache.camel" level="WARN"/>
+
+    <!--Jetty-->
+    <Logger name="org.eclipse.jetty" level="WARN"/>
+
+
+    <!-- Message logging -->
+    <Logger name="se.skltp.aggregatingservices.logging" level="INFO" additivity="false">
+      <AppenderRef ref="TestLogAppender"/>
+<!--      <AppenderRef ref="Console"/>-->
+    </Logger>
+    <Logger name="se.skltp.aggregatingservices.logging.FindContentResponderInterface" level="DEBUG"  additivity="false">
+      <AppenderRef ref="TestLogAppender"/>
+<!--      <AppenderRef ref="Console"/>-->
+    </Logger>
+    <Logger name="se.skltp.aggregatingservices.logging.GetLaboratoryOrderOutcomeResponderInterface.REQ_IN" level="DEBUG"  additivity="false">
+      <AppenderRef ref="TestLogAppender"/>
+<!--      <AppenderRef ref="Console"/>-->
+    </Logger>
+    <Logger name="se.skltp.aggregatingservices.logging.GetLaboratoryOrderOutcomeResponderInterface.RESP_OUT" level="DEBUG"  additivity="false">
+      <AppenderRef ref="TestLogAppender"/>
+<!--      <AppenderRef ref="Console"/>-->
+    </Logger>
+    <Logger name="se.skltp.aggregatingservices.logging.GetLaboratoryOrderOutcomeResponderInterface.REQ_OUT" level="DEBUG"  additivity="false">
+      <AppenderRef ref="TestLogAppender"/>
+<!--      <AppenderRef ref="Console"/>-->
+    </Logger>
+    <Logger name="se.skltp.aggregatingservices.logging.GetLaboratoryOrderOutcomeResponderInterface.RESP_IN" level="DEBUG"  additivity="false">
+      <AppenderRef ref="TestLogAppender"/>
+<!--      <AppenderRef ref="Console"/>-->
+    </Logger>
+
+
+    <Root level="WARN">
+      <AppenderRef ref="Console"/>
+    </Root>
+
+  </Loggers>
+</Configuration>

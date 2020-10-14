@@ -1,27 +1,22 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>agp-parent</artifactId>
+    <groupId>se.skltp.agp</groupId>
+    <version>3.0.1-SNAPSHOT</version>
+  </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>se.skltp.agp</groupId>
-    <artifactId>agp-parent</artifactId>
-    <version>2.3.4-SNAPSHOT</version>
-    <relativePath>../pom.xml</relativePath>
-  </parent>
-
   <artifactId>agp-schemas</artifactId>
-  <packaging>jar</packaging>
-  <name>agp-schemas</name>
 
   <properties>
     <!-- Properties for generating code from XML Schemas (JAXB) -->
     <schema.path>${basedir}/src/main/resources/schemas</schema.path>
-    <cxf.version>${cxf-codegen-plugin.version}</cxf.version>
-    <cxf.xjc.version>3.1.0</cxf.xjc.version>
+    <schema.gen.src.dir>${project.build.directory}/generated-sources/cxf</schema.gen.src.dir>
   </properties>
 
   <build>
+
     <plugins>
 
       <plugin>
@@ -41,12 +36,12 @@
               <goal>xsdtojava</goal>
             </goals>
             <configuration>
-              <sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
+              <sourceRoot>${schema.gen.src.dir}</sourceRoot>
               <xsdOptions>
                 <xsdOption>
                   <xsd>${schema.path}/interoperability/headers/core_components/interoperability_headers_1.0.xsd</xsd>
                   <packagename>se.skltp.agp.riv.interoperability.headers.v1</packagename>
-                 </xsdOption>
+                </xsdOption>
               </xsdOptions>
             </configuration>
           </execution>
@@ -56,44 +51,28 @@
       <plugin>
         <groupId>org.apache.cxf</groupId>
         <artifactId>cxf-codegen-plugin</artifactId>
-        <version>${cxf.version}</version>
+        <version>${apache-cfx.version}</version>
         <executions>
           <execution>
             <id>generate-sources</id>
             <phase>generate-sources</phase>
             <configuration>
-              <sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
+              <sourceRoot>${schema.gen.src.dir}</sourceRoot>
               <wsdlOptions>
 
                 <wsdloption>
                   <wsdl>${schema.path}/TD_ENGAGEMENTINDEX_1_0_R/interactions/FindContentInteraction/FindContentInteraction_1.0_RIVTABP21.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
-                    <extraarg>urn:riv:itintegration:engagementindex:1=se.skltp.agp.riv.itintegration.engagementindex.v1</extraarg>
+                    <extraarg>urn:riv:itintegration:engagementindex:1=se.skltp.aggregatingservices.riv.itintegration.engagementindex.v1</extraarg>
                     <extraarg>-p</extraarg>
-                    <extraarg>urn:riv:itintegration:engagementindex:FindContentResponder:1=se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1</extraarg>
+                    <extraarg>urn:riv:itintegration:engagementindex:FindContentResponder:1=se.skltp.aggregatingservices.riv.itintegration.engagementindex.findcontentresponder.v1</extraarg>
                     <extraarg>-p</extraarg>
-                    <extraarg>urn:riv:itintegration:engagementindex:FindContentInitiator:1=se.skltp.agp.riv.itintegration.engagementindex.findcontentinitiator.v1</extraarg>
+                    <extraarg>urn:riv:itintegration:engagementindex:FindContentInitiator:1=se.skltp.aggregatingservices.riv.itintegration.engagementindex.findcontentinitiator.v1</extraarg>
                     <extraarg>-p</extraarg>
-                    <extraarg>urn:riv:itintegration:engagementindex:FindContent:1:rivtabp21=se.skltp.agp.riv.itintegration.engagementindex.findcontent.v1.rivtabp21</extraarg>
+                    <extraarg>urn:riv:itintegration:engagementindex:FindContent:1:rivtabp21=se.skltp.aggregatingservices.riv.itintegration.engagementindex.findcontent.v1.rivtabp21</extraarg>
                     <extraarg>-p</extraarg>
-                    <extraarg>urn:riv:itintegration:registry:1=se.skltp.agp.riv.itintegration.registry.v1</extraarg>
-                  </extraargs>
-                </wsdloption>
-
-                <wsdloption>
-                  <wsdl>${schema.path}/TD_ENGAGEMENTINDEX_1_0_R/interactions/ProcessNotificationInteraction/ProcessNotificationInteraction_1.0_RIVTABP21.wsdl</wsdl>
-                  <extraargs>
-                    <extraarg>-p</extraarg>
-                    <extraarg>urn:riv:itintegration:engagementindex:1=se.skltp.agp.riv.itintegration.engagementindex.v1</extraarg>
-                    <extraarg>-p</extraarg>
-                    <extraarg>urn:riv:itintegration:engagementindex:ProcessNotificationResponder:1=se.skltp.agp.riv.itintegration.engagementindex.processnotificationresponder.v1</extraarg>
-                    <extraarg>-p</extraarg>
-                    <extraarg>urn:riv:itintegration:engagementindex:ProcessNotificationInitiator:1=se.skltp.agp.riv.itintegration.engagementindex.processnotificationinitiator.v1</extraarg>
-                    <extraarg>-p</extraarg>
-                    <extraarg>urn:riv:itintegration:engagementindex:ProcessNotification:1:rivtabp21=se.skltp.agp.riv.itintegration.engagementindex.processnotification.v1.rivtabp21</extraarg>
-                    <extraarg>-p</extraarg>
-                    <extraarg>urn:riv:itintegration:registry:1=se.skltp.agp.riv.itintegration.registry.v1</extraarg>
+                    <extraarg>urn:riv:itintegration:registry:1=se.skltp.aggregatingservices.riv.itintegration.registry.v1</extraarg>
                   </extraargs>
                 </wsdloption>
 
@@ -115,8 +94,6 @@
           </execution>
         </executions>
       </plugin>
-
     </plugins>
   </build>
-
 </project>
