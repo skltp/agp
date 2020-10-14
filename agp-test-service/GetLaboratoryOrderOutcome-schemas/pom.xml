@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>agp-test-service</artifactId>
+    <groupId>se.skltp.agp</groupId>
+    <version>3.0.1-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>GetLaboratoryOrderOutcome-schemas</artifactId>
+  <packaging>jar</packaging>
+
+  <properties>
+    <!-- Properties for generating code from WSDL and XML Schemas (JAX-WS + JAXB) -->
+    <schema.path>${basedir}/src/main/resources/schemas</schema.path>
+    <schema.gen.src.dir>${project.build.directory}/generated-sources/cxf</schema.gen.src.dir>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-codegen-plugin</artifactId>
+        <version>${apache-cfx.version}</version>
+        <configuration>
+          <!-- fork to avoid encoding issues, ref: soi-toolkit issue 360 -->
+          <fork>once</fork>
+          <additionalJvmArgs>-Dfile.encoding=UTF-8</additionalJvmArgs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>ws.generate</id>
+            <phase>generate-sources</phase>
+            <configuration>
+              <sourceRoot>${schema.gen.src.dir}</sourceRoot>
+              <wsdlOptions>
+                <wsdloption>
+                  <wsdl>${schema.path}/clinicalprocess-healthcond-actoutcome/interactions/GetLaboratoryOrderOutcomeInteraction/GetLaboratoryOrderOutcomeInteraction_4.0_RIVTABP21.wsdl</wsdl>
+                  <extraargs>
+                    <extraarg>-p</extraarg>
+                    <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:clinicalprocess:healthcond:actoutcome:GetLaboratoryOrderOutcomeResponder:4=riv.clinicalprocess.healthcond.actoutcome.getlaboratoryorderoutcomeresponder.v4</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:clinicalprocess:healthcond:actoutcome:GetLaboratoryOrderOutcomeInitiator:4=riv.clinicalprocess.healthcond.actoutcome.getlaboratoryorderoutcomeinitiator.v4</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:clinicalprocess:healthcond:actoutcome:GetLaboratoryOrderOutcome:4:rivtabp21=riv.clinicalprocess.healthcond.actoutcome.getlaboratoryorderoutcome.v4.rivtabp21</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:itintegration:registry:1=riv.itintegration.registry.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:clinicalprocess:healthcond:actoutcome:3=riv.clinicalprocess.healthcond.actoutcome.v4</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:clinicalprocess:healthcond:actoutcome:enums:3=riv.clinicalprocess.healthcond.actoutcome.enums.v4</extraarg>
+                  </extraargs>
+                </wsdloption>
+              </wsdlOptions>
+            </configuration>
+            <goals>
+              <goal>wsdl2java</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

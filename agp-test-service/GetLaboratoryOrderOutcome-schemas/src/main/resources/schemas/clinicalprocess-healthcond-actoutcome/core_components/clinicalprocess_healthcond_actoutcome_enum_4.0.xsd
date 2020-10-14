@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements. See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership. Inera AB licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License. You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied. See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ -->
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'
+           xmlns:tns='urn:riv:clinicalprocess:healthcond:actoutcome:enums:4'
+           targetNamespace='urn:riv:clinicalprocess:healthcond:actoutcome:enums:4'
+           elementFormDefault='qualified' attributeFormDefault='unqualified'
+           version='4.0'>
+
+    <!--
+         Below: enums for common header used in service contracts for JoL (Journal- och Läkemedel).
+    -->
+
+    <xs:simpleType name="ActorTypeCodeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="HCPROFESSIONAL">
+                <xs:annotation>
+                    <xs:documentation>Vårdpersonal</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="PATIENT">
+                <xs:annotation>
+                    <xs:documentation>Patienten själv</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="PROXY">
+                <xs:annotation>
+                    <xs:documentation>Ombud eller annan person</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="DEVICE">
+                <xs:annotation>
+                    <xs:documentation>Maskin</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!--
+         Below: enums for helper types.
+     -->
+
+    <xs:simpleType name="MediaTypeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="application/dicom"/>
+            <xs:enumeration value="application/msword"/>
+            <xs:enumeration value="application/pdf"/>
+            <xs:enumeration value="audio/basic"/>
+            <xs:enumeration value="audio/k32adpcm"/>
+            <xs:enumeration value="audio/mpeg"/>
+            <xs:enumeration value="image/g3fax"/>
+            <xs:enumeration value="image/gif"/>
+            <xs:enumeration value="image/jpeg"/>
+            <xs:enumeration value="image/png"/>
+            <xs:enumeration value="image/tiff"/>
+            <xs:enumeration value="model/vrml"/>
+            <xs:enumeration value="multipart/x-hl7-cda-level1"/>
+            <xs:enumeration value="text/html"/>
+            <xs:enumeration value="text/plain"/>
+            <xs:enumeration value="text/rtf"/>
+            <xs:enumeration value="text/sgml"/>
+            <xs:enumeration value="text/x-hl7-ft"/>
+            <xs:enumeration value="text/xml"/>
+            <xs:enumeration value="video/mpeg"/>
+            <xs:enumeration value="video/x-avi"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ResultCodeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="OK"/>
+            <xs:enumeration value="ERROR"/>
+            <xs:enumeration value="INFO"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ErrorCodeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="INVALID_REQUEST"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!--
+         Below: enums used exclusively by service contract GetRequestOutcome.
+    -->
+
+    <xs:simpleType name="RequestOutcomeTypeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SVA">
+                <xs:annotation>
+                    <xs:documentation>Svar</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- kv_yrkeskoder, 1.2.752.97.3.2.8.8 -->
+    <xs:simpleType name="ProfessionCodeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AP">
+                <xs:annotation>
+                    <xs:documentation>Apotekare</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AT">
+                <xs:annotation>
+                    <xs:documentation>Arbetsterapeut</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AU">
+                <xs:annotation>
+                    <xs:documentation>Audionom</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="BM">
+                <xs:annotation>
+                    <xs:documentation>Barnmorska</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="BA">
+                <xs:annotation>
+                    <xs:documentation>Biomedicinsk analytiker</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="DT">
+                <xs:annotation>
+                    <xs:documentation>Dietist</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KP">
+                <xs:annotation>
+                    <xs:documentation>Kiropraktor</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="LG">
+                <xs:annotation>
+                    <xs:documentation>Logoped</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="LK">
+                <xs:annotation>
+                    <xs:documentation>Läkare</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NA">
+                <xs:annotation>
+                    <xs:documentation>Naprapat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="OP">
+                <xs:annotation>
+                    <xs:documentation>Optiker</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="OT">
+                <xs:annotation>
+                    <xs:documentation>Ortopedingenjör</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="PS">
+                <xs:annotation>
+                    <xs:documentation>Psykolog</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="PT">
+                <xs:annotation>
+                    <xs:documentation>Psykoterapeut</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="RC">
+                <xs:annotation>
+                    <xs:documentation>Receptarie</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="RS">
+                <xs:annotation>
+                    <xs:documentation>Röntgensjuksköterska</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SG">
+                <xs:annotation>
+                    <xs:documentation>Sjukgymnast</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SF">
+                <xs:annotation>
+                    <xs:documentation>Sjukhusfysiker</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SJ">
+                <xs:annotation>
+                    <xs:documentation>Sjuksköterska</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="TH">
+                <xs:annotation>
+                    <xs:documentation>Tandhygienist</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="TL">
+                <xs:annotation>
+                    <xs:documentation>Tandläkare</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>
