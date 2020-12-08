@@ -9,6 +9,7 @@
     <module>agp-application</module>
     <module>agp-test-service</module>
     <module>agp-test-core</module>
+    <module>report</module>
   </modules>
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -56,8 +57,9 @@
     <sonar.language>java</sonar.language>
     <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-    <sonar.jacoco.reportPath>${jacoco.outputDir}/${jacoco.out.ut.file}</sonar.jacoco.reportPath>
-    <sonar.jacoco.itReportPath>${jacoco.outputDir}/${jacoco.out.it.file}</sonar.jacoco.itReportPath>
+    <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+<!--    <sonar.jacoco.reportPath>${jacoco.outputDir}/${jacoco.out.ut.file}</sonar.jacoco.reportPath>-->
+<!--    <sonar.jacoco.itReportPath>${jacoco.outputDir}/${jacoco.out.it.file}</sonar.jacoco.itReportPath>-->
     <sonar.coverage.exclusions>
       **/aggregatingservices/constants/*
     </sonar.coverage.exclusions>
