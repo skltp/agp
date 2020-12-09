@@ -42,6 +42,31 @@
       <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>
+
+    <dependency>
+      <groupId>se.skltp.agp</groupId>
+      <artifactId>GetLaboratoryOrderOutcome</artifactId>
+      <version>${project.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>se.skltp.agp</groupId>
+      <artifactId>GetLaboratoryOrderOutcome-runner</artifactId>
+      <version>${project.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>se.skltp.agp</groupId>
+      <artifactId>GetLaboratoryOrderOutcome-schemas</artifactId>
+      <version>${project.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>se.skltp.agp</groupId>
+      <artifactId>GetLaboratoryOrderOutcome-teststub</artifactId>
+      <version>${project.version}</version>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
 
   <build>
