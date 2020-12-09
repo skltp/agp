@@ -53,11 +53,6 @@
     <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-<!--    <sonar.coverage.exclusions>-->
-<!--      **/aggregatingservices/constants/*-->
-<!--      ,**/agp-schemas/*-->
-<!--      ,**/agp-test-core/*-->
-<!--    </sonar.coverage.exclusions>-->
   </properties>
 
   <distributionManagement>
