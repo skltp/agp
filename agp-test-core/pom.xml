@@ -72,17 +72,5 @@
 
   </dependencies>
 
-  <profiles>
-    <profile>
-      <id>sonar</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <properties>
-        <sonar.coverage.exclusions>
-          **/*.*
-        </sonar.coverage.exclusions>
-      </properties>
-    </profile>
-  </profiles>
+
 </project>
