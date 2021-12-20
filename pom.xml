@@ -20,7 +20,7 @@
 
   <groupId>se.skltp.agp</groupId>
   <artifactId>agp-parent</artifactId>
-  <version>3.0.1-SNAPSHOT</version>
+  <version>3.0.2-SNAPSHOT</version>
   <name>agp-parent</name>
   <description>Demo project for Spring Boot</description>
 
@@ -40,7 +40,7 @@
     <takdatahandler.version>2.0.0</takdatahandler.version>
     <lmax_disruptor-version>3.3.6</lmax_disruptor-version>
     <jetty.version>9.4.31.v20200723</jetty.version>
-    <log4j2.version>2.16.0</log4j2.version>
+    <log4j2.version>2.17.0</log4j2.version>
 
     <maven.javadoc.skip>true</maven.javadoc.skip>
 
@@ -70,9 +70,9 @@
   </distributionManagement>
 
   <scm>
-    <url>https://github.com/skltp-incubator/agp-camel.git</url>
-    <connection>scm:git:https://github.com:443/skltp-incubator/agp-camel.git</connection>
-    <developerConnection>scm:git:https://github.com:443/skltp-incubator/agp-camel.git</developerConnection>
+    <url>https://github.com/skltp/agp.git</url>
+    <connection>scm:git:https://github.com:443/skltp/agp.git</connection>
+    <developerConnection>scm:git:https://github.com:443/skltp/agp.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
 
