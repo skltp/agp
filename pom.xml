@@ -9,6 +9,7 @@
     <module>agp-application</module>
     <module>agp-test-service</module>
     <module>agp-test-core</module>
+    <module>report</module>
   </modules>
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -19,7 +20,7 @@
 
   <groupId>se.skltp.agp</groupId>
   <artifactId>agp-parent</artifactId>
-  <version>3.0.1-SNAPSHOT</version>
+  <version>3.0.2-SNAPSHOT</version>
   <name>agp-parent</name>
   <description>Demo project for Spring Boot</description>
 
@@ -39,6 +40,7 @@
     <takdatahandler.version>2.0.0</takdatahandler.version>
     <lmax_disruptor-version>3.3.6</lmax_disruptor-version>
     <jetty.version>9.4.31.v20200723</jetty.version>
+    <log4j2.version>2.17.0</log4j2.version>
 
     <maven.javadoc.skip>true</maven.javadoc.skip>
 
@@ -46,21 +48,12 @@
     <!-- Sonar/Reporting settings -->
     <!-- ************************-->
     <jacoco.plugin.version>0.8.5</jacoco.plugin.version>
-    <sonar.plugin.version>3.5.0.1254</sonar.plugin.version>
-
-    <jacoco.outputDir>${project.build.directory}</jacoco.outputDir>
-    <jacoco.out.ut.file>jacoco-ut.exec</jacoco.out.ut.file>
-    <jacoco.out.it.file>jacoco-it.exec</jacoco.out.it.file>
-    <jacoco.reportPath>${project.basedir}/../target/jacoco.exec</jacoco.reportPath>
+    <sonar.plugin.version>3.7.0.1746</sonar.plugin.version>
 
     <sonar.language>java</sonar.language>
     <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-    <sonar.jacoco.reportPath>${jacoco.outputDir}/${jacoco.out.ut.file}</sonar.jacoco.reportPath>
-    <sonar.jacoco.itReportPath>${jacoco.outputDir}/${jacoco.out.it.file}</sonar.jacoco.itReportPath>
-    <sonar.coverage.exclusions>
-      **/aggregatingservices/constants/*
-    </sonar.coverage.exclusions>
+    <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
   </properties>
 
   <distributionManagement>
@@ -77,9 +70,9 @@
   </distributionManagement>
 
   <scm>
-    <url>https://github.com/skltp-incubator/agp-camel.git</url>
-    <connection>scm:git:https://github.com:443/skltp-incubator/agp-camel.git</connection>
-    <developerConnection>scm:git:https://github.com:443/skltp-incubator/agp-camel.git</developerConnection>
+    <url>https://github.com/skltp/agp.git</url>
+    <connection>scm:git:https://github.com:443/skltp/agp.git</connection>
+    <developerConnection>scm:git:https://github.com:443/skltp/agp.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
 
@@ -221,7 +214,35 @@
     </dependencies>
   </dependencyManagement>
 
+
+
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.sonarsource.scanner.maven</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>${sonar.plugin.version}</version>
+          <executions>
+            <execution>
+              <phase>verify</phase>
+              <goals>
+                <goal>sonar</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>${jacoco.plugin.version}</version>
+          <configuration>
+            <append>true</append>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
     <plugins>
       <plugin>
         <!-- create test-jar files -->
@@ -277,9 +298,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <argLine>${surefireArgLine}</argLine>
-            </configuration>
           </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
@@ -298,35 +316,16 @@
                 </goals>
               </execution>
             </executions>
-            <configuration>
-              <argLine>${failsafeArgLine}</argLine>
-            </configuration>
           </plugin>
           <plugin>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
-            <version>${jacoco.plugin.version}</version>
             <executions>
               <execution>
                 <id>pre-unit-test</id>
                 <goals>
                   <goal>prepare-agent</goal>
                 </goals>
-                <configuration>
-                  <destFile>${sonar.jacoco.reportPath}</destFile>
-                  <propertyName>surefireArgLine</propertyName>
-                </configuration>
-              </execution>
-              <execution>
-                <id>post-unit-test</id>
-                <phase>test</phase>
-                <goals>
-                  <goal>report</goal>
-                </goals>
-                <configuration>
-                  <dataFile>${jacoco.reportPath}</dataFile>
-                  <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
-                </configuration>
               </execution>
               <execution>
                 <id>pre-integration-test</id>
@@ -334,23 +333,7 @@
                 <goals>
                   <goal>prepare-agent</goal>
                 </goals>
-                <configuration>
-                  <destFile>${sonar.jacoco.itReportPath}</destFile>
-                  <propertyName>failsafeArgLine</propertyName>
-                </configuration>
               </execution>
-              <execution>
-                <id>post-integration-test</id>
-                <phase>post-integration-test</phase>
-                <goals>
-                  <goal>report</goal>
-                </goals>
-                <configuration>
-                  <dataFile>${jacoco.reportPath}</dataFile>
-                  <outputDirectory>${project.reporting.outputDirectory}/jacoco-it</outputDirectory>
-                </configuration>
-              </execution>
-
             </executions>
           </plugin>
         </plugins>

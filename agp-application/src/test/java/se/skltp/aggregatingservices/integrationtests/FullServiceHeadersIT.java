@@ -1,8 +1,11 @@
 package se.skltp.aggregatingservices.integrationtests;
 
 import static se.skltp.aggregatingservices.data.TestDataDefines.SAMPLE_SENDER_ID;
+import static se.skltp.aggregatingservices.data.TestDataDefines.TEST_LOGICAL_ADDRESS_1;
 import static se.skltp.aggregatingservices.data.TestDataDefines.TEST_RR_ID_MANY_HITS_NO_ERRORS;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.BeforeEach;
@@ -125,6 +128,24 @@ public class FullServiceHeadersIT {
 
     consumerService.callService(TEST_RR_ID_MANY_HITS_NO_ERRORS);
 
+    mock.assertIsSatisfied();
+  }
+
+
+  @Test
+  public void createHttpHeadersWithXRivta() throws InterruptedException {
+    final MockEndpoint mock = producerBaseRoute.getMock();
+    mock.expectedHeaderReceived("x-rivta-test1", "test1");
+    mock.expectedHeaderReceived("x-rivta-TEST2", "TEST2");
+    mock.expectedHeaderReceived("x-rivta-123", "123");
+
+    Map<String, Object> headers = new HashMap<>();
+    headers.put("x-rivta-test1", "test1");
+    headers.put("x-rivta-TEST2", "TEST2");
+    headers.put("x-rivta-123", "123");
+
+    consumerService
+        .callService(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_MANY_HITS_NO_ERRORS, headers);
     mock.assertIsSatisfied();
   }
 }
