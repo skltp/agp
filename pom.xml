@@ -126,6 +126,11 @@
         <artifactId>camel-jetty-starter</artifactId>
         <version>${camel.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-file-watch-starter</artifactId>
+        <version>${camel.version}</version>
+      </dependency>
 
       <!-- Camel -->
       <dependency>

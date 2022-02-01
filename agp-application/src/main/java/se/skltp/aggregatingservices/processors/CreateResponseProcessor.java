@@ -23,6 +23,7 @@ import org.apache.cxf.headers.Header;
 import org.apache.cxf.headers.Header.Direction;
 import org.apache.cxf.message.MessageContentsList;
 import org.apache.cxf.staxutils.StaxUtils;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import se.skltp.aggregatingservices.aggregate.AggregatedResponseResults;
 import se.skltp.aggregatingservices.api.AgpServiceFactory;
@@ -39,6 +40,18 @@ public class CreateResponseProcessor implements Processor {
 
   private static final ObjectFactory OF_HEADERS = new ObjectFactory();
   private static final JaxbUtil jaxbUtil = new JaxbUtil(ProcessingStatusType.class);
+
+  public boolean getCloseConnections() {
+    return closeConnections;
+  }
+
+  public void setCloseConnections(boolean closeConnections) {
+    this.closeConnections = closeConnections;
+  }
+
+  private boolean closeConnections = false;
+
+
 
   @Override
   public void process(Exchange exchange) throws Exception {
@@ -62,6 +75,9 @@ public class CreateResponseProcessor implements Processor {
     exchange.setProperty(LOG_ENGAGEMENT_PROCESSING_RESULT, exchange.getProperty(ENGAGEMENT_PROCESSING_RESULT));
 
     exchange.getIn().setHeader(Exchange.HTTP_RESPONSE_CODE, 200);
+    if (closeConnections) {
+      exchange.getIn().setHeader(HttpHeaders.CONNECTION, "close");
+    }
   }
 
   private void validateProcessingStatus(Exchange exchange, AggregatedResponseResults aggregatedResponseResults) {
