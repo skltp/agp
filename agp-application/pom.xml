@@ -74,6 +74,10 @@
       <groupId>org.apache.camel.springboot</groupId>
       <artifactId>camel-cxf-starter</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.apache.camel.springboot</groupId>
+      <artifactId>camel-file-watch-starter</artifactId>
+    </dependency>
 
     <!-- Camel -->
     <dependency>
