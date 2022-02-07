@@ -2,6 +2,8 @@ package se.skltp.aggregatingservices;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.apache.cxf.feature.Feature;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,5 +19,8 @@ public class BeansConfiguration {
     return features;
   }
 
-
+  @Bean
+  public AtomicBoolean preStopStatus() {
+    return new AtomicBoolean(false);
+  }
 }

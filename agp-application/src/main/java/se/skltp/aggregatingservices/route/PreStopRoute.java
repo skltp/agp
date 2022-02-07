@@ -3,7 +3,7 @@ package se.skltp.aggregatingservices.route;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import se.skltp.aggregatingservices.utils.PreStopStatusBean;
+import se.skltp.aggregatingservices.processors.PreStopProcessor;
 
 import java.io.File;
 
@@ -13,7 +13,7 @@ public class PreStopRoute extends RouteBuilder {
   public static final String PRE_STOP_ROUTE = "prestop-route";
 
   @Autowired
-  PreStopStatusBean preStopStatusBean;
+  PreStopProcessor preStopProcessor;
 
   private String preStopFilePath = "/var/spool/agp-camel/preStopFile";
 
@@ -29,7 +29,7 @@ public class PreStopRoute extends RouteBuilder {
       return;
     }
 
-    preStopStatusBean.setPreStopFile(preStopFile);
+    preStopProcessor.setPreStopFile(preStopFile);
     String fileName = preStopFile.getName();
     String directoryName = directory.toString();
     log.info("Watching {} for preStopFile {}", directoryName, fileName);
@@ -38,6 +38,6 @@ public class PreStopRoute extends RouteBuilder {
 
     from(fileWatchUri)
             .routeId(PRE_STOP_ROUTE)
-            .bean(preStopStatusBean, "checkPreStopFile");
+            .process(preStopProcessor);
   }
 }

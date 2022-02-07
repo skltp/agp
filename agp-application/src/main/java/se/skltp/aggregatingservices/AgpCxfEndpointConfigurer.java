@@ -10,13 +10,19 @@ import org.apache.cxf.frontend.AbstractWSDLBasedEndpointFactory;
 import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
+import se.skltp.aggregatingservices.cxf.CloseConnectionInterceptor;
 import se.skltp.aggregatingservices.cxf.SoapActionRemoverInInterceptor;
 import se.skltp.aggregatingservices.logging.MessageLoggingFeature;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AgpCxfEndpointConfigurer implements CxfConfigurer {
 
   @Autowired
   MessageLoggingFeature messageLoggingFeature;
+
+  @Autowired
+  AtomicBoolean preStopStatus;
 
   private int receiveTimeout = 30000;
 
@@ -25,6 +31,8 @@ public class AgpCxfEndpointConfigurer implements CxfConfigurer {
   private boolean schemaValidationEnabled = false;
 
   private boolean validateSoapAction = false;
+
+  private boolean checkPreStopFile = true;
 
 
   public AgpCxfEndpointConfigurer(int receiveTimeout) {
@@ -43,6 +51,7 @@ public class AgpCxfEndpointConfigurer implements CxfConfigurer {
   public void configure(AbstractWSDLBasedEndpointFactory factoryBean) {
     addMessageLoggingFeature(factoryBean);
     addSoapActionInterceptor(factoryBean);
+    addCloseConnectionInterceptor(factoryBean);
   }
 
   @Override
@@ -72,6 +81,12 @@ public class AgpCxfEndpointConfigurer implements CxfConfigurer {
   private void addSoapActionInterceptor(AbstractWSDLBasedEndpointFactory factoryBean) {
     if (!validateSoapAction) {
       factoryBean.getInInterceptors().add(new SoapActionRemoverInInterceptor());
+    }
+  }
+
+  private void addCloseConnectionInterceptor(AbstractWSDLBasedEndpointFactory factoryBean) {
+    if (checkPreStopFile) {
+      factoryBean.getOutInterceptors().add(new CloseConnectionInterceptor(preStopStatus));
     }
   }
 
