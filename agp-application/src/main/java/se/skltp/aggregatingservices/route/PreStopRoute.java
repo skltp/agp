@@ -2,6 +2,7 @@ package se.skltp.aggregatingservices.route;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import se.skltp.aggregatingservices.processors.PreStopProcessor;
 
@@ -15,7 +16,8 @@ public class PreStopRoute extends RouteBuilder {
   @Autowired
   PreStopProcessor preStopProcessor;
 
-  private String preStopFilePath = "/var/spool/agp-camel/preStopFile";
+  @Value("${agp.prestop.file.path}")
+  String preStopFilePath;
 
   @Override
   public void configure() {
