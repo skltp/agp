@@ -16,7 +16,7 @@ public class PreStopRoute extends RouteBuilder {
   @Autowired
   PreStopProcessor preStopProcessor;
 
-  @Value("${agp.prestop.file.path}")
+  @Value("${agp.prestop.file.path:#{null}}")
   String preStopFilePath;
 
   @Override
