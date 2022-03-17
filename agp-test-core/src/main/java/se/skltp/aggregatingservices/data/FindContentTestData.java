@@ -155,6 +155,22 @@ public class FindContentTestData {
             TestDataDefines.CATEGORY_3));
     FINDCONTENT_RESPONSE_MAP.put(TestDataDefines.TEST_RR_ID_THREE_CATEGORIES, response);
 
+    //
+    // TC10 - Patient with two engagements, one has AgP's own logical address
+    //
+    response = new FindContentResponseType();
+    response.getEngagement().add(
+            createEngagement(TestDataDefines.TEST_LOGICAL_ADDRESS_RECURSIVE, TestDataDefines.TEST_RR_ID_RECURSIVE,
+                    TestDataDefines.TEST_BO_ID_MANY_HITS_1,
+                    TestDataDefines.TEST_DATE_MANY_HITS_1));
+    response.getEngagement().add(
+            createEngagement(TestDataDefines.TEST_LOGICAL_ADDRESS_5, TestDataDefines.TEST_RR_ID_RECURSIVE,
+                    TestDataDefines.TEST_BO_ID_MANY_HITS_2,
+                    TestDataDefines.TEST_DATE_MANY_HITS_2));
+    FINDCONTENT_RESPONSE_MAP.put(TestDataDefines.TEST_RR_ID_RECURSIVE, response);
+    log.info(LOG_MSG_ADDED_ITEM, response.getEngagement().size(),
+            TestDataDefines.TEST_RR_ID_MANY_HITS_NO_ERRORS);
+
     log.info(LOG_MSG_ADDED_ITEM, response.getEngagement().size(), TestDataDefines.TEST_RR_ID_ONE_FORMAT_ERROR);
 
   }
