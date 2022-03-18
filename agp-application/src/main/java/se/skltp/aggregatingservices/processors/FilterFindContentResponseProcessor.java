@@ -11,6 +11,7 @@ import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.cxf.message.MessageContentsList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import se.skltp.aggregatingservices.api.AgpServiceFactory;
 import se.skltp.aggregatingservices.constants.AgpHeaders;
@@ -28,6 +29,9 @@ public class FilterFindContentResponseProcessor implements Processor {
   @Autowired
   TakCacheService takCacheService;
 
+  @Value("${agp.logicalAddress:#{null}}")
+  String agpLogicalAddress;
+
   @Override
   public void process(Exchange exchange) {
     AgpServiceFactory agpServiceProcessor = exchange.getProperty(AGP_SERVICE_HANDLER, AgpServiceFactory.class);
@@ -41,6 +45,8 @@ public class FilterFindContentResponseProcessor implements Processor {
     if (eiCategorizationsConf.size() > 1) {
       filterFindContentResponseBasedOnCategorizations(findContentResponse, eiCategorizationsConf);
     }
+
+    filterFindContentResponseFromOwnLogicalAdress(findContentResponse);
 
     EngagementProcessingStatusUtil.initAllAsFiltered(findContentResponse, exchange);
 
@@ -71,6 +77,17 @@ public class FilterFindContentResponseProcessor implements Processor {
       if (!eiCategorizationsConf.contains(engagement.getCategorization().toLowerCase())) {
         log.info("Filter engagement with categorization {}. Allowed cats {}", engagement.getCategorization().toLowerCase(),
             eiCategorizationsConf);
+        iterator.remove();
+      }
+    }
+  }
+
+  protected void filterFindContentResponseFromOwnLogicalAdress(FindContentResponseType eiResp) {
+    final Iterator<EngagementType> iterator = eiResp.getEngagement().iterator();
+    while (iterator.hasNext()) {
+      final EngagementType engagement = iterator.next();
+      if (engagement.getLogicalAddress().equals(agpLogicalAddress)) {
+        log.warn("Filtered engagement with own logical address {}", agpLogicalAddress);
         iterator.remove();
       }
     }
