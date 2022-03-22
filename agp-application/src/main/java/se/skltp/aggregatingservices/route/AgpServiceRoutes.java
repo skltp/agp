@@ -5,9 +5,13 @@ import static se.skltp.aggregatingservices.constants.AgpProperties.AGP_SERVICE_C
 import static se.skltp.aggregatingservices.constants.AgpProperties.AGP_SERVICE_HANDLER;
 import static se.skltp.aggregatingservices.constants.AgpProperties.AGP_TAK_CONTRACT_NAME;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import lombok.extern.log4j.Log4j2;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.jetty.JettyHttpComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.support.GenericApplicationContext;
@@ -61,6 +65,7 @@ public class AgpServiceRoutes extends RouteBuilder {
     for (AgpServiceConfiguration serviceConfiguration : serviceConfigurations) {
       createServiceRoute(serviceConfiguration);
     }
+    configureJettyHttpServer();
   }
 
   private void createServiceRoute(AgpServiceConfiguration serviceConfiguration) throws Exception {
@@ -140,6 +145,13 @@ public class AgpServiceRoutes extends RouteBuilder {
 
     applicationContext.registerBean(serviceConfiguration.getServiceName(), AgpCxfEndpointConfigurer.class,
         () -> new AgpCxfEndpointConfigurer(receiveTimeout, connectTimeout, enableSchemaValidation, validateSoapAction));
+  }
+
+  private void configureJettyHttpServer() {
+    JettyHttpComponent jettyComponent = getContext().getComponent("jetty", JettyHttpComponent.class);
+    Map<String, Object> socketConnectorProperties = new HashMap<>();
+    socketConnectorProperties.put("maxIdleTime", "5000"); //set timeout is 5s
+    jettyComponent.setSocketConnectorProperties(socketConnectorProperties);
   }
 
 }
