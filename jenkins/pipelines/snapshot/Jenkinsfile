@@ -50,20 +50,5 @@ pipeline {
         }
       }
     }
-
-    stage('Deploy') {
-      environment{
-        MAVEN_POM_VERSION = readMavenPom().getVersion()
-        DEPLOY_SERVER = "${params.DEPLOY_TO_TEST ? 'ind-ttjp-agp1' : 'ind-dtjp-agp1'}"
-      }
-      steps{
-        sshagent(["${params.SSH_CREDENTIALS_ID}"]) {
-          echo "MAVEN_POM_VERSION: ${MAVEN_POM_VERSION}"
-          sh "scp agp-application/target/*.jar  ind-app@${DEPLOY_SERVER}:/www/ind/home/ind-app"
-
-          sh "ssh -l ind-app ${DEPLOY_SERVER} 'hostname; ls; sudo mv agp-application*.jar /www/ind/releases/agp-camel; sudo /www/ind/releases/agp-camel/deploy.sh ${MAVEN_POM_VERSION}'"
-        }
-      }
-    }
   }
 }
