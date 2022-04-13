@@ -1,5 +1,5 @@
 node {
-   jdk = tool name: 'Java 8_152'
+   jdk = tool name: 'openjdk-11'
    SONAR_HOME = tool name: 'SonarScanner 4.5'
    env.JAVA_HOME = "${jdk}"
    env.SonarScanner = "${SONAR_HOME}/bin/sonar-scanner"
@@ -14,7 +14,7 @@ node {
       stage('Build') {
          // Run the maven build
          configFileProvider([configFile(fileId: 'ae5eda6d-e166-4b43-a78c-ed67ed10cac0', variable: 'MAVEN_SETTINGS')]) {
-            def maven = docker.image("maven:3.6-jdk-8")
+            def maven = docker.image("maven:3.8.4-jdk-11")
 	  	    maven.pull()
 		    maven.inside("-v ${jdk}:${jdk}") {
 		       sh 'mvn --global-settings ${MAVEN_SETTINGS} clean install -Ptest-coverage'
