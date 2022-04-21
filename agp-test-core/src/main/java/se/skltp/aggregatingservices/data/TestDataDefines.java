@@ -26,6 +26,7 @@ public class TestDataDefines {
   public static final String TEST_LOGICAL_ADDRESS_77 = "HSA-ID-77";
   public static final String TEST_LOGICAL_ADDRESS_CHILD = "SE0000000005-1234";
   public static final String TEST_LOGICAL_ADDRESS_PARENT = "SE0000000003-1234";
+  public static final String TEST_LOGICAL_ADDRESS_RECURSIVE = "5565594230";
   public static final String HSA_ID_FEL = "HSA-ID-FEL";
 
   public static final String TEST_RR_ID_MANY_HITS_NO_ERRORS = "121212121212"; // TC1 - Tolvan Tolvansson
@@ -37,6 +38,7 @@ public class TestDataDefines {
   public static final String TEST_RR_ID_TRADKLATTRING = "194808069887"; // TC7
   public static final String TEST_RR_ID_ONE_FORMAT_ERROR = "194800000001"; // TC8
   public static final String TEST_RR_ID_THREE_CATEGORIES = "194800000002"; // TC9
+  public static final String TEST_RR_ID_RECURSIVE = "194800000003"; // TC10
   public static final String TEST_ID_FAULT_INVALID_ID_IN_EI = "EI:INV_ID";
   public static final String TEST_ID_FAULT_TIMEOUT_IN_EI = "EI:TIMEOUT";
 

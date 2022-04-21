@@ -16,6 +16,7 @@ Spring-boot property fil som ligger under resources i jaren. Inställningarna ka
 | hawtio.external.loginfile |  | Extern fil med user/password till Hawtio |
 | endpoints.camelroutes.enabled | true | Medger tillgång till information om de Camel-routes som finns |
 | endpoints.camelroutes.read-only | true | Tillgång till endpoints bara i read-only mode |
+| agp.logicalAddress | 5565594230 | Egen logisk address till vilken rekursiva anrop inte är tillåtna |
 | aggregate.timeout | 28000 | Timeout ms för aggregering av alla producent anrop |
 | validate.soapAction | false | Ska inkommande SOAPAction header valideras |
 | vp.instanceId | dev_env | VP's instans-ID |

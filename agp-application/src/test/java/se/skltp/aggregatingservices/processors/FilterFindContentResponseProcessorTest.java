@@ -5,12 +5,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static se.skltp.aggregatingservices.constants.AgpProperties.AGP_ORIGINAL_QUERY;
 import static se.skltp.aggregatingservices.constants.AgpProperties.AGP_SERVICE_HANDLER;
 import static se.skltp.aggregatingservices.constants.AgpProperties.AGP_TAK_CONTRACT_NAME;
-import static se.skltp.aggregatingservices.data.TestDataDefines.CATEGORY_1;
-import static se.skltp.aggregatingservices.data.TestDataDefines.CATEGORY_2;
-import static se.skltp.aggregatingservices.data.TestDataDefines.CATEGORY_3;
-import static se.skltp.aggregatingservices.data.TestDataDefines.CATEGORY_DEFAULT;
-import static se.skltp.aggregatingservices.data.TestDataDefines.TEST_RR_ID_MANY_HITS_NO_ERRORS;
-import static se.skltp.aggregatingservices.data.TestDataDefines.TEST_RR_ID_THREE_CATEGORIES;
+import static se.skltp.aggregatingservices.data.TestDataDefines.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -185,6 +180,16 @@ public class FilterFindContentResponseProcessorTest {
 
     filterFindContentResponseProcessor.filterFindContentResponseBasedOnAuthority(findContentResponse, getAuthority());
     assertEquals(0, findContentResponse.getEngagement().size());
+  }
+
+  @Test
+  public void testFilterOwnLogicalAddress() {
+    final Exchange exchange = createExchange(TEST_RR_ID_RECURSIVE, CATEGORY_DEFAULT);
+    Mockito.when(behorigheterCache.isAuthorized(any(), any(),any())).thenReturn(true);
+
+    filterFindContentResponseProcessor.process(exchange);
+    final FindContentResponseType findContentResponse = (FindContentResponseType) exchange.getIn().getBody(MessageContentsList.class).get(0);
+    assertEquals(1, findContentResponse.getEngagement().size());
   }
 
   private Authority getAuthority() {
