@@ -20,7 +20,7 @@
 
   <groupId>se.skltp.agp</groupId>
   <artifactId>agp-parent</artifactId>
-  <version>3.1.0-RC1</version>
+  <version>3.1.1-SNAPSHOT</version>
   <name>agp-parent</name>
   <description>Demo project for Spring Boot</description>
 
