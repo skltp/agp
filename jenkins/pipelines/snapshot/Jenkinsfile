@@ -2,9 +2,9 @@ pipeline {
   agent any
 
   environment{
-    JDK_PATH = tool name: 'Java 8_152'
+    JDK_PATH = tool name: 'openjdk-11'
     JAVA_HOME = "${JDK_PATH}"
-    MAVEN_DOCKER_IMAGE = 'maven:3.6-jdk-8'
+    MAVEN_DOCKER_IMAGE = 'maven:3.8.4-jdk-11'
   }
 
   stages{
@@ -47,21 +47,6 @@ pipeline {
       steps {
         configFileProvider([configFile(fileId: "${params.CONFIG_FILE_ID}", variable: 'MAVEN_SETTINGS')]) {
           sh 'mvn --global-settings ${MAVEN_SETTINGS} -Pskltp -DskipTests=true deploy'
-        }
-      }
-    }
-
-    stage('Deploy') {
-      environment{
-        MAVEN_POM_VERSION = readMavenPom().getVersion()
-        DEPLOY_SERVER = "${params.DEPLOY_TO_TEST ? 'ind-ttjp-agp1' : 'ind-dtjp-agp1'}"
-      }
-      steps{
-        sshagent(["${params.SSH_CREDENTIALS_ID}"]) {
-          echo "MAVEN_POM_VERSION: ${MAVEN_POM_VERSION}"
-          sh "scp agp-application/target/*.jar  ind-app@${DEPLOY_SERVER}:/www/ind/home/ind-app"
-
-          sh "ssh -l ind-app ${DEPLOY_SERVER} 'hostname; ls; sudo mv agp-application*.jar /www/ind/releases/agp-camel; sudo /www/ind/releases/agp-camel/deploy.sh ${MAVEN_POM_VERSION}'"
         }
       }
     }
