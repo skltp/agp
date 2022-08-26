@@ -29,33 +29,35 @@ pipeline {
                 }
             }
         }
-    }
 
-    post {
-        always {
+        stage('Results') {
+          steps {
             script {
                 echo 'Starting results handling...'
                 junit '**/target/surefire-reports/TEST-*.xml'
                 archiveArtifacts '**/target/*.jar'
             }
-
-            stage('Nexus') {
-              agent {
-                docker {
-                  image "${MAVEN_DOCKER_IMAGE}"
-                  args "-v ${JDK_PATH}:${JDK_PATH}"
-                  reuseNode true
-                }
-              }
-              steps {
-                configFileProvider([configFile(fileId: "${params.CONFIG_FILE_ID}", variable: 'MAVEN_SETTINGS')]) {
-                  // sh 'mvn --global-settings ${MAVEN_SETTINGS} -Pskltp -DskipTests=true deploy'
-                  echo 'nexus deployment here'
-                }
-              }
-            }
+          }
         }
 
+        stage('Nexus') {
+          agent {
+            docker {
+              image "${MAVEN_DOCKER_IMAGE}"
+              args "-v ${JDK_PATH}:${JDK_PATH}"
+              reuseNode true
+            }
+          }
+          steps {
+            configFileProvider([configFile(fileId: "${params.CONFIG_FILE_ID}", variable: 'MAVEN_SETTINGS')]) {
+              // sh 'mvn --global-settings ${MAVEN_SETTINGS} -Pskltp -DskipTests=true deploy'
+              echo 'nexus deployment here'
+            }
+          }
+        }
+    }
+
+    post {
         cleanup {
             echo 'Cleaning workspace...'
             cleanWs()
