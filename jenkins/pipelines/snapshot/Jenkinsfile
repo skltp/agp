@@ -49,7 +49,7 @@ pipeline {
             }
           }
           steps {
-            configFileProvider([configFile(fileId: "${params.CONFIG_FILE_ID}", variable: 'MAVEN_SETTINGS')]) {
+            configFileProvider([configFile(fileId: "byggReleaseConfig", variable: 'MAVEN_SETTINGS')]) {
               // sh 'mvn --global-settings ${MAVEN_SETTINGS} -Pskltp -DskipTests=true deploy'
               echo 'nexus deployment here'
             }
