@@ -43,7 +43,7 @@ pipeline {
         stage('Nexus') {
           agent {
             docker {
-              image "${MAVEN_DOCKER_IMAGE}"
+              image "${MAVEN_IMAGE}"
               args "-v ${JDK_PATH}:${JDK_PATH}"
               reuseNode true
             }
