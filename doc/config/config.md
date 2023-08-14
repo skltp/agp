@@ -11,7 +11,13 @@ Spring-boot property fil som ligger under resources i jaren. Inställningarna ka
 |Nyckel|Defaultvärde/Exempel|Beskrivning|
 |----|------------------|---------|
 | server.port | 8881 | Spring-boot server port |
-| management.endpoints.web.exposure.include | hawtio,jolokia | Default aktivera övervakning via Hawwtio |
+| management.endpoints.web.exposure.include | hawtio,jolokia,health | Default exponera Hawtio och health-indicators |
+| management.endpoint.health.probes.enabled | true | Exponera liveness/readiness probes |
+| management.endpoint.health.show-details | always | Visa detaljer om health indicators |
+| management.health.livenessState.enabled | true | Aktivera inbyggd livess-indikator |
+| management.health.readinessState.enabled | true | Aktivera inbyggd readiness-indikator |
+| management.endpoint.health.group.liveness.include | livenessState | Anger vilka indikatorer som ingår i liveness-proben |
+| management.endpoint.health.group.readiness.include | readinessState,takCache | Anger vilka indikatorer som ingår i readiness-proben. Default ingår kontroll att TAK Cache är initierad |
 | hawtio.authentication.enabled | false | Aktivera autentiserng för HawtIO? |
 | hawtio.external.loginfile |  | Extern fil med user/password till Hawtio |
 | endpoints.camelroutes.enabled | true | Medger tillgång till information om de Camel-routes som finns |
