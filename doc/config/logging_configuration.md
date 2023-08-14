@@ -3,7 +3,7 @@
 Denna sida handlar om loggning. För allmän information om konfiguration av AGP Camel, se [AGP Camel konfigurering].
 ### Allmänt
 Som logg-ramverk används Log4j2, se [log4j2s dokumentation] för mer information.
-En grundkonfigurering finns i projektet under `resources/log4j2.xml`.
+Ett exempel på grundkonfigurering som loggar till konsolen finns längre ned på denna sida.
 
 ### Extern konfiguration
 För att använda en extern log4j2.xml konfigurationsfil kan man starta applikationen med parametern `-Dlog4j.configurationFile`, 
@@ -16,8 +16,9 @@ Här beskivs två sätt att ändra loggnivåer i runtime.
  2. Ändra loggnivåer med Hawtio (eller på annat sätt via jmx)
  ### Rekommenderade loggers
 Vissa loggers kan vara av extra intresse för att följa AGPs uppstart och flöden. Se beskrivning nedan:
+
+*log4j2.xml*
 ```
-log4j2.xml
 <Configuration status="WARN" monitorInterval="30">
 
   <Properties>
