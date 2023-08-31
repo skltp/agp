@@ -5,6 +5,7 @@ import static se.skltp.agp.riv.interoperability.headers.v1.StatusCodeEnum.DATA_F
 import static se.skltp.agp.riv.interoperability.headers.v1.StatusCodeEnum.DATA_FROM_SOURCE;
 
 import java.net.SocketTimeoutException;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import org.apache.cxf.binding.soap.SoapFault;
 import se.skltp.agp.riv.interoperability.headers.v1.CausingAgentEnum;
@@ -74,6 +75,8 @@ public class ProcessingStatusUtil {
 		error.setCausingAgent(CausingAgentEnum.VIRTUALIZATION_PLATFORM);
 		if(exception instanceof SoapFault){
 			error.setCode(Integer.toString(((SoapFault)exception).getStatusCode()));
+			// Fix error in encoding from SOAP Fault details (probably a CXF bug)
+			errorText = new String(errorText.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
 		} else if( exception instanceof SocketTimeoutException ) {
 			// Gateway timeout
 			error.setCode("504");
