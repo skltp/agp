@@ -40,4 +40,3 @@ Innehåller även en grund för att skapa en mock plattform för varje plugin
  
  
    [Konfigurering]: <doc/config/config.md>
-
