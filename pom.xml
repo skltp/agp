@@ -147,6 +147,13 @@
         <artifactId>spring-boot-starter-log4j2</artifactId>
         <version>${spring.boot-version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-bom</artifactId>
+        <version>${log4j.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
       <!-- for async logging -->
       <dependency>
         <groupId>com.lmax</groupId>
