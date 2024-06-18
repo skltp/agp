@@ -20,7 +20,7 @@
 
   <groupId>se.skltp.agp</groupId>
   <artifactId>agp-parent</artifactId>
-  <version>3.2.2-SNAPSHOT</version>
+  <version>3.2.2-RC1</version>
   <name>agp-parent</name>
   <description>Demo project for Spring Boot</description>
 
@@ -76,7 +76,7 @@
     <url>https://github.com/skltp/agp.git</url>
     <connection>scm:git:https://github.com:443/skltp/agp.git</connection>
     <developerConnection>scm:git:https://github.com:443/skltp/agp.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>v3.2.2-RC1</tag>
   </scm>
 
   <dependencyManagement>
