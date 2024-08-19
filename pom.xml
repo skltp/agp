@@ -44,6 +44,7 @@
     <javax.jws.version>1.1</javax.jws.version>
     <javax.xml.version>2.3.1</javax.xml.version>
     <ecs-logging-java.version>1.5.0</ecs-logging-java.version>
+    <micrometer.version>1.12.3</micrometer.version>
 
     <maven.javadoc.skip>true</maven.javadoc.skip>
 
@@ -184,6 +185,13 @@
         <groupId>org.apache.cxf</groupId>
         <artifactId>cxf-rt-transports-http-hc</artifactId>
         <version>${apache-cfx.version}</version>
+      </dependency>
+
+      <!-- Prometheus endpoints -->
+      <dependency>
+        <groupId>io.micrometer</groupId>
+        <artifactId>micrometer-registry-prometheus</artifactId>
+        <version>${micrometer.version}</version>
       </dependency>
 
       <!-- Test Dependencies-->
