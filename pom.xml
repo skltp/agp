@@ -51,7 +51,7 @@
     <!-- ************************-->
     <!-- Sonar/Reporting settings -->
     <!-- ************************-->
-    <jacoco.plugin.version>0.8.5</jacoco.plugin.version>
+    <jacoco.plugin.version>0.8.12</jacoco.plugin.version>
     <sonar.plugin.version>3.7.0.1746</sonar.plugin.version>
 
     <sonar.language>java</sonar.language>
