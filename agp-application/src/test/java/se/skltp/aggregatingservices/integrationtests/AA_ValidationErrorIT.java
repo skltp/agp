@@ -48,7 +48,7 @@ public class AA_ValidationErrorIT {
   public void testFormatErrorNotAccepted() throws Exception {
     ExpectedResponse expectedResponse = new ExpectedResponse();
     expectedResponse.add("HSA-ID-4", 1, StatusCodeEnum.DATA_FROM_SOURCE, "");
-    expectedResponse.add("HSA-ID-5", 0, StatusCodeEnum.NO_DATA_SYNCH_FAILED, "(?s).*: Value '1895' is not.*");
+    expectedResponse.add("HSA-ID-5", 0, StatusCodeEnum.NO_DATA_SYNCH_FAILED, "(?s).*: (Value|Värdet) '1895'.*");
 
     final ServiceResponse<GetLaboratoryOrderOutcomeResponseType> response = consumerService
         .callService(TEST_RR_ID_ONE_FORMAT_ERROR);
