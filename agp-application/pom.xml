@@ -56,6 +56,7 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
+
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-transports-http-jetty</artifactId>
@@ -63,6 +64,18 @@
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-transports-http-hc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-bindings-soap</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-bindings-xml</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-wsdl</artifactId>
     </dependency>
 
     <!-- Camel spring-boot starters-->
@@ -72,7 +85,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>
-      <artifactId>camel-cxf-starter</artifactId>
+      <artifactId>camel-cxf-soap-starter</artifactId>
     </dependency>
 
     <!-- Camel -->
