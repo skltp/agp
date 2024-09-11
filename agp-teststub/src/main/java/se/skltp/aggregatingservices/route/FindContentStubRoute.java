@@ -22,7 +22,7 @@ public class FindContentStubRoute extends RouteBuilder {
 
   protected String serviceAddress;
 
-  @EndpointInject(uri="mock:findcontent:input")
+  @EndpointInject("mock:findcontent:input")
   MockEndpoint mock;
 
   @Autowired
