@@ -187,21 +187,6 @@
         <artifactId>cxf-rt-transports-http-hc</artifactId>
         <version>${apache-cfx.version}</version>
       </dependency>
-      <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-rt-bindings-soap</artifactId>
-        <version>${apache-cfx.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-rt-bindings-xml</artifactId>
-        <version>${apache-cfx.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-rt-wsdl</artifactId>
-        <version>${apache-cfx.version}</version>
-      </dependency>
 
       <!-- Prometheus endpoints -->
       <dependency>
