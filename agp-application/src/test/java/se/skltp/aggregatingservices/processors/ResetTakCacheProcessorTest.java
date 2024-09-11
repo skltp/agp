@@ -36,7 +36,7 @@ public class ResetTakCacheProcessorTest extends CamelTestSupport {
   @Autowired
   ResetTakCacheProcessor resetTakCacheProcessor;
 
-  @Produce(uri = "direct:start")
+  @Produce("direct:start")
   protected ProducerTemplate template;
 
   @BeforeEach

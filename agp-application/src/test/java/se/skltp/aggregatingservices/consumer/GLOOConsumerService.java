@@ -69,7 +69,7 @@ public class GLOOConsumerService implements ConsumerService {
     exchange.getIn().setBody(testRequest);
     exchange.getIn().setHeaders(headers);
     exchange.setPattern(ExchangePattern.InOut);
-    final Message response = template.send(getAddress(), exchange).getOut();
+    final Message response = template.send(getAddress(), exchange).getMessage();
     return createServiceResponse(response);
   }
 
@@ -82,7 +82,7 @@ public class GLOOConsumerService implements ConsumerService {
     exchange.getIn().setBody(faultyTestRequest);
     exchange.getIn().setHeaders(headers);
     exchange.setPattern(ExchangePattern.InOut);
-    final Message response = template.send(getFaultyProducerAddress(), exchange).getOut();
+    final Message response = template.send(getFaultyProducerAddress(), exchange).getMessage();
     return createServiceResponse(response);
   }
 

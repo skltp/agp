@@ -80,7 +80,7 @@ public class AgpRoute extends RouteBuilder {
         .process(filterFindContentResponseProcessor)
         .process(createRequestListProcessor)
         .removeHeaders("{{headers.request.filter}}")
-        .split(body()).executorServiceRef("splitterThreadPool")
+        .split(body()).executorService("splitterThreadPool")
                     .timeout(aggregationTimeout)
                     .parallelProcessing(true)
                     .aggregationStrategy(agpAggregationStrategy)

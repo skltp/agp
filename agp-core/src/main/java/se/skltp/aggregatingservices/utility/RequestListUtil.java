@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 import lombok.extern.log4j.Log4j2;
 import org.apache.cxf.message.MessageContentsList;
-import org.springframework.util.StringUtils;
+import org.springframework.util.ObjectUtils;
 import se.skltp.aggregatingservices.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentResponseType;
 import se.skltp.aggregatingservices.riv.itintegration.engagementindex.v1.EngagementType;
 
@@ -43,7 +43,7 @@ public class RequestListUtil {
 
   public static boolean isPartOf(EngagementType engagement, String careUnitId) {
     String careUnit = engagement.getLogicalAddress();
-    return StringUtils.isEmpty(careUnitId) || careUnitId.equals(careUnit);
+    return ObjectUtils.isEmpty(careUnitId) || careUnitId.equals(careUnit);
   }
 
   public static MessageContentsList createRequest(String sourceSystem, MessageContentsList contentsList) {
