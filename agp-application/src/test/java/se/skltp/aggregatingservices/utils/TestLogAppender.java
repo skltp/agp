@@ -2,6 +2,7 @@ package se.skltp.aggregatingservices.utils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.apache.cxf.ext.logging.event.EventType;
@@ -41,7 +42,7 @@ public class TestLogAppender extends AbstractAppender {
     return instance;
   }
 
-  private static List<LogEvent> events = new ArrayList<>();
+  private static List<LogEvent> events = Collections.synchronizedList(new ArrayList<>());
 
   private TestLogAppender(String name, Filter filter, Layout<? extends Serializable> layout, final boolean ignoreExceptions) {
     super(name, filter, layout, ignoreExceptions);

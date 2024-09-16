@@ -41,13 +41,6 @@
     </dependency>
 
     <dependency>
-      <groupId>se.skltp.tak</groupId>
-      <artifactId>tak-schemas</artifactId>
-      <version>1.5.0</version>
-      <scope>compile</scope>
-    </dependency>
-
-    <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-test-spring-junit5</artifactId>
       <scope>compile</scope>
