@@ -190,6 +190,23 @@
         <version>${apache-cfx.version}</version>
       </dependency>
 
+      <!-- Jakarta -->
+      <dependency>
+        <groupId>jakarta.jws</groupId>
+        <artifactId>jakarta.jws-api</artifactId>
+        <version>${jakarta.jws.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.xml.bind</groupId>
+        <artifactId>jakarta.xml.bind-api</artifactId>
+        <version>${jakarta.xml.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.xml.ws</groupId>
+        <artifactId>jakarta.xml.ws-api</artifactId>
+        <version>${jakarta.xml.version}</version>
+      </dependency>
+
       <!-- Prometheus endpoints -->
       <dependency>
         <groupId>io.micrometer</groupId>
