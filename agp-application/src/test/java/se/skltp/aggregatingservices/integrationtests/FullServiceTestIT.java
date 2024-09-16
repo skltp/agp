@@ -219,7 +219,7 @@ public class FullServiceTestIT {
     assertEquals(500, response.getResponseCode(), "Not expected response code");
 
     final SoapFault soapFault = response.getSoapFault();
-    assertNotNull(soapFault, "Expected a SoapFault");§
+    assertNotNull(soapFault, "Expected a SoapFault");
     assertEquals("Invalid Id: EI:INV_ID", soapFault.getReason());
 
     final String eventMessage = testLogAppender.getEventMessage(LOGGER_NAME_ERROR_OUT, 0);
