@@ -1,6 +1,6 @@
 package se.skltp.aggregatingservices.processors;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static se.skltp.aggregatingservices.constants.AgpProperties.AGP_ORIGINAL_QUERY;
 import static se.skltp.aggregatingservices.constants.AgpProperties.AGP_SERVICE_HANDLER;

@@ -1,6 +1,6 @@
 package se.skltp.aggregatingservices.integrationtests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static se.skltp.aggregatingservices.data.TestDataDefines.TEST_RR_ID_MANY_HITS;
 import static se.skltp.aggregatingservices.utils.AssertLoggingUtil.LOGGER_NAME_RESP_OUT;
 import static se.skltp.aggregatingservices.utils.AssertLoggingUtil.assertRespOut;

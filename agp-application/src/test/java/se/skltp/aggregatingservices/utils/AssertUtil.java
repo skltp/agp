@@ -1,14 +1,12 @@
 package se.skltp.aggregatingservices.utils;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import riv.clinicalprocess.healthcond.actoutcome._4.LaboratoryOrderOutcomeType;
 import riv.clinicalprocess.healthcond.actoutcome.getlaboratoryorderoutcomeresponder.v4.GetLaboratoryOrderOutcomeResponseType;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusRecordType;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
 import se.skltp.agp.riv.interoperability.headers.v1.StatusCodeEnum;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AssertUtil {
 
@@ -21,14 +19,14 @@ public class AssertUtil {
       ExpectedResponse expectedResponse,
       String patientId) {
 
-    assertEquals("Not expected response code", expectedResponse.getResponseCode(), response.getResponseCode());
+    assertEquals(expectedResponse.getResponseCode(), response.getResponseCode(), "Not expected response code");
 
-    assertEquals("GetLaboratoryOrderOutcome does not have expected size", expectedResponse.numResponses(),
-        response.getObject().getLaboratoryOrderOutcome().size());
+    assertEquals(expectedResponse.numResponses(),response.getObject().getLaboratoryOrderOutcome().size(),
+            "GetLaboratoryOrderOutcome does not have expected size");
 
     for (LaboratoryOrderOutcomeType responseElement : response.getObject().getLaboratoryOrderOutcome()) {
       String systemId = responseElement.getLaboratoryOrderOutcomeHeader().getSource().getSystemId().getRoot();
-      assertTrue(String.format("%s wasn't expected in response", systemId), expectedResponse.contains(systemId));
+      assertTrue(expectedResponse.contains(systemId), String.format("%s wasn't expected in response", systemId));
       assertEquals(patientId,
           responseElement.getLaboratoryOrderOutcomeHeader().getAccessControlHeader().getPatient().getId().get(0).getRoot());
     }
@@ -39,14 +37,14 @@ public class AssertUtil {
   public static void assertExpectedProcessingStatus(ProcessingStatusType processingStatusType,
       ExpectedResponse expectedResponse) {
 
-    assertEquals("ProcessingStatus does not have expected size", expectedResponse.numProducers(),
-        processingStatusType.getProcessingStatusList().size());
+    assertEquals(expectedResponse.numProducers(), processingStatusType.getProcessingStatusList().size(),
+            "ProcessingStatus does not have expected size");
 
     for (ProcessingStatusRecordType processingStatus : processingStatusType.getProcessingStatusList()) {
       String logicalAddress = processingStatus.getLogicalAddress();
 
-      assertTrue(String.format("%s wasn't expected in ProcessingStatus", logicalAddress),
-          expectedResponse.contains(logicalAddress));
+      assertTrue(expectedResponse.contains(logicalAddress),
+              String.format("%s wasn't expected in ProcessingStatus", logicalAddress));
 
       assertEquals(expectedResponse.getStatusCode(logicalAddress), processingStatus.getStatusCode());
       if (processingStatus.getStatusCode() == StatusCodeEnum.NO_DATA_SYNCH_FAILED) {
@@ -55,11 +53,11 @@ public class AssertUtil {
         String errCode = processingStatus.getLastUnsuccessfulSynchError().getCode();
 
         if(errTxtPart!=null && !errTxtPart.isEmpty()) {
-          assertTrue(String.format("Error txt: %s\n Does not contain:\n  %s ", errTxt, errTxtPart),
-              errTxt.matches(errTxtPart));
+          assertTrue(errTxt.matches(errTxtPart),
+                  String.format("Error txt: %s\n Does not contain:\n  %s ", errTxt, errTxtPart));
         }
 
-        assertNotNull("errorCode should not be null", errCode);
+        assertNotNull(errCode, "errorCode should not be null");
       }
 
     }

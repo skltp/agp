@@ -1,8 +1,8 @@
 package se.skltp.aggregatingservices.integrationtests;
 
 import static org.apache.camel.test.junit5.TestSupport.assertStringContains;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.springframework.test.util.AssertionErrors.assertEquals;
+import static org.springframework.test.util.AssertionErrors.assertNotNull;
 import static se.skltp.aggregatingservices.data.TestDataDefines.TEST_LOGICAL_ADDRESS_1;
 import static se.skltp.aggregatingservices.data.TestDataDefines.TEST_RR_ID_MANY_HITS_NO_ERRORS;
 import static se.skltp.aggregatingservices.data.TestDataDefines.TEST_RR_ID_ONE_FORMAT_ERROR;
