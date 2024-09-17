@@ -1,6 +1,6 @@
 package se.skltp.aggregatingservices.processors;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static se.skltp.aggregatingservices.constants.AgpProperties.AGP_ORIGINAL_QUERY;
 import static se.skltp.aggregatingservices.constants.AgpProperties.AGP_SERVICE_HANDLER;
@@ -9,7 +9,7 @@ import static se.skltp.aggregatingservices.data.TestDataDefines.*;
 
 import java.util.Arrays;
 import java.util.List;
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import org.apache.camel.Exchange;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.support.DefaultExchange;

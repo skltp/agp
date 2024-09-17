@@ -77,7 +77,9 @@ public class GetStatusProcessor implements Processor {
             sc.getClass().getPackage().getName(),
             implementationTitle,
             implementationVersion);
-        implementationVersions.put(implementationTitle, implementationVersion);
+        if (implementationTitle != null) {
+          implementationVersions.put(implementationTitle, implementationVersion);
+        }
       }
     }
   }

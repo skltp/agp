@@ -14,7 +14,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.18</version>
+    <version>3.1.4</version>
     <relativePath /> <!-- lookup parent from repository -->
   </parent>
 
@@ -31,17 +31,16 @@
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <camel.version>3.22.2</camel.version>
-    <spring.boot-version>2.7.18</spring.boot-version>
+    <camel.version>4.0.6</camel.version>
+    <spring.boot-version>3.1.4</spring.boot-version>
     <hawtio.spring.boot-version>2.10.2</hawtio.spring.boot-version>
     <lombok.version>1.18.34</lombok.version>
-    <apache-cfx.version>3.6.2</apache-cfx.version>
-    <cxf.xjc.version>3.3.2</cxf.xjc.version>
-    <takdatahandler.version>3.2.0-RC1</takdatahandler.version>
+    <apache-cfx.version>4.0.3</apache-cfx.version>
+    <cxf.xjc.version>4.0.2</cxf.xjc.version>
+    <takdatahandler.version>3.2.0-RC2</takdatahandler.version>
     <lmax_disruptor-version>3.3.6</lmax_disruptor-version>
-    <jetty.version>9.4.53.v20231009</jetty.version>
-    <javax.jws.version>1.1</javax.jws.version>
-    <javax.xml.version>2.3.1</javax.xml.version>
+    <jakarta.jws.version>3.0.0</jakarta.jws.version>
+    <jakarta.xml.version>4.0.2</jakarta.xml.version>
     <ecs-logging-java.version>1.5.0</ecs-logging-java.version>
     <micrometer.version>1.12.3</micrometer.version>
 
@@ -189,6 +188,23 @@
         <groupId>org.apache.cxf</groupId>
         <artifactId>cxf-rt-transports-http-hc</artifactId>
         <version>${apache-cfx.version}</version>
+      </dependency>
+
+      <!-- Jakarta -->
+      <dependency>
+        <groupId>jakarta.jws</groupId>
+        <artifactId>jakarta.jws-api</artifactId>
+        <version>${jakarta.jws.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.xml.bind</groupId>
+        <artifactId>jakarta.xml.bind-api</artifactId>
+        <version>${jakarta.xml.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.xml.ws</groupId>
+        <artifactId>jakarta.xml.ws-api</artifactId>
+        <version>${jakarta.xml.version}</version>
       </dependency>
 
       <!-- Prometheus endpoints -->

@@ -1,6 +1,6 @@
 package se.skltp.aggregatingservices.integrationtests;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;

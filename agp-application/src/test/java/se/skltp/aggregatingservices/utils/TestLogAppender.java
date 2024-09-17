@@ -2,6 +2,7 @@ package se.skltp.aggregatingservices.utils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.apache.cxf.ext.logging.event.EventType;
@@ -9,6 +10,7 @@ import org.apache.logging.log4j.core.Filter;
 import org.apache.logging.log4j.core.Layout;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.appender.AbstractAppender;
+import org.apache.logging.log4j.core.config.Property;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
 import org.apache.logging.log4j.core.config.plugins.PluginAttribute;
 import org.apache.logging.log4j.core.config.plugins.PluginElement;
@@ -41,10 +43,10 @@ public class TestLogAppender extends AbstractAppender {
     return instance;
   }
 
-  private static List<LogEvent> events = new ArrayList<>();
+  private static final List<LogEvent> events = Collections.synchronizedList(new ArrayList<>());
 
   private TestLogAppender(String name, Filter filter, Layout<? extends Serializable> layout, final boolean ignoreExceptions) {
-    super(name, filter, layout, ignoreExceptions);
+    super(name, filter, layout, ignoreExceptions, Property.EMPTY_ARRAY);
   }
 
   @Override

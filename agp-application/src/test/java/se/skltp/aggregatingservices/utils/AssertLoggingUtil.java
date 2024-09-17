@@ -2,9 +2,9 @@ package se.skltp.aggregatingservices.utils;
 
 import static org.apache.camel.test.junit5.TestSupport.assertStringContains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.junit.Assert.assertEquals;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static se.skltp.agp.riv.interoperability.headers.v1.StatusCodeEnum.DATA_FROM_SOURCE;
 import static se.skltp.agp.riv.interoperability.headers.v1.StatusCodeEnum.NO_DATA_SYNCH_FAILED;
 
@@ -42,10 +42,10 @@ public class AssertLoggingUtil {
     assertEquals(1, testLogAppender.getNumEvents(LOGGER_NAME_EI_REQ_OUT));
     assertEquals(1, testLogAppender.getNumEvents(LOGGER_NAME_EI_RESP_IN));
 
-    assertEquals("Unexpected num REQ_OUT\n" + getAllLogs(testLogAppender), expectedResponse.numProducers(),
-        testLogAppender.getNumEvents(LOGGER_NAME_REQ_OUT));
-    assertEquals("Unexpected num RESP_IN\n" + getAllLogs(testLogAppender), expectedResponse.getNumProducerCallsOk(),
-        testLogAppender.getNumEvents(LOGGER_NAME_RESP_IN));
+    assertEquals(expectedResponse.numProducers(), testLogAppender.getNumEvents(LOGGER_NAME_REQ_OUT),
+            "Unexpected num REQ_OUT\n" + getAllLogs(testLogAppender));
+    assertEquals(expectedResponse.getNumProducerCallsOk(), testLogAppender.getNumEvents(LOGGER_NAME_RESP_IN),
+            "Unexpected num RESP_IN\n" + getAllLogs(testLogAppender));
 
     assertReqIn(testLogAppender, expectedResponse);
     assertRespOut(testLogAppender, expectedResponse);
@@ -90,12 +90,12 @@ public class AssertLoggingUtil {
           "-wsdl_namespace=urn:riv:clinicalprocess:healthcond:actoutcome:GetLaboratoryOrderOutcome:4:rivtabp21");
 
       Matcher matcher = receiverPattern.matcher(eventMessage);
-      assertTrue("No -receiverid found in logentry: \n" + eventMessage, matcher.find());
+      assertTrue(matcher.find(), "No -receiverid found in logentry: \n" + eventMessage);
       String producer = matcher.group(1);
       loggedProducers.add(producer);
       assertStringContains(eventMessage, String.format("-responseCode=%d", expectedResponse.getResponseCode(producer)));
     }
-    assertEquals("Unexpected number receivers logged in " + logMessage, expectedProducers.size(), loggedProducers.size());
+    assertEquals(expectedProducers.size(), loggedProducers.size(), "Unexpected number receivers logged in " + logMessage);
     assertThat(expectedProducers, containsInAnyOrder(loggedProducers.toArray()));
 
   }
@@ -122,10 +122,10 @@ public class AssertLoggingUtil {
           "-wsdl_namespace=urn:riv:clinicalprocess:healthcond:actoutcome:GetLaboratoryOrderOutcome:4:rivtabp21");
 
       Matcher matcher = receiverPattern.matcher(eventMessage);
-      assertTrue("No -receiverid found in logentry: \n" + eventMessage, matcher.find());
+      assertTrue(matcher.find(), "No -receiverid found in logentry: \n" + eventMessage);
       loggedProducers.add(matcher.group(1));
     }
-    assertEquals("Unexpected number receivers logged in req-out", expectedProducers.size(), loggedProducers.size());
+    assertEquals(expectedProducers.size(), loggedProducers.size(), "Unexpected number receivers logged in req-out");
     assertThat(expectedProducers, containsInAnyOrder(loggedProducers.toArray()));
 
   }
@@ -187,9 +187,8 @@ public class AssertLoggingUtil {
 
         final String expectedErrTxtPart = expectedResponse.getErrTxtPart(producer);
         if( expectedErrTxtPart!=null && !expectedErrTxtPart.isEmpty() ) {
-          assertTrue(
-              String.format("Couldn't match:\n%s \n in message:\n%s ", expectedErrTxtPart, eventMessage),
-              eventMessage.matches(expectedErrTxtPart)
+          assertTrue(eventMessage.matches(expectedErrTxtPart),
+                  String.format("Couldn't match:\n%s \n in message:\n%s ", expectedErrTxtPart, eventMessage)
           );
         }
       }
