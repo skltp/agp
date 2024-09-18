@@ -14,13 +14,13 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.14</version>
+    <version>2.7.18</version>
     <relativePath /> <!-- lookup parent from repository -->
   </parent>
 
   <groupId>se.skltp.agp</groupId>
   <artifactId>agp-parent</artifactId>
-  <version>3.2.1-SNAPSHOT</version>
+  <version>3.2.3-SNAPSHOT</version>
   <name>agp-parent</name>
   <description>Demo project for Spring Boot</description>
 
@@ -32,17 +32,19 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <camel.version>3.5.0</camel.version>
-    <spring.boot-version>2.7.14</spring.boot-version>
+    <spring.boot-version>2.7.18</spring.boot-version>
     <hawtio.spring.boot-version>2.10.2</hawtio.spring.boot-version>
-    <lombok.version>1.18.12</lombok.version>
+    <lombok.version>1.18.34</lombok.version>
     <apache-cfx.version>3.4.0</apache-cfx.version>
     <cxf.xjc.version>3.3.2</cxf.xjc.version>
-    <takdatahandler.version>2.1.0</takdatahandler.version>
+    <takdatahandler.version>3.1.0</takdatahandler.version>
     <lmax_disruptor-version>3.3.6</lmax_disruptor-version>
     <jetty.version>9.4.31.v20200723</jetty.version>
     <log4j2.version>2.17.1</log4j2.version>
     <javax.jws.version>1.1</javax.jws.version>
     <javax.xml.version>2.3.1</javax.xml.version>
+    <ecs-logging-java.version>1.5.0</ecs-logging-java.version>
+    <micrometer.version>1.12.3</micrometer.version>
 
     <maven.javadoc.skip>true</maven.javadoc.skip>
 
@@ -147,6 +149,12 @@
         <artifactId>spring-boot-starter-log4j2</artifactId>
         <version>${spring.boot-version}</version>
       </dependency>
+      <dependency>
+        <groupId>co.elastic.logging</groupId>
+        <artifactId>log4j2-ecs-layout</artifactId>
+        <version>${ecs-logging-java.version}</version>
+      </dependency>
+
       <!-- for async logging -->
       <dependency>
         <groupId>com.lmax</groupId>
@@ -177,6 +185,13 @@
         <groupId>org.apache.cxf</groupId>
         <artifactId>cxf-rt-transports-http-hc</artifactId>
         <version>${apache-cfx.version}</version>
+      </dependency>
+
+      <!-- Prometheus endpoints -->
+      <dependency>
+        <groupId>io.micrometer</groupId>
+        <artifactId>micrometer-registry-prometheus</artifactId>
+        <version>${micrometer.version}</version>
       </dependency>
 
       <!-- Test Dependencies-->

@@ -4,7 +4,7 @@
   <parent>
     <artifactId>agp-parent</artifactId>
     <groupId>se.skltp.agp</groupId>
-    <version>3.2.1-SNAPSHOT</version>
+    <version>3.2.3-SNAPSHOT</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
@@ -85,12 +85,25 @@
       <artifactId>camel-management</artifactId>
     </dependency>
 
+    <!-- Prometheus endpoints -->
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-prometheus</artifactId>
+    </dependency>
+
+
 
     <!-- logging -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-log4j2</artifactId>
     </dependency>
+    <dependency>
+      <groupId>co.elastic.logging</groupId>
+      <artifactId>log4j2-ecs-layout</artifactId>
+      <version>${ecs-logging-java.version}</version>
+    </dependency>
+
     <!-- for async logging -->
     <dependency>
       <groupId>com.lmax</groupId>
