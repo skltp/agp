@@ -30,7 +30,7 @@
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <camel.version>4.0.6</camel.version>
+    <camel.version>4.2.0</camel.version>
     <spring.boot-version>3.1.12</spring.boot-version>
     <hawtio.spring.boot-version>2.10.2</hawtio.spring.boot-version>
     <lombok.version>1.18.34</lombok.version>
