@@ -1,5 +1,6 @@
 package se.skltp.aggregatingservices.hawtioauth;
 
+import io.hawt.springboot.ConditionalOnExposedEndpoint;
 import io.hawt.web.auth.AuthenticationConfiguration;
 import java.io.File;
 import java.net.MalformedURLException;
@@ -12,6 +13,7 @@ import se.skltp.aggregatingservices.constants.PropertyConstants;
 
 @Log4j2
 @Configuration
+@ConditionalOnExposedEndpoint(name = "hawtio")
 public class HawtioConfiguration {
 
   private static final String JAVA_SECURITY_AUTH_LOGIN_CONFIG = "java.security.auth.login.config";
