@@ -1,6 +1,5 @@
 package se.skltp.aggregatingservices.hawtioauth;
 
-import io.hawt.config.ConfigFacade;
 import io.hawt.web.auth.AuthenticationConfiguration;
 import java.io.File;
 import java.net.MalformedURLException;
@@ -24,13 +23,13 @@ public class HawtioConfiguration {
   private String externalLoginFile;
 
   /**
-   * Configure facade to use/not use authentication.
+   * Configure hawtio authentication.
    *
    * @return config
    * @throws Exception if an error occurs
    */
   @Bean(initMethod = "init")
-  public ConfigFacade configFacade() {
+  public void init() {
     //If key is set in custom.properties, but no value: true default value above only applies if the key is missing, not value..
     if (hawtioAuthenticationEnabled == null) {
       hawtioAuthenticationEnabled = false;
@@ -51,7 +50,6 @@ public class HawtioConfiguration {
         log.error("Login resource (login.conf) for setting system property " + JAVA_SECURITY_AUTH_LOGIN_CONFIG + " was null!");
       }
     }
-    return new ConfigFacade();
   }
 
   private void setLoginFile() {
