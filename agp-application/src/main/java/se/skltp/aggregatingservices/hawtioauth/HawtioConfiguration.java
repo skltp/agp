@@ -27,7 +27,6 @@ public class HawtioConfiguration {
   /**
    * Configure hawtio authentication.
    *
-   * @return config
    * @throws Exception if an error occurs
    */
   @Bean(initMethod = "init")
