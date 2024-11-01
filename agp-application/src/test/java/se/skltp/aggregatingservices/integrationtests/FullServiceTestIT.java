@@ -28,6 +28,7 @@ import org.apache.cxf.binding.soap.SoapFault;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import riv.clinicalprocess.healthcond.actoutcome.getlaboratoryorderoutcomeresponder.v4.GetLaboratoryOrderOutcomeResponseType;
 import se.skltp.aggregatingservices.AgpApplication;
 import se.skltp.aggregatingservices.consumer.ConsumerService;
@@ -39,6 +40,7 @@ import se.skltp.agp.riv.interoperability.headers.v1.StatusCodeEnum;
 
 @CamelSpringBootTest
 @SpringBootTest(classes = {AgpApplication.class})
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class FullServiceTestIT {
 
   @Autowired
