@@ -32,12 +32,13 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <camel.version>4.2.0</camel.version>
     <spring.boot-version>3.1.12</spring.boot-version>
-    <hawtio.spring.boot-version>2.10.2</hawtio.spring.boot-version>
+    <hawtio.spring.boot-version>4.2.0</hawtio.spring.boot-version>
     <lombok.version>1.18.34</lombok.version>
     <apache-cfx.version>4.0.3</apache-cfx.version>
     <cxf.xjc.version>4.0.2</cxf.xjc.version>
     <takdatahandler.version>3.2.0-RC3</takdatahandler.version>
     <lmax_disruptor-version>3.3.6</lmax_disruptor-version>
+    <jetty.version>11.0.21</jetty.version>
     <jakarta.jws.version>3.0.0</jakarta.jws.version>
     <jakarta.xml.version>4.0.2</jakarta.xml.version>
     <ecs-logging-java.version>1.5.0</ecs-logging-java.version>
