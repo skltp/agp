@@ -18,7 +18,7 @@ public class HawtioConfiguration {
 
   private static final String JAVA_SECURITY_AUTH_LOGIN_CONFIG = "java.security.auth.login.config";
 
-  @Value("${" + PropertyConstants.HAWTIO_AUTHENTICATION_ENABLED + ":#{false}}")
+  @Value("${" + AuthenticationConfiguration.HAWTIO_AUTHENTICATION_ENABLED + ":#{false}}")
   private Boolean hawtioAuthenticationEnabled;
 
   @Value("${" + PropertyConstants.HAWTIO_EXTERNAL_LOGINFILE + ":#{null}}")
@@ -26,8 +26,6 @@ public class HawtioConfiguration {
 
   /**
    * Configure hawtio authentication.
-   *
-   * @throws Exception if an error occurs
    */
   @Bean(initMethod = "init")
   public void init() {
@@ -54,18 +52,14 @@ public class HawtioConfiguration {
       if (f.exists() && f.isFile() && f.canRead()) {
         try {
           loginFileUrl = f.toURI().toURL();
-          if (loginFileUrl != null) {
-            setSystemPropertyIfNotSet("hawtiologin.file", loginFileUrl.toExternalForm());
-            setSystemPropertyIfNotSet(AuthenticationConfiguration.HAWTIO_ROLES, "user");
-            setSystemPropertyIfNotSet(AuthenticationConfiguration.HAWTIO_ROLES, "admin");
-            setSystemPropertyIfNotSet(AuthenticationConfiguration.HAWTIO_REALM, "hawtio");
-            setSystemPropertyIfNotSet(
-                AuthenticationConfiguration.HAWTIO_ROLE_PRINCIPAL_CLASSES,
-                "org.eclipse.jetty.jaas.JAASRole");
-            log.info("Using loginfile for Hawtio : " + loginFileUrl);
-          } else {
-            log.error("No loginFile for Hawtio found. Cannot set user and pw. Hawtio is NOT accessible.");
-          }
+          setSystemPropertyIfNotSet("hawtiologin.file", loginFileUrl.toExternalForm());
+          setSystemPropertyIfNotSet(AuthenticationConfiguration.HAWTIO_ROLES, "user");
+          setSystemPropertyIfNotSet(AuthenticationConfiguration.HAWTIO_ROLES, "admin");
+          setSystemPropertyIfNotSet(AuthenticationConfiguration.HAWTIO_REALM, "hawtio");
+          setSystemPropertyIfNotSet(
+              AuthenticationConfiguration.HAWTIO_ROLE_PRINCIPAL_CLASSES,
+              "org.eclipse.jetty.jaas.JAASRole");
+          log.info("Using loginfile for Hawtio : " + loginFileUrl);
         } catch (MalformedURLException mue) {
           log.error("The external loginFile URL is malformed. URI was " + f.toURI() + " Hawtio is NOT accessible.\n" + mue.getMessage());
         }
