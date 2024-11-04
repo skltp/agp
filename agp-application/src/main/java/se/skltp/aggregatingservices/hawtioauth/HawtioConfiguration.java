@@ -31,16 +31,10 @@ public class HawtioConfiguration {
    */
   @Bean(initMethod = "init")
   public void init() {
-    //If key is set in custom.properties, but no value: true default value above only applies if the key is missing, not value..
-    if (hawtioAuthenticationEnabled == null) {
-      hawtioAuthenticationEnabled = false;
-    }
     log.info("Configuring authentication for Hawtio: hawtioAuthenticationEnabled is " + hawtioAuthenticationEnabled);
     if (!hawtioAuthenticationEnabled) {
-      System.setProperty(AuthenticationConfiguration.HAWTIO_AUTHENTICATION_ENABLED, "false");
       log.warn("Authentication set to false for Hawtio. NOT recommended.");
     } else {
-      System.setProperty(AuthenticationConfiguration.HAWTIO_AUTHENTICATION_ENABLED, "true");
       final URL loginResource = this.getClass().getClassLoader().getResource("login.conf");
       if (loginResource != null) {
         setSystemPropertyIfNotSet(JAVA_SECURITY_AUTH_LOGIN_CONFIG, loginResource.toExternalForm());
