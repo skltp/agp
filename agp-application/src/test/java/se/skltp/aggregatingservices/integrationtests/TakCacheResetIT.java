@@ -16,6 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import se.skltp.aggregatingservices.AgpApplication;
 import se.skltp.aggregatingservices.data.VagvalsInfoTestData;
 import se.skltp.aggregatingservices.service.TakCacheService;
@@ -23,6 +24,7 @@ import se.skltp.takcache.TakCacheLog;
 
 @CamelSpringBootTest
 @SpringBootTest(classes = {AgpApplication.class})
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class TakCacheResetIT {
 
   @Produce
