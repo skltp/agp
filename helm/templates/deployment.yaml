@@ -26,7 +26,7 @@ spec:
         - name: log4j
           configMap:
             name: agp-log4j
-        - name: initrepo
+        - name: init-repo
           persistentVolumeClaim:
             claimName: agp-initrepo-pvc
         - name: init-config
