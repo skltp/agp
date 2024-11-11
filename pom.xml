@@ -9,6 +9,7 @@
     <module>agp-application</module>
     <module>agp-test-service</module>
     <module>agp-test-core</module>
+    <module>agp-init</module>
     <module>report</module>
   </modules>
   <parent>
@@ -22,7 +23,7 @@
   <artifactId>agp-parent</artifactId>
   <version>4.0.0-SNAPSHOT</version>
   <name>agp-parent</name>
-  <description>Demo project for Spring Boot</description>
+  <description>SKLTP AggregeringsPlattform</description>
 
   <properties>
     <java.version>17</java.version>
