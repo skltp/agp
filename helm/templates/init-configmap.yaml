@@ -1,0 +1,78 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: agp-init-config
+data:
+  settings.xml: |
+    <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    
+      <mirrors>
+        <mirror>
+          <id>deploy-repo</id>
+          <url>{{ .Values.aggServices.repository }}</url>
+          <mirrorOf>*</mirrorOf>
+        </mirror>
+      </mirrors>
+    </settings>
+  pom.xml: |
+    <project xmlns="http://maven.apache.org/POM/4.0.0"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+      <modelVersion>4.0.0</modelVersion>
+      <packaging>pom</packaging>
+      
+      <groupId>se.skltp.agp</groupId>
+      <artifactId>agp-init</artifactId>
+      <version>{{ .Chart.AppVersion }}</version>
+      
+      <!-- Enable snapshot dependecies -->
+      <repositories>
+        <repository>
+          <id>central</id>
+          <url>https://repo1.maven.org/maven2/</url>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+          </snapshots>
+        </repository>
+      </repositories>
+    
+      <!-- Copy artifacts from repo to runtime directory -->
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.3.0</version>
+            <executions>
+              <execution>
+                <id>copy-services</id>
+                <phase>package</phase>
+                <goals>
+                <goal>copy</goal>
+                </goals>
+                <configuration>
+                  <artifactItems>
+                    {{- range .Values.aggServices.artifacts }}
+                    <artifactItem>
+                      <groupId>{{ .groupId }}</groupId>
+                      <artifactId>{{ .artifactId }}</artifactId>
+                      <version>{{ .version }}</version>
+                      <classifier>all</classifier>
+                    </artifactItem>
+                    {{- end }}
+                  </artifactItems>
+                  <outputDirectory>/home/maven/services</outputDirectory>
+                  <overWriteReleases>false</overWriteReleases>
+                  <overWriteSnapshots>true</overWriteSnapshots>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </project>
