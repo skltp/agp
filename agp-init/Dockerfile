@@ -8,4 +8,6 @@ RUN adduser -D -h $BASE_DIR -u 1000 inituser
 WORKDIR $BASE_DIR
 USER inituser
 
+RUN mkdir .m2
+
 CMD ["mvn", "package"]
