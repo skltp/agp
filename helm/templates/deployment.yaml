@@ -58,10 +58,10 @@ spec:
             {{- toYaml .Values.deployment.resources | nindent 12 }}
           volumeMounts:
             - name: init-config
-              mountPath: /opt/agp/
+              mountPath: /opt/agp/pom.xml
               subPath: pom.xml
             - name: init-config
-              mountPath: /opt/agp/.m2/
+              mountPath: /opt/agp/.m2/settings.xml
               subPath: settings.xml
             - name: init-repo
               mountPath: /opt/agp/.m2/repository
