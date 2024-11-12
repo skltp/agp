@@ -25,7 +25,7 @@ public class SokVagValInfoStubRoute extends RouteBuilder {
   protected String serviceAddress;
   protected String faultyServiceAddress;
 
-  @EndpointInject(uri="mock:sokvagval:input")
+  @EndpointInject("mock:sokvagval:input")
   MockEndpoint mock;
 
   @Autowired

@@ -1,20 +1,16 @@
 package se.skltp.aggregatingservices.hawtioauth;
 
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 import javax.security.auth.Subject;
 import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.login.LoginException;
 import lombok.extern.log4j.Log4j2;
 import org.eclipse.jetty.jaas.spi.AbstractLoginModule;
-import org.eclipse.jetty.jaas.spi.UserInfo;
 import org.eclipse.jetty.security.PropertyUserStore;
-import org.eclipse.jetty.server.UserIdentity;
-import org.eclipse.jetty.util.security.Credential;
+import org.eclipse.jetty.security.RolePrincipal;
+import org.eclipse.jetty.security.UserPrincipal;
 
 @Log4j2
 public class PropertyFileLoginModule extends AbstractLoginModule {
@@ -70,29 +66,27 @@ public class PropertyFileLoginModule extends AbstractLoginModule {
   }
 
   @Override
-  public UserInfo getUserInfo(final String userName) {
+  public JAASUser getUser(String userName) throws Exception {
     final PropertyUserStore propertyUserStore = PROPERTY_USERSTORES.get(filename);
     if (propertyUserStore == null) {
       throw new IllegalStateException("PropertyUserStore should never be null here!");
     }
 
     log.debug("Checking PropertyUserStore " + filename + " for " + userName);
-    final UserIdentity userIdentity = propertyUserStore.getUserIdentity(userName);
-    if (userIdentity == null) {
-      log.error("No user identity found in external login file.");
+    UserPrincipal userPrincipal = propertyUserStore.getUserPrincipal(userName);
+    if (userPrincipal == null) {
+      log.error("No user principal found in external login file.");
       return null;
     }
 
-    final Set<Principal> principals = userIdentity.getSubject().getPrincipals();
-    final List<String> roles = new ArrayList<>();
-    for (final Principal principal : principals) {
-      roles.add(principal.getName());
-    }
-
-    final Credential credential =
-        (Credential) userIdentity.getSubject().getPrivateCredentials().iterator().next();
-    log.debug("Found: " + userName + " in PropertyUserStore " + filename);
-    return new UserInfo(userName, credential, roles);
+    List<RolePrincipal> rps = propertyUserStore.getRolePrincipals(userName);
+    final List<String> roles = rps == null ? Collections.emptyList()
+            : rps.stream().map(RolePrincipal::getName).collect(Collectors.toList());
+    return new JAASUser(userPrincipal) {
+      public List<String> doFetchRoles() {
+        return roles;
+      }
+    };
   }
 
   @Override

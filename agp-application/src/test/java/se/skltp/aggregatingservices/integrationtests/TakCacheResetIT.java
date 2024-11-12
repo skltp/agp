@@ -1,9 +1,9 @@
 package se.skltp.aggregatingservices.integrationtests;
 
 import static org.apache.camel.test.junit5.TestSupport.assertStringContains;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static se.skltp.aggregatingservices.data.TestDataDefines.SAMPLE_SENDER_ID;
 import static se.skltp.aggregatingservices.data.TestDataDefines.TEST_LOGICAL_ADDRESS_1;
 
@@ -16,6 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import se.skltp.aggregatingservices.AgpApplication;
 import se.skltp.aggregatingservices.data.VagvalsInfoTestData;
 import se.skltp.aggregatingservices.service.TakCacheService;
@@ -23,6 +24,7 @@ import se.skltp.takcache.TakCacheLog;
 
 @CamelSpringBootTest
 @SpringBootTest(classes = {AgpApplication.class})
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class TakCacheResetIT {
 
   @Produce

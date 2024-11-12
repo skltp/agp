@@ -9,40 +9,39 @@
     <module>agp-application</module>
     <module>agp-test-service</module>
     <module>agp-test-core</module>
+    <module>agp-init</module>
     <module>report</module>
   </modules>
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.18</version>
+    <version>3.1.12</version>
     <relativePath /> <!-- lookup parent from repository -->
   </parent>
 
   <groupId>se.skltp.agp</groupId>
   <artifactId>agp-parent</artifactId>
-  <version>3.2.3-SNAPSHOT</version>
+  <version>4.0.0-SNAPSHOT</version>
   <name>agp-parent</name>
-  <description>Demo project for Spring Boot</description>
+  <description>SKLTP AggregeringsPlattform</description>
 
   <properties>
-    <java.version>11</java.version>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <java.version>17</java.version>
+    <maven.compiler.release>17</maven.compiler.release>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <camel.version>3.5.0</camel.version>
-    <spring.boot-version>2.7.18</spring.boot-version>
-    <hawtio.spring.boot-version>2.10.2</hawtio.spring.boot-version>
+    <camel.version>4.2.0</camel.version>
+    <spring.boot-version>3.1.12</spring.boot-version>
+    <hawtio.spring.boot-version>4.2.0</hawtio.spring.boot-version>
     <lombok.version>1.18.34</lombok.version>
-    <apache-cfx.version>3.4.0</apache-cfx.version>
-    <cxf.xjc.version>3.3.2</cxf.xjc.version>
-    <takdatahandler.version>3.1.0</takdatahandler.version>
+    <apache-cfx.version>4.0.3</apache-cfx.version>
+    <cxf.xjc.version>4.0.2</cxf.xjc.version>
+    <takdatahandler.version>3.2.0-RC3</takdatahandler.version>
     <lmax_disruptor-version>3.3.6</lmax_disruptor-version>
-    <jetty.version>9.4.31.v20200723</jetty.version>
-    <log4j2.version>2.17.1</log4j2.version>
-    <javax.jws.version>1.1</javax.jws.version>
-    <javax.xml.version>2.3.1</javax.xml.version>
+    <jetty.version>11.0.21</jetty.version>
+    <jakarta.jws.version>3.0.0</jakarta.jws.version>
+    <jakarta.xml.version>4.0.2</jakarta.xml.version>
     <ecs-logging-java.version>1.5.0</ecs-logging-java.version>
     <micrometer.version>1.12.3</micrometer.version>
 
@@ -51,7 +50,7 @@
     <!-- ************************-->
     <!-- Sonar/Reporting settings -->
     <!-- ************************-->
-    <jacoco.plugin.version>0.8.5</jacoco.plugin.version>
+    <jacoco.plugin.version>0.8.12</jacoco.plugin.version>
     <sonar.plugin.version>3.7.0.1746</sonar.plugin.version>
 
     <sonar.language>java</sonar.language>
@@ -122,12 +121,17 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-cxf-starter</artifactId>
+        <artifactId>camel-cxf-soap-starter</artifactId>
         <version>${camel.version}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jetty-starter</artifactId>
+        <version>${camel.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-direct-starter</artifactId>
         <version>${camel.version}</version>
       </dependency>
 
@@ -185,6 +189,23 @@
         <groupId>org.apache.cxf</groupId>
         <artifactId>cxf-rt-transports-http-hc</artifactId>
         <version>${apache-cfx.version}</version>
+      </dependency>
+
+      <!-- Jakarta -->
+      <dependency>
+        <groupId>jakarta.jws</groupId>
+        <artifactId>jakarta.jws-api</artifactId>
+        <version>${jakarta.jws.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.xml.bind</groupId>
+        <artifactId>jakarta.xml.bind-api</artifactId>
+        <version>${jakarta.xml.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.xml.ws</groupId>
+        <artifactId>jakarta.xml.ws-api</artifactId>
+        <version>${jakarta.xml.version}</version>
       </dependency>
 
       <!-- Prometheus endpoints -->

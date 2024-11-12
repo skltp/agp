@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import se.skltp.aggregatingservices.AgpApplication;
 import se.skltp.aggregatingservices.config.EiConfig;
 import se.skltp.aggregatingservices.config.VpConfig;
@@ -22,6 +23,7 @@ import se.skltp.aggregatingservices.route.ProducerBaseRoute;
 
 @CamelSpringBootTest
 @SpringBootTest(classes = {AgpApplication.class})
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class FullServiceHeadersIT {
 
   @Autowired

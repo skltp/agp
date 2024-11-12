@@ -1,6 +1,6 @@
 package se.skltp.aggregatingservices.integrationtests;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
@@ -9,10 +9,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import se.skltp.aggregatingservices.AgpApplication;
 
 @CamelSpringBootTest
 @SpringBootTest(classes = {AgpApplication.class})
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class GetStatusIT {
 
   @Produce

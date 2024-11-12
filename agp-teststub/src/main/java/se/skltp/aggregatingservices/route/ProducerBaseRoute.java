@@ -19,7 +19,7 @@ public class ProducerBaseRoute extends RouteBuilder {
 
   List<TestProducerConfiguration> testProducerConfigurations;
 
-  @EndpointInject(uri="mock:producer:input")
+  @EndpointInject("mock:producer:input")
   MockEndpoint mock;
 
   @Autowired

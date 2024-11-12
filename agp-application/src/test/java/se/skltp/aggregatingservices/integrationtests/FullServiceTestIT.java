@@ -1,9 +1,9 @@
 package se.skltp.aggregatingservices.integrationtests;
 
 import static org.apache.camel.test.junit5.TestSupport.assertStringContains;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static se.skltp.aggregatingservices.data.TestDataDefines.TEST_ID_FAULT_INVALID_ID_IN_EI;
 import static se.skltp.aggregatingservices.data.TestDataDefines.TEST_ID_FAULT_TIMEOUT_IN_EI;
 import static se.skltp.aggregatingservices.data.TestDataDefines.TEST_LOGICAL_ADDRESS_1;
@@ -28,6 +28,7 @@ import org.apache.cxf.binding.soap.SoapFault;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import riv.clinicalprocess.healthcond.actoutcome.getlaboratoryorderoutcomeresponder.v4.GetLaboratoryOrderOutcomeResponseType;
 import se.skltp.aggregatingservices.AgpApplication;
 import se.skltp.aggregatingservices.consumer.ConsumerService;
@@ -39,6 +40,7 @@ import se.skltp.agp.riv.interoperability.headers.v1.StatusCodeEnum;
 
 @CamelSpringBootTest
 @SpringBootTest(classes = {AgpApplication.class})
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class FullServiceTestIT {
 
   @Autowired
@@ -197,10 +199,10 @@ public class FullServiceTestIT {
     final ServiceResponse<GetLaboratoryOrderOutcomeResponseType> response = consumerService
         .callService(TEST_ID_FAULT_TIMEOUT_IN_EI);
 
-    assertEquals("Not expected response code", 500, response.getResponseCode());
+    assertEquals(500, response.getResponseCode(), "Not expected response code");
 
     final SoapFault soapFault = response.getSoapFault();
-    assertNotNull("Expected a SoapFault", soapFault);
+    assertNotNull(soapFault, "Expected a SoapFault");
     assertTrue(soapFault.getReason().matches("(?i).*(timeout|Read timed out).*"));
 
     final String eventMessage = testLogAppender.getEventMessage(LOGGER_NAME_ERROR_OUT, 0);
@@ -216,10 +218,10 @@ public class FullServiceTestIT {
     final ServiceResponse<GetLaboratoryOrderOutcomeResponseType> response = consumerService
         .callService(TEST_ID_FAULT_INVALID_ID_IN_EI);
 
-    assertEquals("Not expected response code", 500, response.getResponseCode());
+    assertEquals(500, response.getResponseCode(), "Not expected response code");
 
     final SoapFault soapFault = response.getSoapFault();
-    assertNotNull("Expected a SoapFault", soapFault);
+    assertNotNull(soapFault, "Expected a SoapFault");
     assertEquals("Invalid Id: EI:INV_ID", soapFault.getReason());
 
     final String eventMessage = testLogAppender.getEventMessage(LOGGER_NAME_ERROR_OUT, 0);
@@ -235,10 +237,10 @@ public class FullServiceTestIT {
   public void testCallWithWrongContractShouldGiveSoapFault() throws Exception {
     final ServiceResponse<GetLaboratoryOrderOutcomeResponseType> response = consumerService.callServiceWithWrongContract();
 
-    assertEquals("Not expected response code", 500, response.getResponseCode());
+    assertEquals(500, response.getResponseCode(), "Not expected response code");
 
     final SoapFault soapFault = response.getSoapFault();
-    assertNotNull("Expected a SoapFault", soapFault);
+    assertNotNull(soapFault, "Expected a SoapFault");
 
     // The service was called with a FindContent (instead of GetLaboratoryOrderOutcome)
     assertStringContains(soapFault.getReason(), "FindContent was not recognized");

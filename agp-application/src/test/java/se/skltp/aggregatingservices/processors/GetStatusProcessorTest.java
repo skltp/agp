@@ -32,7 +32,7 @@ public class GetStatusProcessorTest extends CamelTestSupport {
 
   @Autowired BuildProperties buildProperties;
 
-  @Produce(uri = "direct:getStatus")
+  @Produce("direct:getStatus")
   protected ProducerTemplate template;
 
   @Test

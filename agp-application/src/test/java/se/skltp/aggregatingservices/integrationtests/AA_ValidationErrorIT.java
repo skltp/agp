@@ -1,8 +1,8 @@
 package se.skltp.aggregatingservices.integrationtests;
 
 import static org.apache.camel.test.junit5.TestSupport.assertStringContains;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.springframework.test.util.AssertionErrors.assertEquals;
+import static org.springframework.test.util.AssertionErrors.assertNotNull;
 import static se.skltp.aggregatingservices.data.TestDataDefines.TEST_LOGICAL_ADDRESS_1;
 import static se.skltp.aggregatingservices.data.TestDataDefines.TEST_RR_ID_MANY_HITS_NO_ERRORS;
 import static se.skltp.aggregatingservices.data.TestDataDefines.TEST_RR_ID_ONE_FORMAT_ERROR;
@@ -48,7 +48,7 @@ public class AA_ValidationErrorIT {
   public void testFormatErrorNotAccepted() throws Exception {
     ExpectedResponse expectedResponse = new ExpectedResponse();
     expectedResponse.add("HSA-ID-4", 1, StatusCodeEnum.DATA_FROM_SOURCE, "");
-    expectedResponse.add("HSA-ID-5", 0, StatusCodeEnum.NO_DATA_SYNCH_FAILED, "(?s).*: Value '1895' is not.*");
+    expectedResponse.add("HSA-ID-5", 0, StatusCodeEnum.NO_DATA_SYNCH_FAILED, "(?s).*: (Value|Värdet) '1895'.*");
 
     final ServiceResponse<GetLaboratoryOrderOutcomeResponseType> response = consumerService
         .callService(TEST_RR_ID_ONE_FORMAT_ERROR);

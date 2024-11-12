@@ -2,7 +2,7 @@ package se.skltp.aggregatingservices;
 
 import static org.apache.cxf.message.Message.SCHEMA_VALIDATION_ENABLED;
 
-import org.apache.camel.component.cxf.CxfConfigurer;
+import org.apache.camel.component.cxf.jaxws.CxfConfigurer;
 import org.apache.cxf.annotations.SchemaValidation.SchemaValidationType;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.endpoint.Server;
