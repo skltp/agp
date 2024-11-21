@@ -17,6 +17,9 @@ Innehåller en körbar spring-boot applikation
 ### agp-core
 Innehåller de interface som varje plugin måste implementera.
 
+### agp-init
+Används för att skapa en init-container, för användning tillsammans med Helm chart.
+
 ### agp-schemas
 Innehåller wsdl scheman för anrop mot EI
 
@@ -32,6 +35,9 @@ Innehåller en mock plattform för:
 - TAK
 
 Innehåller även en grund för att skapa en mock plattform för varje plugin
+
+ ## Helm
+Källkoden innehåller även Helm chart som kan användas som grund för konfiguration i Kubernetes.
 
  ## Dokumentation referenser
  - [Konfigurering]
