@@ -20,83 +20,15 @@ skltp:
 vip:
   name: default-ei-vip
 
+# Aggregating services: maven repository, artifacts, and service ports
 aggServices:
+  repository: https://nexus.drift.inera.se/repository/maven-public/
+  artifacts: {} # Override according to the example below to configure services
+  # - groupId: se.skltp.aggregatingservices.riv.clinicalprocess.activity.actions
+  #   artifactId: GetAggregatedActivities-v1-main
+  #   version: 3.0.0
   ports:
     - 9001
-  repository: https://nexus.drift.inera.se/repository/maven-public/
-  artifacts:
-    - groupId: se.skltp.aggregatingservices.riv.clinicalprocess.activity.actions
-      artifactId: GetAggregatedActivities-v1-main
-      version: 3.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.clinicalprocess.activityprescription.actoutcome
-      artifactId: GetAggregatedMedicationHistory-v2-main
-      version: 3.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.clinicalprocess.activityprescription.actoutcome
-      artifactId: GetAggregatedVaccinationHistory-v1-main
-      version: 2.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.clinicalprocess.activityprescription.actoutcome
-      artifactId: GetAggregatedVaccinationHistory-v2-main
-      version: 4.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.actoutcome
-      artifactId: GetAggregatedECGOutcome-v1-main
-      version: 3.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.actoutcome
-      artifactId: GetAggregatedImagingOutcome-v1-main
-      version: 3.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.actoutcome
-      artifactId: GetAggregatedLaboratoryOrderOutcome-v3-main
-      version: 2.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.actoutcome
-      artifactId: GetAggregatedLaboratoryOrderOutcome-v4-main
-      version: 4.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.actoutcome
-      artifactId: GetAggregatedMaternityMedicalHistory-v2-main
-      version: 3.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.actoutcome
-      artifactId: GetAggregatedReferralOutcome-v3-main
-      version: 3.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic
-      artifactId: GetAggregatedObservations-v1-main
-      version: 3.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.description
-      artifactId: GetAggregatedAlertInformation-v2-main
-      version: 3.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.description
-      artifactId: GetAggregatedAlertInformation-v3-main
-      version: 1.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.description
-      artifactId: GetAggregatedCareDocumentation-v2-main
-      version: 3.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.description
-      artifactId: GetAggregatedCareDocumentation-v3-main
-      version: 2.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.description
-      artifactId: GetAggregatedDiagnosis-v2-main
-      version: 3.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.description
-      artifactId: GetAggregatedFunctionalStatus-v2-main
-      version: 3.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.clinicalprocess.logistics.logistics
-      artifactId: GetAggregatedCareContacts-v2-main
-      version: 4.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.clinicalprocess.logistics.logistics
-      artifactId: GetAggregatedCareContacts-v3-main
-      version: 2.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.clinicalprocess.logistics.logistics
-      artifactId: GetAggregatedCarePlans-v2-main
-      version: 3.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.crm.requeststatus
-      artifactId: GetAggregatedRequestActivities-v1-main
-      version: 4.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.crm.requeststatus
-      artifactId: GetAggregatedRequestActivities-v2-main
-      version: 2.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.crm.scheduling
-      artifactId: GetAggregatedSubjectOfCareSchedule-v1-main
-      version: 3.0.0-SNAPSHOT
-    - groupId: se.skltp.aggregatingservices.riv.financial.patientfees.exemption
-      artifactId: GetAggregatedRequestExemptionStatuses-v1-main
-      version: 2.0.0-SNAPSHOT
 
 environment:
   variables:
