@@ -37,7 +37,7 @@
     <lombok.version>1.18.34</lombok.version>
     <apache-cfx.version>4.0.3</apache-cfx.version>
     <cxf.xjc.version>4.0.2</cxf.xjc.version>
-    <takdatahandler.version>3.2.0-RC3</takdatahandler.version>
+    <takdatahandler.version>3.3.1</takdatahandler.version>
     <lmax_disruptor-version>3.3.6</lmax_disruptor-version>
     <jetty.version>11.0.21</jetty.version>
     <jakarta.jws.version>3.0.0</jakarta.jws.version>
