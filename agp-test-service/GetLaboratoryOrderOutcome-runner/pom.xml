@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>agp-test-service</artifactId>
-    <groupId>se.skltp.agp</groupId>
-    <version>4.0.0-SNAPSHOT</version>
-  </parent>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-
+  <parent>
+    <groupId>se.skltp.agp</groupId>
+    <artifactId>agp-test-service</artifactId>
+    <version>4.0.0</version>
+  </parent>
   <artifactId>GetLaboratoryOrderOutcome-runner</artifactId>
-
   <dependencies>
     <dependency>
       <groupId>se.skltp.agp</groupId>
@@ -30,5 +29,4 @@
       <artifactId>camel-test-spring-junit5</artifactId>
     </dependency>
   </dependencies>
-
 </project>
