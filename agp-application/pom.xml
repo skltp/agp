@@ -1,31 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
-  <parent>
-    <artifactId>agp-parent</artifactId>
-    <groupId>se.skltp.agp</groupId>
-    <version>4.0.0-SNAPSHOT</version>
-  </parent>
-
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-
+  <parent>
+    <groupId>se.skltp.agp</groupId>
+    <artifactId>agp-parent</artifactId>
+    <version>4.1.0-SNAPSHOT</version>
+  </parent>
   <artifactId>agp-application</artifactId>
-
   <dependencies>
-    <!--Modules-->
     <dependency>
       <groupId>se.skltp.agp</groupId>
       <artifactId>agp-core</artifactId>
       <version>${project.version}</version>
     </dependency>
-
     <dependency>
       <groupId>se.skltp.agp</groupId>
       <artifactId>agp-schemas</artifactId>
       <version>${project.version}</version>
     </dependency>
-
-    <!-- Spring Boot -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
@@ -56,7 +49,6 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-transports-http-jetty</artifactId>
@@ -65,8 +57,6 @@
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-transports-http-hc</artifactId>
     </dependency>
-
-    <!-- Camel spring-boot starters-->
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>
       <artifactId>camel-jetty-starter</artifactId>
@@ -79,8 +69,6 @@
       <groupId>org.apache.camel.springboot</groupId>
       <artifactId>camel-direct-starter</artifactId>
     </dependency>
-
-    <!-- Camel -->
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-support</artifactId>
@@ -89,16 +77,10 @@
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-management</artifactId>
     </dependency>
-
-    <!-- Prometheus endpoints -->
     <dependency>
       <groupId>io.micrometer</groupId>
       <artifactId>micrometer-registry-prometheus</artifactId>
     </dependency>
-
-
-
-    <!-- logging -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-log4j2</artifactId>
@@ -108,15 +90,10 @@
       <artifactId>log4j2-ecs-layout</artifactId>
       <version>${ecs-logging-java.version}</version>
     </dependency>
-
-    <!-- for async logging -->
     <dependency>
       <groupId>com.lmax</groupId>
       <artifactId>disruptor</artifactId>
     </dependency>
-
-
-    <!--hawt.io-->
     <dependency>
       <groupId>io.hawt</groupId>
       <artifactId>hawtio-springboot</artifactId>
@@ -126,14 +103,11 @@
       <artifactId>jetty-jaas</artifactId>
       <version>${jetty.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <optional>true</optional>
     </dependency>
-
-    <!-- Test Dependencies-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -183,7 +157,6 @@
       <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>se.skltp.takdatahandler</groupId>
       <artifactId>behorighethandler</artifactId>
@@ -194,19 +167,12 @@
       <artifactId>vagvalhandler</artifactId>
       <version>${takdatahandler.version}</version>
     </dependency>
-
-
   </dependencies>
-
   <build>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <configuration>
-          <layout>ZIP</layout> <!-- to use PropertiesLaunchar -->
-          <classifier>exec</classifier>
-        </configuration>
         <executions>
           <execution>
             <id>build-info</id>
@@ -220,6 +186,10 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <layout>ZIP</layout>
+          <classifier>exec</classifier>
+        </configuration>
       </plugin>
     </plugins>
   </build>

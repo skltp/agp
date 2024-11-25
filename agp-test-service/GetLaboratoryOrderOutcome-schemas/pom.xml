@@ -1,36 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>agp-test-service</artifactId>
-    <groupId>se.skltp.agp</groupId>
-    <version>4.0.0-SNAPSHOT</version>
-  </parent>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-
+  <parent>
+    <groupId>se.skltp.agp</groupId>
+    <artifactId>agp-test-service</artifactId>
+    <version>4.1.0-SNAPSHOT</version>
+  </parent>
   <artifactId>GetLaboratoryOrderOutcome-schemas</artifactId>
-  <packaging>jar</packaging>
-
   <properties>
-    <!-- Properties for generating code from WSDL and XML Schemas (JAX-WS + JAXB) -->
     <schema.path>${basedir}/src/main/resources/schemas</schema.path>
     <schema.gen.src.dir>${project.build.directory}/generated-sources/cxf</schema.gen.src.dir>
   </properties>
-
   <build>
     <plugins>
       <plugin>
         <groupId>org.apache.cxf</groupId>
         <artifactId>cxf-codegen-plugin</artifactId>
         <version>${apache-cfx.version}</version>
-        <configuration>
-          <!-- fork to avoid encoding issues, ref: soi-toolkit issue 360 -->
-          <fork>once</fork>
-          <additionalJvmArgs>-Dfile.encoding=UTF-8</additionalJvmArgs>
-        </configuration>
         <executions>
           <execution>
             <id>ws.generate</id>
             <phase>generate-sources</phase>
+            <goals>
+              <goal>wsdl2java</goal>
+            </goals>
             <configuration>
               <sourceRoot>${schema.gen.src.dir}</sourceRoot>
               <wsdlOptions>
@@ -55,13 +49,13 @@
                 </wsdloption>
               </wsdlOptions>
             </configuration>
-            <goals>
-              <goal>wsdl2java</goal>
-            </goals>
           </execution>
         </executions>
+        <configuration>
+          <fork>once</fork>
+          <additionalJvmArgs>-Dfile.encoding=UTF-8</additionalJvmArgs>
+        </configuration>
       </plugin>
     </plugins>
   </build>
-
 </project>

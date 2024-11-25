@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.1.12</version>
+    <relativePath></relativePath>
+  </parent>
+  <groupId>se.skltp.agp</groupId>
+  <artifactId>agp-parent</artifactId>
+  <version>4.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
+  <name>agp-parent</name>
+  <description>SKLTP AggregeringsPlattform</description>
   <modules>
     <module>agp-schemas</module>
     <module>agp-core</module>
@@ -12,53 +24,11 @@
     <module>agp-init</module>
     <module>report</module>
   </modules>
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.1.12</version>
-    <relativePath /> <!-- lookup parent from repository -->
-  </parent>
-
-  <groupId>se.skltp.agp</groupId>
-  <artifactId>agp-parent</artifactId>
-  <version>4.0.0-SNAPSHOT</version>
-  <name>agp-parent</name>
-  <description>SKLTP AggregeringsPlattform</description>
-
-  <properties>
-    <java.version>17</java.version>
-    <maven.compiler.release>17</maven.compiler.release>
-
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <camel.version>4.2.0</camel.version>
-    <spring.boot-version>3.1.12</spring.boot-version>
-    <hawtio.spring.boot-version>4.2.0</hawtio.spring.boot-version>
-    <lombok.version>1.18.34</lombok.version>
-    <apache-cfx.version>4.0.3</apache-cfx.version>
-    <cxf.xjc.version>4.0.2</cxf.xjc.version>
-    <takdatahandler.version>3.3.1</takdatahandler.version>
-    <lmax_disruptor-version>3.3.6</lmax_disruptor-version>
-    <jetty.version>11.0.21</jetty.version>
-    <jakarta.jws.version>3.0.0</jakarta.jws.version>
-    <jakarta.xml.version>4.0.2</jakarta.xml.version>
-    <ecs-logging-java.version>1.5.0</ecs-logging-java.version>
-    <micrometer.version>1.12.3</micrometer.version>
-
-    <maven.javadoc.skip>true</maven.javadoc.skip>
-
-    <!-- ************************-->
-    <!-- Sonar/Reporting settings -->
-    <!-- ************************-->
-    <jacoco.plugin.version>0.8.12</jacoco.plugin.version>
-    <sonar.plugin.version>3.7.0.1746</sonar.plugin.version>
-
-    <sonar.language>java</sonar.language>
-    <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
-    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-    <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-  </properties>
-
+  <scm>
+    <connection>scm:git:https://github.com:443/skltp/agp.git</connection>
+    <developerConnection>scm:git:https://github.com:443/skltp/agp.git</developerConnection>
+    <url>https://github.com/skltp/agp.git</url>
+  </scm>
   <distributionManagement>
     <repository>
       <id>release-nexus</id>
@@ -71,16 +41,33 @@
       <url>${snapshot-nexus-url}</url>
     </snapshotRepository>
   </distributionManagement>
-
-  <scm>
-    <url>https://github.com/skltp/agp.git</url>
-    <connection>scm:git:https://github.com:443/skltp/agp.git</connection>
-    <developerConnection>scm:git:https://github.com:443/skltp/agp.git</developerConnection>
-    <tag>HEAD</tag>
-  </scm>
-
+  <properties>
+    <maven.compiler.release>17</maven.compiler.release>
+    <jacoco.plugin.version>0.8.12</jacoco.plugin.version>
+    <lmax_disruptor-version>3.3.6</lmax_disruptor-version>
+    <jetty.version>11.0.21</jetty.version>
+    <spring.boot-version>3.1.12</spring.boot-version>
+    <ecs-logging-java.version>1.5.0</ecs-logging-java.version>
+    <maven.javadoc.skip>true</maven.javadoc.skip>
+    <apache-cfx.version>4.0.3</apache-cfx.version>
+    <takdatahandler.version>3.3.1</takdatahandler.version>
+    <cxf.xjc.version>4.0.2</cxf.xjc.version>
+    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+    <micrometer.version>1.12.3</micrometer.version>
+    <sonar.plugin.version>3.7.0.1746</sonar.plugin.version>
+    <sonar.language>java</sonar.language>
+    <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
+    <java.version>17</java.version>
+    <jakarta.xml.version>4.0.2</jakarta.xml.version>
+    <jakarta.jws.version>3.0.0</jakarta.jws.version>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <lombok.version>1.18.34</lombok.version>
+    <hawtio.spring.boot-version>4.2.0</hawtio.spring.boot-version>
+    <camel.version>4.2.0</camel.version>
+  </properties>
   <dependencyManagement>
-    <!-- Spring-boot -->
     <dependencies>
       <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -112,8 +99,6 @@
         <artifactId>spring-boot-starter-actuator</artifactId>
         <version>${spring.boot-version}</version>
       </dependency>
-
-      <!--Camel Spring-boot starters-->
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spring-boot-starter</artifactId>
@@ -134,8 +119,6 @@
         <artifactId>camel-direct-starter</artifactId>
         <version>${camel.version}</version>
       </dependency>
-
-      <!-- Camel -->
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-support</artifactId>
@@ -146,8 +129,6 @@
         <artifactId>camel-management</artifactId>
         <version>${camel.version}</version>
       </dependency>
-
-      <!-- logging -->
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-log4j2</artifactId>
@@ -158,28 +139,22 @@
         <artifactId>log4j2-ecs-layout</artifactId>
         <version>${ecs-logging-java.version}</version>
       </dependency>
-
-      <!-- for async logging -->
       <dependency>
         <groupId>com.lmax</groupId>
         <artifactId>disruptor</artifactId>
         <version>${lmax_disruptor-version}</version>
       </dependency>
-
       <dependency>
         <groupId>io.hawt</groupId>
         <artifactId>hawtio-springboot</artifactId>
         <version>${hawtio.spring.boot-version}</version>
       </dependency>
-
       <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
-        <optional>true</optional>
         <version>${lombok.version}</version>
+        <optional>true</optional>
       </dependency>
-
-      <!-- Cxf -->
       <dependency>
         <groupId>org.apache.cxf</groupId>
         <artifactId>cxf-rt-transports-http-jetty</artifactId>
@@ -190,8 +165,6 @@
         <artifactId>cxf-rt-transports-http-hc</artifactId>
         <version>${apache-cfx.version}</version>
       </dependency>
-
-      <!-- Jakarta -->
       <dependency>
         <groupId>jakarta.jws</groupId>
         <artifactId>jakarta.jws-api</artifactId>
@@ -207,22 +180,17 @@
         <artifactId>jakarta.xml.ws-api</artifactId>
         <version>${jakarta.xml.version}</version>
       </dependency>
-
-      <!-- Prometheus endpoints -->
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-registry-prometheus</artifactId>
         <version>${micrometer.version}</version>
       </dependency>
-
-      <!-- Test Dependencies-->
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-test</artifactId>
         <version>${spring.boot-version}</version>
         <scope>test</scope>
         <exclusions>
-          <!-- This is to exclude Junit4 test-->
           <exclusion>
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>
@@ -232,8 +200,8 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-test-junit5</artifactId>
-        <scope>test</scope>
         <version>${camel.version}</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
@@ -247,13 +215,8 @@
         <version>${camel.version}</version>
         <scope>test</scope>
       </dependency>
-
-
     </dependencies>
   </dependencyManagement>
-
-
-
   <build>
     <pluginManagement>
       <plugins>
@@ -280,10 +243,8 @@
         </plugin>
       </plugins>
     </pluginManagement>
-
     <plugins>
       <plugin>
-        <!-- create test-jar files -->
         <artifactId>maven-jar-plugin</artifactId>
         <executions>
           <execution>
@@ -293,29 +254,11 @@
           </execution>
         </executions>
       </plugin>
-
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-<!--        <version>2.22.2</version>-->
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
-<!--        <version>2.22.2</version>-->
-        <configuration>
-          <!-- Seems to be som kind of conflict with JAXB camel dependencies and JDK8 Jaxb impl.
-          https://stackoverflow.com/questions/42499436/classcastexception-cannot-be-cast-to-com-sun-xml-internal-bind-v2-runtime-refle -->
-          <systemPropertyVariables>
-            <com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize>true
-            </com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize>
-          </systemPropertyVariables>
-
-          <!--Make failsafe and spring-boot repackage play nice together
-          https://github.com/spring-projects/spring-boot/issues/6254-->
-          <classesDirectory>${project.build.outputDirectory}</classesDirectory>
-          <runOrder>alphabetical</runOrder>
-        </configuration>
         <executions>
           <execution>
             <goals>
@@ -324,21 +267,25 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <systemPropertyVariables>
+            <com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize>true</com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize>
+          </systemPropertyVariables>
+          <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+          <runOrder>alphabetical</runOrder>
+        </configuration>
       </plugin>
     </plugins>
   </build>
-
   <profiles>
     <profile>
       <id>test-coverage</id>
       <build>
         <plugins>
           <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
           </plugin>
           <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-failsafe-plugin</artifactId>
             <executions>
               <execution>
@@ -378,5 +325,4 @@
       </build>
     </profile>
   </profiles>
-
 </project>

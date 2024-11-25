@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>agp-parent</artifactId>
-    <groupId>se.skltp.agp</groupId>
-    <version>4.0.0-SNAPSHOT</version>
-  </parent>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-
+  <parent>
+    <groupId>se.skltp.agp</groupId>
+    <artifactId>agp-parent</artifactId>
+    <version>4.1.0-SNAPSHOT</version>
+  </parent>
   <artifactId>agp-schemas</artifactId>
-
   <properties>
-    <!-- Properties for generating code from XML Schemas (JAXB) -->
     <schema.path>${basedir}/src/main/resources/schemas</schema.path>
     <schema.gen.src.dir>${project.build.directory}/generated-sources/cxf</schema.gen.src.dir>
   </properties>
-
   <dependencies>
     <dependency>
       <groupId>jakarta.jws</groupId>
@@ -29,20 +26,12 @@
       <artifactId>jakarta.xml.ws-api</artifactId>
     </dependency>
   </dependencies>
-
   <build>
-
     <plugins>
-
       <plugin>
         <groupId>org.apache.cxf</groupId>
         <artifactId>cxf-xjc-plugin</artifactId>
         <version>${cxf.xjc.version}</version>
-        <configuration>
-          <extensions>
-            <extension>org.apache.cxf.xjcplugins:cxf-xjc-dv:${cxf.xjc.version}</extension>
-          </extensions>
-        </configuration>
         <executions>
           <execution>
             <id>generate-sources</id>
@@ -61,8 +50,12 @@
             </configuration>
           </execution>
         </executions>
+        <configuration>
+          <extensions>
+            <extension>org.apache.cxf.xjcplugins:cxf-xjc-dv:${cxf.xjc.version}</extension>
+          </extensions>
+        </configuration>
       </plugin>
-
       <plugin>
         <groupId>org.apache.cxf</groupId>
         <artifactId>cxf-codegen-plugin</artifactId>
@@ -71,10 +64,12 @@
           <execution>
             <id>generate-sources</id>
             <phase>generate-sources</phase>
+            <goals>
+              <goal>wsdl2java</goal>
+            </goals>
             <configuration>
               <sourceRoot>${schema.gen.src.dir}</sourceRoot>
               <wsdlOptions>
-
                 <wsdloption>
                   <wsdl>${schema.path}/TD_ENGAGEMENTINDEX_1_0_R/interactions/FindContentInteraction/FindContentInteraction_1.0_RIVTABP21.wsdl</wsdl>
                   <extraargs>
@@ -90,7 +85,6 @@
                     <extraarg>urn:riv:itintegration:registry:1=se.skltp.aggregatingservices.riv.itintegration.registry.v1</extraarg>
                   </extraargs>
                 </wsdloption>
-
                 <wsdloption>
                   <wsdl>${schema.path}/TD_SOKVAGVAL_2/sokvagval-info-v2.wsdl</wsdl>
                   <wsdlLocation>classpath:schemas/TD_SOKVAGVAL_2/sokvagval-info-v2.wsdl</wsdlLocation>
@@ -99,13 +93,8 @@
                     <extraarg>urn:skl:tp:vagvalsinfo:v2=se.skltp.agp.riv.vagvalsinfo.v2</extraarg>
                   </extraargs>
                 </wsdloption>
-
               </wsdlOptions>
-
             </configuration>
-            <goals>
-              <goal>wsdl2java</goal>
-            </goals>
           </execution>
         </executions>
       </plugin>
