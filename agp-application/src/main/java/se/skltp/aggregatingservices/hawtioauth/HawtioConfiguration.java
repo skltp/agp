@@ -5,9 +5,10 @@ import io.hawt.web.auth.AuthenticationConfiguration;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import jakarta.annotation.PostConstruct;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import se.skltp.aggregatingservices.constants.PropertyConstants;
 
@@ -27,7 +28,7 @@ public class HawtioConfiguration {
   /**
    * Configure hawtio authentication.
    */
-  @Bean(initMethod = "init")
+  @PostConstruct
   public void init() {
     log.info("Configuring authentication for Hawtio: hawtioAuthenticationEnabled is " + hawtioAuthenticationEnabled);
     if (!hawtioAuthenticationEnabled) {
