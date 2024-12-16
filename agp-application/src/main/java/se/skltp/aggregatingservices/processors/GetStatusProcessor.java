@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.log4j.Log4j2;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
@@ -91,7 +94,7 @@ public class GetStatusProcessor implements Processor {
 
     String json = null;
     try {
-      ObjectMapper mapper = new ObjectMapper();
+      ObjectMapper mapper = JsonMapper.builder().addModule(new JavaTimeModule()).build();
       DefaultPrettyPrinter p = new DefaultPrettyPrinter();
       p.indentArraysWith(new DefaultIndenter().withLinefeed(System.lineSeparator()));
       mapper.setDefaultPrettyPrinter(p);
