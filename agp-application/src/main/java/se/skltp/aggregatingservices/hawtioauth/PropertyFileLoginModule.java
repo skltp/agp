@@ -7,10 +7,11 @@ import javax.security.auth.Subject;
 import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.login.LoginException;
 import lombok.extern.log4j.Log4j2;
-import org.eclipse.jetty.jaas.spi.AbstractLoginModule;
+import org.eclipse.jetty.security.jaas.spi.AbstractLoginModule;
 import org.eclipse.jetty.security.PropertyUserStore;
 import org.eclipse.jetty.security.RolePrincipal;
 import org.eclipse.jetty.security.UserPrincipal;
+import org.eclipse.jetty.util.resource.PathResourceFactory;
 
 @Log4j2
 public class PropertyFileLoginModule extends AbstractLoginModule {
@@ -18,7 +19,7 @@ public class PropertyFileLoginModule extends AbstractLoginModule {
   private static ConcurrentHashMap<String, PropertyUserStore> PROPERTY_USERSTORES =
       new ConcurrentHashMap<>();
 
-  private boolean hotReload = false;
+  private int reloadInterval = 0;
   private String filename = null;
 
   /**
@@ -44,13 +45,13 @@ public class PropertyFileLoginModule extends AbstractLoginModule {
     parseConfig();
     if (PROPERTY_USERSTORES.get(filename) == null) {
       final PropertyUserStore propertyUserStore = new PropertyUserStore();
-      propertyUserStore.setConfig(filename);
-      propertyUserStore.setHotReload(hotReload);
+      propertyUserStore.setConfig(new PathResourceFactory().newResource(filename));
+      propertyUserStore.setReloadInterval(reloadInterval);
 
       final PropertyUserStore prev = PROPERTY_USERSTORES.putIfAbsent(filename, propertyUserStore);
       if (prev == null) {
         log.info("setupPropertyUserStore: Starting new PropertyUserStore. PropertiesFile: "
-                + filename + " hotReload: " + hotReload);
+                + filename + " reloadInterval: " + reloadInterval);
         try {
           propertyUserStore.start();
         } catch (Exception e) {
@@ -62,7 +63,7 @@ public class PropertyFileLoginModule extends AbstractLoginModule {
 
   private void parseConfig() {
     filename = System.getProperty("hawtiologin.file", filename);
-    hotReload = false;
+    reloadInterval = 0;
   }
 
   @Override
