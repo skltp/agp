@@ -36,6 +36,30 @@ Innehåller en mock plattform för:
 
 Innehåller även en grund för att skapa en mock plattform för varje plugin
 
+## Bygga och köra AGP i lokal utvecklingsmiljö
+För att bygga hela projektet och köra alla tester (i rotkatalogen):
+```
+mvn clean install
+```
+För att köra applikationen måste först teststub-komponenten startas:
+```
+cd agp-teststub
+mvn spring-boot:run
+```
+Därefter kan själva applikationen startas (i en annan terminal):
+```
+cd agp-application
+mvn spring-boot:run
+```
+Ovanstående kommandon kommer dock starta AGP utan några aggregerande tjänster (plugins).
+För att starta AGP med aggregerande tjänster behöver man köra den byggda jar-filen enligt följande exempel:
+```
+cd agp-application/target
+java -Dloader.path=/tmp/services/ -jar agp-application-4.1.0-SNAPSHOT-exec.jar
+```
+Parametern loader.path sätts alltså till en katalog där man lagt de aggregerande tjänster som skall startas.
+Notera att det är artefakterna som slutar på _-all.jar_ som skall användas, t.ex. GetAggregatedRequestActivities-v2-main-2.0.1-all.jar
+
  ## Helm
 Källkoden innehåller även Helm chart som kan användas som grund för konfiguration i Kubernetes.
 
