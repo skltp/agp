@@ -9,6 +9,7 @@
  3. Alla producenter anropas och svar inväntas.
  4. Svaren aggregeras till ett hopsatt svar som returneras till konsumenten.
  
+Källkoden för aggregerande tjänster (plugins) finns i olika repon under https://github.com/skltp-aggregerandetjanster
     
  ## Moduler
 ### agp-application
