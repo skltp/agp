@@ -11,6 +11,9 @@ data:
   
   # Actuator
   MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: health,metrics,prometheus
+  MANAGEMENT_ENDPOINT_PROMETHEUS_ENABLED: 'true'
+
+  JAVA_OPTS: -XX:MaxRAMPercentage=65
   
   # Camel spring-boot configurations
   CAMEL_SPRINGBOOT_MESSAGE_HISTORY: "false"

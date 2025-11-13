@@ -15,4 +15,4 @@ VOLUME ${BASE_DIR}/services
 WORKDIR ${BASE_DIR}
 USER ${APP_USER}
 # A few args are default, but feel free to add more using JAVA_OPTS
-CMD java -XX:MaxRAMPercentage=75 -Dloader.path="services/" ${JAVA_OPTS} -jar app.jar
+CMD java -Dloader.path="services/" ${JAVA_OPTS} -jar app.jar
