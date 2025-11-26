@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import org.apache.cxf.ext.logging.event.DefaultLogEventMapper;
 import org.apache.cxf.message.Message;
 import org.apache.logging.log4j.ThreadContext;
@@ -23,7 +24,7 @@ public class LogEntryMapper {
 
   protected static final DefaultLogEventMapper eventMapper = new DefaultLogEventMapper();
 
-  protected static Set<String> sensitiveProtocolHeaderNames = new HashSet();
+  protected static Set<String> sensitiveProtocolHeaderNames = new HashSet<>();
 
   // Static utility class
   private LogEntryMapper() {
@@ -42,7 +43,7 @@ public class LogEntryMapper {
     logEntry.setReceiverId(getLogicalAddress(message));
 
     String correlationId = getCorrelationId(message);
-    if(correlationId != null){
+    if (correlationId != null) {
       message.getExchange().put(CORRELATION_ID, correlationId);
       ThreadContext.put("corr.id", String.format("[%s]", correlationId));
       logEntry.setCorrelationId(correlationId);
@@ -51,16 +52,24 @@ public class LogEntryMapper {
     return logEntry;
   }
 
-  private static String getLogicalAddress(Message message) {
+  public static String getCorrelationId(Message message) {
+    String corrId = (String) message.getExchange().get(CORRELATION_ID);
+    if (corrId != null) {
+      return corrId;
+    }
+    return getHeader(AgpHeaders.X_SKLTP_CORRELATION_ID, message);
+  }
+
+  public static String getLogicalAddress(Message message) {
     final String logicalAddress = getProperty(AgpProperties.LOGICAL_ADDRESS, message);
-    if(logicalAddress==null){
+    if (logicalAddress == null) {
       return (String) message.getExchange().get(AgpProperties.LOGICAL_ADDRESS);
     }
     message.getExchange().put(AgpProperties.LOGICAL_ADDRESS, logicalAddress);
     return logicalAddress;
   }
 
-  private static String getComponentId(Message message) {
+  public static String getComponentId(Message message) {
     String componentId = (String) message.getExchange().get(AgpProperties.AGP_SERVICE_COMPONENT_ID);
     if (componentId != null) {
       return componentId;
@@ -69,33 +78,23 @@ public class LogEntryMapper {
     return (String) message.getExchange().getEndpoint().get("ComponentId");
   }
 
-
-  private static String getCorrelationId(Message message) {
-    String corrId = (String) message.getExchange().get(CORRELATION_ID);
-    if (corrId != null) {
-      return corrId;
-    }
-    return getHeader(AgpHeaders.X_SKLTP_CORRELATION_ID, message);
-  }
-
-
-  private static String getHeader(String headerName, Message message) {
-    final Map headers = (Map) message.get(Message.PROTOCOL_HEADERS);
+  @SuppressWarnings("unchecked")
+  public static String getHeader(String headerName, Message message) {
+    final Map<String, List<String>> headers = (Map<String, List<String>>) message.get(Message.PROTOCOL_HEADERS);
     if (headers != null) {
-      List headerList = (List) headers.get(headerName);
+      var headerList = headers.get(headerName);
       if (headerList != null && !headerList.isEmpty()) {
-        return (String) headerList.get(0);
+        return headerList.get(0);
       }
     }
     return null;
   }
 
-  private static String getProperty(String propertyName, Message message) {
+  public static String getProperty(String propertyName, Message message) {
     Object prop = message.get(propertyName);
-    if(prop != null){
+    if (prop != null) {
       return message.get(propertyName).toString();
     }
     return null;
   }
-
 }
