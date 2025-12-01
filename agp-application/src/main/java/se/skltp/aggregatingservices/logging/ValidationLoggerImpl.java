@@ -5,6 +5,7 @@ import org.apache.logging.log4j.message.StringMapMessage;
 import org.springframework.stereotype.Service;
 import org.apache.cxf.message.Message;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -20,6 +21,9 @@ public class ValidationLoggerImpl implements ValidationLogger {
   public static final String RECEIVER_ID = "receiverid";
   public static final String BUSINESS_CORRELATION_ID = "BusinessCorrelationId";
   public static final String VALIDATION_ERR = "validation-err";
+
+  private final List<String> services = new ArrayList<>();
+  private boolean first = true;
 
   record LogEntryKey(String service, String receiverId, String message) {
   }
@@ -44,10 +48,21 @@ public class ValidationLoggerImpl implements ValidationLogger {
 
   @Override
   public void flush() {
+    if (first) {
+      if (!services.isEmpty()) {
+        log.info("Logging validation errors for services {}", services);
+      }
+      first = false;
+    }
     uniqueMessages.getAndSet(new ConcurrentHashMap<>())
       .values()
       .forEach(log::warn);
 
+  }
+
+  @Override
+  public void register(String serviceName) {
+    services.add(serviceName);
   }
 
   AtomicReference<ConcurrentMap<LogEntryKey, StringMapMessage>> getUniqueMessages() {

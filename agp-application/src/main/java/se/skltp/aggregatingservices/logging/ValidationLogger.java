@@ -8,4 +8,6 @@ public interface ValidationLogger {
   void addErrors(List<String> errors, String service, Message message);
 
   void flush();
+
+  void register(String serviceName);
 }

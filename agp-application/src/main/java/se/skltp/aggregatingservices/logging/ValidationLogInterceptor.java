@@ -45,6 +45,7 @@ public class ValidationLogInterceptor extends AbstractPhaseInterceptor<Message> 
     super(Phase.POST_STREAM);
     this.serviceName = serviceName;
     this.validationLogger = validationLogger;
+    this.validationLogger.register(serviceName);
   }
 
   @Override
