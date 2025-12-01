@@ -19,6 +19,37 @@ För att ändra/lägga till användare/lösenord för Hawtio: Generera en md5-ha
      `hawtio.external.loginfile=<path>/hawtio_users.properties`
      Installera om VP och starta. Kontrollera vilken port AGP är konfigurerad att starta på. Det ska nu gå att surfa till http://\<server\>:\<port\>/actuator/hawtio/ och logga in med vald user och password. Kontrollera även log-filen för agp-camel för att se om installationen gått bra.
      
+### Spårning av brott mot scheman i aggregerande tjänster
+
+Varje aggregerande tjänst kan statiskt konfigureras till att vägra att hantera svar från producenter om de innehåller
+brott mot tjänstekontraktets schema. Det görs genom att sätta parametern se.skltp.aggregatingservices.configuration.AgpServiceConfiguration.enableSchemaValidation.
+
+För att vidarebefordra felaktiga svar men logga brott mot tjänstekontraktet kan propertyn vp.validationLog.services användas.
+Den konfigureras till en lista med tjänster som ska kontrolleras, det vill säga värdet som den aggregerande tjänsten sätter för
+parametern se.skltp.aggregatingservices.configuration.AgpServiceConfiguration.serviceName.
+
+```yaml
+vp.validationLog:
+  services: GetAggregatedCareDocumentation-v3,GetAggregatedCarePlans-v2
+  interval: 120000 # Logga unika fel varannan minut
+```
+
+Felen loggas som varningar med följande struktur:
+
+```json
+{
+    "@timestamp": "<tidsstämpel>",
+    "log.level": "WARN",
+    "BusinessCorrelationId": "<korrelations-id>",
+    "LogMessage": "validation-err",
+    "message": "<felmeddelande>",
+    "receiverid": "<tjänsteproducentens logiska adress>",
+    "service": "<aggregerande tjänst>",
+    "ecs.version": "1.2.0",
+    "process.thread.name": "Camel (camel-1) thread #1 - timer://validationLoggerFlush",
+    "log.logger": "se.skltp.aggregatingservices.logging.ValidationLoggerImpl"
+}
+```
      
 ### Konfigurera loggning
 Se anvisningar på sidan [Loggning konfigurering]
