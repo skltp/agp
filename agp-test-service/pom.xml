@@ -5,7 +5,7 @@
   <parent>
     <groupId>se.skltp.agp</groupId>
     <artifactId>agp-parent</artifactId>
-    <version>4.0.2</version>
+    <version>4.0.3</version>
   </parent>
   <artifactId>agp-test-service</artifactId>
   <packaging>pom</packaging>
