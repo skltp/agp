@@ -222,21 +222,24 @@ public class ValidationLogInterceptor extends AbstractPhaseInterceptor<Message> 
   }
 
   static final class CollectingErrorHandler implements ErrorHandler {
+    public static final String LEVEL_WARN = "Validation warning";
+    public static final String LEVEL_ERROR = "Validation error";
+    public static final String LEVEL_FATAL = "Fatal validation error";
     private final List<String> errors = new ArrayList<>();
 
     @Override
     public void warning(SAXParseException exception) {
-      errors.add(format("WARN", exception));
+      errors.add(format(LEVEL_WARN, exception));
     }
 
     @Override
     public void error(SAXParseException exception) {
-      errors.add(format("ERROR", exception));
+      errors.add(format(LEVEL_ERROR, exception));
     }
 
     @Override
     public void fatalError(SAXParseException exception) {
-      errors.add(format("FATAL", exception));
+      errors.add(format(LEVEL_FATAL, exception));
     }
 
     boolean hasErrors() {
