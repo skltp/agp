@@ -10,7 +10,7 @@
   </parent>
   <groupId>se.skltp.agp</groupId>
   <artifactId>agp-parent</artifactId>
-  <version>4.0.3</version>
+  <version>4.0.4</version>
   <packaging>pom</packaging>
   <name>agp-parent</name>
   <description>SKLTP AggregeringsPlattform</description>

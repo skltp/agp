@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:9cdeb696-8e34-4e99-8f98-afbeb36b6cff",
+  "serialNumber": "urn:uuid:013429bd-6f93-44b5-94c4-9902222f802d",
   "version": 1,
   "metadata": {
-    "timestamp": "2025-12-02T09:09:53+00:00",
+    "timestamp": "2025-12-04T07:26:20+00:00",
     "tools": {
       "components": [
         {
@@ -20,10 +20,10 @@
       ]
     },
     "component": {
-      "bom-ref": "pkg:oci/agp-application@sha256%3A55e8eeda63ac496dcc8d25404611fcab25a9b3f5cb029dd2f49b356177c1c1fe?arch=amd64&repository_url=docker.drift.inera.se%2Fntjp%2Fagp-application",
+      "bom-ref": "pkg:oci/agp-application@sha256%3Aea0461eb14bcbe32f300fb58ca4d686a4e93a5ff36b7864a156f7257ef3c0bf8?arch=amd64&repository_url=docker.drift.inera.se%2Fntjp%2Fagp-application",
       "type": "container",
-      "name": "docker.drift.inera.se/ntjp/agp-application:4.0.3",
-      "purl": "pkg:oci/agp-application@sha256%3A55e8eeda63ac496dcc8d25404611fcab25a9b3f5cb029dd2f49b356177c1c1fe?arch=amd64&repository_url=docker.drift.inera.se%2Fntjp%2Fagp-application",
+      "name": "docker.drift.inera.se/ntjp/agp-application:4.0.4",
+      "purl": "pkg:oci/agp-application@sha256%3Aea0461eb14bcbe32f300fb58ca4d686a4e93a5ff36b7864a156f7257ef3c0bf8?arch=amd64&repository_url=docker.drift.inera.se%2Fntjp%2Fagp-application",
       "properties": [
         {
           "name": "aquasecurity:trivy:DiffID",
@@ -39,11 +39,15 @@
         },
         {
           "name": "aquasecurity:trivy:DiffID",
+          "value": "sha256:64a3bfb95038bd04d7f57b08e75770ac113c737c6ea44db85595559f84d71633"
+        },
+        {
+          "name": "aquasecurity:trivy:DiffID",
           "value": "sha256:8ba8770dfe14b8ca25c2225e44fe34f3002800687cef09fa03908dd7d80c3fbb"
         },
         {
           "name": "aquasecurity:trivy:DiffID",
-          "value": "sha256:991eab9e685b1f51d5f5305234bc5ad284675a8a45d37abd5cf2a120040a8d63"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:DiffID",
@@ -54,16 +58,12 @@
           "value": "sha256:b66aa9269d2b6ac2330afa62fb97eaa2c367519b4463f28257cb5af7e80a44b6"
         },
         {
-          "name": "aquasecurity:trivy:DiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
-        },
-        {
           "name": "aquasecurity:trivy:ImageID",
-          "value": "sha256:2f6e4932b40a4ed7ddf79ba0764b391f365535a43daddee6378534a14e77da82"
+          "value": "sha256:9b5de3bea002e59e9bcf967a359ca83904aaa64a3ed050944d9d78df98bd35ff"
         },
         {
           "name": "aquasecurity:trivy:RepoDigest",
-          "value": "docker.drift.inera.se/ntjp/agp-application@sha256:55e8eeda63ac496dcc8d25404611fcab25a9b3f5cb029dd2f49b356177c1c1fe"
+          "value": "docker.drift.inera.se/ntjp/agp-application@sha256:ea0461eb14bcbe32f300fb58ca4d686a4e93a5ff36b7864a156f7257ef3c0bf8"
         },
         {
           "name": "aquasecurity:trivy:RepoTag",
@@ -71,7 +71,7 @@
         },
         {
           "name": "aquasecurity:trivy:RepoTag",
-          "value": "docker.drift.inera.se/ntjp/agp-application:4.0.3"
+          "value": "docker.drift.inera.se/ntjp/agp-application:4.0.4"
         },
         {
           "name": "aquasecurity:trivy:RepoTag",
@@ -94,91 +94,7 @@
   },
   "components": [
     {
-      "bom-ref": "462b6c3f-67fb-47d5-94a4-c883a3929d73",
-      "type": "library",
-      "group": "org.glassfish.jaxb",
-      "name": "jaxb-runtime",
-      "version": "4.0.5",
-      "hashes": [
-        {
-          "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
-        }
-      ],
-      "purl": "pkg:maven/org.glassfish.jaxb/jaxb-runtime@4.0.5",
-      "properties": [
-        {
-          "name": "aquasecurity:trivy:FilePath",
-          "value": "opt/agp/app.jar/BOOT-INF/lib/jaxb-runtime-4.0.5.jar"
-        },
-        {
-          "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
-        },
-        {
-          "name": "aquasecurity:trivy:PkgType",
-          "value": "jar"
-        }
-      ]
-    },
-    {
-      "bom-ref": "5167054b-1512-4e29-9958-2de72b71caad",
-      "type": "library",
-      "group": "org.glassfish.jaxb",
-      "name": "txw2",
-      "version": "4.0.5",
-      "hashes": [
-        {
-          "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
-        }
-      ],
-      "purl": "pkg:maven/org.glassfish.jaxb/txw2@4.0.5",
-      "properties": [
-        {
-          "name": "aquasecurity:trivy:FilePath",
-          "value": "opt/agp/app.jar/BOOT-INF/lib/com.sun.xml.bind-jaxb-core-4.0.5.jar"
-        },
-        {
-          "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
-        },
-        {
-          "name": "aquasecurity:trivy:PkgType",
-          "value": "jar"
-        }
-      ]
-    },
-    {
-      "bom-ref": "537e95cc-3209-46ad-abbb-feaf40918c7d",
-      "type": "library",
-      "group": "com.sun.istack",
-      "name": "istack-commons-runtime",
-      "version": "4.1.2",
-      "hashes": [
-        {
-          "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
-        }
-      ],
-      "purl": "pkg:maven/com.sun.istack/istack-commons-runtime@4.1.2",
-      "properties": [
-        {
-          "name": "aquasecurity:trivy:FilePath",
-          "value": "opt/agp/app.jar/BOOT-INF/lib/istack-commons-runtime-4.1.2.jar"
-        },
-        {
-          "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
-        },
-        {
-          "name": "aquasecurity:trivy:PkgType",
-          "value": "jar"
-        }
-      ]
-    },
-    {
-      "bom-ref": "6d5316f4-387f-48de-bf77-cc0b0fc6676b",
+      "bom-ref": "19a5aa99-5d29-4a31-b7ef-0acea11a2aa7",
       "type": "library",
       "group": "org.glassfish.jaxb",
       "name": "jaxb-core",
@@ -186,18 +102,18 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.glassfish.jaxb/jaxb-core@4.0.5",
       "properties": [
         {
           "name": "aquasecurity:trivy:FilePath",
-          "value": "opt/agp/app.jar/BOOT-INF/lib/com.sun.xml.bind-jaxb-core-4.0.5.jar"
+          "value": "opt/agp/app.jar/BOOT-INF/lib/org.glassfish.jaxb-jaxb-core-4.0.5.jar"
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -206,7 +122,63 @@
       ]
     },
     {
-      "bom-ref": "957f9129-22cc-43ae-b8cc-2f360e297cd6",
+      "bom-ref": "1fe2b529-8ebb-48ff-8786-f74f17d35ec3",
+      "type": "library",
+      "group": "com.sun.istack",
+      "name": "istack-commons-runtime",
+      "version": "4.1.2",
+      "hashes": [
+        {
+          "alg": "SHA-1",
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
+        }
+      ],
+      "purl": "pkg:maven/com.sun.istack/istack-commons-runtime@4.1.2",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:FilePath",
+          "value": "opt/agp/app.jar/BOOT-INF/lib/com.sun.xml.bind-jaxb-core-4.0.5.jar"
+        },
+        {
+          "name": "aquasecurity:trivy:LayerDiffID",
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
+        },
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "jar"
+        }
+      ]
+    },
+    {
+      "bom-ref": "2920856d-ff17-4e2e-9f26-6907d90fe4c9",
+      "type": "library",
+      "group": "org.glassfish.jaxb",
+      "name": "jaxb-runtime",
+      "version": "4.0.5",
+      "hashes": [
+        {
+          "alg": "SHA-1",
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
+        }
+      ],
+      "purl": "pkg:maven/org.glassfish.jaxb/jaxb-runtime@4.0.5",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:FilePath",
+          "value": "opt/agp/app.jar/BOOT-INF/lib/jaxb-impl-4.0.5.jar"
+        },
+        {
+          "name": "aquasecurity:trivy:LayerDiffID",
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
+        },
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "jar"
+        }
+      ]
+    },
+    {
+      "bom-ref": "464e91f0-2402-469f-8d9b-eacb1ac5068d",
       "type": "operating-system",
       "name": "alpine",
       "version": "3.22.2",
@@ -222,46 +194,18 @@
       ]
     },
     {
-      "bom-ref": "9874b976-5f09-4147-b44a-80c811a539a7",
+      "bom-ref": "4e60d729-d822-421c-8964-05fee108c957",
       "type": "library",
       "group": "org.glassfish.jaxb",
-      "name": "jaxb-runtime",
+      "name": "jaxb-core",
       "version": "4.0.5",
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
-      "purl": "pkg:maven/org.glassfish.jaxb/jaxb-runtime@4.0.5",
-      "properties": [
-        {
-          "name": "aquasecurity:trivy:FilePath",
-          "value": "opt/agp/app.jar/BOOT-INF/lib/jaxb-impl-4.0.5.jar"
-        },
-        {
-          "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
-        },
-        {
-          "name": "aquasecurity:trivy:PkgType",
-          "value": "jar"
-        }
-      ]
-    },
-    {
-      "bom-ref": "99d0fe0f-5ee3-411b-91ea-1ec710a332a7",
-      "type": "library",
-      "group": "com.sun.istack",
-      "name": "istack-commons-runtime",
-      "version": "4.1.2",
-      "hashes": [
-        {
-          "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
-        }
-      ],
-      "purl": "pkg:maven/com.sun.istack/istack-commons-runtime@4.1.2",
+      "purl": "pkg:maven/org.glassfish.jaxb/jaxb-core@4.0.5",
       "properties": [
         {
           "name": "aquasecurity:trivy:FilePath",
@@ -269,7 +213,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -278,7 +222,7 @@
       ]
     },
     {
-      "bom-ref": "d5b7eda4-f5b4-4cd0-9934-3ea436baa908",
+      "bom-ref": "56b8af08-31e2-41b3-b510-079b7ebeffa9",
       "type": "library",
       "group": "org.glassfish.jaxb",
       "name": "txw2",
@@ -286,7 +230,91 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
+        }
+      ],
+      "purl": "pkg:maven/org.glassfish.jaxb/txw2@4.0.5",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:FilePath",
+          "value": "opt/agp/app.jar/BOOT-INF/lib/com.sun.xml.bind-jaxb-core-4.0.5.jar"
+        },
+        {
+          "name": "aquasecurity:trivy:LayerDiffID",
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
+        },
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "jar"
+        }
+      ]
+    },
+    {
+      "bom-ref": "76837fa0-b341-43aa-a28f-289a3852c3dc",
+      "type": "library",
+      "group": "org.glassfish.jaxb",
+      "name": "jaxb-runtime",
+      "version": "4.0.5",
+      "hashes": [
+        {
+          "alg": "SHA-1",
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
+        }
+      ],
+      "purl": "pkg:maven/org.glassfish.jaxb/jaxb-runtime@4.0.5",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:FilePath",
+          "value": "opt/agp/app.jar/BOOT-INF/lib/jaxb-runtime-4.0.5.jar"
+        },
+        {
+          "name": "aquasecurity:trivy:LayerDiffID",
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
+        },
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "jar"
+        }
+      ]
+    },
+    {
+      "bom-ref": "7eb3c875-8c6c-489b-afdb-a4829236b80a",
+      "type": "library",
+      "group": "com.sun.istack",
+      "name": "istack-commons-runtime",
+      "version": "4.1.2",
+      "hashes": [
+        {
+          "alg": "SHA-1",
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
+        }
+      ],
+      "purl": "pkg:maven/com.sun.istack/istack-commons-runtime@4.1.2",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:FilePath",
+          "value": "opt/agp/app.jar/BOOT-INF/lib/istack-commons-runtime-4.1.2.jar"
+        },
+        {
+          "name": "aquasecurity:trivy:LayerDiffID",
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
+        },
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "jar"
+        }
+      ]
+    },
+    {
+      "bom-ref": "a2c0116f-5474-452e-a651-0aba7572ef1e",
+      "type": "library",
+      "group": "org.glassfish.jaxb",
+      "name": "txw2",
+      "version": "4.0.5",
+      "hashes": [
+        {
+          "alg": "SHA-1",
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.glassfish.jaxb/txw2@4.0.5",
@@ -297,35 +325,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
-        },
-        {
-          "name": "aquasecurity:trivy:PkgType",
-          "value": "jar"
-        }
-      ]
-    },
-    {
-      "bom-ref": "e63a0a4b-846b-4813-a7df-2c85e795cd24",
-      "type": "library",
-      "group": "org.glassfish.jaxb",
-      "name": "jaxb-core",
-      "version": "4.0.5",
-      "hashes": [
-        {
-          "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
-        }
-      ],
-      "purl": "pkg:maven/org.glassfish.jaxb/jaxb-core@4.0.5",
-      "properties": [
-        {
-          "name": "aquasecurity:trivy:FilePath",
-          "value": "opt/agp/app.jar/BOOT-INF/lib/org.glassfish.jaxb-jaxb-core-4.0.5.jar"
-        },
-        {
-          "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -3662,7 +3662,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/co.elastic.logging/ecs-logging-core@1.5.0",
@@ -3673,7 +3673,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -3690,7 +3690,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/co.elastic.logging/log4j2-ecs-layout@1.5.0",
@@ -3701,7 +3701,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -3718,7 +3718,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.18.1",
@@ -3729,7 +3729,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -3746,7 +3746,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.18.1",
@@ -3757,7 +3757,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -3774,7 +3774,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.18.1",
@@ -3785,7 +3785,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -3802,7 +3802,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.fasterxml.jackson.datatype/jackson-datatype-jdk8@2.18.1",
@@ -3813,7 +3813,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -3830,7 +3830,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.fasterxml.jackson.datatype/jackson-datatype-jsr310@2.18.1",
@@ -3841,7 +3841,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -3858,7 +3858,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.fasterxml.jackson.module/jackson-module-parameter-names@2.18.1",
@@ -3869,7 +3869,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -3886,7 +3886,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.fasterxml.woodstox/woodstox-core@7.1.0",
@@ -3897,7 +3897,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -3914,7 +3914,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.fasterxml/classmate@1.7.0",
@@ -3925,7 +3925,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -3942,7 +3942,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.github.ben-manes.caffeine/caffeine@3.1.8",
@@ -3953,7 +3953,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -3970,7 +3970,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.github.stephenc.jcip/jcip-annotations@1.0-1",
@@ -3981,7 +3981,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -3998,7 +3998,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.google.code.gson/gson@2.11.0",
@@ -4009,7 +4009,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4026,7 +4026,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.google.errorprone/error_prone_annotations@2.21.1",
@@ -4037,7 +4037,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4054,7 +4054,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.lmax/disruptor@3.3.6",
@@ -4065,7 +4065,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4082,7 +4082,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.nimbusds/nimbus-jose-jwt@9.41.2",
@@ -4093,7 +4093,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4110,7 +4110,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.sun.xml.bind.jaxb/isorelax@20090621",
@@ -4121,7 +4121,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4138,7 +4138,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.sun.xml.bind/jaxb-core@4.0.5",
@@ -4149,7 +4149,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4166,7 +4166,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.sun.xml.bind/jaxb-impl@4.0.5",
@@ -4177,7 +4177,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4194,7 +4194,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.sun.xml.fastinfoset/FastInfoset@2.1.1",
@@ -4205,7 +4205,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4222,7 +4222,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.sun.xml.messaging.saaj/saaj-impl@3.0.4",
@@ -4233,7 +4233,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4250,7 +4250,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.sun.xml.stream.buffer/streambuffer@2.1.0",
@@ -4261,7 +4261,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4278,7 +4278,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.sun.xml.ws/httpspi-servlet@4.0.2",
@@ -4289,7 +4289,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4306,7 +4306,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.sun.xml.ws/jaxws-rt@4.0.2",
@@ -4317,7 +4317,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4334,7 +4334,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.sun.xml.ws/policy@4.0.2",
@@ -4345,7 +4345,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4362,7 +4362,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.sun.xml.ws/rt-fi@4.0.2",
@@ -4373,7 +4373,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4390,7 +4390,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.sun.xml.ws/rt@4.0.2",
@@ -4401,7 +4401,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4418,7 +4418,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/com.sun.xml.ws/servlet@4.0.2",
@@ -4429,7 +4429,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4446,7 +4446,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/commons-cli/commons-cli@1.9.0",
@@ -4457,7 +4457,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4474,7 +4474,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/commons-codec/commons-codec@1.17.1",
@@ -4485,7 +4485,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4502,7 +4502,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/commons-io/commons-io@2.16.1",
@@ -4513,7 +4513,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4530,7 +4530,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/commons-lang/commons-lang@2.6",
@@ -4541,7 +4541,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4558,7 +4558,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/io.hawt/hawtio-springboot@4.2.0",
@@ -4569,7 +4569,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4586,7 +4586,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/io.hawt/hawtio-system@4.2.0",
@@ -4597,7 +4597,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4614,7 +4614,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/io.micrometer/micrometer-commons@1.12.3",
@@ -4625,7 +4625,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4642,7 +4642,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/io.micrometer/micrometer-core@1.12.3",
@@ -4653,7 +4653,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4670,7 +4670,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/io.micrometer/micrometer-jakarta9@1.12.3",
@@ -4681,7 +4681,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4698,7 +4698,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/io.micrometer/micrometer-observation@1.12.3",
@@ -4709,7 +4709,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4726,7 +4726,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/io.micrometer/micrometer-registry-prometheus@1.12.3",
@@ -4737,7 +4737,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4754,7 +4754,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/io.prometheus/simpleclient@0.16.0",
@@ -4765,7 +4765,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4782,7 +4782,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/io.prometheus/simpleclient_common@0.16.0",
@@ -4793,7 +4793,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4810,7 +4810,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/io.prometheus/simpleclient_tracer_common@0.16.0",
@@ -4821,7 +4821,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4838,7 +4838,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/io.prometheus/simpleclient_tracer_otel@0.16.0",
@@ -4849,7 +4849,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4866,7 +4866,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/io.prometheus/simpleclient_tracer_otel_agent@0.16.0",
@@ -4877,7 +4877,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4894,7 +4894,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/jakarta.activation/jakarta.activation-api@2.1.3",
@@ -4905,7 +4905,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4922,7 +4922,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/jakarta.annotation/jakarta.annotation-api@2.1.1",
@@ -4933,7 +4933,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4950,7 +4950,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/jakarta.enterprise/jakarta.enterprise.cdi-api@4.0.1",
@@ -4961,7 +4961,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -4978,7 +4978,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/jakarta.enterprise/jakarta.enterprise.lang-model@4.0.1",
@@ -4989,7 +4989,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5006,7 +5006,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/jakarta.inject/jakarta.inject-api@2.0.1",
@@ -5017,7 +5017,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5034,7 +5034,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/jakarta.interceptor/jakarta.interceptor-api@2.1.0",
@@ -5045,7 +5045,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5062,7 +5062,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/jakarta.jws/jakarta.jws-api@3.0.0",
@@ -5073,7 +5073,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5090,7 +5090,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/jakarta.mail/jakarta.mail-api@2.1.3",
@@ -5101,7 +5101,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5118,7 +5118,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/jakarta.servlet/jakarta.servlet-api@6.0.0",
@@ -5129,7 +5129,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5146,7 +5146,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/jakarta.transaction/jakarta.transaction-api@2.0.1",
@@ -5157,7 +5157,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5174,7 +5174,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/jakarta.validation/jakarta.validation-api@3.0.2",
@@ -5185,7 +5185,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5202,7 +5202,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/jakarta.websocket/jakarta.websocket-api@2.1.1",
@@ -5213,7 +5213,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5230,7 +5230,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/jakarta.websocket/jakarta.websocket-client-api@2.1.1",
@@ -5241,7 +5241,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5258,7 +5258,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/jakarta.xml.bind/jakarta.xml.bind-api@4.0.2",
@@ -5269,7 +5269,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5286,7 +5286,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/jakarta.xml.soap/jakarta.xml.soap-api@3.0.2",
@@ -5297,7 +5297,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5314,7 +5314,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/jakarta.xml.ws/jakarta.xml.ws-api@4.0.2",
@@ -5325,7 +5325,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5342,7 +5342,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/net.java.dev.msv/xsdlib@2022.7",
@@ -5353,7 +5353,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5370,7 +5370,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel.springboot/camel-core-starter@4.8.2",
@@ -5381,7 +5381,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5398,7 +5398,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel.springboot/camel-cxf-soap-starter@4.8.2",
@@ -5409,7 +5409,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5426,7 +5426,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel.springboot/camel-direct-starter@4.8.2",
@@ -5437,7 +5437,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5454,7 +5454,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel.springboot/camel-jetty-starter@4.8.2",
@@ -5465,7 +5465,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5482,7 +5482,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel.springboot/camel-spring-boot@4.8.2",
@@ -5493,7 +5493,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5510,7 +5510,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-api@4.8.2",
@@ -5521,7 +5521,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5538,7 +5538,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-attachments@4.8.2",
@@ -5549,7 +5549,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5566,7 +5566,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-base-engine@4.8.2",
@@ -5577,7 +5577,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5594,7 +5594,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-base@4.8.2",
@@ -5605,7 +5605,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5622,7 +5622,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-bean@4.8.2",
@@ -5633,7 +5633,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5650,7 +5650,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-cloud@4.8.2",
@@ -5661,7 +5661,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5678,7 +5678,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-cluster@4.8.2",
@@ -5689,7 +5689,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5706,7 +5706,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-core-engine@4.8.2",
@@ -5717,7 +5717,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5734,7 +5734,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-core-languages@4.8.2",
@@ -5745,7 +5745,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5762,7 +5762,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-core-model@4.8.2",
@@ -5773,7 +5773,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5790,7 +5790,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-core-processor@4.8.2",
@@ -5801,7 +5801,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5818,7 +5818,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-core-reifier@4.8.2",
@@ -5829,7 +5829,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5846,7 +5846,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-core-xml@4.8.2",
@@ -5857,7 +5857,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5874,7 +5874,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-cxf-common@4.8.2",
@@ -5885,7 +5885,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5902,7 +5902,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-cxf-soap@4.8.2",
@@ -5913,7 +5913,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5930,7 +5930,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-cxf-spring-common@4.8.2",
@@ -5941,7 +5941,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5958,7 +5958,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-cxf-spring-soap@4.8.2",
@@ -5969,7 +5969,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -5986,7 +5986,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-cxf-spring-transport@4.8.2",
@@ -5997,7 +5997,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6014,7 +6014,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-cxf-transport@4.8.2",
@@ -6025,7 +6025,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6042,7 +6042,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-direct@4.8.2",
@@ -6053,7 +6053,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6070,7 +6070,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-health@4.8.2",
@@ -6081,7 +6081,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6098,7 +6098,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-http-base@4.8.2",
@@ -6109,7 +6109,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6126,7 +6126,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-http-common@4.8.2",
@@ -6137,7 +6137,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6154,7 +6154,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-jetty-common@4.8.2",
@@ -6165,7 +6165,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6182,7 +6182,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-jetty@4.8.2",
@@ -6193,7 +6193,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6210,7 +6210,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-log@4.8.2",
@@ -6221,7 +6221,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6238,7 +6238,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-main@4.8.2",
@@ -6249,7 +6249,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6266,7 +6266,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-management-api@4.8.2",
@@ -6277,7 +6277,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6294,7 +6294,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-management@4.8.2",
@@ -6305,7 +6305,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6322,7 +6322,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-spring-main@4.8.2",
@@ -6333,7 +6333,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6350,7 +6350,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-spring-xml@4.8.2",
@@ -6361,7 +6361,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6378,7 +6378,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-spring@4.8.2",
@@ -6389,7 +6389,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6406,7 +6406,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-support@4.8.2",
@@ -6417,7 +6417,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6434,7 +6434,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-timer@4.8.2",
@@ -6445,7 +6445,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6462,7 +6462,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-util-json@4.8.2",
@@ -6473,7 +6473,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6490,7 +6490,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-util@4.8.2",
@@ -6501,7 +6501,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6518,7 +6518,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-xml-io-util@4.8.2",
@@ -6529,7 +6529,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6546,7 +6546,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-xml-io@4.8.2",
@@ -6557,7 +6557,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6574,7 +6574,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-xml-jaxb@4.8.2",
@@ -6585,7 +6585,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6602,7 +6602,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-xml-jaxp-util@4.8.2",
@@ -6613,7 +6613,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6630,7 +6630,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.camel/camel-xml-jaxp@4.8.2",
@@ -6641,7 +6641,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6658,7 +6658,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.commons/commons-collections4@4.4",
@@ -6669,7 +6669,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6686,7 +6686,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.cxf/cxf-core@4.1.0",
@@ -6697,7 +6697,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6714,7 +6714,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.cxf/cxf-rt-bindings-soap@4.0.5",
@@ -6725,7 +6725,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6742,7 +6742,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.cxf/cxf-rt-bindings-xml@4.0.5",
@@ -6753,7 +6753,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6770,7 +6770,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.cxf/cxf-rt-databinding-jaxb@4.0.5",
@@ -6781,7 +6781,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6798,7 +6798,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.cxf/cxf-rt-features-logging@4.0.5",
@@ -6809,7 +6809,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6826,7 +6826,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.cxf/cxf-rt-features-metrics@4.0.5",
@@ -6837,7 +6837,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6854,7 +6854,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.cxf/cxf-rt-frontend-jaxws@4.0.5",
@@ -6865,7 +6865,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6882,7 +6882,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.cxf/cxf-rt-frontend-simple@4.0.5",
@@ -6893,7 +6893,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6910,7 +6910,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.cxf/cxf-rt-transports-http-hc@4.1.0",
@@ -6921,7 +6921,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6938,7 +6938,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.cxf/cxf-rt-transports-http-jetty@4.1.0",
@@ -6949,7 +6949,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6966,7 +6966,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.cxf/cxf-rt-transports-http@4.1.0",
@@ -6977,7 +6977,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -6994,7 +6994,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.cxf/cxf-rt-ws-addr@4.0.5",
@@ -7005,7 +7005,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7022,7 +7022,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.cxf/cxf-rt-ws-policy@4.0.5",
@@ -7033,7 +7033,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7050,7 +7050,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.cxf/cxf-rt-wsdl@4.0.5",
@@ -7061,7 +7061,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7078,7 +7078,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.cxf/cxf-spring-boot-autoconfigure@4.0.5",
@@ -7089,7 +7089,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7106,7 +7106,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.cxf/cxf-spring-boot-starter-jaxws@4.0.5",
@@ -7117,7 +7117,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7134,7 +7134,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.httpcomponents/httpasyncclient@4.1.5",
@@ -7145,7 +7145,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7162,7 +7162,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.httpcomponents/httpclient@4.5.13",
@@ -7173,7 +7173,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7190,7 +7190,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.httpcomponents/httpcore-nio@4.4.16",
@@ -7201,7 +7201,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7218,7 +7218,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.httpcomponents/httpcore@4.4.16",
@@ -7229,7 +7229,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7246,7 +7246,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.logging.log4j/log4j-api@2.24.1",
@@ -7257,7 +7257,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7274,7 +7274,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.logging.log4j/log4j-core@2.24.1",
@@ -7285,7 +7285,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7302,7 +7302,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.logging.log4j/log4j-jul@2.24.1",
@@ -7313,7 +7313,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7330,7 +7330,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.logging.log4j/log4j-slf4j2-impl@2.24.1",
@@ -7341,7 +7341,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7358,7 +7358,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.neethi/neethi@3.2.0",
@@ -7369,7 +7369,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7386,7 +7386,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.tomcat.embed/tomcat-embed-el@10.1.33",
@@ -7397,7 +7397,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7414,7 +7414,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.apache.ws.xmlschema/xmlschema-core@2.3.1",
@@ -7425,7 +7425,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7442,7 +7442,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.checkerframework/checker-qual@3.37.0",
@@ -7453,7 +7453,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7470,7 +7470,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.codehaus.woodstox/stax2-api@4.2.2",
@@ -7481,7 +7481,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7498,7 +7498,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.angus/angus-activation@2.0.2",
@@ -7509,7 +7509,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7526,7 +7526,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.angus/angus-core@2.0.3",
@@ -7537,7 +7537,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7554,7 +7554,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.angus/angus-mail@2.0.3",
@@ -7565,7 +7565,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7582,7 +7582,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.angus/imap@2.0.3",
@@ -7593,7 +7593,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7610,7 +7610,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.angus/logging-mailhandler@2.0.3",
@@ -7621,7 +7621,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7638,7 +7638,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.angus/pop3@2.0.3",
@@ -7649,7 +7649,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7666,7 +7666,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.angus/smtp@2.0.3",
@@ -7677,7 +7677,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7694,7 +7694,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty.ee10.websocket/jetty-ee10-websocket-jakarta-client@12.0.15",
@@ -7705,7 +7705,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7722,7 +7722,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty.ee10.websocket/jetty-ee10-websocket-jakarta-common@12.0.15",
@@ -7733,7 +7733,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7750,7 +7750,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty.ee10.websocket/jetty-ee10-websocket-jakarta-server@12.0.15",
@@ -7761,7 +7761,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7778,7 +7778,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty.ee10.websocket/jetty-ee10-websocket-jetty-server@12.0.15",
@@ -7789,7 +7789,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7806,7 +7806,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty.ee10.websocket/jetty-ee10-websocket-servlet@12.0.15",
@@ -7817,7 +7817,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7834,7 +7834,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty.ee10/jetty-ee10-annotations@12.0.15",
@@ -7845,7 +7845,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7862,7 +7862,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty.ee10/jetty-ee10-plus@12.0.15",
@@ -7873,7 +7873,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7890,7 +7890,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty.ee10/jetty-ee10-servlet@12.0.15",
@@ -7901,7 +7901,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7918,7 +7918,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty.ee10/jetty-ee10-servlets@12.0.15",
@@ -7929,7 +7929,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7946,7 +7946,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty.ee10/jetty-ee10-webapp@12.0.15",
@@ -7957,7 +7957,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -7974,7 +7974,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty.websocket/jetty-websocket-core-client@12.0.15",
@@ -7985,7 +7985,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8002,7 +8002,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty.websocket/jetty-websocket-core-common@12.0.15",
@@ -8013,7 +8013,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8030,7 +8030,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty.websocket/jetty-websocket-core-server@12.0.15",
@@ -8041,7 +8041,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8058,7 +8058,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty.websocket/jetty-websocket-jetty-api@12.0.15",
@@ -8069,7 +8069,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8086,7 +8086,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty.websocket/jetty-websocket-jetty-common@12.0.15",
@@ -8097,7 +8097,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8114,7 +8114,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty/jetty-alpn-client@12.0.15",
@@ -8125,7 +8125,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8142,7 +8142,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty/jetty-client@12.0.15",
@@ -8153,7 +8153,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8170,7 +8170,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty/jetty-ee@12.0.15",
@@ -8181,7 +8181,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8198,7 +8198,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty/jetty-http@12.0.15",
@@ -8209,7 +8209,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8226,7 +8226,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty/jetty-io@12.0.15",
@@ -8237,7 +8237,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8254,7 +8254,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty/jetty-jmx@12.0.15",
@@ -8265,7 +8265,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8282,7 +8282,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty/jetty-plus@12.0.15",
@@ -8293,7 +8293,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8310,7 +8310,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty/jetty-security@12.0.15",
@@ -8321,7 +8321,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8338,7 +8338,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty/jetty-server@12.0.15",
@@ -8349,7 +8349,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8366,7 +8366,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty/jetty-session@12.0.15",
@@ -8377,7 +8377,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8394,7 +8394,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty/jetty-util@12.0.15",
@@ -8405,7 +8405,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8422,7 +8422,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.eclipse.jetty/jetty-xml@12.0.15",
@@ -8433,7 +8433,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8450,7 +8450,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.glassfish.external/management-api@3.2.3",
@@ -8461,7 +8461,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8478,7 +8478,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.glassfish.gmbal/gmbal-api-only@4.0.3",
@@ -8489,7 +8489,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8506,7 +8506,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.glassfish.ha/ha-api@3.1.13",
@@ -8517,7 +8517,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8534,7 +8534,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.hdrhistogram/HdrHistogram@2.1.12",
@@ -8545,7 +8545,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8562,7 +8562,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.hibernate.validator/hibernate-validator@8.0.1.Final",
@@ -8573,7 +8573,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8590,7 +8590,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.jboss.logging/jboss-logging@3.6.1.Final",
@@ -8601,7 +8601,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8618,7 +8618,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.jolokia/jolokia-agent-jvm@2.1.1",
@@ -8629,7 +8629,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8646,7 +8646,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.jolokia/jolokia-json@2.1.1",
@@ -8657,7 +8657,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8674,7 +8674,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.jolokia/jolokia-server-core@2.1.1",
@@ -8685,7 +8685,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8702,7 +8702,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.jolokia/jolokia-server-detector@2.1.1",
@@ -8713,7 +8713,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8730,7 +8730,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.jolokia/jolokia-service-discovery@2.1.1",
@@ -8741,7 +8741,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8758,7 +8758,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.jolokia/jolokia-service-history@2.1.1",
@@ -8769,7 +8769,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8786,7 +8786,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.jolokia/jolokia-service-jmx@2.1.1",
@@ -8797,7 +8797,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8814,7 +8814,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.jolokia/jolokia-service-jsr160@2.1.1",
@@ -8825,7 +8825,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8842,7 +8842,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.jolokia/jolokia-service-notif-pull@2.1.1",
@@ -8853,7 +8853,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8870,7 +8870,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.jolokia/jolokia-service-notif-sse@2.1.1",
@@ -8881,7 +8881,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8898,7 +8898,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.jolokia/jolokia-service-serializer@2.1.1",
@@ -8909,7 +8909,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8926,7 +8926,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.jolokia/jolokia-support-jmx@2.1.1",
@@ -8937,7 +8937,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8954,7 +8954,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.jolokia/jolokia-support-spring@2.1.1",
@@ -8965,7 +8965,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -8982,7 +8982,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.jvnet.mimepull/mimepull@1.10.0",
@@ -8993,7 +8993,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9010,7 +9010,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.jvnet.staxex/stax-ex@2.1.0",
@@ -9021,7 +9021,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9038,7 +9038,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.latencyutils/LatencyUtils@2.0.3",
@@ -9049,7 +9049,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9066,7 +9066,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.ow2.asm/asm-commons@9.7.1",
@@ -9077,7 +9077,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9094,7 +9094,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.ow2.asm/asm-tree@9.7.1",
@@ -9105,7 +9105,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9122,7 +9122,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.ow2.asm/asm@9.7.1",
@@ -9133,7 +9133,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9150,7 +9150,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.projectlombok/lombok@1.18.34",
@@ -9161,7 +9161,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9178,7 +9178,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.slf4j/jcl-over-slf4j@2.0.16",
@@ -9189,7 +9189,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9206,7 +9206,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.slf4j/slf4j-api@2.0.16",
@@ -9217,7 +9217,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9234,7 +9234,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.springframework.boot/spring-boot-actuator-autoconfigure@3.4.0",
@@ -9245,7 +9245,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9262,7 +9262,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.springframework.boot/spring-boot-actuator@3.4.0",
@@ -9273,7 +9273,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9290,7 +9290,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.springframework.boot/spring-boot-autoconfigure@3.4.0",
@@ -9301,7 +9301,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9318,7 +9318,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.springframework.boot/spring-boot-jarmode-tools@3.4.0",
@@ -9329,7 +9329,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9346,7 +9346,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.springframework.boot/spring-boot@3.4.0",
@@ -9357,7 +9357,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9374,7 +9374,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.springframework/spring-aop@6.2.0",
@@ -9385,7 +9385,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9402,7 +9402,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.springframework/spring-beans@6.2.0",
@@ -9413,7 +9413,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9430,7 +9430,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.springframework/spring-context@6.2.0",
@@ -9441,7 +9441,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9458,7 +9458,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.springframework/spring-core@6.2.0",
@@ -9469,7 +9469,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9486,7 +9486,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.springframework/spring-expression@6.2.0",
@@ -9497,7 +9497,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9514,7 +9514,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.springframework/spring-jcl@6.2.0",
@@ -9525,7 +9525,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9542,7 +9542,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.springframework/spring-tx@6.2.0",
@@ -9553,7 +9553,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9570,7 +9570,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.springframework/spring-web@6.2.0",
@@ -9581,7 +9581,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9598,7 +9598,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.springframework/spring-webmvc@6.2.0",
@@ -9609,7 +9609,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9626,7 +9626,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/org.yaml/snakeyaml@2.3",
@@ -9637,7 +9637,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9646,18 +9646,18 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/se.skltp.agp/agp-application@4.0.3",
+      "bom-ref": "pkg:maven/se.skltp.agp/agp-application@4.0.4",
       "type": "library",
       "group": "se.skltp.agp",
       "name": "agp-application",
-      "version": "4.0.3",
+      "version": "4.0.4",
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
-      "purl": "pkg:maven/se.skltp.agp/agp-application@4.0.3",
+      "purl": "pkg:maven/se.skltp.agp/agp-application@4.0.4",
       "properties": [
         {
           "name": "aquasecurity:trivy:FilePath",
@@ -9665,7 +9665,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9674,26 +9674,26 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/se.skltp.agp/agp-core@4.0.3",
+      "bom-ref": "pkg:maven/se.skltp.agp/agp-core@4.0.4",
       "type": "library",
       "group": "se.skltp.agp",
       "name": "agp-core",
-      "version": "4.0.3",
+      "version": "4.0.4",
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
-      "purl": "pkg:maven/se.skltp.agp/agp-core@4.0.3",
+      "purl": "pkg:maven/se.skltp.agp/agp-core@4.0.4",
       "properties": [
         {
           "name": "aquasecurity:trivy:FilePath",
-          "value": "opt/agp/app.jar/BOOT-INF/lib/agp-core-4.0.3.jar"
+          "value": "opt/agp/app.jar/BOOT-INF/lib/agp-core-4.0.4.jar"
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9702,26 +9702,26 @@
       ]
     },
     {
-      "bom-ref": "pkg:maven/se.skltp.agp/agp-schemas@4.0.3",
+      "bom-ref": "pkg:maven/se.skltp.agp/agp-schemas@4.0.4",
       "type": "library",
       "group": "se.skltp.agp",
       "name": "agp-schemas",
-      "version": "4.0.3",
+      "version": "4.0.4",
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
-      "purl": "pkg:maven/se.skltp.agp/agp-schemas@4.0.3",
+      "purl": "pkg:maven/se.skltp.agp/agp-schemas@4.0.4",
       "properties": [
         {
           "name": "aquasecurity:trivy:FilePath",
-          "value": "opt/agp/app.jar/BOOT-INF/lib/agp-schemas-4.0.3.jar"
+          "value": "opt/agp/app.jar/BOOT-INF/lib/agp-schemas-4.0.4.jar"
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9738,7 +9738,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/se.skltp.hsa-cache/hsa-cache@1.3.0",
@@ -9749,7 +9749,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9766,7 +9766,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/se.skltp.tak/tak-schemas@4.0.0",
@@ -9777,7 +9777,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9794,7 +9794,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/se.skltp.takcache/takcache@2.2.0",
@@ -9805,7 +9805,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9822,7 +9822,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/se.skltp.takdatahandler/behorighethandler@3.3.1",
@@ -9833,7 +9833,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9850,7 +9850,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/se.skltp.takdatahandler/common@3.3.1",
@@ -9861,7 +9861,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9878,7 +9878,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/se.skltp.takdatahandler/vagvalhandler@3.3.1",
@@ -9889,7 +9889,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9906,7 +9906,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/wsdl4j/wsdl4j@1.6.3",
@@ -9917,7 +9917,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9934,7 +9934,7 @@
       "hashes": [
         {
           "alg": "SHA-1",
-          "content": "28edad934bf23576f959b963a67573e9d3a015d4"
+          "content": "52adda624e07f1a2bfc7a4b65c5b39bcc8b9040a"
         }
       ],
       "purl": "pkg:maven/xml-resolver/xml-resolver@1.2",
@@ -9945,7 +9945,7 @@
         },
         {
           "name": "aquasecurity:trivy:LayerDiffID",
-          "value": "sha256:e8fa9767148bce116478ef6f97cdebbbc9a0f71cfef1b6545f15f0f9017e1498"
+          "value": "sha256:a3c6241e04073d89333001d432f0e8b85b19f650f3bd0cfe0e919005c478d86b"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -9956,23 +9956,19 @@
   ],
   "dependencies": [
     {
-      "ref": "462b6c3f-67fb-47d5-94a4-c883a3929d73",
+      "ref": "19a5aa99-5d29-4a31-b7ef-0acea11a2aa7",
       "dependsOn": []
     },
     {
-      "ref": "5167054b-1512-4e29-9958-2de72b71caad",
+      "ref": "1fe2b529-8ebb-48ff-8786-f74f17d35ec3",
       "dependsOn": []
     },
     {
-      "ref": "537e95cc-3209-46ad-abbb-feaf40918c7d",
+      "ref": "2920856d-ff17-4e2e-9f26-6907d90fe4c9",
       "dependsOn": []
     },
     {
-      "ref": "6d5316f4-387f-48de-bf77-cc0b0fc6676b",
-      "dependsOn": []
-    },
-    {
-      "ref": "957f9129-22cc-43ae-b8cc-2f360e297cd6",
+      "ref": "464e91f0-2402-469f-8d9b-eacb1ac5068d",
       "dependsOn": [
         "pkg:apk/alpine/alpine-baselayout@3.7.0-r0?arch=x86_64&distro=3.22.2",
         "pkg:apk/alpine/alpine-release@3.22.2-r0?arch=x86_64&distro=3.22.2",
@@ -9991,19 +9987,23 @@
       ]
     },
     {
-      "ref": "9874b976-5f09-4147-b44a-80c811a539a7",
+      "ref": "4e60d729-d822-421c-8964-05fee108c957",
       "dependsOn": []
     },
     {
-      "ref": "99d0fe0f-5ee3-411b-91ea-1ec710a332a7",
+      "ref": "56b8af08-31e2-41b3-b510-079b7ebeffa9",
       "dependsOn": []
     },
     {
-      "ref": "d5b7eda4-f5b4-4cd0-9934-3ea436baa908",
+      "ref": "76837fa0-b341-43aa-a28f-289a3852c3dc",
       "dependsOn": []
     },
     {
-      "ref": "e63a0a4b-846b-4813-a7df-2c85e795cd24",
+      "ref": "7eb3c875-8c6c-489b-afdb-a4829236b80a",
+      "dependsOn": []
+    },
+    {
+      "ref": "a2c0116f-5474-452e-a651-0aba7572ef1e",
       "dependsOn": []
     },
     {
@@ -11415,15 +11415,15 @@
       "dependsOn": []
     },
     {
-      "ref": "pkg:maven/se.skltp.agp/agp-application@4.0.3",
+      "ref": "pkg:maven/se.skltp.agp/agp-application@4.0.4",
       "dependsOn": []
     },
     {
-      "ref": "pkg:maven/se.skltp.agp/agp-core@4.0.3",
+      "ref": "pkg:maven/se.skltp.agp/agp-core@4.0.4",
       "dependsOn": []
     },
     {
-      "ref": "pkg:maven/se.skltp.agp/agp-schemas@4.0.3",
+      "ref": "pkg:maven/se.skltp.agp/agp-schemas@4.0.4",
       "dependsOn": []
     },
     {
@@ -11459,17 +11459,17 @@
       "dependsOn": []
     },
     {
-      "ref": "pkg:oci/agp-application@sha256%3A55e8eeda63ac496dcc8d25404611fcab25a9b3f5cb029dd2f49b356177c1c1fe?arch=amd64&repository_url=docker.drift.inera.se%2Fntjp%2Fagp-application",
+      "ref": "pkg:oci/agp-application@sha256%3Aea0461eb14bcbe32f300fb58ca4d686a4e93a5ff36b7864a156f7257ef3c0bf8?arch=amd64&repository_url=docker.drift.inera.se%2Fntjp%2Fagp-application",
       "dependsOn": [
-        "462b6c3f-67fb-47d5-94a4-c883a3929d73",
-        "5167054b-1512-4e29-9958-2de72b71caad",
-        "537e95cc-3209-46ad-abbb-feaf40918c7d",
-        "6d5316f4-387f-48de-bf77-cc0b0fc6676b",
-        "957f9129-22cc-43ae-b8cc-2f360e297cd6",
-        "9874b976-5f09-4147-b44a-80c811a539a7",
-        "99d0fe0f-5ee3-411b-91ea-1ec710a332a7",
-        "d5b7eda4-f5b4-4cd0-9934-3ea436baa908",
-        "e63a0a4b-846b-4813-a7df-2c85e795cd24",
+        "19a5aa99-5d29-4a31-b7ef-0acea11a2aa7",
+        "1fe2b529-8ebb-48ff-8786-f74f17d35ec3",
+        "2920856d-ff17-4e2e-9f26-6907d90fe4c9",
+        "464e91f0-2402-469f-8d9b-eacb1ac5068d",
+        "4e60d729-d822-421c-8964-05fee108c957",
+        "56b8af08-31e2-41b3-b510-079b7ebeffa9",
+        "76837fa0-b341-43aa-a28f-289a3852c3dc",
+        "7eb3c875-8c6c-489b-afdb-a4829236b80a",
+        "a2c0116f-5474-452e-a651-0aba7572ef1e",
         "pkg:maven/co.elastic.logging/ecs-logging-core@1.5.0",
         "pkg:maven/co.elastic.logging/log4j2-ecs-layout@1.5.0",
         "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.18.1",
@@ -11684,9 +11684,9 @@
         "pkg:maven/org.springframework/spring-web@6.2.0",
         "pkg:maven/org.springframework/spring-webmvc@6.2.0",
         "pkg:maven/org.yaml/snakeyaml@2.3",
-        "pkg:maven/se.skltp.agp/agp-application@4.0.3",
-        "pkg:maven/se.skltp.agp/agp-core@4.0.3",
-        "pkg:maven/se.skltp.agp/agp-schemas@4.0.3",
+        "pkg:maven/se.skltp.agp/agp-application@4.0.4",
+        "pkg:maven/se.skltp.agp/agp-core@4.0.4",
+        "pkg:maven/se.skltp.agp/agp-schemas@4.0.4",
         "pkg:maven/se.skltp.hsa-cache/hsa-cache@1.3.0",
         "pkg:maven/se.skltp.tak/tak-schemas@4.0.0",
         "pkg:maven/se.skltp.takcache/takcache@2.2.0",
@@ -12649,6 +12649,15 @@
             "name": "photon"
           },
           "severity": "medium"
+        },
+        {
+          "source": {
+            "name": "redhat"
+          },
+          "score": 4.4,
+          "severity": "medium",
+          "method": "CVSSv31",
+          "vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:L/I:N/A:L"
         }
       ],
       "cwes": [
@@ -12661,6 +12670,9 @@
           "url": "https://avd.aquasec.com/nvd/cve-2025-64505"
         },
         {
+          "url": "https://access.redhat.com/security/cve/CVE-2025-64505"
+        },
+        {
           "url": "https://github.com/pnggroup/libpng/commit/6a528eb5fd0dd7f6de1c39d30de0e41473431c37"
         },
         {
@@ -12668,6 +12680,12 @@
         },
         {
           "url": "https://github.com/pnggroup/libpng/security/advisories/GHSA-4952-h5wq-4m42"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-64505"
+        },
+        {
+          "url": "https://www.cve.org/CVERecord?id=CVE-2025-64505"
         }
       ],
       "published": "2025-11-25T00:15:47+00:00",
