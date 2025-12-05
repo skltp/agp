@@ -21,6 +21,7 @@ import se.skltp.aggregatingservices.AgpCxfEndpointConfigurer;
 import se.skltp.aggregatingservices.api.AgpServiceFactory;
 import se.skltp.aggregatingservices.config.VpConfig;
 import se.skltp.aggregatingservices.configuration.AgpServiceConfiguration;
+import se.skltp.aggregatingservices.logging.HashStrategy;
 import se.skltp.aggregatingservices.logging.ValidationLogInterceptor;
 import se.skltp.aggregatingservices.logging.ValidationLogger;
 
@@ -29,13 +30,15 @@ import se.skltp.aggregatingservices.logging.ValidationLogger;
 public class AgpServiceRoutes extends RouteBuilder {
 
   @Value("${validate.soapAction:false}")
-  Boolean validateSoapAction;
+    boolean validateSoapAction;
 
   private final GenericApplicationContext applicationContext;
 
   private final VpConfig vpConfig;
 
   private final ValidationLogger validationLogger;
+
+  private final HashStrategy hashStrategy;
 
   public static final String INBOUND_SERVICE_CONFIGURATION = "cxf:%s"
     + "?wsdlURL=%s"
@@ -54,13 +57,14 @@ public class AgpServiceRoutes extends RouteBuilder {
     + "&properties.org.apache.cxf.transport.http.async.MAX_PER_HOST_CONNECTIONS=2000";
 
 
-  List<AgpServiceConfiguration> serviceConfigurations;
+    final List<AgpServiceConfiguration> serviceConfigurations;
 
   @Autowired
-  public AgpServiceRoutes(GenericApplicationContext applicationContext, VpConfig vpConfig, ValidationLogger validationLogger, List<AgpServiceConfiguration> serviceConfigurations) {
+  public AgpServiceRoutes(GenericApplicationContext applicationContext, VpConfig vpConfig, ValidationLogger validationLogger, HashStrategy hashStrategy, List<AgpServiceConfiguration> serviceConfigurations) {
     this.applicationContext = applicationContext;
     this.vpConfig = vpConfig;
     this.validationLogger = validationLogger;
+    this.hashStrategy = hashStrategy;
     this.serviceConfigurations = serviceConfigurations;
   }
 
@@ -72,6 +76,7 @@ public class AgpServiceRoutes extends RouteBuilder {
     }
 
     from(String.format("timer:validationLoggerFlush?period=%d", vpConfig.getValidationLog().getInterval()))
+      .id("validationLoggerFlushTimer")
       .process(e -> validationLogger.flush());
   }
 
@@ -100,7 +105,7 @@ public class AgpServiceRoutes extends RouteBuilder {
     log.info("outboundServiceAddress: {}", outboundServiceAddress);
     CxfEndpoint cxfEndpoint = getContext().getEndpoint(outboundServiceAddress, CxfEndpoint.class);
     if (vpConfig.getValidationLog().getServices().contains(serviceName)) {
-      cxfEndpoint.getInInterceptors().add(new ValidationLogInterceptor(serviceName, validationLogger));
+      cxfEndpoint.getInInterceptors().add(new ValidationLogInterceptor(serviceName, validationLogger, hashStrategy));
     }
     List<Feature> features = new ArrayList<>();
     features.add(new GZIPFeature());
