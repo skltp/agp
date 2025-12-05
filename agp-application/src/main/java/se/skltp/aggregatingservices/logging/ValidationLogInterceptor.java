@@ -12,9 +12,7 @@ import org.apache.ws.commons.schema.XmlSchema;
 import org.apache.ws.commons.schema.XmlSchemaExternal;
 import org.apache.ws.commons.schema.XmlSchemaImport;
 import org.apache.ws.commons.schema.XmlSchemaInclude;
-import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 
 import javax.xml.XMLConstants;
 import javax.xml.stream.XMLInputFactory;
@@ -33,18 +31,34 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Slf4j
 public class ValidationLogInterceptor extends AbstractPhaseInterceptor<Message> {
 
+  private static final XMLInputFactory XML_INPUT_FACTORY;
+
+  static {
+    XML_INPUT_FACTORY = XMLInputFactory.newFactory();
+    XML_INPUT_FACTORY.setProperty(XMLInputFactory.SUPPORT_DTD, false);
+    XML_INPUT_FACTORY.setProperty("javax.xml.stream.isSupportingExternalEntities", false);
+  }
+
   private final String serviceName;
   private final ValidationLogger validationLogger;
-  Validator validator;
+  Schema schema;
+  private final Object schemaLock = new Object();
+  private final HashStrategy hashStrategy;
 
   public ValidationLogInterceptor(String serviceName, ValidationLogger validationLogger) {
+    this(serviceName, validationLogger, new Sha256HashStrategy());
+  }
+
+  public ValidationLogInterceptor(String serviceName, ValidationLogger validationLogger, HashStrategy hashStrategy) {
     super(Phase.POST_STREAM);
     this.serviceName = serviceName;
     this.validationLogger = validationLogger;
+    this.hashStrategy = hashStrategy != null ? hashStrategy : new Sha256HashStrategy();
     this.validationLogger.register(serviceName);
   }
 
@@ -69,14 +83,22 @@ public class ValidationLogInterceptor extends AbstractPhaseInterceptor<Message> 
       return;
     }
 
-    if (validator == null) {
-      validator = getValidator(message);
+    Schema localSchema = getOrCreateSchema(message);
+    Validator validator = localSchema != null ? localSchema.newValidator() : null;
+    processMessage(message, xmlBytes, validator);
+  }
+
+  private Schema getOrCreateSchema(Message message) {
+    synchronized (schemaLock) {
+      if (schema == null) {
+        schema = resolveSchema(message);
+      }
     }
-    processMessage(message, xmlBytes);
+    return schema;
   }
 
   @SuppressWarnings("java:S2093") // ByteArrayInputStream should be left open
-  private void processMessage(Message message, byte[] xmlBytes) {
+  private void processMessage(Message message, byte[] xmlBytes, Validator validator) {
     try {
       if (validator != null) {
         validateAgainstSchema(xmlBytes, validator, message);
@@ -86,21 +108,14 @@ public class ValidationLogInterceptor extends AbstractPhaseInterceptor<Message> 
     } catch (Exception ex) {
       log.error("Unexpected validation error", ex);
     } finally {
-      // Detta måste alltid köras, oavsett fel ovan
+      // This must always run, regardless of errors above
       message.setContent(InputStream.class, new ByteArrayInputStream(xmlBytes));
     }
   }
 
-  private Validator getValidator(Message message) {
-    Schema schema = resolveSchema(message);
-    if (schema != null) {
-      return schema.newValidator();
-    }
-    return null;
-  }
 
   private void validateAgainstSchema(byte[] xmlBytes, Validator validator, Message message) throws XMLStreamException, IOException, SAXException {
-    CollectingErrorHandler handler = new CollectingErrorHandler();
+    CollectingErrorHandler handler = new CollectingErrorHandler(this.hashStrategy);
     validator.setErrorHandler(handler);
 
     XMLStreamReader xsr = getXmlStreamReader(xmlBytes);
@@ -121,10 +136,7 @@ public class ValidationLogInterceptor extends AbstractPhaseInterceptor<Message> 
   }
 
   private XMLStreamReader getXmlStreamReader(byte[] xmlBytes) throws XMLStreamException {
-    XMLInputFactory factory = XMLInputFactory.newFactory();
-    factory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
-    factory.setProperty("javax.xml.stream.isSupportingExternalEntities", false);
-    return factory.createXMLStreamReader(new ByteArrayInputStream(xmlBytes));
+    return XML_INPUT_FACTORY.createXMLStreamReader(new ByteArrayInputStream(xmlBytes));
   }
 
   private Schema resolveSchema(Message message) {
@@ -205,7 +217,7 @@ public class ValidationLogInterceptor extends AbstractPhaseInterceptor<Message> 
   }
 
   private boolean isXsd(URL url) {
-    return url.toString().toLowerCase().endsWith(".xsd");
+    return url.toString().toLowerCase(Locale.ROOT).endsWith(".xsd");
   }
 
   private URL resolveLocation(String base, String location) {
@@ -219,40 +231,5 @@ public class ValidationLogInterceptor extends AbstractPhaseInterceptor<Message> 
       // If not an URL, try to get it directly as a resource path.
     }
     return Thread.currentThread().getContextClassLoader().getResource(location);
-  }
-
-  static final class CollectingErrorHandler implements ErrorHandler {
-    public static final String LEVEL_WARN = "Validation warning";
-    public static final String LEVEL_ERROR = "Validation error";
-    public static final String LEVEL_FATAL = "Fatal validation error";
-    private final List<String> errors = new ArrayList<>();
-
-    @Override
-    public void warning(SAXParseException exception) {
-      errors.add(format(LEVEL_WARN, exception));
-    }
-
-    @Override
-    public void error(SAXParseException exception) {
-      errors.add(format(LEVEL_ERROR, exception));
-    }
-
-    @Override
-    public void fatalError(SAXParseException exception) {
-      errors.add(format(LEVEL_FATAL, exception));
-    }
-
-    boolean hasErrors() {
-      return !errors.isEmpty();
-    }
-
-    List<String> getErrors() {
-      return errors;
-    }
-
-    private static String format(String level, SAXParseException e) {
-      return String.format("%s at line %d col %d: %s",
-        level, e.getLineNumber(), e.getColumnNumber(), e.getMessage());
-    }
   }
 }
