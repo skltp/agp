@@ -32,22 +32,28 @@ parametern se.skltp.aggregatingservices.configuration.AgpServiceConfiguration.se
 vp.validationLog:
   services: GetAggregatedCareDocumentation-v3,GetAggregatedCarePlans-v2
   interval: 120000 # Logga unika fel varannan minut
+  hashStrategy: noop # Använd ingen hash-strategi, logga alla fel i klartext
 ```
+
+vp.validationLog.hashStrategy noop får inte användas i produktionsmiljöer eftersom det kan leda till att känslig
+information loggas i klartext.
 
 Felen loggas som varningar med följande struktur:
 
 ```json
 {
-    "@timestamp": "<tidsstämpel>",
-    "log.level": "WARN",
-    "BusinessCorrelationId": "<korrelations-id>",
-    "LogMessage": "validation-err",
-    "message": "<felmeddelande>",
-    "receiverid": "<tjänsteproducentens logiska adress>",
-    "service": "<aggregerande tjänst>",
-    "ecs.version": "1.2.0",
-    "process.thread.name": "Camel (camel-1) thread #1 - timer://validationLoggerFlush",
-    "log.logger": "se.skltp.aggregatingservices.logging.ValidationLoggerImpl"
+  "@timestamp": "<tidsstämpel>",
+  "log.level": "WARN",
+  "BusinessCorrelationId": "<korrelations-id>",
+  "LogMessage": "validation-err",
+  "location.columnNumber": "<kolumnnummer>",
+  "location.lineNumber": "<radnummer>",
+  "message": "<felmeddelande>",
+  "receiverid": "<tjänsteproducentens logiska adress>",
+  "service": "<aggregerande tjänst>",
+  "ecs.version": "1.2.0",
+  "process.thread.name": "Camel (camel-1) thread #1 - timer://validationLoggerFlush",
+  "log.logger": "se.skltp.aggregatingservices.logging.ValidationLoggerImpl"
 }
 ```
      

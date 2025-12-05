@@ -27,5 +27,7 @@ public class VpConfig {
   public static class ValidationLog {
     Set<String> services = new HashSet<>();
     int interval = 60000;
+    // choose hashing strategy for validation messages: "sha256" (default) or "noop"
+    String hashStrategy = "sha256";
   }
 }

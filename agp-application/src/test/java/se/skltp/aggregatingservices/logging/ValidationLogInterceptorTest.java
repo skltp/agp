@@ -38,7 +38,7 @@ class ValidationLogInterceptorTest {
       validationLogInterceptor.handleMessage(message);
 
       verify(message).getContent(any());
-      assertNotNull(validationLogInterceptor.validator);
+      assertNotNull(validationLogInterceptor.schema);
     }
     verify(validationLogger, times(0)).addErrors(anyList(), anyString(), any());
   }
@@ -111,13 +111,13 @@ class ValidationLogInterceptorTest {
     validationLogInterceptor.handleMessage(message);
 
     verify(message).getContent(any());
-    assertNull(validationLogInterceptor.validator);
+    assertNull(validationLogInterceptor.schema);
     verify(validationLogger, times(0)).addErrors(anyList(), anyString(), any());
   }
 
   @Test
   void testErrorHandler() {
-    var errorHandler = new ValidationLogInterceptor.CollectingErrorHandler();
+    var errorHandler = new CollectingErrorHandler();
     assertFalse(errorHandler.hasErrors());
     errorHandler.warning(new SAXParseException("warning!", "", "", 42, 42));
     assertTrue(errorHandler.hasErrors());
