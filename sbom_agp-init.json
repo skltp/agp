@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:1658946d-285b-4ad3-b4d9-497194d36a80",
+  "serialNumber": "urn:uuid:deb8d3a0-2541-4359-b6e3-e39272f105b1",
   "version": 1,
   "metadata": {
-    "timestamp": "2025-12-04T07:26:27+00:00",
+    "timestamp": "2025-12-05T11:44:13+00:00",
     "tools": {
       "components": [
         {
@@ -20,10 +20,10 @@
       ]
     },
     "component": {
-      "bom-ref": "pkg:oci/agp-init@sha256%3Aac2b806fa997c4ddd4c397ea7ef20a87f430c132e16e01df6aa1aae5226e4574?arch=amd64&repository_url=docker.drift.inera.se%2Fntjp%2Fagp-init",
+      "bom-ref": "pkg:oci/agp-init@sha256%3A2ca12639e8c08771412ff21b2b6bcccb52883576f02c5f25bc8cc3025b0ca1e5?arch=amd64&repository_url=docker.drift.inera.se%2Fntjp%2Fagp-init",
       "type": "container",
-      "name": "docker.drift.inera.se/ntjp/agp-init:4.0.4",
-      "purl": "pkg:oci/agp-init@sha256%3Aac2b806fa997c4ddd4c397ea7ef20a87f430c132e16e01df6aa1aae5226e4574?arch=amd64&repository_url=docker.drift.inera.se%2Fntjp%2Fagp-init",
+      "name": "docker.drift.inera.se/ntjp/agp-init:4.0.5",
+      "purl": "pkg:oci/agp-init@sha256%3A2ca12639e8c08771412ff21b2b6bcccb52883576f02c5f25bc8cc3025b0ca1e5?arch=amd64&repository_url=docker.drift.inera.se%2Fntjp%2Fagp-init",
       "properties": [
         {
           "name": "aquasecurity:trivy:DiffID",
@@ -31,11 +31,11 @@
         },
         {
           "name": "aquasecurity:trivy:DiffID",
-          "value": "sha256:28e7c66f13fd1cda8c9ca77e6107235aab7460d07e298ebb0d52b30197b70b8e"
+          "value": "sha256:3b8b18144f258aef18df5b3539b52b9f98df7fd405865c94b36d284a8f39ec34"
         },
         {
           "name": "aquasecurity:trivy:DiffID",
-          "value": "sha256:3b8b18144f258aef18df5b3539b52b9f98df7fd405865c94b36d284a8f39ec34"
+          "value": "sha256:48f97ab1be705b7f2a4a8be29d4cc58f146aaa30a76f10ecda89a84e074ee4ca"
         },
         {
           "name": "aquasecurity:trivy:DiffID",
@@ -63,10 +63,6 @@
         },
         {
           "name": "aquasecurity:trivy:DiffID",
-          "value": "sha256:83ad223c2ad17249ee5b1daef2f630a6c4c7a6fa7aaf629d74e7f17d2085c855"
-        },
-        {
-          "name": "aquasecurity:trivy:DiffID",
           "value": "sha256:b16ef5a5d8ca66d36d70e824bcff07dc8fb944f0bd2061829d1fa824c0f4259c"
         },
         {
@@ -78,8 +74,12 @@
           "value": "sha256:de20ed16496d4c492988ca6ff3024a55e0b1c7026802144c340fec3d335815b9"
         },
         {
+          "name": "aquasecurity:trivy:DiffID",
+          "value": "sha256:e023f56f9290296c7494bc1038ac186803503efe1c22c64b68ce14043dfa28dc"
+        },
+        {
           "name": "aquasecurity:trivy:ImageID",
-          "value": "sha256:9ab9adcf67d06f59f974b238a5f864f4ee7e0635abece05bc80d5082b47838b1"
+          "value": "sha256:0c187d78fbd4d26054072f4ca1d62452aba820c64054a95d9766f2970e617a42"
         },
         {
           "name": "aquasecurity:trivy:Labels:org.opencontainers.image.description",
@@ -99,7 +99,7 @@
         },
         {
           "name": "aquasecurity:trivy:RepoDigest",
-          "value": "docker.drift.inera.se/ntjp/agp-init@sha256:ac2b806fa997c4ddd4c397ea7ef20a87f430c132e16e01df6aa1aae5226e4574"
+          "value": "docker.drift.inera.se/ntjp/agp-init@sha256:2ca12639e8c08771412ff21b2b6bcccb52883576f02c5f25bc8cc3025b0ca1e5"
         },
         {
           "name": "aquasecurity:trivy:RepoTag",
@@ -107,11 +107,7 @@
         },
         {
           "name": "aquasecurity:trivy:RepoTag",
-          "value": "docker.drift.inera.se/ntjp/agp-init:4.0.4"
-        },
-        {
-          "name": "aquasecurity:trivy:RepoTag",
-          "value": "docker.drift.inera.se/ntjp/agp-init:4.1.0-SNAPSHOT"
+          "value": "docker.drift.inera.se/ntjp/agp-init:4.0.5"
         },
         {
           "name": "aquasecurity:trivy:RepoTag",
@@ -134,7 +130,7 @@
   },
   "components": [
     {
-      "bom-ref": "efed5098-8ef1-4ea7-85a7-796c1a54875b",
+      "bom-ref": "017dbe08-b882-407a-af38-8fa2b2726b5d",
       "type": "operating-system",
       "name": "alpine",
       "version": "3.22.2",
@@ -5818,7 +5814,7 @@
   ],
   "dependencies": [
     {
-      "ref": "efed5098-8ef1-4ea7-85a7-796c1a54875b",
+      "ref": "017dbe08-b882-407a-af38-8fa2b2726b5d",
       "dependsOn": [
         "pkg:apk/alpine/alpine-baselayout@3.7.0-r0?arch=x86_64&distro=3.22.2",
         "pkg:apk/alpine/alpine-release@3.22.2-r0?arch=x86_64&distro=3.22.2",
@@ -6755,9 +6751,9 @@
       "dependsOn": []
     },
     {
-      "ref": "pkg:oci/agp-init@sha256%3Aac2b806fa997c4ddd4c397ea7ef20a87f430c132e16e01df6aa1aae5226e4574?arch=amd64&repository_url=docker.drift.inera.se%2Fntjp%2Fagp-init",
+      "ref": "pkg:oci/agp-init@sha256%3A2ca12639e8c08771412ff21b2b6bcccb52883576f02c5f25bc8cc3025b0ca1e5?arch=amd64&repository_url=docker.drift.inera.se%2Fntjp%2Fagp-init",
       "dependsOn": [
-        "efed5098-8ef1-4ea7-85a7-796c1a54875b",
+        "017dbe08-b882-407a-af38-8fa2b2726b5d",
         "pkg:maven/aopalliance/aopalliance@1.0",
         "pkg:maven/com.google.code.gson/gson@2.13.1",
         "pkg:maven/com.google.errorprone/error_prone_annotations@2.38.0",
