@@ -64,17 +64,14 @@
 
     <!-- Dependencies -->
     <takdatahandler.version>3.3.1</takdatahandler.version>
-    <spring.boot-version>3.5.12</spring.boot-version>
+    <!-- Mirrors <parent> version — required because ${spring-boot.version} is not inherited from spring-boot-starter-parent -->
+    <spring-boot.version>3.5.12</spring-boot.version>
     <camel.version>4.18.0</camel.version>
     <apache-cfx.version>4.1.5</apache-cfx.version>
-    <jetty.version>12.0.33</jetty.version>
     <lmax_disruptor-version>3.3.11</lmax_disruptor-version>
     <ecs-logging-java.version>1.6.0</ecs-logging-java.version>
     <hawtio.spring.boot-version>4.2.0</hawtio.spring.boot-version>
     <lombok.version>1.18.44</lombok.version>
-    <micrometer.version>1.12.13</micrometer.version>
-    <jakarta.xml.ws-api.version>4.0.3</jakarta.xml.ws-api.version>
-    <jakarta.xml.bind-api.version>4.0.5</jakarta.xml.bind-api.version>
     <jakarta.jws.version>3.0.0</jakarta.jws.version>
 
     <!-- Test dependencies -->
@@ -83,76 +80,56 @@
 
   <dependencyManagement>
     <dependencies>
+      <!-- Camel BOM — manages all org.apache.camel.springboot starter artifacts -->
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-spring-boot-bom</artifactId>
+        <version>${camel.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- Camel core BOM — manages all org.apache.camel artifacts -->
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-bom</artifactId>
+        <version>${camel.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Global exclusion of spring-boot-starter-logging (project uses Log4j2 instead) -->
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter</artifactId>
-        <version>${spring.boot-version}</version>
+        <version>${spring-boot.version}</version>
         <exclusions>
-          <exclusion>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-          </exclusion>
           <exclusion>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
           </exclusion>
         </exclusions>
       </dependency>
+
+      <!-- CXF transports — not covered by Camel or Spring Boot BOMs -->
       <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-jetty</artifactId>
-        <version>${spring.boot-version}</version>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-rt-transports-http-jetty</artifactId>
+        <version>${apache-cfx.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-autoconfigure</artifactId>
-        <version>${spring.boot-version}</version>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-rt-transports-http-hc</artifactId>
+        <version>${apache-cfx.version}</version>
       </dependency>
+
+      <!-- Jakarta JWS — not managed by Spring Boot -->
       <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-actuator</artifactId>
-        <version>${spring.boot-version}</version>
+        <groupId>jakarta.jws</groupId>
+        <artifactId>jakarta.jws-api</artifactId>
+        <version>${jakarta.jws.version}</version>
       </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-spring-boot-starter</artifactId>
-        <version>${camel.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-cxf-soap-starter</artifactId>
-        <version>${camel.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-jetty-starter</artifactId>
-        <version>${camel.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-direct-starter</artifactId>
-        <version>${camel.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-support</artifactId>
-        <version>${camel.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-management</artifactId>
-        <version>${camel.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-timer</artifactId>
-        <version>${camel.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-log4j2</artifactId>
-        <version>${spring.boot-version}</version>
-      </dependency>
+
+      <!-- Third-party libraries not in any BOM -->
       <dependency>
         <groupId>co.elastic.logging</groupId>
         <artifactId>log4j2-ecs-layout</artifactId>
@@ -167,72 +144,6 @@
         <groupId>io.hawt</groupId>
         <artifactId>hawtio-springboot</artifactId>
         <version>${hawtio.spring.boot-version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <version>${lombok.version}</version>
-        <optional>true</optional>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-rt-transports-http-jetty</artifactId>
-        <version>${apache-cfx.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-rt-transports-http-hc</artifactId>
-        <version>${apache-cfx.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>jakarta.jws</groupId>
-        <artifactId>jakarta.jws-api</artifactId>
-        <version>${jakarta.jws.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>jakarta.xml.bind</groupId>
-        <artifactId>jakarta.xml.bind-api</artifactId>
-        <version>${jakarta.xml.bind-api.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>jakarta.xml.ws</groupId>
-        <artifactId>jakarta.xml.ws-api</artifactId>
-        <version>${jakarta.xml.ws-api.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>io.micrometer</groupId>
-        <artifactId>micrometer-registry-prometheus</artifactId>
-        <version>${micrometer.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-test</artifactId>
-        <version>${spring.boot-version}</version>
-        <scope>test</scope>
-        <exclusions>
-          <exclusion>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-test-junit5</artifactId>
-        <version>${camel.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-test-spring-junit5</artifactId>
-        <version>${camel.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-http-starter</artifactId>
-        <version>${camel.version}</version>
-        <scope>test</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
