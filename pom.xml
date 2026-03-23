@@ -5,8 +5,8 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.4.0</version>
-    <relativePath></relativePath>
+    <version>3.5.12</version>
+    <relativePath/>
   </parent>
   <groupId>se.skltp.agp</groupId>
   <artifactId>agp-parent</artifactId>
@@ -43,29 +43,30 @@
   </distributionManagement>
   <properties>
     <maven.compiler.release>17</maven.compiler.release>
-    <jacoco.plugin.version>0.8.12</jacoco.plugin.version>
-    <lmax_disruptor-version>3.3.6</lmax_disruptor-version>
-    <jetty.version>12.0.15</jetty.version>
-    <spring.boot-version>3.4.0</spring.boot-version>
+    <jacoco.plugin.version>0.8.14</jacoco.plugin.version>
+    <lmax_disruptor-version>3.3.11</lmax_disruptor-version>
+    <jetty.version>12.0.33</jetty.version>
+    <spring.boot-version>3.5.12</spring.boot-version>
     <ecs-logging-java.version>1.6.0</ecs-logging-java.version>
     <maven.javadoc.skip>true</maven.javadoc.skip>
-    <apache-cfx.version>4.1.0</apache-cfx.version>
+    <apache-cfx.version>4.1.5</apache-cfx.version>
     <takdatahandler.version>3.3.1</takdatahandler.version>
     <cxf.xjc.version>4.0.2</cxf.xjc.version>
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-    <micrometer.version>1.12.3</micrometer.version>
+    <micrometer.version>1.12.13</micrometer.version>
     <sonar.plugin.version>3.7.0.1746</sonar.plugin.version>
     <sonar.language>java</sonar.language>
     <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
     <java.version>17</java.version>
-    <jakarta.xml.version>4.0.2</jakarta.xml.version>
+    <jakarta.xml.ws-api.version>4.0.3</jakarta.xml.ws-api.version>
+    <jakarta.xml.bind-api.version>4.0.5</jakarta.xml.bind-api.version>
     <jakarta.jws.version>3.0.0</jakarta.jws.version>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <lombok.version>1.18.34</lombok.version>
+    <lombok.version>1.18.44</lombok.version>
     <hawtio.spring.boot-version>4.2.0</hawtio.spring.boot-version>
-    <camel.version>4.8.2</camel.version>
+    <camel.version>4.18.0</camel.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -178,12 +179,12 @@
       <dependency>
         <groupId>jakarta.xml.bind</groupId>
         <artifactId>jakarta.xml.bind-api</artifactId>
-        <version>${jakarta.xml.version}</version>
+        <version>${jakarta.xml.bind-api.version}</version>
       </dependency>
       <dependency>
         <groupId>jakarta.xml.ws</groupId>
         <artifactId>jakarta.xml.ws-api</artifactId>
-        <version>${jakarta.xml.version}</version>
+        <version>${jakarta.xml.ws-api.version}</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
