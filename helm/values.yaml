@@ -4,6 +4,7 @@ deployment:
   replicaCount: 1
   imagePullPolicy: Always
   elasticGrokFilter: camel
+  javaOpts: "-XX:MaxRAMPercentage=65"
   resources: {} # Override to specify resources
   topologySpreadConstraints:
     - labelSelector:
