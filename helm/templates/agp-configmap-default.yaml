@@ -13,8 +13,8 @@ data:
   MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: health,metrics,prometheus
   MANAGEMENT_ENDPOINT_PROMETHEUS_ENABLED: 'true'
 
-  JAVA_OPTS: -XX:MaxRAMPercentage=65
-  
+  JAVA_OPTS: "{{ .Values.deployment.javaOpts }}"
+
   # Camel spring-boot configurations
   CAMEL_SPRINGBOOT_MESSAGE_HISTORY: "false"
   CAMEL_SPRINGBOOT_TRACING: "false"
