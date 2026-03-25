@@ -6,6 +6,13 @@ deployment:
   elasticGrokFilter: camel
   javaOpts: "-XX:MaxRAMPercentage=65"
   resources: {} # Override to specify resources
+  initResources:
+    limits:
+      cpu: 250m
+      memory: 512Mi
+    requests:
+      cpu: 150m
+      memory: 256Mi
   topologySpreadConstraints:
     - labelSelector:
         matchLabels:

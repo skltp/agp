@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
   name: agp
 spec:
   replicas: {{ .Values.deployment.replicaCount }}
@@ -16,7 +15,6 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      annotations:
       labels:
         app: agp
         app.kubernetes.io/name: agp
@@ -43,7 +41,7 @@ spec:
       {{- end }}
 
       initContainers:
-        - name: agp-init
+        - name: agp-init # downloads aggregating services
           image: "{{ .Values.repository }}agp-init:{{ .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.deployment.pullPolicy }}
           securityContext:
@@ -56,7 +54,7 @@ spec:
             seccompProfile:
               type: RuntimeDefault
           resources:
-            {{- toYaml .Values.deployment.resources | nindent 12 }}
+            {{- toYaml .Values.deployment.initResources | nindent 12 }}
           volumeMounts:
             - name: init-config
               mountPath: /opt/agp/pom.xml
