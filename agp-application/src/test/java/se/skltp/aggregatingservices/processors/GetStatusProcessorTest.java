@@ -9,7 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.info.BuildProperties;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
@@ -25,7 +25,7 @@ import se.skltp.takcache.TakCache;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class GetStatusProcessorTest extends CamelTestSupport {
 
-  @MockBean(name = "takCache")
+  @MockitoBean(name = "takCache")
   private TakCache takCache;
 
   @Autowired GetStatusProcessor getStatusProcessor;
