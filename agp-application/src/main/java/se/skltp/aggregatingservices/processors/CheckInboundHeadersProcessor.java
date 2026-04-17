@@ -3,7 +3,7 @@ package se.skltp.aggregatingservices.processors;
 import lombok.extern.log4j.Log4j2;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import se.skltp.aggregatingservices.constants.AgpHeaders;
 

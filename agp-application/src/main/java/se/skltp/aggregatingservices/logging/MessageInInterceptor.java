@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.cxf.ext.logging.WireTapIn;
 import org.apache.cxf.ext.logging.event.LogEvent;
 import org.apache.cxf.interceptor.Fault;

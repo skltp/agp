@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.5.12</version>
+    <version>3.5.12</version> <!-- MAR 2026 -->
     <relativePath/>
   </parent>
 
@@ -54,27 +54,30 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.javadoc.skip>true</maven.javadoc.skip>
 
+    <!-- TODO: REGULARLY CHECK UPDATES FOR DEPS -#- DEPENDENCIES CHECKED: APR 2026. -->
+
     <!-- Plugins -->
-    <sonar.plugin.version>3.7.0.1746</sonar.plugin.version>
-    <cxf.xjc.version>4.0.2</cxf.xjc.version>
+    <sonar.plugin.version>3.11.0.3922</sonar.plugin.version> <!-- MAR 2024 -->
+    <cxf.xjc.version>4.0.2</cxf.xjc.version> <!-- AUG 2024 - Updates exist. -->
+
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     <sonar.language>java</sonar.language>
     <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
 
     <!-- Dependencies -->
-    <takdatahandler.version>3.3.1</takdatahandler.version>
+    <takdatahandler.version>3.4.3</takdatahandler.version> <!-- APR 2026 -->
     <!-- Mirrors the <parent> version — required because ${spring-boot.version} is not inherited from spring-boot-starter-parent -->
-    <spring-boot.version>3.5.12</spring-boot.version>
-    <camel.version>4.18.1</camel.version>
-    <apache-cfx.version>4.1.5</apache-cfx.version>
-    <lmax_disruptor-version>3.3.11</lmax_disruptor-version>
-    <ecs-logging-java.version>1.6.0</ecs-logging-java.version>
+    <spring-boot.version>3.5.12</spring-boot.version> <!-- MAR 2026 -->
+    <camel.version>4.18.1</camel.version> <!-- MAR 2026 -->
+    <apache-cfx.version>4.1.5</apache-cfx.version> <!-- FEB 2026 - 4.2.0 exists but requires work. -->
+    <lmax_disruptor-version>4.0.0</lmax_disruptor-version> <!-- SEP 2023. Latest as of APR 2026. -->
+    <ecs-logging-java.version>1.7.0</ecs-logging-java.version> <!-- APR 2025. Latest as of APR 2026. -->
     <hawtio.spring.boot-version>4.3.0</hawtio.spring.boot-version> <!-- FEB 2025 -->
-    <jakarta.jws.version>3.0.0</jakarta.jws.version>
+    <jakarta.jws.version>3.0.0</jakarta.jws.version> <!-- OCT 2020. Latest as of APR 2026. -->
 
     <!-- Test dependencies -->
-    <jacoco.plugin.version>0.8.14</jacoco.plugin.version>
+    <jacoco.plugin.version>0.8.14</jacoco.plugin.version> <!-- OCT 2025. Latest as of APR 2026. -->
   </properties>
 
   <dependencyManagement>
@@ -146,6 +149,14 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <dependencies>
+    <dependency> <!-- SLF4J provider for Log4J2 placed at top-parent level to propagate throughout the project. -->
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j2-impl</artifactId>
+      <!-- VERSION handled by Spring Boot parent. -->
+    </dependency>
+  </dependencies>
 
   <build>
     <pluginManagement>
