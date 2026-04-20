@@ -58,7 +58,7 @@
 
     <!-- Plugins -->
     <sonar.plugin.version>3.11.0.3922</sonar.plugin.version> <!-- MAR 2024 -->
-    <cxf.xjc.version>4.0.2</cxf.xjc.version> <!-- AUG 2024 - Updates exist. -->
+    <cxf-xjc-plugin-version>4.1.2</cxf-xjc-plugin-version> <!-- JAN 2026 -->
 
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
@@ -70,7 +70,7 @@
     <!-- Mirrors the <parent> version — required because ${spring-boot.version} is not inherited from spring-boot-starter-parent -->
     <spring-boot.version>3.5.12</spring-boot.version> <!-- MAR 2026 -->
     <camel.version>4.18.1</camel.version> <!-- MAR 2026 -->
-    <apache-cfx.version>4.1.5</apache-cfx.version> <!-- FEB 2026 - 4.2.0 exists but requires work. -->
+    <apache-cfx.version>4.1.5</apache-cfx.version> <!-- FEB 2026 - 4.2.x exists but might require Spring Boot 4. -->
     <lmax_disruptor-version>4.0.0</lmax_disruptor-version> <!-- SEP 2023. Latest as of APR 2026. -->
     <ecs-logging-java.version>1.7.0</ecs-logging-java.version> <!-- APR 2025. Latest as of APR 2026. -->
     <hawtio.spring.boot-version>4.3.0</hawtio.spring.boot-version> <!-- FEB 2025 -->
