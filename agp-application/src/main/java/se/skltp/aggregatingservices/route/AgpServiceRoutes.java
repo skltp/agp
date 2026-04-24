@@ -1,6 +1,13 @@
+/*
+ * Copyright © 2014-2026 Inera.
+ * Copyright owner URL: https://www.inera.se/
+ * SKLTP overview page: https://inera.atlassian.net/wiki/spaces/SKLTP/overview
+ * This library is free software under the GNU Lesser General Public License v3.0.
+ * Please refer to the full license files at the project root.
+ */
 package se.skltp.aggregatingservices.route;
 
-import static org.apache.commons.lang.StringUtils.isEmpty;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static se.skltp.aggregatingservices.constants.AgpProperties.AGP_SERVICE_COMPONENT_ID;
 import static se.skltp.aggregatingservices.constants.AgpProperties.AGP_SERVICE_HANDLER;
 import static se.skltp.aggregatingservices.constants.AgpProperties.AGP_TAK_CONTRACT_NAME;

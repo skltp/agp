@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.5.12</version>
+    <version>3.5.13</version> <!-- MAR 2026 -->
     <relativePath/>
   </parent>
 
@@ -54,27 +54,30 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.javadoc.skip>true</maven.javadoc.skip>
 
+    <!-- TODO: REGULARLY CHECK UPDATES FOR DEPS -#- DEPENDENCIES CHECKED: APR 2026. -->
+
     <!-- Plugins -->
-    <sonar.plugin.version>3.7.0.1746</sonar.plugin.version>
-    <cxf.xjc.version>4.0.2</cxf.xjc.version>
+    <sonar.plugin.version>3.11.0.3922</sonar.plugin.version> <!-- MAR 2024 -->
+    <cxf-xjc-plugin-version>4.1.2</cxf-xjc-plugin-version> <!-- JAN 2026 -->
+
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     <sonar.language>java</sonar.language>
     <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
 
     <!-- Dependencies -->
-    <takdatahandler.version>3.3.1</takdatahandler.version>
+    <takdatahandler.version>3.4.3</takdatahandler.version> <!-- APR 2026 -->
     <!-- Mirrors the <parent> version — required because ${spring-boot.version} is not inherited from spring-boot-starter-parent -->
-    <spring-boot.version>3.5.12</spring-boot.version>
-    <camel.version>4.18.0</camel.version>
-    <apache-cfx.version>4.1.5</apache-cfx.version>
-    <lmax_disruptor-version>3.3.11</lmax_disruptor-version>
-    <ecs-logging-java.version>1.6.0</ecs-logging-java.version>
-    <hawtio.spring.boot-version>4.2.0</hawtio.spring.boot-version>
-    <jakarta.jws.version>3.0.0</jakarta.jws.version>
+    <spring-boot.version>3.5.13</spring-boot.version> <!-- MAR 2026 -->
+    <camel.version>4.18.2</camel.version> <!-- MAR 2026 -->
+    <apache-cfx.version>4.1.5</apache-cfx.version> <!-- FEB 2026 - 4.2.x exists but might require Spring Boot 4. -->
+    <lmax_disruptor-version>4.0.0</lmax_disruptor-version> <!-- SEP 2023. Latest as of APR 2026. -->
+    <ecs-logging-java.version>1.7.0</ecs-logging-java.version> <!-- APR 2025. Latest as of APR 2026. -->
+    <hawtio.spring.boot-version>4.3.0</hawtio.spring.boot-version> <!-- FEB 2025 -->
+    <jakarta.jws.version>3.0.0</jakarta.jws.version> <!-- OCT 2020. Latest as of APR 2026. -->
 
     <!-- Test dependencies -->
-    <jacoco.plugin.version>0.8.14</jacoco.plugin.version>
+    <jacoco.plugin.version>0.8.14</jacoco.plugin.version> <!-- OCT 2025. Latest as of APR 2026. -->
   </properties>
 
   <dependencyManagement>
@@ -147,6 +150,14 @@
     </dependencies>
   </dependencyManagement>
 
+  <dependencies>
+    <dependency> <!-- SLF4J provider for Log4J2 placed at top-parent level to propagate throughout the project. -->
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j2-impl</artifactId>
+      <!-- VERSION handled by Spring Boot parent. -->
+    </dependency>
+  </dependencies>
+
   <build>
     <pluginManagement>
       <plugins>
@@ -163,6 +174,7 @@
             </execution>
           </executions>
         </plugin>
+
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
@@ -171,8 +183,59 @@
             <append>true</append>
           </configuration>
         </plugin>
+
+        <!-- User manual for license plugin in IntelliJ IDEA:
+                -Set profile 'license' to true in your IDE and refresh the project.
+                -Go to plugins > license on project-parent level;
+                   and run 'license:check' to control, or 'license:format' to renew file headers.
+                -Disable the 'license' profile and commit your updated headers. -->
+        <plugin>
+          <groupId>com.mycila</groupId>
+          <artifactId>license-maven-plugin</artifactId>
+          <version>5.0.0</version> <!-- MAR 2025. Latest as of APR 2026 -->
+          <configuration>
+            <!-- To fail the build when deprecated configuration is used. -->
+            <prohibitLegacyUse>true</prohibitLegacyUse>
+            <strictCheck>true</strictCheck>
+            <useDefaultMapping>true</useDefaultMapping>
+            <useDefaultExcludes>true</useDefaultExcludes>
+            <basedir>${project.basedir}</basedir>
+            <encoding>UTF-8</encoding>
+
+            <licenseSets>
+              <licenseSet>
+                <header>License_header_template.txt</header>
+
+                <!-- Properties used in the template -->
+                <properties>
+                  <copyrightYears>2014-2026</copyrightYears>
+                  <inceptionYear>2014</inceptionYear>
+                  <product>SKLTP</product>
+                  <owner>Inera</owner>
+                  <owner_url>https://www.inera.se/</owner_url>
+                  <skltp_page>https://inera.atlassian.net/wiki/spaces/SKLTP/overview</skltp_page>
+                </properties>
+
+                <!-- File inclusion/exclusion -->
+                <includes>
+                  <include>**/*.java</include>
+                </includes>
+
+                <excludes>
+                  <exclude>target/**</exclude>
+                  <exclude>**/target/**</exclude>
+                  <exclude>**/*.xsd</exclude>
+                  <exclude>**/*.wsdl</exclude>
+                  <exclude>**/*.xml</exclude>
+                  <exclude>**/*.dtd</exclude>
+                </excludes>
+              </licenseSet>
+            </licenseSets>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
+
     <plugins>
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
@@ -204,6 +267,10 @@
           <classesDirectory>${project.build.outputDirectory}</classesDirectory>
           <runOrder>alphabetical</runOrder>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.mycila</groupId>
+        <artifactId>license-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
@@ -248,6 +315,27 @@
                 <phase>pre-integration-test</phase>
                 <goals>
                   <goal>prepare-agent</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>license</id>
+      <activation />
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.mycila</groupId>
+            <artifactId>license-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>check-license</id>
+                <phase>compile</phase>
+                <goals>
+                  <goal>check</goal>
                 </goals>
               </execution>
             </executions>

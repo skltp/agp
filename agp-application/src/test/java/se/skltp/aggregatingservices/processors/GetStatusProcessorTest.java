@@ -1,3 +1,10 @@
+/*
+ * Copyright © 2014-2026 Inera.
+ * Copyright owner URL: https://www.inera.se/
+ * SKLTP overview page: https://inera.atlassian.net/wiki/spaces/SKLTP/overview
+ * This library is free software under the GNU Lesser General Public License v3.0.
+ * Please refer to the full license files at the project root.
+ */
 package se.skltp.aggregatingservices.processors;
 
 import org.apache.camel.Exchange;
@@ -9,7 +16,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.info.BuildProperties;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
@@ -25,7 +32,7 @@ import se.skltp.takcache.TakCache;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class GetStatusProcessorTest extends CamelTestSupport {
 
-  @MockBean(name = "takCache")
+  @MockitoBean(name = "takCache")
   private TakCache takCache;
 
   @Autowired GetStatusProcessor getStatusProcessor;

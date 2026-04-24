@@ -1,3 +1,10 @@
+/*
+ * Copyright © 2014-2026 Inera.
+ * Copyright owner URL: https://www.inera.se/
+ * SKLTP overview page: https://inera.atlassian.net/wiki/spaces/SKLTP/overview
+ * This library is free software under the GNU Lesser General Public License v3.0.
+ * Please refer to the full license files at the project root.
+ */
 package se.skltp.aggregatingservices.logging;
 
 import java.io.IOException;
@@ -6,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.cxf.ext.logging.WireTapIn;
 import org.apache.cxf.ext.logging.event.LogEvent;
 import org.apache.cxf.interceptor.Fault;
