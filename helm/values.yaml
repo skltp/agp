@@ -38,6 +38,99 @@ aggServices:
   ports:
     - 9001
 
+# Server configuration
+server:
+  port: "8089"
+
+# Installation basepath
+paths:
+  base: /opt/agp
+
+# Logging configuration
+logging:
+  config: /etc/agp/log4j2.xml
+  maxPayloadSize: "49152"
+
+# Actuator / Management
+management:
+  endpointsWebExposureInclude:
+    - health
+    - metrics
+    - prometheus
+  endpointPrometheusEnabled: "true"
+
+# Camel spring-boot configurations
+camel:
+  messageHistory: "false"
+  tracing: "false"
+
+# Total timeout for aggregated calls to producers
+aggregate:
+  timeout: "28000"
+
+# Outgoing parameters for calling services via VP
+vp:
+  defaultReceiveTimeout: "27000"
+  defaultConnectTimeout: "2000"
+  defaultServiceUrl: "http://vp:8080/vp"
+  useAynchHttpConduit: "true"
+
+# Outgoing parameters for calling EI-FindContent
+ei:
+  logicalAddress: "5565594230"
+  findContentUrl: "http://ei-backend:8082/skltp-ei/find-content-service/v1"
+  connectTimeout: "2000"
+  receiveTimeout: "20000"
+  useAynchHttpConduit: "true"
+
+# Aggregating service inbound URLs
+aggServiceUrls:
+  getAggregatedActivities_v1: "http://0.0.0.0:9001/GetAggregatedActivities/service/v1"
+  getAggregatedAlertInformation_v2: "http://0.0.0.0:9001/GetAggregatedAlertInformation/service/v2"
+  getAggregatedAlertInformation_v3: "http://0.0.0.0:9001/GetAggregatedAlertInformation/service/v3"
+  getAggregatedCareContacts_v2: "http://0.0.0.0:9001/GetAggregatedCareContacts/service/v2"
+  getAggregatedCareContacts_v3: "http://0.0.0.0:9001/GetAggregatedCareContacts/service/v3"
+  getAggregatedCareDocumentation_v2: "http://0.0.0.0:9001/GetAggregatedCareDocumentation/service/v2"
+  getAggregatedCareDocumentation_v3: "http://0.0.0.0:9001/GetAggregatedCareDocumentation/service/v3"
+  getAggregatedCarePlans_v2: "http://0.0.0.0:9001/GetAggregatedCarePlans/service/v2"
+  getAggregatedDiagnosis_v2: "http://0.0.0.0:9001/GetAggregatedDiagnosis/service/v2"
+  getAggregatedECGOutcome_v1: "http://0.0.0.0:9001/GetAggregatedECGOutcome/service/v1"
+  getAggregatedFunctionalStatus_v2: "http://0.0.0.0:9001/GetAggregatedFunctionalStatus/service/v2"
+  getAggregatedImagingOutcome_v1: "http://0.0.0.0:9001/GetAggregatedImagingOutcome/service/v1"
+  getAggregatedLaboratoryOrderOutcome_v3: "http://0.0.0.0:9001/GetAggregatedLaboratoryOrderOutcome/service/v3"
+  getAggregatedLaboratoryOrderOutcome_v4: "http://0.0.0.0:9001/GetAggregatedLaboratoryOrderOutcome/service/v4"
+  getAggregatedMaternityMedicalHistory_v2: "http://0.0.0.0:9001/GetAggregatedMaternityMedicalHistory/service/v2"
+  getAggregatedMedicationHistory_v2: "http://0.0.0.0:9001/GetAggregatedMedicationHistory/service/v2"
+  getAggregatedObservations_v1: "http://0.0.0.0:9001/GetAggregatedObservations/service/v1"
+  getAggregatedReferralOutcome_v3: "http://0.0.0.0:9001/GetAggregatedReferralOutcome/service/v3"
+  getAggregatedRequestActivities_v1: "http://0.0.0.0:9001/GetAggregatedRequestActivities/service/v1"
+  getAggregatedRequestActivities_v2: "http://0.0.0.0:9001/GetAggregatedRequestActivities/service/v2"
+  getAggregatedRequestExemptionStatuses_v1: "http://0.0.0.0:9001/GetAggregatedRequestExemptionStatuses/service/v1"
+  getAggregatedSubjectOfCareSchedule_v1: "http://0.0.0.0:9001/GetAggregatedSubjectOfCareSchedule/service/v1"
+  getAggregatedVaccinationHistory_v1: "http://0.0.0.0:9001/GetAggregatedVaccinationHistory/service/v1"
+  getAggregatedVaccinationHistory_v2: "http://0.0.0.0:9001/GetAggregatedVaccinationHistory/service/v2"
+
+# Other service URLs
+otherServiceUrls:
+  resetCache: "http://0.0.0.0:8091/resetcache"
+  agpStatus: "http://0.0.0.0:8080/status"
+
+# TAK cache configuration
+takcache:
+  useBehorighetCache: "true"
+  useVagvalCache: "false"
+  persistentFileName: /dev/null
+  endpointAddress: "http://tak-services-svc:8080/tak-services/SokVagvalsInfo/v2"
+
+# Service special configuration (per-service overrides)
+serviceOverrides:
+  getAggregatedRequestActivities_v1:
+    receiveTimeout: "15000"
+  getAggregatedRequestActivities_v2:
+    receiveTimeout: "15000"
+  getAggregatedSubjectOfCareSchedule_v1:
+    receiveTimeout: "15000"
+
 environment:
   variables:
     _default_config_maps:
