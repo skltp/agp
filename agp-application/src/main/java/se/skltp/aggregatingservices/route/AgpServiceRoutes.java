@@ -61,7 +61,8 @@ public class AgpServiceRoutes extends RouteBuilder {
     + "&cxfConfigurer=#%s"
     + "&properties.use.async.http.conduit=%s"
     + "&properties.org.apache.cxf.transport.http.async.MAX_CONNECTIONS=10000"
-    + "&properties.org.apache.cxf.transport.http.async.MAX_PER_HOST_CONNECTIONS=2000";
+    + "&properties.org.apache.cxf.transport.http.async.MAX_PER_HOST_CONNECTIONS=2000"
+    + "&properties.org.apache.cxf.transport.http.async.SO_TIMEOUT=%d";
 
 
     final List<AgpServiceConfiguration> serviceConfigurations;
@@ -129,7 +130,8 @@ public class AgpServiceRoutes extends RouteBuilder {
       , serviceConfiguration.getOutboundServiceClass()
       , serviceConfiguration.getServiceName()
       , serviceConfiguration.getServiceName()
-      , vpConfig.getUseAyncHttpConduit());
+      , vpConfig.getUseAyncHttpConduit()
+      , vpConfig.getDefaultReceiveTimeout());
     if (serviceConfiguration.getOutboundPortName() != null) {
       return outboundServiceAddress + "&portName=" + serviceConfiguration.getOutboundPortName();
     }

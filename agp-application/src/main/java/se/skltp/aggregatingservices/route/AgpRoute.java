@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 import se.skltp.aggregatingservices.AgpCxfEndpointConfigurer;
 import se.skltp.aggregatingservices.aggregate.AgpAggregationStrategy;
 import se.skltp.aggregatingservices.config.EiConfig;
+import se.skltp.aggregatingservices.config.VpConfig;
 import se.skltp.aggregatingservices.processors.CheckInboundHeadersProcessor;
 import se.skltp.aggregatingservices.processors.CreateFindContentProcessor;
 import se.skltp.aggregatingservices.processors.CreateRequestListProcessor;
@@ -38,7 +39,8 @@ public class AgpRoute extends RouteBuilder {
       + "&cxfConfigurer=#eiEndpointConfBean"
       + "&properties.use.async.http.conduit=%s"
       + "&properties.org.apache.cxf.transport.http.async.MAX_CONNECTIONS=10000"
-      + "&properties.org.apache.cxf.transport.http.async.MAX_PER_HOST_CONNECTIONS=2000";
+      + "&properties.org.apache.cxf.transport.http.async.MAX_PER_HOST_CONNECTIONS=2000"
+      + "&properties.org.apache.cxf.transport.http.async.SO_TIMEOUT=%d";
 
   @Value("${aggregate.timeout:29000}")
   Long aggregationTimeout;
@@ -48,6 +50,9 @@ public class AgpRoute extends RouteBuilder {
 
   @Autowired
   EiConfig eiConfig;
+
+  @Autowired
+  VpConfig vpConfig;
 
   @Autowired
   CreateRequestListProcessor createRequestListProcessor;
@@ -75,7 +80,7 @@ public class AgpRoute extends RouteBuilder {
         ()->new AgpCxfEndpointConfigurer(eiConfig.getReceiveTimeout(), eiConfig.getConnectTimeout(), false, true));
 
     String findContentServiceAddress = String.format(EI_FINDCONTENT_URI,
-        eiConfig.getUseAyncHttpConduit() );
+        eiConfig.getUseAyncHttpConduit(), vpConfig.getDefaultReceiveTimeout() );
 
      from("direct:agproute").id("agp-service-route").streamCaching()
         .process(checkInboundHeadersProcessor)

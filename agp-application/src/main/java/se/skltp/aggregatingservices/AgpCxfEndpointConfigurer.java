@@ -69,6 +69,7 @@ public class AgpCxfEndpointConfigurer implements CxfConfigurer {
     HTTPClientPolicy policy = new HTTPClientPolicy();
     policy.setReceiveTimeout(receiveTimeout);
     policy.setConnectionTimeout(connectTimeout);
+    policy.setConnectionRequestTimeout(receiveTimeout);
     conduit.setClient(policy);
   }
 
