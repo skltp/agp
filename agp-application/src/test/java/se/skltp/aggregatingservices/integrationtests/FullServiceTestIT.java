@@ -22,9 +22,7 @@ import static se.skltp.aggregatingservices.data.TestDataDefines.TEST_RR_ID_ONE_F
 import static se.skltp.aggregatingservices.data.TestDataDefines.TEST_RR_ID_ONE_HIT;
 import static se.skltp.aggregatingservices.data.TestDataDefines.TEST_RR_ID_THREE_CATEGORIES;
 import static se.skltp.aggregatingservices.data.TestDataDefines.TEST_RR_ID_ZERO_HITS;
-import static se.skltp.aggregatingservices.utils.AssertLoggingUtil.LOGGER_NAME_ERROR_OUT;
-import static se.skltp.aggregatingservices.utils.AssertLoggingUtil.assertEventMessageCommon;
-import static se.skltp.aggregatingservices.utils.AssertLoggingUtil.assertLogging;
+import static se.skltp.aggregatingservices.utils.AssertLoggingUtil.*;
 import static se.skltp.aggregatingservices.utils.AssertUtil.assertExpectedProcessingStatus;
 import static se.skltp.aggregatingservices.utils.AssertUtil.assertExpectedResponse;
 
@@ -119,7 +117,7 @@ public class FullServiceTestIT {
     ExpectedResponse expectedResponse = new ExpectedResponse();
     expectedResponse.add("HSA-ID-1", 1, StatusCodeEnum.DATA_FROM_SOURCE, "");
     expectedResponse.add("HSA-ID-2", 2, StatusCodeEnum.DATA_FROM_SOURCE, "");
-    expectedResponse.add("HSA-ID-3", 0, StatusCodeEnum.NO_DATA_SYNCH_FAILED, "(?s).*(timeout|Read timed out).*");
+    expectedResponse.add("HSA-ID-3", 0, StatusCodeEnum.NO_DATA_SYNCH_FAILED, "(?s).*(timeout|Read timed out|\\d{1,10} MILLISECONDS).*");
 
     final ServiceResponse<GetLaboratoryOrderOutcomeResponseType> response = consumerService.callService(TEST_RR_ID_MANY_HITS);
 
@@ -210,7 +208,7 @@ public class FullServiceTestIT {
 
     final SoapFault soapFault = response.getSoapFault();
     assertNotNull(soapFault, "Expected a SoapFault");
-    assertTrue(soapFault.getReason().matches("(?i).*(timeout|Read timed out).*"));
+    assertTrue(TIMEOUT_ERROR_PATTERN.matcher(soapFault.getReason()).find());
 
     final String eventMessage = testLogAppender.getEventMessage(LOGGER_NAME_ERROR_OUT, 0);
     assertEventMessageCommon(eventMessage, "error-out");

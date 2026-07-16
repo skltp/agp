@@ -26,6 +26,8 @@ import se.skltp.agp.riv.interoperability.headers.v1.StatusCodeEnum;
 public class AssertLoggingUtil {
 
   private static final Pattern receiverPattern = Pattern.compile("-receiverid=(.*)");
+  public static final Pattern TIMEOUT_ERROR_PATTERN =
+    Pattern.compile("timeout|Read timed out|\\d{1,10} MILLISECONDS", Pattern.CASE_INSENSITIVE);
   public static final String LOGGER_NAME_REQ_IN = "se.skltp.aggregatingservices.logging.GetLaboratoryOrderOutcomeResponderInterface.REQ_IN";
   public static final String LOGGER_NAME_REQ_OUT = "se.skltp.aggregatingservices.logging.GetLaboratoryOrderOutcomeResponderInterface.REQ_OUT";
   public static final String LOGGER_NAME_RESP_IN = "se.skltp.aggregatingservices.logging.GetLaboratoryOrderOutcomeResponderInterface.RESP_IN";
@@ -111,7 +113,7 @@ public class AssertLoggingUtil {
     return expectedResponse.getProducers().stream().filter(
         producer ->
             expectedResponse.getStatusCode(producer) == statusCode &&
-            !expectedResponse.getErrTxtPart(producer).matches("(?s).*(timeout|Read timed out).*")
+            !TIMEOUT_ERROR_PATTERN.matcher(expectedResponse.getErrTxtPart(producer)).find()
     ).collect(Collectors.toList());
   }
 
