@@ -58,10 +58,7 @@ public class AgpServiceRoutes extends RouteBuilder {
     + "?wsdlURL=%s"
     + "&serviceClass=%s"
     + "&beanId=%s"
-    + "&cxfConfigurer=#%s"
-    + "&properties.use.async.http.conduit=%s"
-    + "&properties.org.apache.cxf.transport.http.async.MAX_CONNECTIONS=10000"
-    + "&properties.org.apache.cxf.transport.http.async.MAX_PER_HOST_CONNECTIONS=2000";
+    + "&cxfConfigurer=#%s";
 
 
     final List<AgpServiceConfiguration> serviceConfigurations;

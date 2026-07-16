@@ -35,10 +35,7 @@ public class AgpRoute extends RouteBuilder {
       + "&serviceClass=se.skltp.aggregatingservices.riv.itintegration.engagementindex.findcontent.v1.rivtabp21.FindContentResponderInterface"
       + "&portName={urn:riv:itintegration:engagementindex:FindContent:1:rivtabp21}FindContentResponderPort"
       + "&dataFormat=POJO"
-      + "&cxfConfigurer=#eiEndpointConfBean"
-      + "&properties.use.async.http.conduit=%s"
-      + "&properties.org.apache.cxf.transport.http.async.MAX_CONNECTIONS=10000"
-      + "&properties.org.apache.cxf.transport.http.async.MAX_PER_HOST_CONNECTIONS=2000";
+      + "&cxfConfigurer=#eiEndpointConfBean";
 
   @Value("${aggregate.timeout:29000}")
   Long aggregationTimeout;

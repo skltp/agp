@@ -119,11 +119,6 @@
         <artifactId>cxf-rt-transports-http-jetty</artifactId>
         <version>${apache-cfx.version}</version>
       </dependency>
-      <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-rt-transports-http-hc</artifactId>
-        <version>${apache-cfx.version}</version>
-      </dependency>
 
       <!-- Jakarta JWS — not managed by Spring Boot -->
       <dependency>
