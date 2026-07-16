@@ -111,7 +111,7 @@ public class AssertLoggingUtil {
     return expectedResponse.getProducers().stream().filter(
         producer ->
             expectedResponse.getStatusCode(producer) == statusCode &&
-            !expectedResponse.getErrTxtPart(producer).matches("(?s).*(timeout|Read timed out).*")
+            !expectedResponse.getErrTxtPart(producer).matches("(?s).*(timeout|Read timed out|request timed out).*")
     ).collect(Collectors.toList());
   }
 

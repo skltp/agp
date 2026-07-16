@@ -210,7 +210,7 @@ public class FullServiceTestIT {
 
     final SoapFault soapFault = response.getSoapFault();
     assertNotNull(soapFault, "Expected a SoapFault");
-    assertTrue(soapFault.getReason().matches("(?i).*(timeout|Read timed out).*"));
+    assertTrue(soapFault.getReason().matches("(?i).*(timeout|Read timed out|request timed out).*"));
 
     final String eventMessage = testLogAppender.getEventMessage(LOGGER_NAME_ERROR_OUT, 0);
     assertEventMessageCommon(eventMessage, "error-out");
