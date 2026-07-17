@@ -57,6 +57,8 @@
     <camel.version>4.18.2</camel.version> <!-- MAR 2026 -->
     <takdatahandler.version>3.4.5</takdatahandler.version> <!-- MAY 2026 -->
     <apache-cfx.version>4.1.7</apache-cfx.version> <!-- MAY 2026 - 4.1.x is aligned to Spring Boot 3, and Jakarta EE10 - 4.2.x exists but is aligned to Spring Boot 4. -->
+    <httpclient5.version>5.4.4</httpclient5.version> <!-- JUL 2026. Forced to be compatible with Apache CXF 4.1.7 -->
+    <httpcore5.version>5.3.4</httpcore5.version> <!-- JUL 2026. Forced to be compatible with Apache CXF 4.1.7 -->
 
     <!-- Supporting Dependencies -->
     <lmax_disruptor-version>4.0.0</lmax_disruptor-version> <!-- SEP 2023. Latest as of APR 2026. -->
@@ -147,6 +149,28 @@
         <groupId>io.hawt</groupId>
         <artifactId>hawtio-springboot</artifactId>
         <version>${hawtio.spring.boot-version}</version>
+      </dependency>
+
+      <!-- Force HttpComponents versions compatible with httpclient5 5.4.4 -->
+      <dependency>
+        <groupId>org.apache.httpcomponents.client5</groupId>
+        <artifactId>httpclient5</artifactId>
+        <version>${httpclient5.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents.client5</groupId>
+        <artifactId>httpclient5-cache</artifactId>
+        <version>${httpclient5.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents.core5</groupId>
+        <artifactId>httpcore5</artifactId>
+        <version>${httpcore5.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents.core5</groupId>
+        <artifactId>httpcore5-h2</artifactId>
+        <version>${httpcore5.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
