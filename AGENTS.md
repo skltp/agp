@@ -24,6 +24,8 @@ Each aggregating service (e.g., `GetAggregatedCareDocumentation.v3`, `GetAggrega
 
 Plugins inherit `se.skltp.agp:agp-parent` as Maven parent; they reference `agp-core` at compile scope and the `*-all.jar` fat assembly is loaded at runtime via `-Dloader.path`.
 
+All plugins share one classloader. Plugins in the same service domain generate identical class names from the shared `core_components` schemas, so all aggregating services in the same domain and major version must be rebuilt and deployed together. `PluginConflictDetector` (`ApplicationReadyEvent`) hashes `.class`/`.xsd`/`.wsdl` entries in the `loader.path` jars and logs a WARN per package when the same name has differing content. See README "Delade schemaklasser".
+
 ## Build & Run
 
 ```powershell
