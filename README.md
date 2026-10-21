@@ -61,6 +61,24 @@ java -Dloader.path=/tmp/services/ -jar agp-application-4.1.0-SNAPSHOT-exec.jar
 Parametern loader.path sätts alltså till en katalog där man lagt de aggregerande tjänster som skall startas.
 Notera att det är artefakterna som slutar på _-all.jar_ som skall användas, t.ex. GetAggregatedRequestActivities-v2-main-2.0.1-all.jar
 
+### Delade schemaklasser – bygg och driftsätt per tjänstedomän
+Varje tjänsts schemamodul genererar JAXB-klasser med en mappning från namespace till paket, t.ex.
+`urn:riv:clinicalprocess:healthcond:actoutcome:4` → `riv.clinicalprocess.healthcond.actoutcome.v4`.
+Schemafilerna under `core_components` delas av alla tjänster i samma tjänstedomän, vilket gör att flera
+plugins innehåller klasser (och XSD-resurser) med exakt samma namn. Alla plugins laddas i samma classloader,
+så vid en namnkrock används den variant som råkar hittas först på `loader.path` – övriga ignoreras tyst.
+
+**Därför gäller:** Alla aggregerande tjänster i samma tjänstedomän och major-version
+(t.ex. alla `clinicalprocess:healthcond:actoutcome` v4) ska byggas om mot samma version av
+tjänstedomänens schema och driftsättas tillsammans. Uppgradera aldrig en enskild tjänst i domänen
+till en ny schemaversion utan att uppgradera övriga.
+
+Vid uppstart kontrollerar AgP samtliga jar-filer på `loader.path`. Klasser (`.class`) och schemaresurser
+(`.xsd`, `.wsdl`) som förekommer i flera jar-filer med olika innehåll loggas som `WARN` från
+`se.skltp.aggregatingservices.startup.PluginConflictDetector`, grupperat per paket och med de
+inblandade jar-filerna. En sådan varning innebär att tjänsterna i domänen inte är byggda tillsammans
+och ska åtgärdas enligt ovan. Enskilda krockande filer loggas på `DEBUG`-nivå.
+
  ## Helm
 Källkoden innehåller även Helm chart som kan användas som grund för konfiguration i Kubernetes.
 
